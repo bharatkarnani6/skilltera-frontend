@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../../Component/Navbar/navbar'
-import Banner from '../../Assets/banner.jpg'
+import Banner from '../../Assets/banner.png'
 import './home.css'
 
 const Home = () => {
@@ -10,19 +10,19 @@ const Home = () => {
       <div className="container-fluid banner">
         <div className="row">
           <div className="col">
-            <div className="for-companies">
-              <h3>For Companies</h3>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            <div className="for-companies fonts">
+              <h3 style={{ 'fontWeight': '800' }}>For Companies</h3>
+              <p >Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Molestias aut, repellat ipsum facere voluptate dicta obcaecati
                 deserunt nobis suscipit eaque?</p>
               <button className="btn btn-primary">Start Hiring</button>
             </div>
-            <div className="for-developers">
-              <h3>For Developers</h3>
+            <div className="for-developers fonts">
+              <h3 style={{ 'fontWeight': '800' }}>For Developers</h3>
               <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Molestias aut, repellat ipsum facere voluptate dicta obcaecati
                 deserunt nobis suscipit eaque?</p>
-              <button className="btn btn-primary">Signup</button>
+              <button className="btn btn-primary">Sign Up</button>
             </div>
           </div>
           <div className="col banner-image-section">
