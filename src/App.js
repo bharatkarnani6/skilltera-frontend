@@ -1,12 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
-import Navbar from './Component/Navbar/navbar'
+import { BrowserRouter } from "react-router-dom";
 import Home from './Pages/Home/home';
+import Route from './Route/route';
 
 function App() {
   return (
     <>
-      <Home />
+      <BrowserRouter>
+        <Route />
+      </BrowserRouter>
     </>
   );
 }
