@@ -1,14 +1,45 @@
-import react, { useState, useEffect, useRef } from "react";
+import react, { useState, useEffect, useRef, useContext } from "react";
 import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
+import axios from 'axios';
+import ApiConstants from "../../Services/apiconstants";
+import Swal from 'sweetalert2'
 
 
 export default function Signup(props) {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
     const [isSubmitting, setIsSubmitting] = useState(true);
+    const [isEmailVerified, setisEmailVerified] = useState(false);
+
+
     const onSubmit = (data, e) => {
         console.log(data);
+        axios
+            .post(ApiConstants.SIGNUP, {
+                fullname: data.fullname,
+                email: data.email,
+                password: data.password
+            })
+            .then((response) => {
+                console.log(response.data);
+                Swal.fire({
+                    title: 'Email Verification',
+                    text: 'Please verify your email address',
+                    icon: 'info',
+                    width: 400,
+                    height: 100,
+                })
+
+            }).catch(error => {
+                Swal.fire({
+                    title: error.response.data.error,
+                    icon: 'info',
+                    width: 400,
+                    height: 100,
+                })
+            });
     };
+
     const reCaptchaSubmit = (value) => {
         setIsSubmitting(false);
         // console.log(value);
