@@ -34,6 +34,29 @@ export default function Login() {
             //console.log(error.response.data.error)
         })
     };
+
+//rak --> for login validation
+
+
+const initialValues = {email:"" ,password:""}
+
+const [formValues ,setFormValues] = useState(initialValues)
+
+
+const handleChange = (e) => {
+
+    console.log(e.target)
+
+    const {name,values} = e.target
+
+    setFormValues({...formValues , [name]:values})
+
+    console.log(formValues)
+
+}
+
+
+
     return (
         <>
             <Header />
@@ -41,12 +64,24 @@ export default function Login() {
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <div className="mb-3">
                         <label className="form-label">Email address</label>
-                        <input type="email" className="form-control" placeholder="name@example.com" {...register('email', { required: true })} />
+                        <input type="email" className="form-control"
+                         placeholder="name@example.com" 
+                         name="email"
+                         value = {formValues.email}
+                         onChange={handleChange}
+
+                         {...register('email', { required: true })} 
+                         />
                         <p style={{ 'color': 'red' }}>{errors.email?.type === 'required' && "Email is required"}</p>
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Password</label>
-                        <input type="password" className="form-control" placeholder="Password" {...register('password', { required: true })} />
+                        <input type="password" className="form-control" 
+                        placeholder="Password" 
+                        name="password"
+                        value={formValues.password}
+                        onChange={handleChange}
+                        {...register('password', { required: true })} />
                         <p style={{ 'color': 'red' }}>{errors.password?.type === 'required' && "Password is required"}</p>
                     </div>
                     <div className="row">
