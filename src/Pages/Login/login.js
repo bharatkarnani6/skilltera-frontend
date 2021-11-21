@@ -9,7 +9,7 @@ import ApiConstants from "../../Services/apiconstants";
 import Swal from 'sweetalert2'
 import { useHistory } from 'react-router-dom';
 
-export default function Login() {
+const Login = () =>  {
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const [isEmailVerified, setisEmailVerified] = useState(false);
     let history = useHistory();
@@ -44,14 +44,13 @@ const [formValues ,setFormValues] = useState(initialValues)
 
 
 const handleChange = (e) => {
+   
 
-    console.log(e.target)
+    // const {name,value} = e.target
 
-    const {name,values} = e.target
+    // setFormValues({...formValues , [name]:value})
 
-    setFormValues({...formValues , [name]:values})
-
-    console.log(formValues)
+    // console.log(formValues)
 
 }
 
@@ -61,16 +60,17 @@ const handleChange = (e) => {
         <>
             <Header />
             <div className="main-box">
-                <form onSubmit={handleSubmit(onSubmit)} >
+                <form onSubmit={handleSubmit(onSubmit) } >
                     <div className="mb-3">
                         <label className="form-label">Email address</label>
                         <input type="email" className="form-control"
-                         placeholder="name@example.com" 
-                         name="email"
-                         value = {formValues.email}
-                         onChange={handleChange}
+                        placeholder="name@example.com" 
+                        name="email"
+                        value = {formValues.email}
+                        onChange={handleChange}
 
                          {...register('email', { required: true })} 
+
                          />
                         <p style={{ 'color': 'red' }}>{errors.email?.type === 'required' && "Email is required"}</p>
                     </div>
@@ -81,7 +81,9 @@ const handleChange = (e) => {
                         name="password"
                         value={formValues.password}
                         onChange={handleChange}
-                        {...register('password', { required: true })} />
+                        {...register('password', { required: true })}
+                        
+                        />
                         <p style={{ 'color': 'red' }}>{errors.password?.type === 'required' && "Password is required"}</p>
                     </div>
                     <div className="row">
@@ -90,12 +92,12 @@ const handleChange = (e) => {
                         </div>
                         <div className="col-6">
                             <div className="d-grid col-12 mx-auto">
-                                <button className="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Register</button>
+                                <button className="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">Register</button>
                             </div>
                         </div>
                     </div>
                 </form>
-                <p className="pt-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalForgetPassword">Forget Password</p>
+                <p className="pt-3" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModalForgetPassword">Forget Password</p>
 
             </div>
             <Signup />
@@ -103,3 +105,7 @@ const handleChange = (e) => {
         </>
     );
 }
+
+
+
+export default Login
