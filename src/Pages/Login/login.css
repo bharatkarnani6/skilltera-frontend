@@ -13,3 +13,11 @@
     width: 80%;
   }
 }
+
+.showHint{
+
+border: none;
+margin-top: 0.5rem;
+background-color: transparent;
+
+}

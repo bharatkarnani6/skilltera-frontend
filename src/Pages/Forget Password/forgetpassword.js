@@ -87,8 +87,16 @@ export default function ForgetPassword() {
                             <div className="modal-body">
                                 <div className="mb-3">
                                     <label className="form-label">Email address</label>
-                                    <input type="email" disabled={getOtp} className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" {...register('email', { required: true })} />
-                                    <p style={{ 'color': 'red' }}>{errors.email?.type === 'required' && "Email is required"}</p>
+                                    <input type="email"
+                                     disabled={getOtp} 
+                                     className="form-control" 
+                                     id="exampleFormControlInput1" 
+                                     placeholder="name@example.com" 
+                                     {...register("email", { required: true , pattern:{value:/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ ,message:<p>invalid email</p>}})} />
+                                   
+                                   {errors.email && <p style={{ 'color': 'red' }}>Enter the valid email</p>}
+
+                                  {/* <p style={{ 'color': 'red' }}>{errors.email?.type === 'required' && "Email is required"}</p> */}
                                 </div>
                             </div>
                             <div className="modal-footer">

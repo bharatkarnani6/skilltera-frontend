@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useState,useEffect } from "react";
 import './login.css'
 import Signup from "../Signup/signup";
 import { useForm } from "react-hook-form";
@@ -8,12 +8,15 @@ import axios from 'axios';
 import ApiConstants from "../../Services/apiconstants";
 import Swal from 'sweetalert2'
 import { useHistory } from 'react-router-dom';
+import { FcAbout} from "react-icons/fc";
 
 const Login = () =>  {
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const [isEmailVerified, setisEmailVerified] = useState(false);
     let history = useHistory();
-    const onSubmit = (data) => {
+
+
+    const onSubmit = (data ) => {
         console.log(data);
         axios.post(ApiConstants.LOGIN, {
             email: data.email,
@@ -38,53 +41,45 @@ const Login = () =>  {
 //rak --> for login validation
 
 
-const initialValues = {email:"" ,password:""}
+function showHint(){
 
-const [formValues ,setFormValues] = useState(initialValues)
-
-
-const handleChange = (e) => {
-   
-
-    // const {name,value} = e.target
-
-    // setFormValues({...formValues , [name]:value})
-
-    // console.log(formValues)
-
+    alert("1. At least 8 characters \n 2. At least one special char \n 3. At least one number \n 4. At least one upper and one lower case char. \n " )
 }
 
 
 
-    return (
+  return (
         <>
             <Header />
+
             <div className="main-box">
-                <form onSubmit={handleSubmit(onSubmit) } >
+
+             <form onSubmit={handleSubmit(onSubmit) } >
                     <div className="mb-3">
                         <label className="form-label">Email address</label>
-                        <input type="email" className="form-control"
-                        placeholder="name@example.com" 
-                        name="email"
-                        value = {formValues.email}
-                        onChange={handleChange}
+                        <input type="text"
+                        className="form-control"
 
-                         {...register('email', { required: true })} 
+                        placeholder="email" 
+           {...register("email", { required: true , pattern:{value:/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ ,message:<p>invalid email</p>}})} 
 
-                         />
-                        <p style={{ 'color': 'red' }}>{errors.email?.type === 'required' && "Email is required"}</p>
+               />
+               {errors.email && <p style={{ 'color': 'red' }}>Enter the valid email </p> }
+
+                {/* <p style={{ 'color': 'red' }}>{errors.email?.type === 'required' && "Email is required"} </p> */}
                     </div>
-                    <div className="mb-3">
+                    <div className="mb-3">  
                         <label className="form-label">Password</label>
-                        <input type="password" className="form-control" 
+                        <input type="password"     
+                        className="form-control" 
+
                         placeholder="Password" 
-                        name="password"
-                        value={formValues.password}
-                        onChange={handleChange}
-                        {...register('password', { required: true })}
-                        
+             {...register("password", { required: true ,pattern:{value:/^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$/ }})}
+
                         />
-                        <p style={{ 'color': 'red' }}>{errors.password?.type === 'required' && "Password is required"}</p>
+                 {errors.password && <p style={{ 'color': 'red' }}>Enter the strong password   <button onClick={showHint} className="showHint" > <FcAbout/></button>  </p>   }
+
+                      {/* <p style={{ 'color': 'red' }}>  {errors.password?.type === 'required' && "Password is required" }  </p> */}
                     </div>
                     <div className="row">
                         <div className="col-6">
