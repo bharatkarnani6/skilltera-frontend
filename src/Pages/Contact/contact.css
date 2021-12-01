@@ -1,0 +1,15 @@
+.contact-banner {
+}
+.contact-form {
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-top: 7rem;
+}
+@media (max-width: 480px) {
+  .contact-form {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0rem;
+    padding-bottom: 2rem;
+  }
+}
