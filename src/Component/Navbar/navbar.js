@@ -25,7 +25,7 @@ const Navbar = () => {
                 <a className="nav-link px-4 fonts"><NavLink exact to='/blog' activeStyle={{ color: "red" }}>Blog</NavLink></a>
               </li>
               <li className="nav-item">
-                <a className="nav-link px-4 fonts"><NavLink exact to='/login' activeStyle={{ color: "red" }}>Contact Us</NavLink></a>
+                <a className="nav-link px-4 fonts"><NavLink exact to='/contact' activeStyle={{ color: "red" }}>Contact Us</NavLink></a>
               </li>
             </ul>
           </div>

@@ -17,7 +17,7 @@ const Home = () => {
                   <p >Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Molestias aut, repellat ipsum facere voluptate dicta obcaecati
                     deserunt nobis suscipit eaque?</p>
-                  <button className="btn btn-primary">Start Hiring</button>
+                  <Link to='/company_login'> <button className="btn btn-primary">Start Hiring</button></Link>
                 </div>
               </div>
               <div className="col">

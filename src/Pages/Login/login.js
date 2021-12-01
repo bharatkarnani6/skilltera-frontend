@@ -2,7 +2,7 @@ import react, { useState } from "react";
 import './login.css'
 import Signup from "../Signup/signup";
 import { useForm } from "react-hook-form";
-import Header from "../../Component/Navbar/navbar";
+import Navbar from "../../Component/Navbar/navbar";
 import ForgetPassword from "../Forget Password/forgetpassword";
 import axios from 'axios';
 import ApiConstants from "../../Services/apiconstants";
@@ -36,7 +36,7 @@ export default function Login() {
     };
     return (
         <>
-            <Header />
+            <Navbar />
             <div className="main-box">
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <div className="mb-3">
