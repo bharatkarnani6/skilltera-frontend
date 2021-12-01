@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import './login.css'
 import Signup from "../Signup/signup";
 import { useForm } from "react-hook-form";
@@ -8,11 +8,14 @@ import axios from 'axios';
 import ApiConstants from "../../Services/apiconstants";
 import Swal from 'sweetalert2'
 import { useHistory } from 'react-router-dom';
+import { FcAbout } from "react-icons/fc";
 
-export default function Login() {
+const Login = () => {
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const [isEmailVerified, setisEmailVerified] = useState(false);
     let history = useHistory();
+
+
     const onSubmit = (data) => {
         console.log(data);
         axios.post(ApiConstants.LOGIN, {
@@ -34,20 +37,48 @@ export default function Login() {
             //console.log(error.response.data.error)
         })
     };
+
+    //rak --> for login validation
+
+
+    function showHint() {
+
+        alert("1. At least 8 characters \n 2. At least one special char \n 3. At least one number \n 4. At least one upper and one lower case char. \n ")
+    }
+
+
+
     return (
         <>
             <Navbar />
             <div className="main-box">
+
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <div className="mb-3">
                         <label className="form-label">Email address</label>
-                        <input type="email" className="form-control" placeholder="name@example.com" {...register('email', { required: true })} />
-                        <p style={{ 'color': 'red' }}>{errors.email?.type === 'required' && "Email is required"}</p>
+                        <input type="text"
+                            className="form-control"
+
+                            placeholder="email"
+                            {...register("email", { required: true, pattern: { value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, message: <p>invalid email</p> } })}
+
+                        />
+                        {errors.email && <p style={{ 'color': 'red' }}>Enter the valid email </p>}
+
+                        {/* <p style={{ 'color': 'red' }}>{errors.email?.type === 'required' && "Email is required"} </p> */}
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Password</label>
-                        <input type="password" className="form-control" placeholder="Password" {...register('password', { required: true })} />
-                        <p style={{ 'color': 'red' }}>{errors.password?.type === 'required' && "Password is required"}</p>
+                        <input type="password"
+                            className="form-control"
+
+                            placeholder="Password"
+                            {...register("password", { required: true, pattern: { value: /^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$/ } })}
+
+                        />
+                        {errors.password && <p style={{ 'color': 'red' }}>Enter the strong password   <button onClick={showHint} className="showHint" > <FcAbout /></button>  </p>}
+
+                        {/* <p style={{ 'color': 'red' }}>  {errors.password?.type === 'required' && "Password is required" }  </p> */}
                     </div>
                     <div className="row">
                         <div className="col-6">
@@ -55,12 +86,12 @@ export default function Login() {
                         </div>
                         <div className="col-6">
                             <div className="d-grid col-12 mx-auto">
-                                <button className="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Register</button>
+                                <button className="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">Register</button>
                             </div>
                         </div>
                     </div>
                 </form>
-                <p className="pt-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalForgetPassword">Forget Password</p>
+                <p className="pt-3" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModalForgetPassword">Forget Password</p>
 
             </div>
             <Signup />
@@ -68,3 +99,7 @@ export default function Login() {
         </>
     );
 }
+
+
+
+export default Login
