@@ -8,6 +8,7 @@ import About from '../Pages/About/about';
 import Blog from '../Pages/Blog/blog'
 import Contact from '../Pages/Contact/contact';
 import CompanyLogin from '../Pages/Company Login/companyLogin';
+import CompanyDashboard from '../Pages/Company Dashboard/companyDashboard';
 
 
 export default function Routes() {
@@ -22,6 +23,7 @@ export default function Routes() {
                 <Route exact path="/contact" ><Contact /></Route>
                 <Route exact path="/company_login" ><CompanyLogin /></Route>
                 <SecuredRoutes exact path="/dashboard" component={Dashboard} />
+                <SecuredRoutes exact path="/company_Dashboard" component={CompanyDashboard} />
             </Switch>
 
         </div>

@@ -1,0 +1,16 @@
+.logotext {
+  float: left;
+}
+.closemenu {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+/* .pro-sidebar {
+  color: #1d1d1d !important;
+}
+.pro-sidebar-inner {
+  background-color: pink !important;
+} */
+.pro-sidebar .pro-menu {
+  padding-top: 10px !important;
+}

@@ -8,20 +8,23 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 
 export default function CompanyLogin() {
+    const companyList = ['Netflix', 'Google', 'Meta', 'SkillTera']
     const { register, handleSubmit, formState: { errors, isSubmitting, isDirty, isValid }, } = useForm({
         mode: "onChange"
     });
     const onSubmit = async (data, e) => {
         await axios.post(ApiConstants.COMPANY_LOGIN, {
-            compantName: data.company_name,
+            companyName: data.company_name,
             email: data.email,
-            message: data.message
+            password: data.password
         }).then((response) => {
-            console.log(response.data);
+            localStorage.setItem('company_loggedin_user_data', JSON.stringify(response.data));
+            localStorage.setItem('login', true);
+            window.location.pathname = "/company_dashboard";
         }).catch(error => {
             Swal.fire({
-                title: 'Backend Not Connected',
-                icon: 'error',
+                title: error.response.data.error,
+                icon: 'info',
                 width: 400,
                 height: 100,
             })
@@ -42,8 +45,18 @@ export default function CompanyLogin() {
                         <p style={{ 'color': 'red' }}>{errors.email?.type === 'required' && "Email is required"}</p>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Company Name</label>
-                        <input type="text" class="form-control" id="inputPassword4" {...register('company_name', { required: true })} />
+                        <label className="form-label">Company Name</label>
+                        <input className="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." {...register('company_name', { required: true })} />
+                        <datalist id="datalistOptions">
+                            {
+                                companyList.map((d, i) => {
+                                    return (
+                                        <option key={i} value={d} />
+                                    )
+                                })
+                            }
+
+                        </datalist>
                         <p style={{ 'color': 'red' }}>{errors.company_name?.type === 'required' && "Company Name is required"}</p>
                     </div>
                     <div className="mb-3">
