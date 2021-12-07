@@ -43,3 +43,8 @@ table th {
   background-color: #04aa6d;
   color: white;
 }
+.filter-menu {
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+}

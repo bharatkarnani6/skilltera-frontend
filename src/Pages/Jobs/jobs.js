@@ -53,6 +53,8 @@ export default function Jobs() {
     const [values, setValues] = useState({
         jobData: {}
     })
+    const [filterToggle, setFilterToggle] = useState(false);
+    const [filterData, setFilterData] = useState('');
     const userData = () => {
         axios.get(ApiConstants.COMPANY_DATA).then((response) => {
             var dataTest = [];
@@ -75,14 +77,35 @@ export default function Jobs() {
         setTimeout(() => {
             $(() => {
                 $('#myTable').DataTable({
-                    "lengthMenu": [2, 3, 5, 100]
+                    "lengthMenu": [2, 3, 5, 100],
+                    "searching": false,
+                    "ordering": false,
                 });
             });
-        }, 5000)
+        }, 1000)
+
+
 
     }, [])
 
-    console.log('data', values.jobData);
+
+
+    function filterByRole(item) {
+        setFilterToggle(!filterToggle);
+        setFilterData(item)
+
+        // values.jobData.filter(data => data.interestedRole.includes(item)).map(filterDatas => {
+        //     filterData.push(filterDatas)
+        // })
+        // console.log(filterData);
+        // setValues({ ...values, jobData: filterData })
+        // setTimeout(() => {
+
+        //     console.log(values.jobData);
+        // }, 5000)
+
+
+    }
 
     const [isExpanded, setIsExpanded] = useState(false)
     const executeOnClick = () => {
@@ -92,6 +115,13 @@ export default function Jobs() {
     return (
         <>
             <div className="table-responsive job-table">
+                <div className="filter-menu">
+                    <div className="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" className="btn btn-primary" onClick={() => filterByRole("Data Engineer")}>Data Engineers</button>
+                        <button type="button" className="btn btn-primary" onClick={() => filterByRole("Full Stack Engineer")}>Full Stack Engineers</button>
+                        <button type="button" className="btn btn-primary" onClick={() => filterByRole("Cloud Engineer")}>Cloud Engineers</button>
+                    </div>
+                </div>
                 <table id="myTable" className="table-light">
                     <thead>
                         <tr>
@@ -105,7 +135,42 @@ export default function Jobs() {
                     </thead>
                     <tbody>
                         {
-                            Object.keys(values.jobData).length != 0 && values.jobData.map((data, i) => {
+                            !filterToggle && Object.keys(values.jobData).length != 0 && values.jobData.map((data, i) => {
+                                return (
+                                    <>
+                                        <tr>
+                                            <td>{++i}</td>
+                                            <td>{data.experience}</td>
+                                            <td>{data.currentRole}</td>
+                                            <td>{data.currentCompany}</td>
+                                            <td>{data.previousEmployers}</td>
+                                            <td>{data.timeToJoin}</td>
+                                            <td>{data.knownTechnologies}</td>
+                                            <td>
+                                                <ShowMoreText
+                                                    /* Default options */
+                                                    lines={1}
+                                                    more="Show more"
+                                                    less="Show less"
+                                                    className="content-css"
+                                                    anchorClass="my-anchor-css-class"
+                                                    onClick={executeOnClick}
+                                                    expanded={isExpanded}
+                                                    width={280}
+                                                    truncatedEndingComponent={"... "}
+                                                >{data.experienceDescription}</ShowMoreText>
+                                            </td>
+                                            <td>{data.typeOfJob}</td>
+                                            <td>{data.expectedRateC2CorC2H}</td>
+                                            <td>{data.relocation ? 'Yes' : 'No'}</td>
+                                            <td><input className="form-check-input" type="checkbox" /></td>
+                                        </tr>
+                                    </>
+                                )
+                            })
+                        }
+                        {
+                            filterToggle && Object.keys(values.jobData).length != 0 && values.jobData.filter(data => data.interestedRole.includes(filterData)).map((data, i) => {
                                 return (
                                     <>
                                         <tr>
