@@ -6,7 +6,9 @@ const ApiConstants = {
     FORGET_PASSWORD: `${local}/forgetPassword`,
     VERIFY_OTP: `${local}/verifyOtp`,
     CONTACT_MAIL: `${local}/contact`,
-    COMPANY_LOGIN: `${local}/company/login`
+    COMPANY_LOGIN: `${local}/company/login`,
+    COMPANY_DATA: `${local}/candidates/viewAll`
+
 
 }
 export default ApiConstants;

@@ -11,7 +11,7 @@ export default function Dashboard() {
     const menu = useSelector((state) => state.toggleMenu);
     const titleSelection = useSelector((state) => state.sidebarMenuSelectionReducer);
     return (
-        <>
+        <div>
             <Navbar />
             <div className="container-fluid overflow-hidden">
                 <div className="row g-0 no-gutters">
@@ -47,6 +47,6 @@ export default function Dashboard() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }

@@ -23,8 +23,8 @@ const Login = () => {
             password: data.password
         }).then((response) => {
             console.log(response.data);
-            localStorage.setItem('login', true);
-            window.location.pathname = "/dashboard";
+            //localStorage.setItem('login', true);
+            //window.location.pathname = "/dashboard";
             // history.push('/dashboard')
             setisEmailVerified(response.data.candidate.isVerified);
         }).catch(error => {
@@ -49,7 +49,7 @@ const Login = () => {
 
 
     return (
-        <>
+        <div>
             <Navbar />
             <div className="main-box">
 
@@ -96,7 +96,7 @@ const Login = () => {
             </div>
             <Signup />
             <ForgetPassword />
-        </>
+        </div>
     );
 }
 

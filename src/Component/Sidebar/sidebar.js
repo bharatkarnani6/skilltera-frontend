@@ -31,14 +31,15 @@ export default function Sidebar() {
     const menuSelection = (data) => {
         dispatch(SidebarMenuSelectionAction(data))
     }
+
     const logout = () => {
         localStorage.clear();
         window.location.pathname = "/";
     }
 
     return (
-        <>
-            <ProSidebar collapsed={menuCollapse} width="14rem" style={{ 'height': '87vh' }}>
+        <div>
+            <ProSidebar collapsed={menuCollapse} width="14rem" style={{ 'height': '100vh' }}>
                 <SidebarHeader>
                     {/* <div className="logotext">
                         <h5>Skilltera</h5>
@@ -56,6 +57,8 @@ export default function Sidebar() {
                         <MenuItem active={true} icon={<FiHome />} onClick={() => menuSelection('Dashboard')}>
                             Dashboard
                         </MenuItem>
+                        {/* <MenuItem icon={<FaList />} onClick={() => menuSelection('Jobs')}>Jobs</MenuItem> */}
+                        {/* <MenuItem icon={<FaRegHeart />}>Favourite</MenuItem> */}
                         <MenuItem icon={<RiPencilLine />} onClick={() => menuSelection('Profile')}>Profile</MenuItem>
                         <MenuItem icon={<BiCog />} onClick={() => menuSelection('Settings')}>Settings</MenuItem>
                     </Menu>
@@ -66,6 +69,6 @@ export default function Sidebar() {
                     </Menu>
                 </SidebarFooter>
             </ProSidebar>
-        </>
+        </div>
     )
 }
