@@ -10,8 +10,7 @@ const Navbar = () => {
     }
   }, [])
   return (
-
-    <>
+    <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light navbar-z">
         <div className="container-fluid">
           <a className="navbar-brand">
@@ -39,11 +38,12 @@ const Navbar = () => {
                   <a className="nav-link px-4 fonts"><NavLink exact to='/dashboard' activeStyle={{ color: "red" }}>Dashboard</NavLink></a>
                 </li>
               }
+
             </ul>
           </div>
         </div>
       </nav>
-    </>
+    </div>
   )
 }
 

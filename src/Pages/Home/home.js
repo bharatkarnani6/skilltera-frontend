@@ -5,7 +5,7 @@ import './home.css'
 import { Link } from 'react-router-dom';
 const Home = () => {
   return (
-    <>
+    <div>
       <Navbar />
       <div className="container-fluid banner">
         <div className="row">
@@ -40,7 +40,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
