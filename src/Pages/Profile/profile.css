@@ -1,0 +1,31 @@
+.professionalPage{
+
+    float:left;
+    margin-left: 2rem;
+    
+    position: fixed;
+       top :10rem;
+       left: 20rem;
+}
+/* .professionalPage input {
+
+    height: 5vh;
+    width: 10vw;
+} */
+
+
+
+.personalPage{
+
+    float: left;
+    position: sticky;
+    margin-left: 0.5rem;
+
+    
+}
+
+/* .personalPage input {
+
+    height: 5vh;
+    width: 10vw;
+} */

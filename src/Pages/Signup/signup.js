@@ -30,7 +30,6 @@ export default function Signup(props) {
                     width: 400,
                     height: 100,
                 })
-
             }).catch(error => {
                 Swal.fire({
                     title: error.response.data.error,
