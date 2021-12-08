@@ -22,9 +22,6 @@ const onSubmit = (data) => {
         timeToJoin:data.timeToJoin,
         needVisaEmployers:data.needVisaEmployers,
         salery:data.salery
-
-
-
       })
       .then((response) => {
           console.log(response.data);
