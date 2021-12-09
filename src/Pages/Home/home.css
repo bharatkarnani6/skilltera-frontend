@@ -17,13 +17,14 @@
   float: left;
   position: absolute;
   top: 7.5rem;
+  left:7rem;
 }
 .for-developers {
   width: 300px;
   height: 200px;
   float: left;
   position: absolute;
-  left: 30rem;
+  left: 12rem;
   top: 7.5rem;
 }
 @media (max-width: 480px) {

@@ -8,6 +8,11 @@ import Profile from '../Profile/profile';
 import Jobs from '../Jobs/jobs'
 
 export default function Dashboard() {
+
+     const candidateData =  JSON.parse( localStorage.getItem('candidate_data'))
+
+     console.log(candidateData)
+
     const menu = useSelector((state) => state.toggleMenu);
     const titleSelection = useSelector((state) => state.sidebarMenuSelectionReducer);
     return (

@@ -2,10 +2,11 @@
 
     float:left;
     margin-left: 2rem;
+    position: sticky ;
+    top :10rem;
+    left: 20rem;
+  
     
-    position: fixed;
-       top :10rem;
-       left: 20rem;
 }
 /* .professionalPage input {
 
@@ -16,7 +17,7 @@
 
 
 .personalPage{
-
+    
     float: left;
     position: sticky;
     margin-left: 0.5rem;

@@ -5,7 +5,8 @@ const ApiConstants = {
     RESET_PASSWORD: `${local}/reset-password`,
     FORGET_PASSWORD: `${local}/forgetPassword`,
     VERIFY_OTP: `${local}/verifyOtp`,
-    PROFILE:`${local}/profile`
+    PROFILE:`${local}/profile`,
+    CANDIDATE:`${local}/candidate/`
 
 }
 export default ApiConstants;
