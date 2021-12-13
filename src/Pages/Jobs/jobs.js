@@ -65,7 +65,7 @@ export default function Jobs() {
             selector: row => row.relocation ? 'Yes' : 'No',
         }, {
             name: 'Selection',
-            cell: () => (<input className="form-check-input" type="checkbox" onClick={test} />),
+            cell: (row) => (<input className="form-check-input" type="checkbox" onClick={() => test(row)} />),
             ignoreRowClick: true,
             allowOverflow: true,
             button: true,
@@ -105,13 +105,12 @@ export default function Jobs() {
     const executeOnClick = () => {
         setIsExpanded(!isExpanded);
     }
-    const [selectedRows, setSelectedRows] = useState([]);
-    const test = () => {
+    const [selectedData, setSelectedData] = React.useState();
+    const test = (data) => {
         console.log("clicked");
+        console.log(data);
     }
-    const handleChange = useCallback(state => {
-        setSelectedRows(state.selectedRows);
-    }, []);
+    //console.log(selectedData);
     return (
         <>
             <div className="table-responsive job-table">
@@ -129,8 +128,6 @@ export default function Jobs() {
                         pagination paginationRowsPerPageOptions={[2, 3, 5]}
                         paginationPerPage={5}
                         highlightOnHover
-
-                        onSelectedRowsChange={handleChange}
                         columns={columnsList}
                         data={values.jobData.filter((item) => {
                             if (filterData === "") {
