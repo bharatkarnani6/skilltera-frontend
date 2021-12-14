@@ -1,6 +1,6 @@
 .job-table {
-  overflow-y: scroll;
-  height: 76vh;
+  /* overflow-y: scroll; */
+  /* height: 76vh; */
 }
 .my-anchor-css-class {
   background-color: #04aa6d;
@@ -45,6 +45,6 @@ table th {
 }
 .filter-menu {
   display: block;
-  margin: 10px auto;
+  margin: 15px auto;
   text-align: center;
 }
