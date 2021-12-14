@@ -5,14 +5,15 @@
     position: sticky ;
     top :10rem;
     left: 20rem;
-  
+    
     
 }
-/* .professionalPage input {
+.professionalPage input {
 
     height: 5vh;
     width: 10vw;
-} */
+
+}
 
 
 
@@ -20,13 +21,14 @@
     
     float: left;
     position: sticky;
-    margin-left: 0.5rem;
+    margin-left: 10.5rem;
 
     
 }
 
-/* .personalPage input {
+.personalPage input {
 
     height: 5vh;
     width: 10vw;
-} */
+ 
+}

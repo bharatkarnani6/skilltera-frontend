@@ -6,7 +6,7 @@ import axios from 'axios';
 import ApiConstants from "../../Services/apiconstants";
 import Swal from 'sweetalert2'
 
-import { authHeader } from '../../Common/authHeader';
+
 
 const Professional = () => {
 
@@ -14,33 +14,18 @@ const Professional = () => {
 
   const [check, setCheck] = useState(false)    
 
-  const [user,setUser] = useState([])
-
-
   const candidateData = JSON.parse( localStorage.getItem('candidate_data'))
 
 
   const token = candidateData.token
 
-  console.log("token" ,token)
 
   const userId = candidateData.candidate._id;
   
-  
+  const user = candidateData.candidate
+
   
 
-  // useEffect((e) => {
-  //   axios
-  //       .get(ApiConstants.CANDIDATE + userId,
-  //     )
-  //       .then((response) => {
-  //         setUser(response.data.candidate);
-  //         setCheck(true)
-  //           console.log(response.data.candidate);
-  //       })
-  //       .catch((err) => console.log(err));
-  // },[]);
-  
 
   const onSubmit = (data) => {
     console.log(data);
@@ -56,7 +41,13 @@ const Professional = () => {
          
         },{
           
-            headers:token
+          "Accept": "application/json",
+          "Content-type": "application/json",
+         'token': token,
+         '_id': userId,
+          'Access-Control-Allow-Origin': true,
+          "Access-Control-Allow-Methods": "GET, POST, PATCH"
+ 
 
         }).then((response) => {
             console.log(response.data);
@@ -67,6 +58,15 @@ const Professional = () => {
                 width: 400,
                 height: 100,
             })
+
+            setTimeout(function(){ 
+
+              window.location.pathname = "/dashboard";
+  
+             }, 2000);
+  
+
+
         }).catch(error => {
             Swal.fire({
                 title: error.response.data.error,
@@ -81,12 +81,12 @@ const Professional = () => {
     return (
         <>
 
-  <form className="professionalForm" onSubmit={handleSubmit(onSubmit)}>
+  <form className="professionalForm" onSubmit={handleSubmit(onSubmit)} >
        <div className="form-row">
   <div className="form-group col-md-4">
     <label >Overall Experience</label>
     <input type="number" className="form-control"  placeholder="1"
-     
+     style={{color:check=== true?"black":"#7B7D7D" }}
      defaultValue= {user.experience}
       {...register("experience")}
     />
@@ -94,15 +94,16 @@ const Professional = () => {
   <div class="form-group col-md-4">
     <label >Current Company</label>
     <input type="text" class="form-control"  placeholder="Google"
-      
+      style={{color:check=== true?"black":"#7B7D7D" }}
       defaultValue = {user.currentCompany}
       {...register("currentCompany")}
     />
   </div>
   <div class="form-group col-md-4">
     <label >Current Role</label>
-    <input type="text" class="form-control"  placeholder="Developer"
-
+    <input type="text" class="form-control"  
+    style={{color:check=== true?"black":"#7B7D7D" }}
+    placeholder="Developer"
 defaultValue = {user.interestedRole}
 {...register("interestedRole")}
     />
@@ -112,7 +113,7 @@ defaultValue = {user.interestedRole}
 <div className="form-group">
   <label for="inputUrl">Technologies /Tools you are good </label>
   <input type="text" className="form-control"  placeholder="c++,mern"
-
+style={{color:check=== true?"black":"#7B7D7D" }}
 defaultValue = {user.knownTechnologies}
 {...register("knownTechnologies")}
 
@@ -124,6 +125,7 @@ defaultValue = {user.knownTechnologies}
 <div class="form-group">
     <label for="exampleFormControlTextarea1">Brief Description about your skill</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
+    style={{color:check=== true?"black":"#7B7D7D" }}
      defaultValue = {user.experienceDescription}
      {...register("experienceDescription")}
 
@@ -134,7 +136,7 @@ defaultValue = {user.knownTechnologies}
 
 <div class="btn-group" role="group" aria-label="Basic example">
   
-{ check ? <button type="submit" className="btn btn-primary disabled"  aria-disabled="true" >Save</button> :<button type="submit" className="btn btn-primary active" aria-disabled="true">Save</button> }
+{check ?<button type="submit" className="btn btn-primary disabled"  aria-disabled="true" >Save</button> :<button type="submit" className="btn btn-primary active" aria-disabled="true">Save</button> }
 
 {check ?<button type="button" class="btn btn-secondary active" onClick={(e) =>setCheck(false) } >Edit</button> : <button type="button" class="btn btn-secondary disabled" aria-disabled="true" >Edit</button>}
 

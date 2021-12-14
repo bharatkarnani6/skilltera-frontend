@@ -16,16 +16,16 @@ const Navbar = () => {
           <div className="collapse navbar-collapse justify-content-end menu-items" id="navbarSupportedContent">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link px-4 fonts" aria-current="page"><NavLink exact to='/' activeStyle={{ color: "red" }}>Home</NavLink></a>
+                <a className="nav-link px-4 fonts" aria-current="page"><NavLink className="navItem" exact to='/'>Home</NavLink></a>
               </li>
               <li className="nav-item">
-                <a className="nav-link px-4 fonts"><NavLink exact to='/about' activeStyle={{ color: "red" }}>About Us</NavLink ></a>
+                <a className="nav-link px-4 fonts"><NavLink exact to='/about'className="navItem" >About Us </NavLink></a>
               </li>
               <li className="nav-item">
-                <a className="nav-link px-4 fonts"><NavLink exact to='/blog' activeStyle={{ color: "red" }}>Blog</NavLink></a>
+                <a className="nav-link px-4 fonts"><NavLink exact to='/blog' className="navItem" >Blog</NavLink></a>
               </li>
               <li className="nav-item">
-                <a className="nav-link px-4 fonts"><NavLink exact to='/login' activeStyle={{ color: "red" }}>Contact Us</NavLink></a>
+                <a className="nav-link px-4 fonts"><NavLink exact to='/contact' className="navItem" >Contact Us</NavLink></a>
               </li>
             </ul>
           </div>
