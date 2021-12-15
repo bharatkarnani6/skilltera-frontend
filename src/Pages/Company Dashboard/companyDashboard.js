@@ -1,29 +1,25 @@
 import react, { useContext, useEffect, useState } from 'react';
-import './dashboard.css'
+import './companyDashboard.css'
 import Navbar from '../../Component/Navbar/navbar'
 import Sidebar from '../../Component/Sidebar/sidebar';
 import { useSelector } from 'react-redux';
 import Aboutus from '../About/about';
 import Profile from '../Profile/profile';
 import Jobs from '../Jobs/jobs'
+import CompanySidebar from '../../Component/Company Sidebar/companySidebar';
 
-export default function Dashboard() {
-
-     const candidateData =  JSON.parse( localStorage.getItem('candidate_data'))
-
-     console.log(candidateData)
-    
-     const userName = candidateData.candidate.fullname
-
+export default function CompanyDashboard() {
     const menu = useSelector((state) => state.toggleMenu);
     const titleSelection = useSelector((state) => state.sidebarMenuSelectionReducer);
+    const data = JSON.parse(localStorage.getItem('company_loggedin_user_data'));
+    console.log(data);
     return (
         <div>
             <Navbar />
             <div className="container-fluid overflow-hidden">
                 <div className="row g-0 no-gutters">
                     <div className={!menu.toggleValue ? 'toggle-width-sidebar' : 'col-2'} >
-                        <Sidebar />
+                        <CompanySidebar />
                     </div>
                     <div className={!menu.toggleValue ? 'toggle-width-dashboard' : 'col-10'} style={{ 'padding': '0' }}>
                         <div className="patch">
@@ -32,7 +28,7 @@ export default function Dashboard() {
                                     <h4 className="p-2">{titleSelection.menuSelection}</h4>
                                 </div>
                                 <div className="col px-4 d-flex justify-content-end">
-                                    <h4 className="p-2">Hi {userName}</h4>
+                                    <h4 className="p-2">Hi Bharat</h4>
                                 </div>
                             </div>
                             {(() => {

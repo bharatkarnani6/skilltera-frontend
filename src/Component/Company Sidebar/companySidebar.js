@@ -1,5 +1,5 @@
 import react, { useState, createContext, useContext } from 'react'
-import './sidebar.css'
+import './companySidebar.css'
 import {
     ProSidebar,
     Menu,
@@ -19,7 +19,7 @@ import { SidebarMenuSelectionAction, ToggleAction } from '../../Redux/Action/tog
 
 
 
-export default function Sidebar() {
+export default function CompanySidebar() {
 
     const dispatch = useDispatch();
     const [menuCollapse, setMenuCollapse] = useState(false)
@@ -39,7 +39,7 @@ export default function Sidebar() {
 
     return (
         <div>
-            <ProSidebar collapsed={menuCollapse} width="14rem" style={{ 'height': '100vh' }}>
+            <ProSidebar collapsed={menuCollapse} width="14rem" style={{ 'height': '87vh' }}>
                 <SidebarHeader>
                     {/* <div className="logotext">
                         <h5>Skilltera</h5>
@@ -57,9 +57,7 @@ export default function Sidebar() {
                         <MenuItem active={true} icon={<FiHome />} onClick={() => menuSelection('Dashboard')}>
                             Dashboard
                         </MenuItem>
-                        {/* <MenuItem icon={<FaList />} onClick={() => menuSelection('Jobs')}>Jobs</MenuItem> */}
-                        {/* <MenuItem icon={<FaRegHeart />}>Favourite</MenuItem> */}
-                        <MenuItem icon={<RiPencilLine />} onClick={() => menuSelection('Profile')}>Profile</MenuItem>
+                        <MenuItem icon={<FaList />} onClick={() => menuSelection('Jobs')}>Jobs</MenuItem>
                         <MenuItem icon={<BiCog />} onClick={() => menuSelection('Settings')}>Settings</MenuItem>
                     </Menu>
                 </SidebarContent>

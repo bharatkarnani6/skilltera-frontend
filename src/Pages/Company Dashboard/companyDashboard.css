@@ -1,0 +1,15 @@
+.patch {
+  width: 100%;
+  height: 8vh;
+  background-color: pink;
+}
+.container-fluid {
+  margin: 0;
+  padding: 0;
+}
+.toggle-width-sidebar {
+  width: 6%;
+}
+.toggle-width-dashboard {
+  width: 94%;
+}

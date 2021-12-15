@@ -5,7 +5,7 @@ import './home.css'
 import { Link } from 'react-router-dom';
 const Home = () => {
   return (
-    <>
+    <div>
       <Navbar />
       <div className="container-fluid banner">
         <div className="row">
@@ -17,7 +17,7 @@ const Home = () => {
                   <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Molestias aut, repellat ipsum facere voluptate dicta obcaecati
                     deserunt nobis suscipit eaque?</p>
-                  <button className="btn btn-primary  w-50 h-20 ">Start Hiring</button>
+                  <Link to='/company_login'> <button className="btn btn-primary">Start Hiring</button></Link>
                 </div>
               </div>
               <div className="col">
@@ -38,7 +38,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

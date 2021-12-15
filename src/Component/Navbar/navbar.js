@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, Link } from 'react-router-dom';
 import Logo from '../../Assets/skilltera_logo.png'
 import './navbar.css'
 const Navbar = () => {
+  const [dashboard, setDashboard] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem('login') != null) {
+      setDashboard(!dashboard)
+    }
+  }, [])
   return (
-    <>
+    <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light navbar-z">
         <div className="container-fluid">
           <a className="navbar-brand">
@@ -25,13 +31,19 @@ const Navbar = () => {
                 <a className="nav-link px-4 fonts"><NavLink exact to='/blog' className="navItem" >Blog</NavLink></a>
               </li>
               <li className="nav-item">
-                <a className="nav-link px-4 fonts"><NavLink exact to='/contact' className="navItem" >Contact Us</NavLink></a>
+                <a className="nav-link px-4 fonts"><NavLink exact to='/contact' activeStyle={{ color: "red" }}>Contact Us</NavLink></a>
               </li>
+              {
+                dashboard && <li className="nav-item">
+                  <a className="nav-link px-4 fonts"><NavLink exact to='/dashboard' activeStyle={{ color: "red" }}>Dashboard</NavLink></a>
+                </li>
+              }
+
             </ul>
           </div>
         </div>
       </nav>
-    </>
+    </div>
   )
 }
 
