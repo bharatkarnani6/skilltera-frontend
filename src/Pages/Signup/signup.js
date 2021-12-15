@@ -13,10 +13,9 @@ export default function Signup(props) {
     const [isEmailVerified, setisEmailVerified] = useState(false);
 
 
-    const onSubmit = (data, e) => {
+    const onSubmit = (data) => {
         console.log(data);
-        axios
-            .post(ApiConstants.SIGNUP, {
+        axios.post(ApiConstants.SIGNUP,{
                 fullname: data.fullname,
                 email: data.email,
                 password: data.password
@@ -30,6 +29,7 @@ export default function Signup(props) {
                     width: 400,
                     height: 100,
                 })
+
 
             }).catch(error => {
                 Swal.fire({
