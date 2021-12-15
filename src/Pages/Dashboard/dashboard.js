@@ -32,7 +32,7 @@ export default function Dashboard() {
                                     <h4 className="p-2">{titleSelection.menuSelection}</h4>
                                 </div>
                                 <div className="col px-4 d-flex justify-content-end">
-                                    <h4 className="p-2">Hi {userName}</h4>
+                                    <h4 className="p-2" style ={{color:"red"}}>Hi {userName}</h4>
                                 </div>
                             </div>
                             {(() => {
