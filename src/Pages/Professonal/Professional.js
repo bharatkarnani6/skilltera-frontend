@@ -12,7 +12,7 @@ const Professional = () => {
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
 
-  const [check, setCheck] = useState(false)    
+  const [check, setCheck] = useState(true)    
 
   const candidateData = JSON.parse( localStorage.getItem('candidate_data'))
 
@@ -23,6 +23,23 @@ const Professional = () => {
   const userId = candidateData.candidate._id;
   
   const user = candidateData.candidate
+
+  const count = Object.keys(candidateData).length;
+
+// const valcheck = (e) => {
+//  e.preventDefault();
+
+//  if(count>0){
+//    setCheck(false)
+//  }
+// else{
+//   setCheck(true)
+// }
+// }
+
+// valcheck();
+
+
 
   
 
@@ -86,7 +103,7 @@ const Professional = () => {
   <div className="form-group col-md-4">
     <label >Overall Experience</label>
     <input type="number" className="form-control"  placeholder="1"
-     style={{color:check=== true?"black":"#7B7D7D" }}
+     style={{color:check=== true?"#7B7D7D":"black" }}
      defaultValue= {user.experience}
       {...register("experience")}
     />
@@ -94,7 +111,7 @@ const Professional = () => {
   <div class="form-group col-md-4">
     <label >Current Company</label>
     <input type="text" class="form-control"  placeholder="Google"
-      style={{color:check=== true?"black":"#7B7D7D" }}
+      style={{color:check=== true?"#7B7D7D":"black" }}
       defaultValue = {user.currentCompany}
       {...register("currentCompany")}
     />
@@ -102,7 +119,7 @@ const Professional = () => {
   <div class="form-group col-md-4">
     <label >Current Role</label>
     <input type="text" class="form-control"  
-    style={{color:check=== true?"black":"#7B7D7D" }}
+    style={{color:check=== true?"#7B7D7D":"black" }}
     placeholder="Developer"
 defaultValue = {user.interestedRole}
 {...register("interestedRole")}
@@ -113,7 +130,7 @@ defaultValue = {user.interestedRole}
 <div className="form-group">
   <label for="inputUrl">Technologies /Tools you are good </label>
   <input type="text" className="form-control"  placeholder="c++,mern"
-style={{color:check=== true?"black":"#7B7D7D" }}
+style={{color:check=== true?"#7B7D7D":"black" }}
 defaultValue = {user.knownTechnologies}
 {...register("knownTechnologies")}
 
@@ -125,7 +142,7 @@ defaultValue = {user.knownTechnologies}
 <div class="form-group">
     <label for="exampleFormControlTextarea1">Brief Description about your skill</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
-    style={{color:check=== true?"black":"#7B7D7D" }}
+    style={{color:check=== true?"#7B7D7D":"black" }}
      defaultValue = {user.experienceDescription}
      {...register("experienceDescription")}
 
@@ -138,13 +155,13 @@ defaultValue = {user.knownTechnologies}
   
 {check ?<button type="submit" className="btn btn-primary disabled"  aria-disabled="true" >Save</button> :<button type="submit" className="btn btn-primary active" aria-disabled="true">Save</button> }
 
-{check ?<button type="button" class="btn btn-secondary active" onClick={(e) =>setCheck(false) } >Edit</button> : <button type="button" class="btn btn-secondary disabled" aria-disabled="true" >Edit</button>}
+{check ?<button type="button" className="btn btn-secondary active" onClick={(e) =>setCheck(false) } >Edit</button> : <button type="button" className="btn btn-secondary disabled" aria-disabled="true" >Edit</button>}
 
 </div>
 </form>
     
 </>
-    )
-}
+    
+    )}
 
 export default Professional
