@@ -34,7 +34,7 @@ export default function CompanyDashboard() {
                             {(() => {
                                 switch (titleSelection.menuSelection) {
                                     case 'Dashboard':
-                                        return <Aboutus />
+                                        return
                                         break;
                                     case 'Profile':
                                         return <Profile />

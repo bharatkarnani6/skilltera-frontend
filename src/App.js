@@ -6,6 +6,7 @@ import Route from './Route/route';
 
 
 function App() {
+  console.log(process.env);
   return (
     <>
       <BrowserRouter>
