@@ -1,16 +1,20 @@
-var local = "http://localhost:8080"
+var baseUrl;
+if (process.env.NODE_ENV == 'development') {
+    baseUrl = "http://localhost:8080"
+} else {
+    baseUrl = "https://skilltera-api.herokuapp.com"
+}
+console.log(baseUrl);
 const ApiConstants = {
-    LOGIN: `${local}/login`,
-    SIGNUP: `${local}/signup`,
-    RESET_PASSWORD: `${local}/reset-password`,
-    FORGET_PASSWORD: `${local}/forgetPassword`,
-    VERIFY_OTP: `${local}/verifyOtp`,
-    PROFILE:`${local}/profile`,
-    CANDIDATE:`${local}/candidate/`,
-    CONTACT_MAIL: `${local}/contact`,
-    COMPANY_LOGIN: `${local}/company/login`,
-    COMPANY_DATA: `${local}/candidates/viewAll`
-
+  
+    LOGIN: `${baseUrl}/login`,
+    SIGNUP: `${baseUrl}/signup`,
+    RESET_PASSWORD: `${baseUrl}/reset-password`,
+    FORGET_PASSWORD: `${baseUrl}/forgetPassword`,
+    VERIFY_OTP: `${baseUrl}/verifyOtp`,
+    CONTACT_MAIL: `${baseUrl}/contact`,
+    COMPANY_LOGIN: `${baseUrl}/company/login`,
+    COMPANY_DATA: `${baseUrl}/candidates/viewAll`
 
 }
 export default ApiConstants;
