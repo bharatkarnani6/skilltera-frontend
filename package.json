@@ -16,6 +16,7 @@
     "axios": "^0.24.0",
     "datatables.net": "^1.11.3",
     "datatables.net-dt": "^1.11.3",
+    "heroku": "^7.59.2",
     "immer": "^8.0.1",
     "jquery": "^3.6.0",
     "mui-datatables": "^4.0.0",
