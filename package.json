@@ -2,6 +2,9 @@
   "name": "skilltera-frontend",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
@@ -16,7 +19,6 @@
     "immer": "^8.0.1",
     "jquery": "^3.6.0",
     "mui-datatables": "^4.0.0",
-    "node": "^14.x",
     "react": "^17.0.2",
     "react-data-table-component": "^7.4.5",
     "react-dom": "^17.0.2",
