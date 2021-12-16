@@ -23,8 +23,11 @@ const Login = () => {
             password: data.password
         }).then((response) => {
             console.log(response.data);
-            //localStorage.setItem('login', true);
-            //window.location.pathname = "/dashboard";
+
+            localStorage.setItem("candidate_data",JSON.stringify(response.data))
+        
+            
+           window.location.pathname = "/dashboard";
             // history.push('/dashboard')
             setisEmailVerified(response.data.candidate.isVerified);
         }).catch(error => {
@@ -34,11 +37,13 @@ const Login = () => {
                 width: 400,
                 height: 100,
             })
-            //console.log(error.response.data.error)
+    
         })
     };
 
-    //rak --> for login validation
+//rak --> for login validation message 
+
+
 
 
     function showHint() {

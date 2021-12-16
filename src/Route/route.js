@@ -14,7 +14,6 @@ import CompanyDashboard from '../Pages/Company Dashboard/companyDashboard';
 export default function Routes() {
     return (
         <div>
-
             <Switch>
                 <Route exact path="/" ><Home /></Route>
                 <Route exact path="/login" ><Login /></Route>
@@ -25,7 +24,6 @@ export default function Routes() {
                 <SecuredRoutes exact path="/dashboard" component={Dashboard} />
                 <SecuredRoutes exact path="/company_Dashboard" component={CompanyDashboard} />
             </Switch>
-
         </div>
     );
 }

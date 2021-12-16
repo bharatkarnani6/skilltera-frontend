@@ -1,8 +1,34 @@
-.button-right {
-  display: block;
-  text-align: end;
-  margin: 1rem;
+.professionalPage{
+
+    float:left;
+    margin-left: 2rem;
+    position: sticky ;
+    top :10rem;
+    left: 20rem;
+    
+    
 }
-.profile-form {
-  padding: 1rem;
+.professionalPage input {
+
+    height: 5vh;
+    width: 10vw;
+
+}
+
+
+
+.personalPage{
+    
+    float: left;
+    position: sticky;
+    margin-left: 10.5rem;
+
+    
+}
+
+.personalPage input {
+
+    height: 5vh;
+    width: 10vw;
+ 
 }

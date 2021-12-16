@@ -17,15 +17,16 @@
   height: 200px;
   float: left;
   position: absolute;
-  top: 7.5rem;
+  top: 2.5rem;
+  left:7rem;
 }
 .for-developers {
   width: 300px;
   height: 200px;
   float: left;
   position: absolute;
-  left: 30rem;
-  top: 7.5rem;
+  left: 12rem;
+  top: 2.5rem;
 }
 @media (max-width: 480px) {
   .banner {
@@ -55,10 +56,19 @@
     top: 21rem;
     padding-left: 10px;
     padding-right: 10px;
+
   }
   .banner-image-section {
     /* display: none; */
     position: relative;
     top: 25rem;
   }
+}
+
+
+.fonts{
+
+  font-family: 'Lato', sans-serif;
+  font-size: 1.5rem;
+
 }

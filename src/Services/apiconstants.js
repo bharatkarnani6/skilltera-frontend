@@ -6,6 +6,7 @@ if (process.env.NODE_ENV == 'development') {
 }
 console.log(baseUrl);
 const ApiConstants = {
+  
     LOGIN: `${baseUrl}/login`,
     SIGNUP: `${baseUrl}/signup`,
     RESET_PASSWORD: `${baseUrl}/reset-password`,
@@ -14,7 +15,6 @@ const ApiConstants = {
     CONTACT_MAIL: `${baseUrl}/contact`,
     COMPANY_LOGIN: `${baseUrl}/company/login`,
     COMPANY_DATA: `${baseUrl}/candidates/viewAll`
-
 
 }
 export default ApiConstants;

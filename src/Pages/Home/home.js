@@ -14,7 +14,7 @@ const Home = () => {
               <div className="col">
                 <div className="for-companies fonts">
                   <h3 style={{ 'fontWeight': '800' }}>For Companies</h3>
-                  <p >Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Molestias aut, repellat ipsum facere voluptate dicta obcaecati
                     deserunt nobis suscipit eaque?</p>
                   <Link to='/company_login'> <button className="btn btn-primary">Start Hiring</button></Link>
@@ -22,16 +22,14 @@ const Home = () => {
               </div>
               <div className="col">
                 <div className="for-developers fonts">
-                  <h3 style={{ 'fontWeight': '800' }}>For Developers</h3>
+                  <h3 style={{ 'fontWeight': '800'   }}>For Developers</h3>
                   <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Molestias aut, repellat ipsum facere voluptate dicta obcaecati
                     deserunt nobis suscipit eaque?</p>
-                  <Link to='/login'> <button className="btn btn-primary">Sign Up</button></Link>
+                  <Link to='/login'> <button className="btn btn-primary w-50 h-20 ">Sign Up</button></Link>
                 </div>
               </div>
             </div>
-
-
           </div>
           <div className="col-12 col-md-6 col-lg-6 banner-image-section">
             <div className="banner-image">
