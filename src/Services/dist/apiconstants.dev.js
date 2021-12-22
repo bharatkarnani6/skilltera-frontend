@@ -4,18 +4,24 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var local = "http://localhost:8080";
+var baseUrl;
+
+if (process.env.NODE_ENV == 'development') {
+  baseUrl = "https://skilltera-api.herokuapp.com";
+} else {
+  baseUrl = "http://localhost:8080";
+}
+
+console.log(baseUrl);
 var ApiConstants = {
-  LOGIN: "".concat(local, "/login"),
-  SIGNUP: "".concat(local, "/signup"),
-  RESET_PASSWORD: "".concat(local, "/reset-password"),
-  FORGET_PASSWORD: "".concat(local, "/forgetPassword"),
-  VERIFY_OTP: "".concat(local, "/verifyOtp"),
-  PROFILE: "".concat(local, "/profile"),
-  CANDIDATE: "".concat(local, "/candidate/"),
-  CONTACT_MAIL: "".concat(local, "/contact"),
-  COMPANY_LOGIN: "".concat(local, "/company/login"),
-  COMPANY_DATA: "".concat(local, "/candidates/viewAll")
+  LOGIN: "".concat(baseUrl, "/login"),
+  SIGNUP: "".concat(baseUrl, "/signup"),
+  RESET_PASSWORD: "".concat(baseUrl, "/reset-password"),
+  FORGET_PASSWORD: "".concat(baseUrl, "/forgetPassword"),
+  VERIFY_OTP: "".concat(baseUrl, "/verifyOtp"),
+  CONTACT_MAIL: "".concat(baseUrl, "/contact"),
+  COMPANY_LOGIN: "".concat(baseUrl, "/company/login"),
+  COMPANY_DATA: "".concat(baseUrl, "/candidates/viewAll")
 };
 var _default = ApiConstants;
 exports["default"] = _default;

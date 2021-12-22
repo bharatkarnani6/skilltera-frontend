@@ -14,21 +14,13 @@ export default function Dashboard() {
      console.log(candidateData)
     
     const userName = candidateData.candidate.fullname
-
-    const companyLogin = localStorage.getItem('companyLogin')
-    
-    console.log("companyLogin" ,companyLogin)
-
     const menu = useSelector((state) => state.toggleMenu);
     const titleSelection = useSelector((state) => state.sidebarMenuSelectionReducer);
-
-
-
 
     return (
         <div>
             <Navbar />
-            <div className="container-fluid overflow-hidden">
+            <div className="container-fluid overflow-hidden" >
                 <div className="row g-0 no-gutters">
                     <div className={!menu.toggleValue ? 'toggle-width-sidebar' : 'col-2'} >
                         <Sidebar />

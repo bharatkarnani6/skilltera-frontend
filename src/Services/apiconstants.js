@@ -1,8 +1,8 @@
 var baseUrl;
 if (process.env.NODE_ENV == 'development') {
-    baseUrl = "http://localhost:8080"
-} else {
     baseUrl = "https://skilltera-api.herokuapp.com"
+} else {
+    baseUrl = "http://localhost:8080"
 }
 console.log(baseUrl);
 const ApiConstants = {
