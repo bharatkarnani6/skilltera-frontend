@@ -13,14 +13,14 @@ export default function Dashboard() {
 
      console.log(candidateData)
     
-     const userName = candidateData.candidate.fullname
-
+    const userName = candidateData.candidate.fullname
     const menu = useSelector((state) => state.toggleMenu);
     const titleSelection = useSelector((state) => state.sidebarMenuSelectionReducer);
+
     return (
         <div>
             <Navbar />
-            <div className="container-fluid overflow-hidden">
+            <div className="container-fluid overflow-hidden" >
                 <div className="row g-0 no-gutters">
                     <div className={!menu.toggleValue ? 'toggle-width-sidebar' : 'col-2'} >
                         <Sidebar />
@@ -32,7 +32,7 @@ export default function Dashboard() {
                                     <h4 className="p-2">{titleSelection.menuSelection}</h4>
                                 </div>
                                 <div className="col px-4 d-flex justify-content-end">
-                                    <h4 className="p-2">Hi {userName}</h4>
+                                    <h4 className="p-2" style ={{color:"red"}}>Hi {userName}</h4>
                                 </div>
                             </div>
                             {(() => {

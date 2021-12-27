@@ -26,11 +26,13 @@ const Login = () => {
 
             localStorage.setItem("candidate_data",JSON.stringify(response.data))
         
+            localStorage.setItem("candidateLogin" ,true)
             
            window.location.pathname = "/dashboard";
             // history.push('/dashboard')
             setisEmailVerified(response.data.candidate.isVerified);
         }).catch(error => {
+            localStorage.setItem("candidateLogin" ,false)
             Swal.fire({
                 title: error.response.data.error,
                 icon: 'info',
