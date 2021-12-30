@@ -5,9 +5,9 @@ import ApiConstants from "../../../Services/apiconstants";
 import Swal from 'sweetalert2'
 import { useHistory } from 'react-router-dom';
 import { FcAbout } from "react-icons/fc";
-import './companyAdminPage.css'
+import './candidateAdminSignup.css'
 
-export default function CompanyAdminPage() {
+export default function CandidateAdminSignup() {
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const [id, setId] = useState('');
     const [token, setToken] = useState('');
@@ -18,10 +18,10 @@ export default function CompanyAdminPage() {
     const onSubmit = (data) => {
         console.log("id", id);
         console.log("token", token);
-        axios.post(ApiConstants.ADMIN_COMPANY_SIGNUP, {
+        axios.post(ApiConstants.ADMIN_CANDIDATE_SIGNUP, {
             email: data.email,
             password: data.password,
-            companyName: data.companyName
+            fullname: data.fullName
         }, {
             headers: {
                 "Accept": "application/json",
@@ -63,18 +63,18 @@ export default function CompanyAdminPage() {
     }
     return (
         <>
-            <div className="main-box-admin">
+            <div className="main-box-admin-candidate-signup">
 
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <div className="mb-3">
-                        <label className="form-label">Company Name</label>
+                        <label className="form-label">Full Name</label>
                         <input type="text"
                             className="form-control"
-                            placeholder="Company Name"
-                            {...register("companyName", { required: true, message: <p>Invalid Company Name</p> })}
+                            placeholder="Full Name"
+                            {...register("fullName", { required: true, message: <p>Invalid Full Name</p> })}
 
                         />
-                        {errors.companyName && <p style={{ 'color': 'red' }}>Enter the valid Company Name</p>}
+                        {errors.fullName && <p style={{ 'color': 'red' }}>Enter the valid Full Name</p>}
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Email address</label>

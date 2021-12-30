@@ -56,6 +56,9 @@ export default function AdminSidebar() {
                         <MenuItem active={true} icon={<FiHome />} onClick={() => menuSelection('Company Admin Page')}>
                             Company Admin Page
                         </MenuItem>
+                        <MenuItem active={true} icon={<FiHome />} onClick={() => menuSelection('Candidate Admin Signup')}>
+                            Candidate Admin Signup
+                        </MenuItem>
                         <MenuItem icon={<FaList />} onClick={() => menuSelection('Reset Company Password')}>Reset Company Password</MenuItem>
                         <MenuItem icon={<BiCog />} onClick={() => menuSelection('All Companies')}>All Companies</MenuItem>
                         <MenuItem icon={<BiCog />} onClick={() => menuSelection('All Candidates')}>All Candidates</MenuItem>

@@ -16,29 +16,24 @@ export default function Admin() {
 
     const onSubmit = (data) => {
         console.log(data);
-        // axios.post(ApiConstants.LOGIN, {
-        //     email: data.email,
-        //     password: data.password
-        // }).then((response) => {
-        //     console.log(response.data);
+        axios.post(ApiConstants.ADMIN_LOGIN, {
+            email: data.email,
+            password: data.password
+        }).then((response) => {
+            console.log(response.data);
+            localStorage.setItem("ADMIN", JSON.stringify(response.data))
+            localStorage.setItem("login", true)
+            window.location.pathname = "/adminDashboard";
+        }).catch(error => {
+            //localStorage.setItem("candidateLogin", false)
+            Swal.fire({
+                title: error.response.data.error,
+                icon: 'info',
+                width: 400,
+                height: 100,
+            })
 
-        //     localStorage.setItem("candidate_data", JSON.stringify(response.data))
-
-        //     localStorage.setItem("candidateLogin", true)
-
-        //     window.location.pathname = "/dashboard";
-        //     // history.push('/dashboard')
-        //     setisEmailVerified(response.data.candidate.isVerified);
-        // }).catch(error => {
-        //     localStorage.setItem("candidateLogin", false)
-        //     Swal.fire({
-        //         title: error.response.data.error,
-        //         icon: 'info',
-        //         width: 400,
-        //         height: 100,
-        //     })
-
-        // })
+        })
     };
 
     function showHint() {

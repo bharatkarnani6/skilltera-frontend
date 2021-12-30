@@ -11,12 +11,13 @@ import CompanyAdminPage from '../Admin/Company Admin Page/companyAdminPage';
 import ResetCompanyPassword from '../Admin/Reset Company Password/resetCompanyPassword';
 import AllCompanies from '../Admin/All Companies/allCompanies';
 import AllCandidates from '../Admin/All Candidates/allCandidates';
+import CandidateAdminSignup from '../Admin/Cadidate Admin Signup/candidateAdminSignup';
 
 export default function AdminDashboard() {
     const menu = useSelector((state) => state.toggleMenu);
     const titleSelection = useSelector((state) => state.sidebarMenuSelectionReducer);
-    const data = JSON.parse(localStorage.getItem('company_loggedin_user_data'));
-    console.log(data);
+    // const data = JSON.parse(localStorage.getItem('company_loggedin_user_data'));
+    // console.log(data);
     return (
         <div>
             <Navbar />
@@ -48,6 +49,9 @@ export default function AdminDashboard() {
                                         break;
                                     case 'All Candidates':
                                         return <AllCandidates />
+                                        break;
+                                    case 'Candidate Admin Signup':
+                                        return <CandidateAdminSignup />
                                         break;
                                     default:
                                         <h1>Error</h1>

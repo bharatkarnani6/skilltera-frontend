@@ -77,7 +77,7 @@ export default function Jobs() {
     })
     const [filterData, setFilterData] = useState('');
     const userData = () => {
-        axios.get(ApiConstants.COMPANY_DATA).then((response) => {
+        axios.get(ApiConstants.CANDIDATE_DATA).then((response) => {
             var dataTest = [];
             for (var i = 0; i < Object.keys(response.data.candidate).length; i++) {
                 if (Object.keys(response.data.candidate[i]).length > 8) {
