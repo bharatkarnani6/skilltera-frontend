@@ -9,6 +9,7 @@ import "datatables.net-dt/js/dataTables.dataTables"
 import "datatables.net-dt/css/jquery.dataTables.min.css"
 
 import DataTable from 'react-data-table-component';
+import UpdateCandidateAdmin from './Update Candidate Admin/updateCandidateAdmin';
 export default function AllCandidates() {
     const [values, setValues] = useState({
         candidateData: {}
@@ -62,7 +63,7 @@ export default function AllCandidates() {
             selector: row => row.relocation ? 'Yes' : 'No',
         }, {
             name: 'Selection',
-            cell: (row) => (<button type="button" class="btn btn-primary" onClick={() => editable(row)} >Edit</button>),
+            cell: (row) => (<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => editable(row)} >Edit</button>),
             ignoreRowClick: true,
             allowOverflow: true,
             button: true,
@@ -110,6 +111,7 @@ export default function AllCandidates() {
                     data={values.candidateData}
                 />)
             }
+            <UpdateCandidateAdmin />
         </>
     )
 }
