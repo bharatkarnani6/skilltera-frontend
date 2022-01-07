@@ -5,7 +5,8 @@ import ApiConstants from "../../../../Services/apiconstants";
 import '../Update Candidate Admin/updateCandidateAdmin.css'
 
 export default function UpdateCandidateAdmin(props) {
-    const [candidateDataById, setCandidateDataById] = useState({});
+    const [adminId, setAdminId] = useState('');
+    const [token, setToken] = useState('');
 
     const { register, handleSubmit, formState: { errors }, setValue, getValues } = useForm();
 
@@ -40,10 +41,49 @@ export default function UpdateCandidateAdmin(props) {
 
     useEffect(() => {
         candidateData();
+        setAdminId(JSON.parse(localStorage.getItem('ADMIN')).admin._id);
+        setToken(JSON.parse(localStorage.getItem('ADMIN')).token)
     }, [props.candidateId])
 
     const onSubmit = (data) => {
         console.log(data)
+        axios.patch(ApiConstants.ADMIN_CANDIDATE_UPDATE,
+            {
+                id: props.candidateId,
+                fullname: data.fullname,
+                country: data.country,
+                currentCity: data.currentCity,
+                currentCompany: data.currentCompany,
+                currentRole: data.currentRole,
+                email: data.email,
+                expectedRateC2CorC2H: data.expectedRateC2CorC2H,
+                experience: data.experience,
+                experienceDescription: data.experienceDescription,
+                interestedRole: data.interestedRole,
+                knownTechnologies: data.knownTechnologies,
+                linkedInUrl: data.linkedInUrl,
+                needVisaSponsorship: data.needVisaSponsorship,
+                phone: data.phone,
+                relocation: data.relocation,
+                timeToJoin: data.timeToJoin,
+                typeOfJob: data.typeOfJob,
+
+            }, {
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json",
+                '_id': adminId,
+                'token': token,
+                'Access-Control-Allow-Origin': true,
+                "Access-Control-Allow-Methods": "GET, POST, PATCH"
+            }
+        }).then((response) => {
+
+            console.log(response);
+
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
 
