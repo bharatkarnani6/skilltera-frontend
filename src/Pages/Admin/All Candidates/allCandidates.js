@@ -15,6 +15,8 @@ export default function AllCandidates() {
         candidateData: {}
     })
     const [isExpanded, setIsExpanded] = useState(false)
+    const [candidateId, setCandidateId] = useState('')
+    const [editClicked, setEditClicked] = useState(false);
     const columnsList = [
         {
             name: 'ID',
@@ -95,8 +97,8 @@ export default function AllCandidates() {
     }
 
     const editable = (data) => {
-        console.log("clicked");
-        console.log(data);
+        // setEditClicked(true)
+        setCandidateId(data._id);
     }
     return (
         <>
@@ -111,7 +113,7 @@ export default function AllCandidates() {
                     data={values.candidateData}
                 />)
             }
-            <UpdateCandidateAdmin />
+            <UpdateCandidateAdmin candidateId={candidateId} />
         </>
     )
 }

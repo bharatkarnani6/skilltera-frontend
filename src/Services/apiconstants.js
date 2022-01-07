@@ -19,6 +19,8 @@ const ApiConstants = {
     ADMIN_LOGIN: `${baseUrl}/admin/login`,
     ADMIN_COMPANY_SIGNUP: `${baseUrl}/admin/company/signup`,
     ADMIN_CANDIDATE_SIGNUP: `${baseUrl}/admin/candidate/signup`,
+    CANDIDATE_DATA_BY_ID: `${baseUrl}/candidate`,
+    ADMIN_CANDIDATE_UPDATE: `${baseUrl}/admin/candidate/update`,
 
 
 }
