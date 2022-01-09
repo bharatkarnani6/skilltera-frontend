@@ -26,7 +26,7 @@ const Login = () => {
 
             localStorage.setItem("candidate_data",JSON.stringify(response.data))
         
-            localStorage.setItem("candidateLogin" ,true)
+            localStorage.setItem("login" ,true)
             
            window.location.pathname = "/dashboard";
             // history.push('/dashboard')
