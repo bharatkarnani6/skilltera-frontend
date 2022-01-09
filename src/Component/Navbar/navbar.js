@@ -9,40 +9,42 @@ const Navbar = () => {
       setDashboard(!dashboard)
     }
   }, [])
-  return (
+  return(
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light navbar-z">
-        <div className="container-fluid">
-          <a className="navbar-brand">
-            <NavLink exact to='/' activeClassName="active" activeStyle={{ color: "red" }}><img src={Logo} alt="logo" className="img-fluid" /></NavLink>
-          </a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse justify-content-end menu-items" id="navbarSupportedContent">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link px-4 fonts" aria-current="page"><NavLink className="navItem" exact to='/'>Home</NavLink></a>
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+    <NavLink exact to='/' activeClassName="active" activeStyle={{ color: "red" }}><img src={Logo} alt="logo" className="img-fluid" /></NavLink>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item  pl-2">
+                <a class="nav-link px-4 fonts" aria-current="page"><NavLink class="navItem" exact to='/'>Home</NavLink></a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link px-4 fonts"><NavLink exact to='/about'className="navItem" >About Us </NavLink></a>
+              <li class="nav-item">
+                <a class="nav-link px-4 fonts"><NavLink exact to='/about' class="navItem" >About Us </NavLink></a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link px-4 fonts"><NavLink exact to='/blog' className="navItem" >Blog</NavLink></a>
+              <li class="nav-item">
+                <a class="nav-link px-4 fonts"><NavLink exact to='/blog' class="navItem" >Blog</NavLink></a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link px-4 fonts"><NavLink exact to='/contact' activeStyle={{ color: "red" }}>Contact Us</NavLink></a>
+              <li class="nav-item">
+                <a class="nav-link px-4 fonts"><NavLink exact to='/contact' activeStyle={{ color: "red" }}>Contact Us</NavLink></a>
               </li>
               {
-                dashboard && <li className="nav-item">
-                  <a className="nav-link px-4 fonts"><NavLink exact to='/dashboard' activeStyle={{ color: "red" }}>Dashboard</NavLink></a>
+                dashboard && <li class="nav-item">
+                  <a class="nav-link px-4 fonts"><NavLink exact to='/dashboard' activeStyle={{ color: "red" }}>Dashboard</NavLink></a>
                 </li>
               }
+      </ul>
+   
+    </div>
+  </div>
+</nav> 
 
-            </ul>
-          </div>
-        </div>
-      </nav>
     </div>
   )
 }

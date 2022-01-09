@@ -19,6 +19,7 @@
   position: absolute;
   top: 2.5rem;
   left:7rem;
+  z-index: 1;
 }
 .for-developers {
   width: 300px;
@@ -27,13 +28,14 @@
   position: absolute;
   left: 12rem;
   top: 2.5rem;
+  z-index: 1;
 }
 @media (max-width: 480px) {
   .banner {
     padding-left: 0px;
     position: static;
     z-index: -10;
-    height: 100vh;
+    height: 75vh;
     background-image: linear-gradient(
       to bottom,
       #ada996,
@@ -43,25 +45,27 @@
     );
   }
   .for-companies {
-    width: 100%;
+    width: 90vw;
     height: 0px;
-    top: 8rem;
+    top: 2rem;
+    left:40px;
     padding-left: 10px;
     padding-right: 10px;
+    z-index: 1;
   }
   .for-developers {
-    width: 100%;
+    width: 90vw;
     height: 0px;
-    left: 0;
-    top: 21rem;
-    padding-left: 10px;
+    left: -159px;
+    top: 27rem;
+    padding-left: 21px;
     padding-right: 10px;
-
+    z-index:1;
   }
   .banner-image-section {
     /* display: none; */
     position: relative;
-    top: 25rem;
+    top: 14rem;
   }
 }
 

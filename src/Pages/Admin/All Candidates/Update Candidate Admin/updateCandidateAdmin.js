@@ -2,7 +2,7 @@ import react, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useForm } from "react-hook-form";
 import ApiConstants from "../../../../Services/apiconstants";
-import '../Update Candidate Admin/updateCandidateAdmin.css'
+// import '../Update Candidate Admin/updateCandidateAdmin.css'
 
 export default function UpdateCandidateAdmin(props) {
     const [adminId, setAdminId] = useState('');
