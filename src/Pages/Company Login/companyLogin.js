@@ -20,19 +20,16 @@ export default function CompanyLogin() {
                 password: data.password
             }).then((response) => {
                 localStorage.setItem('company_loggedin_user_data', JSON.stringify(response.data));
-                localStorage.setItem('companyLogin', true);
+                localStorage.setItem('login', true);
                 window.location.pathname = "/companyDashboard";
 
             }).catch(error => {
-
-                localStorage.setItem('companyLogin', false);
                 Swal.fire({
                     title: error.response.data.error,
                     icon: 'info',
                     width: 400,
                     height: 100,
                 })
-                window.location.pathname = "/company_login";
             })
 
         } catch (err) {
