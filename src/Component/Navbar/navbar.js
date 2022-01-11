@@ -3,46 +3,72 @@ import { NavLink, Link } from 'react-router-dom';
 import Logo from '../../Assets/skilltera_logo.png'
 import './navbar.css'
 const Navbar = () => {
-  const [dashboard, setDashboard] = useState(false);
+
+  // const candidateData = localStorage.getItem('candidate_data')
+  // const adminData = localStorage.getItem('ADMIN')
+  // const companyData = localStorage.getItem('company_loggedin_user_data')
+
+  const [candidateData, setCandidateData] = useState(false);
+  const [adminData, setAdminData] = useState(false);
+  const [companyData, setCompanyData] = useState(false);
+
   useEffect(() => {
-    if (localStorage.getItem('login') != null) {
-      setDashboard(!dashboard)
+    if (localStorage.getItem('candidate_data') != null) {
+      setCandidateData(true)
+    }
+    if (localStorage.getItem('ADMIN') != null) {
+      setAdminData(true)
+    }
+    if (localStorage.getItem('company_loggedin_user_data') != null) {
+      setCompanyData(true)
     }
   }, [])
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light navbar-z">
-        <div className="container-fluid">
-          <a className="navbar-brand">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
             <NavLink exact to='/' activeClassName="active" activeStyle={{ color: "red" }}><img src={Logo} alt="logo" className="img-fluid" /></NavLink>
           </a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse justify-content-end menu-items" id="navbarSupportedContent">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link px-4 fonts" aria-current="page"><NavLink className="navItem" exact to='/'>Home</NavLink></a>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item  pl-2">
+                <a class="nav-link px-4 fonts" aria-current="page"><NavLink class="navItem" exact to='/'>Home</NavLink></a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link px-4 fonts"><NavLink exact to='/about'className="navItem" >About Us </NavLink></a>
+              <li class="nav-item">
+                <a class="nav-link px-4 fonts"><NavLink exact to='/about' class="navItem" >About Us </NavLink></a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link px-4 fonts"><NavLink exact to='/blog' className="navItem" >Blog</NavLink></a>
+              <li class="nav-item">
+                <a class="nav-link px-4 fonts"><NavLink exact to='/blog' class="navItem" >Blog</NavLink></a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link px-4 fonts"><NavLink exact to='/contact' activeStyle={{ color: "red" }}>Contact Us</NavLink></a>
+              <li class="nav-item">
+                <a class="nav-link px-4 fonts"><NavLink exact to='/contact' activeStyle={{ color: "red" }}>Contact Us</NavLink></a>
               </li>
               {
-                dashboard && <li className="nav-item">
-                  <a className="nav-link px-4 fonts"><NavLink exact to='/dashboard' activeStyle={{ color: "red" }}>Dashboard</NavLink></a>
+                candidateData && <li class="nav-item">
+                  <a class="nav-link px-4 fonts"><NavLink exact to='/dashboard' activeStyle={{ color: "red" }}>Dashboard</NavLink></a>
                 </li>
               }
-
+              {
+                adminData && <li class="nav-item">
+                  <a class="nav-link px-4 fonts"><NavLink exact to='/adminDashboard' activeStyle={{ color: "red" }}>Dashboard</NavLink></a>
+                </li>
+              }
+              {
+                companyData && <li class="nav-item">
+                  <a class="nav-link px-4 fonts"><NavLink exact to='/companyDashboard' activeStyle={{ color: "red" }}>Dashboard</NavLink></a>
+                </li>
+              }
             </ul>
+
           </div>
         </div>
       </nav>
+
     </div>
   )
 }
