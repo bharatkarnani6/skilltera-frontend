@@ -37,9 +37,9 @@ export default function Dashboard() {
                             </div>
                             {(() => {
                                 switch (titleSelection.menuSelection) {
-                                    case 'Dashboard':
-                                        return <Aboutus />
-                                        break;
+                                    // case 'Dashboard':
+                                    //     return <Aboutus />
+                                    //     break;
                                     case 'Profile':
                                         return <Profile />
                                         break;

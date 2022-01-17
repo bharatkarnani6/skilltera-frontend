@@ -98,7 +98,7 @@ const Professional = () => {
     return (
         <>
 
-  <form className="professionalForm" onSubmit={handleSubmit(onSubmit)} >
+   <form className="professionalForm" onSubmit={handleSubmit(onSubmit)} >
        <div className="form-row">
   <div className="form-group col-md-4">
     <label >Overall Experience</label>
@@ -158,7 +158,9 @@ defaultValue = {user.knownTechnologies}
 {check ?<button type="button" className="btn btn-secondary active" onClick={(e) =>setCheck(false) } >Edit</button> : <button type="button" className="btn btn-secondary disabled" aria-disabled="true" >Edit</button>}
 
 </div>
-</form>
+</form>  
+
+
     
 </>
     
