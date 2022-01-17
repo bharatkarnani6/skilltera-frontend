@@ -42,18 +42,13 @@ const Login = () => {
         })
     };
 
-    //rak --> for login validation message 
-
-
-
-
     function showHint() {
 
         alert("1. At least 8 characters \n 2. At least one special char \n 3. At least one number \n 4. At least one upper and one lower case char. \n ")
+
     }
 
-
-
+    
     return (
         <div>
             <Navbar />
@@ -82,7 +77,7 @@ const Login = () => {
                             {...register("password", { required: true, pattern: { value: /^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$/ } })}
 
                         />
-                        {errors.password && <p style={{ 'color': 'red' }}>Enter the strong password   <button onClick={showHint} className="showHint" > <FcAbout /></button>  </p>}
+                        {errors.password && <p style={{ 'color': 'red' }}>Please enter password  <button onClick={showHint} className="showHint" > <FcAbout /></button>  </p>}
 
                         {/* <p style={{ 'color': 'red' }}>  {errors.password?.type === 'required' && "Password is required" }  </p> */}
                     </div>
@@ -105,7 +100,6 @@ const Login = () => {
         </div>
     );
 }
-
 
 
 export default Login

@@ -1,8 +1,8 @@
 .main-box {
   padding: 15px;
   width: 30%;
-  position: absolute;
-  top: 50%;
+  position: relative;
+  top: 10rem;
   left: 50%;
   -ms-transform: translateX(-50%) translateY(-50%);
   -webkit-transform: translate(-50%, -50%);

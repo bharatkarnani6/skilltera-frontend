@@ -45,8 +45,7 @@ export default function Signup(props) {
         setIsSubmitting(false);
         // console.log(value);
     }
-
-
+    
     //rak
 
     function showHint() {
@@ -55,8 +54,8 @@ export default function Signup(props) {
     }
 
     return (
-        <div>
-            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div >
+            <div className="modal fade container-fluid" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
