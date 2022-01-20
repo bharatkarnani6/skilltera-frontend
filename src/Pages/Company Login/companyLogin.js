@@ -48,7 +48,7 @@ export default function CompanyLogin() {
         <div>
             <Navbar />
             <div className="heading">
-                <h1 className='d-flex justify-content-center'>Company Login</h1>
+                <h1 className='d-flex justify-content-center'>Company Sign-in</h1>
             </div>
             <div className="company-login">
                 <form onSubmit={handleSubmit(onSubmit)} >
@@ -78,7 +78,7 @@ export default function CompanyLogin() {
                     </div>
 
                     <div className="d-grid gap-2 col-6 mx-auto">
-                        <button type="submit" disabled={!isDirty || !isValid} className="btn btn-primary">Login</button>
+                        <button type="submit" disabled={!isDirty || !isValid} className="btn btn-primary">Sign-in</button>
                     </div>
                 </form>
                 <p style={{ fontSize: '14px' }} className="pt-3 text-center">If you are new user to this portal and don't have email id and password, Feel free to <Link to='contact' style={{ color: 'blue' }}> Contact Us</Link></p>
