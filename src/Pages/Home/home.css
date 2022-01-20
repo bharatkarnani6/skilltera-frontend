@@ -1,60 +1,76 @@
 .banner {
   padding-left: 90px;
   position: relative;
-  margin-left: 50px;
+  margin-left: 0;
   z-index: 0;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to right,
     #ada996,
     #f2f2f2,
     #dbdbdb,
     #eaeaea
-  );
+  ); */
   overflow-x: hidden;
+  height: 66vh;
+
 }
 
+
 .for-companies {
-  width: 425px;
+  width: 554px;
   height: 200px;
   float: left;
   position: absolute;
-  top: 0.5rem;
-  left: 2rem;
+  top: 1.5rem;
+  left: 4.2rem;
   z-index: 1;
 }
 .for-companies p {
   font-family: initial;
-  color: slateblue;
+  color:#405254;
 
 }
 .for-developers {
-  width: 664px;
+  width: 705px;
   height: 200px;
   float: left;
   position: absolute;
-  top: 0.5rem;
-  left: 10rem;
+  top: 2.5rem;
+  left: 38rem;
   z-index: 1;
+ 
 }
 
 .for-developers p {
 
   font-family: initial;
-  color: slateblue;
+  color:#405254;
+}
+
+.bannerImg{
+  position: relative;
+  left: 0rem;
+  top: 3rem;
+  width: 40vw;
+}
+
+h3{
+  font-size: 2.2rem;
 }
 @media (max-width: 480px) {
   .banner {
     padding-left: 0px;
     position: static;
     z-index: -10;
-    height: 75vh;
-    background-image: linear-gradient(
+    height: 88vh;
+    /* background-image: linear-gradient(
       to bottom,
       #ada996,
       #f2f2f2,
       #dbdbdb,
       #eaeaea
-    );
+    ); */
+   
   }
   .for-companies {
     width: 90vw;
@@ -65,20 +81,25 @@
     padding-right: 10px;
     z-index: 1;
   }
+  
   .for-developers {
-    width: 90vw;
-    height: 0px;
-    left: -180px;
-    top: 38rem;
-    padding-left: 21px;
-    padding-right: 10px;
-    z-index:1;
+    width: 317px;
+    height: 26px;
+    left: 30px;
+    top: 0rem;
+    z-index: 1;
   }
+
   .banner-image-section {
-    /* display: none; */
+
     position: relative;
-    top: 20rem;
+    top: 27rem;
   }
+
+  .bannerImg{
+     position: absolute;
+  }
+
 }
 
 

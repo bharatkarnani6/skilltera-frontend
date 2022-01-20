@@ -6,7 +6,7 @@ import axios from 'axios';
 import ApiConstants from "../../Services/apiconstants";
 import Swal from 'sweetalert2'
 
-
+  
 
 const Professional = () => {
 
@@ -24,24 +24,7 @@ const Professional = () => {
   
   const user = candidateData.candidate
 
-  const count = Object.keys(candidateData).length;
-
-// const valcheck = (e) => {
-//  e.preventDefault();
-
-//  if(count>0){
-//    setCheck(false)
-//  }
-// else{
-//   setCheck(true)
-// }
-// }
-
-// valcheck();
-
-
-
-  
+ 
 
 
   const onSubmit = (data) => {

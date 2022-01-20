@@ -21,20 +21,7 @@ const userId = candidateData.candidate._id;
 
 const user = candidateData.candidate
 
-const count = Object.keys(candidateData).length;
 
-// const valcheck = (e) => {
-//  e.preventDefault();
-
-//  if(count>0){
-//    setCheck(false)
-//  }
-// else{
-//   setCheck(true)
-// }
-// }
-
-// valcheck();
 
 
 
@@ -149,7 +136,8 @@ const onSubmit = (data) => {
     <label for="exampleFormControlSelect1">Job Type</label>
     <select class="form-control" {...register("jobOfType") } style={{color:check=== true?"#7B7D7D":"black" }} >
       <option value={user.jobOfType =="Fulltime" ?"Fulltime":"Parttime"}> {user.jobOfType =="Fulltime" ?"Fulltime":"Parttime"} </option>
-      <option value={user.jobOfType =="Parttime" ?"Parttime":"Fulltime"}>{user.jobOfType =="Parttime" ?"Parttime":"Fulltime"}</option>
+      <option value={user.jobOfType =="C2C" ?"C2C":"Fulltime"}>{user.jobOfType =="C2C" ?"C2C":"Fulltime"}</option>
+      <option value={user.jobOfType =="C2H" ?"C2H":"Fulltime"}>{user.jobOfType =="C2H" ?"":"Fulltime"}</option>
     </select>
   </div>
   <div class="form-group col-md-7 ">
@@ -178,7 +166,7 @@ const onSubmit = (data) => {
   <div class="form-group col-md-6">
       <label >Expected salery</label>
       <input type="number" class="form-control" id="inputCity" placeholder="usd"
- style={{color:check=== true?"#7B7D7D":"black" }}
+    style={{color:check=== true?"#7B7D7D":"black" }}
     defaultValue ={user.expectedRateC2CorC2H}
      {...register("expectedRateC2CorC2H")}
 
