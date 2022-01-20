@@ -9,6 +9,7 @@ import './profile.css'
 
 
 
+
 const Profile = () => {
 
 
@@ -38,13 +39,13 @@ const Profile = () => {
           timeToJoin:data.timeToJoin,
           needVisaEmployers:data.needVisaEmployers,
           expectedRateC2CorC2H:data.expectedRateC2CorC2H,
-
-
           experience:data.experience,
           currentCompany:data.currentCompany,
           interestedRole:data.interestedRole,
           knownTechnologies:data.knownTechnologies,
-          experienceDescription:data.experienceDescription
+          experienceDescription:data.experienceDescription,
+          previousEmployers:data.previousEmployers,
+          interestedRole:data.interestedRole
 
          
         },{
@@ -91,18 +92,20 @@ const Profile = () => {
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
       <h3>Personal Info</h3>
                         <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <label for="exampleFormControlTextarea1">Phone Number</label>
-                                    <input type="tel" class="form-control "
-                                        {...register("phone")}
-                                    />
+                                    <input type="number" className="form-control"  
+                                       style={{color:check=== true?"#7B7D7D":"black" }}
+                                       defaultValue= {user.phone}
+                                       {...register("phone")}
+                                   />
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                         <label for="exampleFormControlSelect1">When can you join(week)</label>
-                                        <select class="form-control" {...register("timeToJoin")} >
+                                        <select class="form-control" {...register("timeToJoin")} style={{color:check=== true?"#7B7D7D":"black" }}  >
                                             <option value="1" >1 </option>
                                             <option value="2">2 </option>
                                             <option value="1" >3 </option>
@@ -115,38 +118,39 @@ const Profile = () => {
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="exampleFormControlTextarea1">Country</label>
-                                        <input type="text" class="form-control"
-                                            {...register("country")}
+                                        <input type="text" class="form-control" id="inputState" placeholder="India"
+                                          style={{color:check=== true?"#7B7D7D":"black" }}
+                                          defaultValue= {user.country}
+                                          {...register("country")}
                                         />
                                     </div>
 
                                     <div class="col">
                                         <label for="exampleFormControlTextarea1"> Current City</label>
-                                        <input type="text" class="form-control"
-                                            {...register("currentCity")}
-                                        />
+                                        <input type="text" class="form-control" id="inputCity" placeholder="Delhi"
+                                           style={{color:check=== true?"#7B7D7D":"black" }}
+                                           defaultValue= {user.currentCity}
+                                          {...register("currentCity")}
+                                          />
+
                                     </div>
                                </div>
 
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
                                         <label for="exampleFormControlSelect1"> Open to relocate</label>
-                                        <select class="form-control"  {...register("relocation")}  >
-                                            <option value={false} >No</option>
-                                            <option value={true} >Yes</option>
-                                        </select>
+                                     <select class="form-control"  {...register("relocation") } style={{color:check=== true?"#7B7D7D":"black" }} >
+                                   <option value={user.relocation === false?false:true} >{user.relocation === true?"No":"Yes"}</option>
+                                   <option value={user.relocation === true?true:false}>{user.relocation === true?"Yes":"No"}</option>
+                                    </select>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <label for="exampleFormControlSelect1">Type of Job you want </label>
-                      
-                                     <select class="form-control"   {...register("typeOfJob")} >
-                                            <option value="Fulltime" >Fulltime</option>
-                                            <option value="C2C">C2C</option>
-                                            <option value="C2H" >C2h</option>
-                              
+                                        <select class="form-control" {...register("jobOfType") } style={{color:check=== true?"#7B7D7D":"black" }} >
+                                        <option value={user.jobOfType =="Fulltime" ?"Fulltime":"Parttime"}> {user.jobOfType =="Fulltime" ?"Fulltime":"Parttime"} </option>
+                                        <option value={user.jobOfType =="C2C" ?"C2C":"C2H"}>{user.jobOfType =="C2C" ?"C2C":"C2H"}</option>
+                                        <option value={user.jobOfType =="C2H" ?"C2H":"C2C"}>{user.jobOfType =="C2H" ?"C2H":"C2C"}</option>
                                         </select>
-
-
                                     </div>
                                 </div>
 
@@ -155,40 +159,43 @@ const Profile = () => {
                                 <div class="row mt-3">
                                     <div class="col-md-6 col-sm-6">
                                         <label for="exampleFormControlSelect1">Do you need visa Sponsorship ?</label>
-                                        <select class="form-control" {...register("needVisaSponsorship")} >
-                                            <option value={false} >No</option>
-                                            <option value={true}>Yes</option>
-                                        </select>
+                                        <select class="form-control" {...register("needVisaEmployer")}  style={{color:check=== true?"#7B7D7D":"black" }}>
+                                      <option value={user.needVisaEmployer === false?false:true} >{user.needVisaEmployer === false?"No":"Yes"}</option>
+                                     <option value={user.needVisaEmployer === true?true:false}>{user.needVisaEmployer === true?"Yes":"No"}</option>
+                                  </select>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <label for="exampleFormControlSelect1">Expected Rate for C2C/C2H</label>
-                                        <input type="text" class="form-control"
-                                            {...register("expectedRateC2CorC2H")}
-                                        />
+                                        <input type="number" class="form-control" id="inputCity" placeholder="usd"
+                                         style={{color:check=== true?"#7B7D7D":"black" }}
+                                         defaultValue ={user.expectedRateC2CorC2H}
+                                           {...register("expectedRateC2CorC2H")}
+
+                                           />
                                     </div>
                                 </div>
 
                                 <div class="from-row mt-1">
                                     <label for="exampleFormControlTextarea1">LinkedIn url</label>
-                                    <input type="url" class="form-control "
-                                        {...register("linkedInUrl")}
-                                    />
+                                    <input type="url" className="form-control" id="inputPhone" placeholder="http://"
+                                     style={{color:check=== true?"#7B7D7D":"black" }}
+                                     defaultValue= {user.linkedInUrl}
+                                      {...register("linkedInUrl")}
+                                     />
+
                                 </div>
 
-                                {/* <div class="modal-footer" >
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                </div> */}
+                            
 
 
-<div class="btn-group mt-4" role="group" aria-label="Basic example">
+               <div class="btn-group mt-4" role="group" aria-label="Basic example">
   
-  {check ?<button type="submit" className="btn btn-primary disabled"  aria-disabled="true" >Save</button> :<button type="submit" className="btn btn-primary active" aria-disabled="true">Save</button> }
+               {check ?<button type="submit" className="btn btn-primary disabled"  aria-disabled="true" >Save</button> :<button type="submit" className="btn btn-primary active" aria-disabled="true">Save</button> }
   
-  {check ?<button type="button" className="btn btn-secondary active" onClick={(e) =>setCheck(false) } >Edit</button> : <button type="button" className="btn btn-secondary disabled" aria-disabled="true" >Edit</button>}
+               {check ?<button type="button" className="btn btn-secondary active" onClick={(e) =>setCheck(false) } >Edit</button> : <button type="button" className="btn btn-secondary disabled" aria-disabled="true" >Edit</button>}
   
   </div>      
-                            </form>
+                 </form>
 
              </div>
           </div>
@@ -203,15 +210,20 @@ const Profile = () => {
       <div class="form-row">                                        
              <div class="col">
                  <label for="exampleFormControlSelect1"> Total Overall Experience</label>
-                  <input type="number" class="form-control"
-                   {...register("experience")}
-                          />
+                 <input type="number" className="form-control"  placeholder="1"
+                   style={{color:check=== true?"#7B7D7D":"black" }}
+                   defaultValue= {user.experience}
+                    {...register("experience")}
+                />
              </div>                  
             <div class="col">
                      <label for="exampleFormControlSelect1">Current Role</label>
-                     <input type="text" class="form-control"
-                     {...register("interestedRole")}
-              />
+                     <input type="text" class="form-control"  
+                          style={{color:check=== true?"#7B7D7D":"black" }}
+                          placeholder="Developer"
+                          defaultValue = {user.interestedRole}
+                      {...register("interestedRole")}
+                   />
             </div>
          </div>    
          
@@ -219,30 +231,39 @@ const Profile = () => {
 
                                 <div class="col-md-6 col-sm-6">
                                     <label for="exampleFormControlSelect1">Current Company/Client</label>
-                                    <input type="text" class="form-control"
-                                        {...register("currentCompany")}
+                                    <input type="text" class="form-control"  placeholder="Google"
+                                        style={{color:check=== true?"#7B7D7D":"black" }}
+                                         defaultValue = {user.currentCompany}
+                                  {...register("currentCompany")}
                                     />
                                 </div>
-                                {/* iska field add kro  */}
+                            
                                 <div class="col-md-6 col-sm-6">
                                     <label for="exampleFormControlSelect1"> Enter Type of Role you are looking</label>
-                                    <input type="text" class="form-control"
-                                        {...register("currentCompany")}
-                                    />
+                                    <select class="form-control" {...register("interestedRole")}  style={{color:check=== true?"#7B7D7D":"black" }}>
+                                      <option value="Data Engineer" > Data Engineer</option>
+                                     <option value="Full Stack Engineer">Full Stack Engineer </option>
+                                     <option value="Cloud Engineer">Cloud Engineer</option>
+                                  </select>
                                 </div>
                               </div>
 
                           <div class="row mt-3">
                                 <div class="col-md-6 col-sm-6 mt-4">
                                     <label for="exampleFormControlSelect1">Technologies /Tools you are good</label>
-                                    <input type="text" class="form-control mb-2"
-                                        {...register("knownTechnologies")}
-                                    />
+                                    <input type="text" className="form-control"  placeholder="c++,mern"
+                                      style={{color:check=== true?"#7B7D7D":"black" }}
+                                       defaultValue = {user.knownTechnologies}
+                                      {...register("knownTechnologies")}
+                                     />
                                 </div>
+                          
                                 <div class="col-md-6 col-sm-6">
                                     <label for="exampleFormControlSelect1">Enter Companies/Client you have worked for </label>
                                     <input type="text" class="form-control mb-2"
-                                        {...register("knownTechnologies")}
+                                     style={{color:check=== true?"#7B7D7D":"black" }}
+                                     defaultValue = {user.previousEmployers}
+                                        {...register("previousEmployers")}
                                     />
                                 </div>
 
@@ -250,11 +271,12 @@ const Profile = () => {
                             
                                 <div class="form-row ">
                                     <label for="exampleFormControlTextarea1">Brief Description about your skill</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                        {...register("experienceDescription")}
-                                    />
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
+                                       style={{color:check=== true?"#7B7D7D":"black" }}
+                                       defaultValue = {user.experienceDescription}
+                                      {...register("experienceDescription")}
+                                      />
                                 </div>
-
 
                                 <div class="btn-group mt-3" role="group" aria-label="Basic example">
   
@@ -263,13 +285,7 @@ const Profile = () => {
   {check ?<button type="button" className="btn btn-secondary active" onClick={(e) =>setCheck(false) } >Edit</button> : <button type="button" className="btn btn-secondary disabled" aria-disabled="true" >Edit</button>}
   
   </div>
-
-
-{/* 
-                                <div class="modal-footer" >
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                </div> */}
+                          
                             </form>
 
 
