@@ -29,10 +29,10 @@ export default function Dashboard() {
                         <div className="patch">
                             <div className="row">
                                 <div className="col">
-                                    <h4 className="p-2">{titleSelection.menuSelection}</h4>
+                                    <h4 className="p-2" style={{color:"white"}}>{titleSelection.menuSelection}</h4>
                                 </div>
                                 <div className="col px-4 d-flex justify-content-end">
-                                    <h4 className="p-2" style ={{color:"red"}}>Hi {userName}</h4>
+                                    <h4 className="p-2" style ={{color:"white"}}>Hi {userName}</h4>
                                 </div>
                             </div>
                             {(() => {
