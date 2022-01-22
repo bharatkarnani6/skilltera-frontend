@@ -4,7 +4,8 @@ import Navbar from '../../Component/Navbar/navbar'
 import Sidebar from '../../Component/Sidebar/sidebar';
 import { useSelector } from 'react-redux';
 import Aboutus from '../About/about';
-import Profile from '../Profile/profile';
+import Personal from '../Personal/personal';
+import Professional from '../Professional/professional'
 import Jobs from '../Jobs/jobs'
 
 export default function Dashboard() {
@@ -40,8 +41,10 @@ export default function Dashboard() {
                                     // case 'Dashboard':
                                     //     return <Aboutus />
                                     //     break;
-                                    case 'Profile':
-                                        return <Profile />
+                                    case 'Personal Info':
+                                        return <Personal />
+                                    case 'Professional Info':
+                                            return <Professional />    
                                         break;
                                     case 'Jobs':
                                         return <Jobs />

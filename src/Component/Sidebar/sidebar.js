@@ -59,9 +59,13 @@ export default function Sidebar() {
                         </MenuItem>
                         {/* <MenuItem icon={<FaList />} onClick={() => menuSelection('Jobs')}>Jobs</MenuItem> */}
                         {/* <MenuItem icon={<FaRegHeart />}>Favourite</MenuItem> */}
-                        <MenuItem icon={<RiPencilLine />} onClick={() => menuSelection('Profile')}>Profile</MenuItem>
-                        <MenuItem icon={<BiCog />} onClick={() => menuSelection('Settings')}>Settings</MenuItem>
+
+                       <MenuItem icon={<RiPencilLine />} onClick={() => menuSelection('Personal Info')}>Personal Info</MenuItem>
+                       <MenuItem icon={<RiPencilLine />} onClick={() => menuSelection('Professional Info')}>Professional Info</MenuItem>
+
+                       <MenuItem icon={<BiCog />} onClick={() => menuSelection('Settings')}>Settings</MenuItem>
                     </Menu>
+
                 </SidebarContent>
                 <SidebarFooter>
                     <Menu iconShape="square">
