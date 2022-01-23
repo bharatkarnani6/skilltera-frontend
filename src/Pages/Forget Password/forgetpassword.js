@@ -59,7 +59,7 @@ export default function ForgetPassword() {
                 console.log(response);
             }).catch(error => {
                 Swal.fire({
-                    title: error.response.data.error,
+                    title: 'Backend Not Connected',
                     icon: 'info',
                     width: 400,
                     height: 100,

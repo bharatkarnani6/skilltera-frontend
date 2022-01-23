@@ -40,9 +40,9 @@ export default function CandidateAdminSignup() {
                 height: 100,
             })
         }).catch(error => {
-            if (error.response.data.error) {
+            if ('Backend Not Connected') {
                 Swal.fire({
-                    title: error.response.data.error,
+                    title: 'Backend Not Connected',
                     icon: 'info',
                     width: 400,
                     height: 100,

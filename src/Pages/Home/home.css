@@ -12,9 +12,7 @@
   ); */
   overflow-x: hidden;
   height: 66vh;
-
 }
-
 
 .for-companies {
   width: 554px;
@@ -27,8 +25,7 @@
 }
 .for-companies p {
   font-family: initial;
-  color:#405254;
-
+  color: #405254;
 }
 .for-developers {
   width: 705px;
@@ -38,23 +35,21 @@
   top: 2.5rem;
   left: 38rem;
   z-index: 1;
- 
 }
 
 .for-developers p {
-
   font-family: initial;
-  color:#405254;
+  color: #405254;
 }
 
-.bannerImg{
+.bannerImg {
   position: relative;
   left: 0rem;
   top: 3rem;
   width: 40vw;
 }
 
-h3{
+h3 {
   font-size: 2.2rem;
 }
 @media (max-width: 480px) {
@@ -70,42 +65,42 @@ h3{
       #dbdbdb,
       #eaeaea
     ); */
-   
   }
   .for-companies {
     width: 90vw;
     height: 0px;
     top: 2rem;
-    left:40px;
+    left: 40px;
     padding-left: 10px;
     padding-right: 10px;
     z-index: 1;
   }
-  
+
   .for-developers {
+    position: relative;
     width: 317px;
-    height: 26px;
-    left: 30px;
-    top: 0rem;
-    z-index: 1;
+    left: 8px;
+    top: 1rem;
+    overflow: -moz-hidden-unscrollable;
   }
 
   .banner-image-section {
-
     position: relative;
     top: 27rem;
+    font-weight: 100;
   }
 
-  .bannerImg{
-     position: absolute;
+  .bannerImg {
+    position: absolute;
+    left: 5rem;
+    width: 77vw;
+    top: 0rem;
+    height: 14vh;
+    overflow-y: hidden;
   }
-
 }
 
-
-.fonts{
-
-  font-family: 'Lato', sans-serif;
+.fonts {
+  font-family: "Lato", sans-serif;
   font-size: 1.5rem;
-
 }

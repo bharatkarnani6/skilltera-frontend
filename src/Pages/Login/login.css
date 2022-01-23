@@ -2,7 +2,7 @@
   padding: 15px;
   width: 30%;
   position: relative;
-  top: 10rem;
+  top: 18rem;
   left: 50%;
   -ms-transform: translateX(-50%) translateY(-50%);
   -webkit-transform: translate(-50%, -50%);
@@ -10,7 +10,7 @@
 }
 @media (max-width: 480px) {
   .main-box {
-    width: 80%;
+    width: 90%;
   }
 }
 
