@@ -1,4 +1,4 @@
-import react, { useState, createContext, useContext } from 'react'
+import react, { useState, createContext, useContext, useEffect } from 'react'
 import './sidebar.css'
 import {
     ProSidebar,
@@ -36,6 +36,13 @@ export default function Sidebar() {
         localStorage.clear();
         window.location.pathname = "/";
     }
+    // useEffect(() => {
+    //     var width = window.screen.width;
+    //     var height = window.screen.height;
+    //     console.log("width", width);
+    //     console.log("height", height);
+    // })
+
 
     return (
         <div>
