@@ -1,6 +1,6 @@
 import produce from "immer"
 const initialState = {
-    toggleValue: false
+    toggleValue: true
 }
 export const menuReducer = (state = initialState, action) => {
     return produce(

@@ -12,6 +12,7 @@ import Jobs from "../Jobs/jobs";
 export default function Dashboard() {
   const candidateData = JSON.parse(localStorage.getItem("candidate_data"));
 
+
   console.log(candidateData);
 
   const userName = candidateData.candidate.fullname;
