@@ -88,7 +88,7 @@ const Profile = () => {
  }, []);
 
 
-
+  
     return (
       <>
     <div class="main-box card w-75">

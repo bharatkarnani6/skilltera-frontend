@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import react, { useState, useEffect, useRef } from "react";
 import "./login.css";
 import Signup from "../Signup/signup";
 import { useForm } from "react-hook-form";
@@ -10,8 +10,6 @@ import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import { FcAbout } from "react-icons/fc";
 
-import Spinner from "../../Component/Spinner/spinner";
-
 const Login = () => {
   const {
     register,
@@ -19,7 +17,6 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const [isEmailVerified, setisEmailVerified] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   let history = useHistory();
 
@@ -37,19 +34,37 @@ const Login = () => {
 
         localStorage.setItem("login", true);
 
-        setLoading(true);
+        Swal.fire({
+          title: "Please Wait !",
+          html: "data loading", // add html attribute if you want or remove
+          allowOutsideClick: true,
+          allowEscapeKey: true,
+          allowEnterKey: true,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
 
         window.location.pathname = "/dashboard";
         // history.push('/dashboard')
         setisEmailVerified(response.data.candidate.isVerified);
       })
       .catch((error) => {
-        Swal.fire({
-          title: "Backend Not Connected",
-          icon: "error",
-          width: 400,
-          height: 100,
-        });
+        if (error.message === "Request failed with status code 400") {
+          Swal.fire({
+            title: error.response.data.error,
+            icon: "info",
+            width: 400,
+            height: 100,
+          });
+        } else if (error.message === "Network Error") {
+          Swal.fire({
+            title: "Backend not connected",
+            icon: "info",
+            width: 400,
+            height: 100,
+          });
+        }
       });
   };
 
@@ -59,11 +74,19 @@ const Login = () => {
     );
   }
 
+  // ............clearInputFiled after filldata.....
+
+  const formRef = useRef();
+
+  const handleClick = () => {
+    formRef.current.reset();
+  };
+
   return (
     <div>
       <Navbar />
       <div className="main-box">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
           <div className="mb-3">
             <label className="form-label">Email address</label>
             <input
@@ -93,7 +116,7 @@ const Login = () => {
               placeholder="Password"
               {...register("password", {
                 required: true,
-                pattern: { value: /^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$/ },
+                // pattern: { value: /^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$/ },
               })}
             />
             {errors.password && (
@@ -110,15 +133,19 @@ const Login = () => {
           </div>
           <div className="row">
             <div className="col-6">
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={handleClick}
+              >
                 Sign in
               </button>
             </div>
             <div className="col-6">
               <div className="d-grid col-12 mx-auto">
                 <button
-                  className="btn btn-success"
-                  type="submit"
+                  className="btn btn-primary"
+                  type="button"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                 >
