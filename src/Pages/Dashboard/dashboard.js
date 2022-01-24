@@ -9,10 +9,7 @@ import Jobs from '../Jobs/jobs'
 
 export default function Dashboard() {
 
-     const candidateData =  JSON.parse( localStorage.getItem('candidate_data'))
-
-     console.log(candidateData)
-    
+    const candidateData = JSON.parse(localStorage.getItem('candidate_data'))
     const userName = candidateData.candidate.fullname
     const menu = useSelector((state) => state.toggleMenu);
     const titleSelection = useSelector((state) => state.sidebarMenuSelectionReducer);
@@ -29,10 +26,10 @@ export default function Dashboard() {
                         <div className="patch">
                             <div className="row">
                                 <div className="col">
-                                    <h4 className="p-2" style={{color:"white"}}>{titleSelection.menuSelection}</h4>
+                                    <h4 className="p-2" style={{ color: "white" }}>{titleSelection.menuSelection}</h4>
                                 </div>
                                 <div className="col px-4 d-flex justify-content-end">
-                                    <h4 className="p-2" style ={{color:"white"}}>Hi {userName}</h4>
+                                    <h4 className="p-2" style={{ color: "white" }}>Hi {userName}</h4>
                                 </div>
                             </div>
                             {(() => {
