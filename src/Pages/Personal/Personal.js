@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import ApiConstants from "../../Services/apiconstants";
 import Swal from 'sweetalert2'
-import './personal.css'
+import './Personal.css'
 
 
 const Profile = () => {
