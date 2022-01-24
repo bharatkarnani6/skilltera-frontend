@@ -1,14 +1,16 @@
-
-.card{
-    margin-top: 8rem;
-    margin-left:2rem ;
+.main-box {
+  margin-top: 0rem;
+  margin-left: -3rem;
 }
 
-@media(max-width:480px ){
+.card {
+  margin-top: 0rem;
+  margin-left: 2rem;
+}
 
-    .card{
-        margin-top: 16rem;
-        margin-left:2rem ;
-    }
-
+@media (max-width: 480px) {
+  .card {
+    margin-top: 7rem;
+    margin-left: 2rem;
+  }
 }
