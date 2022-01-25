@@ -16,50 +16,83 @@ export default function CompanyLogin() {
   } = useForm({
     mode: "onChange",
   });
-  const onSubmit = (data, e) => {
-    try {
-      axios
-        .post(ApiConstants.COMPANY_LOGIN, {
-          companyName: data.company_name,
-          email: data.email,
-          password: data.password,
-        })
-        .then((response) => {
-          localStorage.setItem(
-            "company_loggedin_user_data",
-            JSON.stringify(response.data)
-          );
-          localStorage.setItem("login", true);
+  const onSubmit = (data) => {
+    console.log(data);
+    axios
+      .post(ApiConstants.COMPANY_LOGIN, {
+        companyName: data.company_name,
+        email: data.email,
+        password: data.password,
+      })
+      .then((response) => {
+        localStorage.setItem(
+          "company_loggedin_user_data",
+          JSON.stringify(response.data)
+        );
+        localStorage.setItem("login", true);
+
+        Swal.fire({
+          title: "Please Wait !",
+          html: "data loading", // add html attribute if you want or remove
+          allowOutsideClick: true,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+
+        window.location.pathname = "/companyDashboard";
+      })
+      .catch((error) => {
+        if (error.message === "Network Error") {
+          let timerInterval;
           Swal.fire({
-            title: "Please Wait !",
-            html: "data loading", // add html attribute if you want or remove
-            allowOutsideClick: true,
+            title: "Please Wait",
+            timer: 2500,
+            timerProgressBar: true,
             didOpen: () => {
               Swal.showLoading();
+              timerInterval = setInterval(() => {
+                Swal.getTimerLeft();
+              }, 50);
             },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((result) => {
+            Swal.fire({
+              title: "Backend not connected",
+              icon: "info",
+              width: 400,
+              height: 100,
+            });
           });
-
-          window.location.pathname = "/companyDashboard";
-        })
-        .catch((error) => {
+        } else {
+          let timerInterval;
           Swal.fire({
-            title: "Backend Not Connected",
-            icon: "info",
-            width: 400,
-            height: 100,
+            title: "Please Wait",
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              timerInterval = setInterval(() => {
+                Swal.getTimerLeft();
+              }, 50);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((result) => {
+            Swal.fire({
+              title: error.response.data.error,
+              icon: "info",
+              width: 400,
+              height: 100,
+            });
           });
-        });
-    } catch (err) {
-      Swal.fire({
-        title: err,
-        icon: "info",
-        width: 400,
-        height: 100,
+        }
       });
-    }
-
-    //e.target.reset();
   };
+  //e.target.reset();
 
   // ............clearInputFiled after filldata.....
 
