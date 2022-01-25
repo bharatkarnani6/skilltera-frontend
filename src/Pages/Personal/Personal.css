@@ -1,16 +1,14 @@
-.main-box {
-  margin-top: 0rem;
-  margin-left: -3rem;
-}
-
-.card {
-  margin-top: 0rem;
-  margin-left: 2rem;
+.personal {
+  width: 60vw;
+  margin-left: 12rem;
+  margin-top: 2rem;
+  padding: 1rem;
 }
 
 @media (max-width: 480px) {
-  .card {
-    margin-top: 7rem;
-    margin-left: 2rem;
+  .personal {
+    margin-top: 0rem;
+    margin-left: 3.5rem;
+    width: 81vw;
   }
 }

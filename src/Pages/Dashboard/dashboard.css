@@ -1,8 +1,7 @@
 .patch {
   width: 100%;
   height: 8vh;
-  background-color:#9B51E0;
-
+  background-color: #9b51e0;
 }
 .container-fluid {
   margin: 0;
@@ -10,9 +9,13 @@
 }
 .toggle-width-sidebar {
   width: 6%;
-  
 }
 .toggle-width-dashboard {
   width: 94%;
+}
 
+@media (max-width: 480px) {
+  .username {
+    display: none;
+  }
 }
