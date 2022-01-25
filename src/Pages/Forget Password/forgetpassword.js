@@ -39,29 +39,78 @@ export default function ForgetPassword() {
       .then((response) => {
         setgetOtp(true);
         console.log(response);
+
+        let timerInterval;
         Swal.fire({
-          title: "Email sent",
-          allowOutsideClick: true,
-          allowEscapeKey: true,
-          allowEnterKey: true,
-          icon: "success",
-          confirmButtonText: "Ok",
+          html: "<h1>Please Wait....</h1>",
+          timer: 2500,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            timerInterval = setInterval(() => {
+              Swal.getTimerLeft();
+            }, 50);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          Swal.fire({
+            title: "Email sent",
+            allowOutsideClick: true,
+            allowEscapeKey: true,
+            allowEnterKey: true,
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
         });
       })
       .catch((error) => {
         if (error.message === "Request failed with status code 501") {
+          let timerInterval;
           Swal.fire({
-            title: error.response.data.message,
-            icon: "info",
-            width: 400,
-            height: 100,
+            title: "Please Wait....",
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              timerInterval = setInterval(() => {
+                Swal.getTimerLeft();
+              }, 50);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((result) => {
+            Swal.fire({
+              title: error.response.data.message,
+              icon: "info",
+              width: 400,
+              height: 100,
+            });
           });
         } else if (error.message === "Network Error") {
+          let timerInterval;
           Swal.fire({
-            title: "Backend not connected",
-            icon: "info",
-            width: 400,
-            height: 100,
+            title: "Please Wait....",
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              timerInterval = setInterval(() => {
+                Swal.getTimerLeft();
+              }, 50);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((result) => {
+            Swal.fire({
+              title: "Backend not connected",
+              icon: "info",
+              width: 400,
+              height: 100,
+            });
           });
         }
       });

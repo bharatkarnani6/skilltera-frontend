@@ -29,34 +29,66 @@ export default function Admin() {
         localStorage.setItem("login", true);
 
         Swal.fire({
-          title: "Please Wait !",
+          title: response.data.message,
           html: "Verifiying Detail", // add html attribute if you want or remove
           allowOutsideClick: true,
           allowEscapeKey: true,
           allowEnterKey: true,
+
           didOpen: () => {
             Swal.showLoading();
           },
+          icon: "success",
         });
 
         window.location.pathname = "/adminDashboard";
       })
       .catch((error) => {
-        //console.log("status  : ", error.message);
-
-        if (error.message === "Request failed with status code 400") {
+        if (error.message === "Network Error") {
+          let timerInterval;
           Swal.fire({
-            title: error.response.data.error,
-            icon: "info",
-            width: 400,
-            height: 100,
+            title: "Please Wait",
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              timerInterval = setInterval(() => {
+                Swal.getTimerLeft();
+              }, 50);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((result) => {
+            Swal.fire({
+              title: "Backend not connected",
+              icon: "info",
+              width: 400,
+              height: 100,
+            });
           });
-        } else if (error.message === "Network Error") {
+        } else if (error.message === "Request failed with status code 400") {
+          let timerInterval;
           Swal.fire({
-            title: "Backend not connected",
-            icon: "info",
-            width: 400,
-            height: 100,
+            title: "Please Wait",
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              timerInterval = setInterval(() => {
+                Swal.getTimerLeft();
+              }, 50);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((result) => {
+            Swal.fire({
+              title: error.response.data.error,
+              icon: "info",
+              width: 400,
+              height: 100,
+            });
           });
         }
       });

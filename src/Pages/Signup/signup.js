@@ -26,33 +26,80 @@ export default function Signup(props) {
       })
       .then((response) => {
         console.log(response.data);
-
+        let timerInterval;
         Swal.fire({
-          title: "Email Sent !",
-          html: "Please Verify your Email",
-          icon: "success",
-          allowOutsideClick: true,
-          allowEscapeKey: true,
-          allowEnterKey: true,
-          confirmButtonText: "Ok",
+          title: "Please Wait....",
+          timer: 2500,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            timerInterval = setInterval(() => {
+              Swal.getTimerLeft();
+            }, 50);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          Swal.fire({
+            title: "Email Sent !",
+            html: "Please Verify your Email",
+            icon: "success",
+            allowOutsideClick: true,
+            allowEscapeKey: true,
+            allowEnterKey: true,
+            confirmButtonText: "Ok",
+          });
         });
       })
       .catch((error) => {
         // console.log("error_massage :  ", error.response.status);
-        console.log("error massage : ", error.response.data.message);
+        //console.log("error massage : ", error.response.message);
         if (error.response.status === 500) {
+          let timerInterval;
           Swal.fire({
-            title: error.response.data.message,
-            icon: "info",
-            width: 400,
-            height: 100,
+            title: "Please Wait.....",
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              timerInterval = setInterval(() => {
+                Swal.getTimerLeft();
+              }, 50);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((result) => {
+            Swal.fire({
+              title: error.response.data.message,
+              icon: "info",
+              width: 400,
+              height: 100,
+            });
           });
         } else if (error.message === "Network Error") {
+          let timerInterval;
           Swal.fire({
-            title: "Backend Not Connected",
-            icon: "info",
-            width: 400,
-            height: 100,
+            title: "Please Wait...",
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              timerInterval = setInterval(() => {
+                Swal.getTimerLeft();
+              }, 50);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((result) => {
+            Swal.fire({
+              title: "Backend Not Connected",
+              icon: "info",
+              width: 400,
+              height: 100,
+            });
           });
         }
       });

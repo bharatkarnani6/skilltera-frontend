@@ -51,18 +51,50 @@ const Login = () => {
       })
       .catch((error) => {
         if (error.message === "Request failed with status code 400") {
+          let timerInterval;
           Swal.fire({
-            title: error.response.data.error,
-            icon: "info",
-            width: 400,
-            height: 100,
+            title: "Please Wait",
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              timerInterval = setInterval(() => {
+                Swal.getTimerLeft();
+              }, 50);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((result) => {
+            Swal.fire({
+              title: error.response.data.error,
+              icon: "info",
+              width: 400,
+              height: 100,
+            });
           });
         } else if (error.message === "Network Error") {
+          let timerInterval;
           Swal.fire({
-            title: "Backend not connected",
-            icon: "info",
-            width: 400,
-            height: 100,
+            title: "Please Wait",
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              timerInterval = setInterval(() => {
+                Swal.getTimerLeft();
+              }, 50);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((result) => {
+            Swal.fire({
+              title: "Backend not connected",
+              icon: "info",
+              width: 400,
+              height: 100,
+            });
           });
         }
       });
