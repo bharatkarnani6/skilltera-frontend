@@ -23,9 +23,6 @@
     "datatables.net-dt": "^1.11.3",
     "firebase-tools": "^9.23.3",
     "got": "^12.0.0",
-    "heroku": "^7.59.2",
-    "immer": "^8.0.1",
-    "jquery": "^3.6.0",
     "mui-datatables": "^4.0.0",
     "phoenix": "^1.6.5",
     "react": "^17.0.2",
@@ -43,13 +40,14 @@
     "react-table": "^7.7.0",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.0",
+    "styled-components": "^5.3.3",
     "sweetalert2": "^11.1.10",
     "tippy.js": "^6.3.7",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=false && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

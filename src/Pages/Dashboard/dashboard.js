@@ -4,13 +4,14 @@ import Navbar from "../../Component/Navbar/navbar";
 import Sidebar from "../../Component/Sidebar/sidebar";
 import { useSelector } from "react-redux";
 import Aboutus from "../About/about";
-import Personal from "../Personal/personal";
+import Personal from "../Personal/Personal";
 import Professional from "../Professional/professional";
 import Jobs from "../Jobs/jobs";
 
 //comment for presonal
 export default function Dashboard() {
   const candidateData = JSON.parse(localStorage.getItem("candidate_data"));
+
 
   console.log(candidateData);
 
