@@ -14,3 +14,6 @@
 .pro-sidebar .pro-menu {
   padding-top: 10px !important;
 }
+
+@media (max-width: 480px) {
+}

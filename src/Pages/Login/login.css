@@ -2,7 +2,7 @@
   padding: 15px;
   width: 30%;
   position: relative;
-  top: 18rem;
+  top: 12rem;
   left: 50%;
   -ms-transform: translateX(-50%) translateY(-50%);
   -webkit-transform: translate(-50%, -50%);
@@ -11,13 +11,12 @@
 @media (max-width: 480px) {
   .main-box {
     width: 90%;
+    padding-left: 2rem;
   }
 }
 
-.showHint{
-
-border: none;
-margin-top: 0.5rem;
-background-color: transparent;
-
+.showHint {
+  border: none;
+  margin-top: 0.5rem;
+  background-color: transparent;
 }

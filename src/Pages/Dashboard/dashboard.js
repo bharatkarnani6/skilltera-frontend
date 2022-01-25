@@ -12,7 +12,6 @@ import Jobs from "../Jobs/jobs";
 export default function Dashboard() {
   const candidateData = JSON.parse(localStorage.getItem("candidate_data"));
 
-
   console.log(candidateData);
 
   const userName = candidateData.candidate.fullname;
@@ -33,8 +32,8 @@ export default function Dashboard() {
             className={!menu.toggleValue ? "toggle-width-dashboard" : "col-10"}
             style={{ padding: "0" }}
           >
-            <div className="patch">
-              <div className="row">
+            <div className="patch ">
+              <div className="row username">
                 <div className="col">
                   <h4 className="p-2" style={{ color: "white" }}>
                     {titleSelection.menuSelection}
