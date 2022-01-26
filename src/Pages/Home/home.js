@@ -23,7 +23,7 @@ const Home = () => {
                   talent pipeline for in demand skills, then please try
                   Skilltera and let us know how we can help better?
                 </p>
-                <Link to="/company_login"><button className="btn btn-primary ">Sign Up</button></Link>
+                <Link to="/company_login"><button className="btn btn-primary btn-lg">Sign Up</button></Link>
               </div>
 
             </div>
@@ -55,7 +55,7 @@ const Home = () => {
                   explore the upcoming features that will be shared first with
                   those who join us by March 2022
                 </p>
-                <Link to="/login"><button className="btn btn-primary  h-20 ">Sign Up</button></Link>
+                <Link to="/login"><button className="btn btn-primary btn-lg">Sign Up</button></Link>
               </div>
             </div>
           </div>
