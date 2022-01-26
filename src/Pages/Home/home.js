@@ -42,7 +42,7 @@ const Home = () => {
         </div>
 
         <div
-          class=" banner banner2"
+          class=" banner  banner2"
           style={{ backgroundColor: "rgb(196 197 194)" }}
         >
           <div class="row">
