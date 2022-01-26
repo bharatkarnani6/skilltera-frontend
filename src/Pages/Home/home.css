@@ -1,90 +1,68 @@
-.banner1 {
-  position: relative;
-  height: 65vh;
-  overflow-x: hidden;
-  overflow-y: hidden;
+.fonts {
+  font-family: "Lato", sans-serif;
+  font-size: 1.5rem;
 }
-
-.banner2 {
-  position: relative;
-  height: 75vh;
+.home-main {
+  width: 100%;
+  margin: 0 auto;
   overflow-x: hidden;
 }
-
 .for-companies {
-  height: 200px;
-  width: 600px;
-  float: left;
+  background-color: #dddddd;
+}
+.for-developers {
+  background-color: rgb(196 197 194);
+}
+.for-companies-block {
   position: relative;
-  text-align: justify;
-  top: 1.5rem;
-  left: 3rem;
+  top: 4.5rem;
+  left: 2rem;
   z-index: 1;
 }
-.for-companies p {
+.for-developers-block {
+  position: relative;
+  top: 4.5rem;
+  z-index: 1;
+}
+.for-companies-block p {
   font-family: initial;
   color: #405254;
 }
-.for-developers {
-  height: 284px;
-  width: 700px;
-  margin-top: 2rem;
-  position: relative;
-  text-align: justify;
-  z-index: 1;
+.for-developers-block p {
+  font-family: initial;
+  color: #405254;
 }
 
 .for-developers p {
   font-family: initial;
   color: #405254;
 }
-
-.bannerImage2 {
+.banner-image-2 {
   position: relative;
-  top: 0;
-  margin-left: 1rem;
+  left: 2rem;
 }
 
 @media (max-width: 480px) {
-  .banner1 {
-    height: auto;
-  }
-  .for-companies {
-    width: 90vw;
-    top: 2rem;
-    left: 4px;
-    padding-left: 2rem;
-    z-index: 1;
-    text-align: justify;
-    padding-right: 1rem;
-  }
-  .bannerImage1 {
-    margin-top: 16rem;
-  }
-
-  .banner2 {
-    height: 1200px;
-    overflow-y: hidden;
-  }
-
-  .for-developers {
+  .for-companies-block {
     position: relative;
-    width: 85vw;
-    left: 20px;
-    text-align: justify;
-    padding-right: 1rem;
+    top: 1.5rem;
+    left: 1rem;
+    z-index: 1;
   }
-  .bannerImage2 {
-    margin-top: -4rem;
-    margin-left: 1rem;
+  .for-developers-block {
+    position: relative;
+    top: 1.5rem;
+    left: 1rem;
+    z-index: 1;
   }
-  .bannerImage2 img {
-    height: 50vh;
-    width: 90vw;
+  .for-companies-block p {
+    width: 95%;
   }
-}
-
-.fonts {
-  font-family: "Lato", sans-serif;
-  font-size: 1.5rem;
+  .for-developers-block p {
+    width: 95%;
+  }
+  .banner-image-2 {
+    position: relative;
+    left: 0;
+  }
 }
