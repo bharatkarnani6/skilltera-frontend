@@ -14,7 +14,7 @@ const Home = () => {
           <div className="row">
             <div className="col-lg-6">
               <div className="for-companies-block fonts">
-                <h3 style={{ fontWeight: "900" }}>For Companies</h3>
+                <h1 style={{ fontWeight: "900", fontSize: 'xx-large' }}>For Companies</h1>
                 <p>
                   There are many portals where you can get a list of candidates
                   and job portals to list your jobs with a hope that right
@@ -43,7 +43,7 @@ const Home = () => {
             </div>
             <div className="col-lg-6 order-1 order-xl-2 ">
               <div className="for-developers-block fonts">
-                <h2 style={{ fontWeight: "900" }}>For Developers</h2>
+                <h1 style={{ fontWeight: "900", fontSize: 'xx-large' }}>For Developers</h1>
                 <p>
                   Our highly experienced founders have felt that putting your
                   profile in known portals or applying for jobs does not really
