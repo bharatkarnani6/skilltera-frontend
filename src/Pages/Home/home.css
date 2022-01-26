@@ -1,26 +1,24 @@
-.banner {
-  padding-left: 90px;
+.banner1 {
   position: relative;
-  margin-left: 0;
-  z-index: 0;
-  /* background-image: linear-gradient(
-    to right,
-    #ada996,
-    #f2f2f2,
-    #dbdbdb,
-    #eaeaea
-  ); */
+  height: 65vh;
   overflow-x: hidden;
-  height: 66vh;
+  overflow-y: hidden;
+}
+
+.banner2 {
+  position: relative;
+  height: 75vh;
+  overflow-x: hidden;
 }
 
 .for-companies {
-  width: 554px;
   height: 200px;
+  width: 600px;
   float: left;
-  position: absolute;
+  position: relative;
+  text-align: justify;
   top: 1.5rem;
-  left: 4.2rem;
+  left: 3rem;
   z-index: 1;
 }
 .for-companies p {
@@ -28,12 +26,11 @@
   color: #405254;
 }
 .for-developers {
-  width: 705px;
-  height: 200px;
-  float: left;
-  position: absolute;
-  top: 2.5rem;
-  left: 38rem;
+  height: 284px;
+  width: 700px;
+  margin-top: 2rem;
+  position: relative;
+  text-align: justify;
   z-index: 1;
 }
 
@@ -42,63 +39,48 @@
   color: #405254;
 }
 
-.bannerImg {
+.bannerImage2 {
   position: relative;
-  left: 0rem;
-  top: 3rem;
-  width: 40vw;
+  top: 0;
+  margin-left: 1rem;
 }
 
-h3 {
-  font-size: 2.2rem;
-}
 @media (max-width: 480px) {
-  .banner {
-    padding-left: 0px;
-    position: static;
-    z-index: -10;
-    height: 88vh;
-    /* background-image: linear-gradient(
-      to bottom,
-      #ada996,
-      #f2f2f2,
-      #dbdbdb,
-      #eaeaea
-    ); */
+  .banner1 {
+    height: auto;
   }
   .for-companies {
     width: 90vw;
     top: 2rem;
-    left: 40px;
-    padding-left: 10px;
-    padding-right: 10px;
+    left: 4px;
+    padding-left: 2rem;
     z-index: 1;
     text-align: justify;
     padding-right: 1rem;
+  }
+  .bannerImage1 {
+    margin-top: 16rem;
+  }
+
+  .banner2 {
+    height: 135vh;
+    overflow-y: hidden;
   }
 
   .for-developers {
     position: relative;
     width: 85vw;
     left: 20px;
-    top: 1rem;
-    overflow: -moz-hidden-unscrollable;
     text-align: justify;
     padding-right: 1rem;
   }
-
-  .banner-image-section {
-    position: relative;
-    top: 27rem;
-    font-weight: 100;
+  .bannerImage2 {
+    margin-top: -4rem;
+    margin-left: 1rem;
   }
-
-  .bannerImg {
-    position: absolute;
-    left: 1rem;
-    width: 77vw;
-    top: 0;
-    overflow-y: hidden;
+  .bannerImage2 img {
+    height: 50vh;
+    width: 90vw;
   }
 }
 
