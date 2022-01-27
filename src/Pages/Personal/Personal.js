@@ -65,7 +65,7 @@ const Profile = () => {
       })
       .catch((error) => {
         Swal.fire({
-          title: "Backend Not Connected",
+          title: error.response.data.error,
           icon: "info",
           width: 400,
           height: 100,
@@ -74,12 +74,6 @@ const Profile = () => {
   };
 
   // .............tooltips.........
-
-  const inputRef = useRef();
-
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
 
   return (
     <>
@@ -95,7 +89,6 @@ const Profile = () => {
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.phone}
                 {...register("phone")}
-                ref={inputRef}
               />
             </div>
             <div class="col-md-6 col-sm-6">
@@ -146,6 +139,8 @@ const Profile = () => {
           <div class="row">
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1"> Open to relocate</label>
+
+              {/* /check */}
               <select
                 class="form-control"
                 {...register("relocation")}
@@ -159,36 +154,40 @@ const Profile = () => {
                 </option>
               </select>
             </div>
+
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">
                 Type of Job you want{" "}
               </label>
               <select
                 class="form-control"
-                {...register("jobOfType")}
+                {...register("typeOfJob")}
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
               >
                 <option
-                  value={user.jobOfType == "Fulltime" ? "Fulltime" : "Parttime"}
+                  value={user.typeOfJob == "Fulltime" ? "Fulltime" : "Parttime"}
                 >
                   {" "}
-                  {user.jobOfType == "Fulltime" ? "Fulltime" : "Parttime"}{" "}
+                  {user.typeOfJob == "Fulltime" ? "Fulltime" : "Parttime"}{" "}
                 </option>
                 <option value={user.jobOfType == "C2C" ? "C2C" : "C2H"}>
-                  {user.jobOfType == "C2C" ? "C2C" : "C2H"}
+                  {user.typeOfJob == "C2C" ? "C2C" : "C2H"}
                 </option>
                 <option value={user.jobOfType == "C2H" ? "C2H" : "C2C"}>
-                  {user.jobOfType == "C2H" ? "C2H" : "C2C"}
+                  {user.typeOfJob == "C2H" ? "C2H" : "C2C"}
                 </option>
               </select>
             </div>
           </div>
+
+          {/* /check */}
 
           <div class="row mt-3">
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">
                 Do you need visa Sponsorship ?
               </label>
+
               <select
                 class="form-control"
                 {...register("needVisaEmployer")}
