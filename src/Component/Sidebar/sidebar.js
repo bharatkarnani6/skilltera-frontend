@@ -27,12 +27,12 @@ import {
 
 export default function Sidebar() {
   const dispatch = useDispatch();
-  const [menuCollapse, setMenuCollapse] = useState(false);
+  // const [menuCollapse, setMenuCollapse] = useState(false);
 
-  const menuIconClick = () => {
-    menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
-    dispatch(ToggleAction(menuCollapse));
-  };
+  // const menuIconClick = () => {
+  //   menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
+  //   dispatch(ToggleAction(menuCollapse));
+  // };
   const menuSelection = (data) => {
     dispatch(SidebarMenuSelectionAction(data));
   };
@@ -41,76 +41,102 @@ export default function Sidebar() {
     localStorage.clear();
     window.location.pathname = "/";
   };
-  // useEffect(() => {
-  //     var width = window.screen.width;
-  //     var height = window.screen.height;
-  //     console.log("width", width);
-  //     console.log("height", height);
-  // })
+
+  const [show, setShow] = useState(false);
+
+  const handleClick = (e) => {
+    setShow(true);
+  };
 
   return (
     <div>
-      <ProSidebar
-        collapsed={menuCollapse}
-        width="14rem"
-        style={{ height: "150vh" }}
+      <button
+        class="btn btn-primary border border-dark  sidebarBtn"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasWithBothOptions"
+        aria-controls="offcanvasWithBothOptions"
       >
-        <SidebarHeader>
-          {/* <div className="logotext">
-                        <h5>Skilltera</h5>
-                    </div> */}
-          <div
-            className="closemenu d-flex justify-content-center"
-            onClick={menuIconClick}
-          >
-            {menuCollapse ? (
-              <GiHamburgerMenu size="2rem" />
-            ) : (
-              <GiHamburgerMenu size="2rem" />
-            )}
-          </div>
-        </SidebarHeader>
-        <SidebarContent>
-          <Menu iconShape="square">
-            <MenuItem
-              active={true}
-              icon={<FiHome />}
-              onClick={() => menuSelection("Dashboard")}
-            >
-              Dashboard
-            </MenuItem>
-            {/* <MenuItem icon={<FaList />} onClick={() => menuSelection('Jobs')}>Jobs</MenuItem> */}
-            {/* <MenuItem icon={<FaRegHeart />}>Favourite</MenuItem> */}
+        <GiHamburgerMenu />
+      </button>
 
-            <MenuItem
-              icon={<RiPencilLine />}
-              onClick={() => menuSelection("Personal Info")}
-            >
-              Personal Info
-            </MenuItem>
-            <MenuItem
-              icon={<RiPencilLine />}
-              onClick={() => menuSelection("Professional Info")}
-            >
-              Professional Info
-            </MenuItem>
+      <div
+        class="offcanvas offcanvas-start bg-arsenic canvas"
+        data-bs-scroll="true"
+        tabindex="-1"
+        id="offcanvasWithBothOptions"
+        aria-labelledby="offcanvasWithBothOptionsLabel"
+        data-trap-focus="true"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+            Dashboard Item
+          </h5>
+          <button
+            type="button"
+            class="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <button
+                class="btn btn-primary mr-1"
+                active={true}
+                onClick={() => menuSelection("Dashboard")}
+              >
+                <FiHome />
+              </button>
+              <span> Dashboard</span>
+            </li>
 
-            <MenuItem
-              icon={<BiCog />}
-              onClick={() => menuSelection("Settings")}
-            >
-              Settings
-            </MenuItem>
-          </Menu>
-        </SidebarContent>
-        <SidebarFooter>
-          <Menu iconShape="square">
-            <MenuItem icon={<FiLogOut />} onClick={logout}>
-              Logout
-            </MenuItem>
-          </Menu>
-        </SidebarFooter>
-      </ProSidebar>
+            <li class="list-group-item">
+              <button
+                active={true}
+                class="btn btn-primary mr-1"
+                onClick={() => menuSelection("Personal Info")}
+              >
+                <RiPencilLine />
+              </button>
+              <span> Personal Info</span>
+            </li>
+            <li class="list-group-item">
+              <button
+                active={true}
+                class="btn btn-primary mr-1"
+                onClick={() => menuSelection("Professional Info")}
+              >
+                <RiPencilLine />
+              </button>
+              <span>Professional</span>
+            </li>
+
+            <li class="list-group-item">
+              <button
+                class="btn btn-primary mr-1"
+                active={true}
+                onClick={() => menuSelection("Settings")}
+              >
+                <BiCog />
+              </button>
+              <span>Settings</span>
+            </li>
+
+            <li class="list-group-item">
+              <button
+                class="btn btn-primary mr-1"
+                active={true}
+                onClick={() => menuSelection("logout")}
+              >
+                <FiLogOut />
+              </button>
+              <span>logout</span>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

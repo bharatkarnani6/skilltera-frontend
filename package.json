@@ -23,6 +23,7 @@
     "datatables.net-dt": "^1.11.3",
     "firebase-tools": "^9.23.3",
     "got": "^12.0.0",
+    "immer": "^9.0.12",
     "mui-datatables": "^4.0.0",
     "phoenix": "^1.6.5",
     "react": "^17.0.2",
