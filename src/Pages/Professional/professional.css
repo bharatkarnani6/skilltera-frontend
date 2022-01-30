@@ -1,14 +1,14 @@
 .professional {
   width: 60vw;
   margin-left: 12rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
   padding: 1rem;
 }
 
 @media (max-width: 480px) {
   .professional {
-    margin-top: 0rem;
-    margin-left: 3.5rem;
-    width: 81vw;
+    margin-top: 0.5rem;
+    margin-left: -0.5rem;
+    width: 100%;
   }
 }

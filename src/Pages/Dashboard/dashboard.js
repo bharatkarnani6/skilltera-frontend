@@ -23,15 +23,13 @@ export default function Dashboard() {
   return (
     <div>
       <Navbar />
-      <div className="container-fluid overflow-hidden">
-        <div className="row g-0 no-gutters">
-          <div className={!menu.toggleValue ? "toggle-width-sidebar" : "col-2"}>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-1">
             <Sidebar />
           </div>
-          <div
-            className={!menu.toggleValue ? "toggle-width-dashboard" : "col-10"}
-            style={{ padding: "0" }}
-          >
+
+          <div className="col-11">
             <div className="patch ">
               <div className="row username">
                 <div className="col">
@@ -47,9 +45,6 @@ export default function Dashboard() {
               </div>
               {(() => {
                 switch (titleSelection.menuSelection) {
-                  // case 'Dashboard':
-                  //     return <Aboutus />
-                  //     break;
                   case "Personal Info":
                     return <Personal />;
                   case "Professional Info":
