@@ -26,7 +26,7 @@ import {
 } from "../../Redux/Action/toggleAction";
 
 export default function Sidebar() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const [menuCollapse, setMenuCollapse] = useState(false);
 
   // const menuIconClick = () => {
