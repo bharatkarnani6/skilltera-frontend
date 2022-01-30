@@ -1,5 +1,9 @@
+.patchBar {
+  width: 101%;
+}
+
 .patch {
-  width: 95%;
+  width: 99%;
 
   background-color: #9b51e0;
 }

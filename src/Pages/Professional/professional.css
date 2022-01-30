@@ -1,14 +1,15 @@
 .professional {
+  position: absolute;
   width: 60vw;
-  margin-left: 12rem;
-  margin-top: 3rem;
+  margin-left: 0rem;
+  margin-top: 0rem;
   padding: 1rem;
 }
 
 @media (max-width: 480px) {
   .professional {
+    width: 97vw;
     margin-top: 0.5rem;
-    margin-left: -0.5rem;
-    width: 100%;
+    margin-left: -3.75rem;
   }
 }

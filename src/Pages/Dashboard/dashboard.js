@@ -23,41 +23,39 @@ export default function Dashboard() {
   return (
     <div>
       <Navbar />
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-1">
-            <Sidebar />
-          </div>
+      <div class="row patchBar" style={{ backgroundColor: "#9b51e0" }}>
+        <div class="col-2">
+          <Sidebar />
+        </div>
 
-          <div className="col-11">
-            <div className="patch ">
-              <div className="row username">
-                <div className="col">
-                  <h4 className="p-2" style={{ color: "white" }}>
-                    {titleSelection.menuSelection}
-                  </h4>
-                </div>
-                <div className="col px-4 d-flex justify-content-end">
-                  <h4 className="p-2" style={{ color: "white" }}>
-                    Hi {userName}
-                  </h4>
-                </div>
+        <div className="col-10">
+          <div className="patch ">
+            <div className="row username">
+              <div className="col justify-content-start">
+                <h4 className="p-2" style={{ color: "white" }}>
+                  {titleSelection.menuSelection}
+                </h4>
               </div>
-              {(() => {
-                switch (titleSelection.menuSelection) {
-                  case "Personal Info":
-                    return <Personal />;
-                  case "Professional Info":
-                    return <Professional />;
-                    break;
-                  case "Jobs":
-                    return <Jobs />;
-                    break;
-                  default:
-                    <h1>Error</h1>;
-                }
-              })()}
+              <div className="col px-4 d-flex justify-content-end">
+                <h4 className="p-2" style={{ color: "white" }}>
+                  Hi {userName}
+                </h4>
+              </div>
             </div>
+            {(() => {
+              switch (titleSelection.menuSelection) {
+                case "Personal Info":
+                  return <Personal />;
+                case "Professional Info":
+                  return <Professional />;
+                  break;
+                case "Jobs":
+                  return <Jobs />;
+                  break;
+                default:
+                  <h1>Error</h1>;
+              }
+            })()}
           </div>
         </div>
       </div>
