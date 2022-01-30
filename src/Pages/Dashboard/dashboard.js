@@ -20,6 +20,11 @@ export default function Dashboard() {
     (state) => state.sidebarMenuSelectionReducer
   );
 
+  const logout = () => {
+    localStorage.clear();
+    window.location.pathname = "/";
+  };
+
   return (
     <div>
       <Navbar />
@@ -51,6 +56,9 @@ export default function Dashboard() {
                   break;
                 case "Jobs":
                   return <Jobs />;
+                  break;
+                case "logout":
+                  return logout();
                   break;
                 default:
                   <h1>Error</h1>;

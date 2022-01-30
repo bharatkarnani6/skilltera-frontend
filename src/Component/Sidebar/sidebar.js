@@ -26,26 +26,16 @@ import {
 } from "../../Redux/Action/toggleAction";
 
 export default function Sidebar() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const [menuCollapse, setMenuCollapse] = useState(false);
 
   // const menuIconClick = () => {
   //   menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
   //   dispatch(ToggleAction(menuCollapse));
   // };
+
   const menuSelection = (data) => {
     dispatch(SidebarMenuSelectionAction(data));
-  };
-
-  const logout = () => {
-    localStorage.clear();
-    window.location.pathname = "/";
-  };
-
-  const [show, setShow] = useState(false);
-
-  const handleClick = (e) => {
-    setShow(true);
   };
 
   return (
@@ -61,7 +51,7 @@ export default function Sidebar() {
       </button>
 
       <div
-        class="offcanvas offcanvas-start canvas"
+        class="offcanvas offcanvas-start canvas collapseOnSelect"
         data-bs-scroll="true"
         tabindex="-1"
         id="offcanvasWithBothOptions"
@@ -85,6 +75,7 @@ export default function Sidebar() {
               <button
                 class="btn btn-primary  mr-1"
                 active={true}
+                data-bs-dismiss="offcanvas"
                 onClick={() => menuSelection("Dashboard")}
               >
                 <FiHome />
@@ -96,6 +87,7 @@ export default function Sidebar() {
               <button
                 active={true}
                 class="btn btn-primary mr-1"
+                data-bs-dismiss="offcanvas"
                 onClick={() => menuSelection("Personal Info")}
               >
                 <RiPencilLine />
@@ -106,6 +98,7 @@ export default function Sidebar() {
               <button
                 active={true}
                 class="btn btn-primary mr-1"
+                data-bs-dismiss="offcanvas"
                 onClick={() => menuSelection("Professional Info")}
               >
                 <RiPencilLine />
@@ -117,6 +110,7 @@ export default function Sidebar() {
               <button
                 class="btn btn-primary mr-1"
                 active={true}
+                data-bs-dismiss="offcanvas"
                 onClick={() => menuSelection("Settings")}
               >
                 <BiCog />
@@ -128,11 +122,12 @@ export default function Sidebar() {
               <button
                 class="btn btn-primary mr-1"
                 active={true}
+                data-bs-dismiss="offcanvas"
                 onClick={() => menuSelection("logout")}
               >
                 <FiLogOut />
               </button>
-              <span>logout</span>
+              logout
             </li>
           </ul>
         </div>

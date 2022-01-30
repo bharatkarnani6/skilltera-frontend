@@ -1,5 +1,6 @@
 .patchBar {
   width: 101%;
+  z-index: -1;
 }
 
 .patch {
