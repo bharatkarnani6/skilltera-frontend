@@ -61,7 +61,7 @@ export default function Sidebar() {
       </button>
 
       <div
-        class="offcanvas offcanvas-start bg-arsenic canvas"
+        class="offcanvas offcanvas-start canvas"
         data-bs-scroll="true"
         tabindex="-1"
         id="offcanvasWithBothOptions"
@@ -83,7 +83,7 @@ export default function Sidebar() {
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
               <button
-                class="btn btn-primary mr-1"
+                class="btn btn-primary  mr-1"
                 active={true}
                 onClick={() => menuSelection("Dashboard")}
               >

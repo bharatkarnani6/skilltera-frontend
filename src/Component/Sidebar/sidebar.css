@@ -5,6 +5,7 @@
 
 @media (max-width: 480px) {
   .sidebarBtn {
-    padding-left: -2rem;
+    height: 4.2rem;
+    width: 4.1rem;
   }
 }
