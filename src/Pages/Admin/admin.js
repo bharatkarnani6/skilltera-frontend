@@ -111,7 +111,7 @@ export default function Admin() {
   return (
     <>
       <Navbar />
-      <div className="main-box">
+      <div className="main-box ">
         <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
           <div className="mb-3">
             <label className="form-label">Email address</label>
