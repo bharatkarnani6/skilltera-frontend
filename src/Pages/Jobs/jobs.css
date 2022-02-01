@@ -1,6 +1,6 @@
 .job-table {
-  /* overflow-y: scroll; */
-  /* height: 76vh; */
+  width: 100%;
+  margin-left: 0;
 }
 .my-anchor-css-class {
   background-color: #04aa6d;
