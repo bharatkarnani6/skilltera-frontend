@@ -18,7 +18,7 @@ export default function ResetCompanyPassword() {
   };
   return (
     <>
-      <div className="main-box">
+      <div className="main-box main-box-admin-reset">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
             <label className="form-label">Email address</label>

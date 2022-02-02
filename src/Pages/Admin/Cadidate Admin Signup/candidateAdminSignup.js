@@ -71,7 +71,7 @@ export default function CandidateAdminSignup() {
   };
   return (
     <>
-      <div className="main-box">
+      <div className="main-box main-box-admin-candidate-signup">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
             <label className="form-label">Full Name</label>

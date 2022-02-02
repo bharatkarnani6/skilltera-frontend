@@ -1,10 +1,13 @@
 .main-box-admin {
-  padding: 10px;
-  width: 30%;
+  width: 60%;
   position: absolute;
-  top: 55%;
+  top: 15rem;
   left: 50%;
-  -ms-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 480px) {
+  .main-box-admin {
+    width: 120%;
+    left: 41%;
+  }
 }

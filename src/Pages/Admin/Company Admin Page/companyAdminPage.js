@@ -71,7 +71,7 @@ export default function CompanyAdminPage() {
   };
   return (
     <>
-      <div className="main-box">
+      <div className="main-box main-box-admin">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
             <label className="form-label">Company Name</label>
