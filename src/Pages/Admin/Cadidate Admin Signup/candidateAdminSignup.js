@@ -6,8 +6,10 @@ import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import { FcAbout } from "react-icons/fc";
 import "./candidateAdminSignup.css";
+import { trackPromise, usePromiseTracker } from "react-promise-tracker";
 
 export default function CandidateAdminSignup() {
+  const { promiseInProgress } = usePromiseTracker();
   const {
     register,
     handleSubmit,
@@ -22,56 +24,72 @@ export default function CandidateAdminSignup() {
   const onSubmit = (data) => {
     console.log("id", id);
     console.log("token", token);
-    axios
-      .post(
-        ApiConstants.ADMIN_CANDIDATE_SIGNUP,
-        {
-          email: data.email,
-          password: data.password,
-          fullname: data.fullName,
-        },
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-type": "application/json",
-            token: token,
-            _id: id,
-            "Access-Control-Allow-Origin": true,
-            "Access-Control-Allow-Methods": "GET, POST, PATCH",
+
+    trackPromise(
+      axios
+        .post(
+          ApiConstants.ADMIN_CANDIDATE_SIGNUP,
+          {
+            email: data.email,
+            password: data.password,
+            fullname: data.fullName,
           },
-        }
-      )
-      .then((response) => {
-        console.log(response.data);
-        Swal.fire({
-          title: response.data.message,
-          icon: "info",
-          width: 400,
-          height: 100,
-        });
-      })
-      .catch((error) => {
-        if ("Backend Not Connected") {
+          {
+            headers: {
+              Accept: "application/json",
+              "Content-type": "application/json",
+              token: token,
+              _id: id,
+              "Access-Control-Allow-Origin": true,
+              "Access-Control-Allow-Methods": "GET, POST, PATCH",
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
           Swal.fire({
-            title: "Backend Not Connected",
+            title: response.data.message,
             icon: "info",
             width: 400,
             height: 100,
           });
-        } else if (error.response.status == "500") {
-          console.log(error.response.status);
-          Swal.fire({
-            title: error.response.data.message,
-            icon: "info",
-            width: 400,
-            height: 100,
-          });
-        }
-      });
+        })
+        .catch((error) => {
+          if ("Backend Not Connected") {
+            Swal.fire({
+              title: "Backend Not Connected",
+              icon: "info",
+              width: 400,
+              height: 100,
+            });
+          } else if (error.response.status == "500") {
+            console.log(error.response.status);
+            Swal.fire({
+              title: error.response.data.message,
+              icon: "info",
+              width: 400,
+              height: 100,
+            });
+          }
+        })
+    );
   };
   return (
     <>
-      <div className="main-box main-box-admin-candidate-signup">
+      <div className="main-box main-box-admin-candidate-signup border">
+        {promiseInProgress === true ? (
+          <div class="d-flex align-items-center">
+            <h3 className="mb-3">Loading...</h3>
+            <div
+              class="spinner-border ml-auto"
+              role="status"
+              aria-hidden="true"
+            ></div>
+          </div>
+        ) : null}
+        <h2 className="d-flex justify-content-center">
+          Candidate Admin Signup
+        </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
             <label className="form-label">Full Name</label>
@@ -124,12 +142,10 @@ export default function CandidateAdminSignup() {
 
             {/* <p style={{ 'color': 'red' }}>  {errors.password?.type === 'required' && "Password is required" }  </p> */}
           </div>
-          <div className="row">
-            <div className="d-grid gap-2 col-6 mx-auto">
-              <button type="submit" className="btn btn-primary">
-                Create
-              </button>
-            </div>
+          <div className="row mt-2 ml-2">
+            <button type="submit" className="btn btn-primary">
+              Create
+            </button>
           </div>
         </form>
       </div>

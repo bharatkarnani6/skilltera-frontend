@@ -13,12 +13,18 @@ export default function ResetCompanyPassword() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
     console.log(data);
   };
+
   return (
     <>
-      <div className="main-box main-box-admin-reset">
+      <div className="main-box main-box-admin-reset border">
+        <h2 className="d-flex justify-content-center">
+          Reset Company Password
+        </h2>
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
             <label className="form-label">Email address</label>
@@ -56,12 +62,10 @@ export default function ResetCompanyPassword() {
 
             {/* <p style={{ 'color': 'red' }}>  {errors.password?.type === 'required' && "Password is required" }  </p> */}
           </div>
-          <div className="row">
-            <div className="d-grid gap-2 col-6 mx-auto">
-              <button type="submit" className="btn btn-primary">
-                Create
-              </button>
-            </div>
+          <div className="row mt-2 ml-2">
+            <button type="submit" className="btn btn-primary">
+              Create
+            </button>
           </div>
         </form>
       </div>

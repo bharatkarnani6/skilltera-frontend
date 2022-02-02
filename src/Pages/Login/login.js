@@ -90,7 +90,7 @@ const Login = () => {
             ></div>
           </div>
         ) : null}
-        <h5>Sign In</h5>
+        <h2 className="d-flex justify-content-center">Login</h2>
         <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
           <div className="mb-3">
             <label className="form-label">Email address</label>
