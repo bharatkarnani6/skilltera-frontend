@@ -1,15 +1,14 @@
 import react, { useState, useEffect, useRef } from "react";
 import "./login.css";
-import Signup from "../Signup/signup";
 import { useForm } from "react-hook-form";
 import Navbar from "../../Component/Navbar/navbar";
-import ForgetPassword from "../Forget Password/forgetpassword";
 import axios from "axios";
 import ApiConstants from "../../Services/apiconstants";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import { FcAbout } from "react-icons/fc";
 import { trackPromise, usePromiseTracker } from "react-promise-tracker";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
   const { promiseInProgress } = usePromiseTracker();
@@ -19,6 +18,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const [isEmailVerified, setisEmailVerified] = useState(false);
 
   let history = useHistory();
@@ -79,7 +79,7 @@ const Login = () => {
     <>
       <Navbar />
 
-      <div className="main-box">
+      <div className="main-box login  border">
         {promiseInProgress === true ? (
           <div class="d-flex align-items-center">
             <h3 className="mb-3">Loading...</h3>
@@ -90,6 +90,7 @@ const Login = () => {
             ></div>
           </div>
         ) : null}
+        <h5>Sign In</h5>
         <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
           <div className="mb-3">
             <label className="form-label">Email address</label>
@@ -150,33 +151,17 @@ const Login = () => {
 
         <div className="row">
           <div className="col-6">
-            <p
-              className="pt-3"
-              type="submit"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModalForgetPassword"
-              style={{ color: "#9b51e0" }}
-            >
-              <u>Forgot Password </u>
+            <p className="pt-3" style={{ color: "#9b51e0" }}>
+              <NavLink to="/forgotPassword"> Forgot Password </NavLink>
             </p>
           </div>
           <div className="col-6">
-            <div className="d-grid col-12 mx-auto pl-0">
-              <p
-                className="pt-3"
-                type="submit"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModalForgetPassword"
-                style={{ color: "#9b51e0" }}
-              >
-                <u> New User? Register </u>
-              </p>
-            </div>
+            <p style={{ color: "#9b51e0" }} className="pt-3">
+              <NavLink to="/signup"> New User? Register </NavLink>
+            </p>
           </div>
         </div>
       </div>
-      <Signup />
-      <ForgetPassword />
     </>
   );
 };

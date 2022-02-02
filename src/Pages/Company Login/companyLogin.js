@@ -6,8 +6,11 @@ import { Link } from "react-router-dom";
 import ApiConstants from "../../Services/apiconstants";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { trackPromise, usePromiseTracker } from "react-promise-tracker";
 
 export default function CompanyLogin() {
+  const { promiseInProgress } = usePromiseTracker();
+
   const companyList = ["Netflix", "Google", "Meta", "SkillTera"];
   const {
     register,
@@ -18,79 +21,81 @@ export default function CompanyLogin() {
   });
   const onSubmit = (data) => {
     console.log(data);
-    axios
-      .post(ApiConstants.COMPANY_LOGIN, {
-        companyName: data.company_name,
-        email: data.email,
-        password: data.password,
-      })
-      .then((response) => {
-        localStorage.setItem(
-          "company_loggedin_user_data",
-          JSON.stringify(response.data)
-        );
-        localStorage.setItem("login", true);
+    trackPromise(
+      axios
+        .post(ApiConstants.COMPANY_LOGIN, {
+          companyName: data.company_name,
+          email: data.email,
+          password: data.password,
+        })
+        .then((response) => {
+          localStorage.setItem(
+            "company_loggedin_user_data",
+            JSON.stringify(response.data)
+          );
+          localStorage.setItem("login", true);
 
-        Swal.fire({
-          title: "Please Wait !",
-          html: "data loading", // add html attribute if you want or remove
-          allowOutsideClick: true,
-          didOpen: () => {
-            Swal.showLoading();
-          },
-        });
-
-        window.location.pathname = "/companyDashboard";
-      })
-      .catch((error) => {
-        if (error.message === "Network Error") {
-          let timerInterval;
           Swal.fire({
-            title: "Please Wait",
-            timer: 2500,
-            timerProgressBar: true,
+            title: "Please Wait !",
+            html: "data loading", // add html attribute if you want or remove
+            allowOutsideClick: true,
             didOpen: () => {
               Swal.showLoading();
-              timerInterval = setInterval(() => {
-                Swal.getTimerLeft();
-              }, 50);
             },
-            willClose: () => {
-              clearInterval(timerInterval);
-            },
-          }).then((result) => {
-            Swal.fire({
-              title: "Backend not connected",
-              icon: "info",
-              width: 400,
-              height: 100,
-            });
           });
-        } else {
-          let timerInterval;
-          Swal.fire({
-            title: "Please Wait",
-            timer: 2500,
-            timerProgressBar: true,
-            didOpen: () => {
-              Swal.showLoading();
-              timerInterval = setInterval(() => {
-                Swal.getTimerLeft();
-              }, 50);
-            },
-            willClose: () => {
-              clearInterval(timerInterval);
-            },
-          }).then((result) => {
+
+          window.location.pathname = "/companyDashboard";
+        })
+        .catch((error) => {
+          if (error.message === "Network Error") {
+            let timerInterval;
             Swal.fire({
-              title: error.response.data.error,
-              icon: "info",
-              width: 400,
-              height: 100,
+              title: "Please Wait",
+              timer: 2500,
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading();
+                timerInterval = setInterval(() => {
+                  Swal.getTimerLeft();
+                }, 50);
+              },
+              willClose: () => {
+                clearInterval(timerInterval);
+              },
+            }).then((result) => {
+              Swal.fire({
+                title: "Backend not connected",
+                icon: "info",
+                width: 400,
+                height: 100,
+              });
             });
-          });
-        }
-      });
+          } else {
+            let timerInterval;
+            Swal.fire({
+              title: "Please Wait",
+              timer: 2500,
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading();
+                timerInterval = setInterval(() => {
+                  Swal.getTimerLeft();
+                }, 50);
+              },
+              willClose: () => {
+                clearInterval(timerInterval);
+              },
+            }).then((result) => {
+              Swal.fire({
+                title: error.response.data.error,
+                icon: "info",
+                width: 400,
+                height: 100,
+              });
+            });
+          }
+        })
+    );
   };
   //e.target.reset();
 
@@ -105,12 +110,22 @@ export default function CompanyLogin() {
   return (
     <div>
       <Navbar />
-      <div className="heading">
-        <h1 className="d-flex justify-content-center">Company Sign-in</h1>
-      </div>
-      <div className="company-login">
+
+      <div className="container-fluid company-login border">
+        {promiseInProgress === true ? (
+          <div class="d-flex align-items-center">
+            <h3 className="mb-3">Loading...</h3>
+            <div
+              class="spinner-border ml-auto"
+              role="status"
+              aria-hidden="true"
+            ></div>
+          </div>
+        ) : null}
+        <h2 className="d-flex justify-content-center">Company Sign-in</h2>
+
         <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
-          <div className="mb-3">
+          <div className="mr-2 ml-2">
             <label className="form-label">User Email</label>
             <input
               type="email"
@@ -122,7 +137,7 @@ export default function CompanyLogin() {
               {errors.email?.type === "required" && "Email is required"}
             </p>
           </div>
-          <div className="mb-3">
+          <div className="mb-1 mr-2 ml-2">
             <label className="form-label">Company Name</label>
             <input
               className="form-control"
@@ -141,7 +156,7 @@ export default function CompanyLogin() {
                 "Company Name is required"}
             </p>
           </div>
-          <div className="mb-3">
+          <div className="mb-1 mr-2 ml-2">
             <label className="form-label">Password</label>
             <input
               type="password"
@@ -154,10 +169,9 @@ export default function CompanyLogin() {
             </p>
           </div>
 
-          <div className="d-grid gap-2 col-6 mx-auto">
+          <div className="row mr-2 ml-2">
             <button
               type="submit"
-              disabled={!isDirty || !isValid}
               className="btn btn-primary"
               onClick={handleClick}
             >
@@ -165,7 +179,7 @@ export default function CompanyLogin() {
             </button>
           </div>
         </form>
-        <p style={{ fontSize: "14px" }} className="pt-3 text-center">
+        <p style={{ fontSize: "14px" }} className="pt-1 text-center">
           If you are new user to this portal and don't have email id and
           password, Feel free to{" "}
           <Link to="contact" style={{ color: "blue" }}>
