@@ -8,4 +8,7 @@
     height: 4.2rem;
     width: 4.1rem;
   }
+  .offcanvas-start {
+    width: 300px;
+  }
 }

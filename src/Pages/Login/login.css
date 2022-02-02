@@ -1,6 +1,6 @@
-.main-box {
+.login {
   padding: 15px;
-  width: 30%;
+  width: 50%;
   position: relative;
   top: 12rem;
   left: 50%;
@@ -9,8 +9,8 @@
   transform: translate(-50%, -50%);
 }
 @media (max-width: 480px) {
-  .main-box {
-    width: 90%;
+  .login {
+    width: 100%;
     padding-left: 2rem;
   }
 }

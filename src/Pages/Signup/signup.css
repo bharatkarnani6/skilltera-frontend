@@ -1,7 +1,16 @@
-.showHint{
-
-    border: none;
-    margin-top: 0.5rem;
-    background-color: transparent;
-    
-    }
+.signup {
+  padding: 15px;
+  width: 50%;
+  position: relative;
+  top: 16rem;
+  left: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+@media (max-width: 480px) {
+  .signup {
+    width: 110%;
+    padding-left: 2rem;
+  }
+}

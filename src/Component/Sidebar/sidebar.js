@@ -27,12 +27,6 @@ import {
 
 export default function Sidebar() {
   const dispatch = useDispatch();
-  // const [menuCollapse, setMenuCollapse] = useState(false);
-
-  // const menuIconClick = () => {
-  //   menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
-  //   dispatch(ToggleAction(menuCollapse));
-  // };
 
   const menuSelection = (data) => {
     dispatch(SidebarMenuSelectionAction(data));

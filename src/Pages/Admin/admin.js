@@ -7,7 +7,11 @@ import ApiConstants from "../../Services/apiconstants";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import { FcAbout } from "react-icons/fc";
+import { trackPromise, usePromiseTracker } from "react-promise-tracker";
+
 export default function Admin() {
+  const { promiseInProgress } = usePromiseTracker();
+
   const {
     register,
     handleSubmit,
@@ -18,80 +22,83 @@ export default function Admin() {
 
   const onSubmit = (data) => {
     console.log(data);
-    axios
-      .post(ApiConstants.ADMIN_LOGIN, {
-        email: data.email,
-        password: data.password,
-      })
-      .then((response) => {
-        console.log(response.data);
-        localStorage.setItem("ADMIN", JSON.stringify(response.data));
-        localStorage.setItem("login", true);
 
-        Swal.fire({
-          title: response.data.message,
-          html: "Verifiying Detail", // add html attribute if you want or remove
-          allowOutsideClick: true,
-          allowEscapeKey: true,
-          allowEnterKey: true,
+    trackPromise(
+      axios
+        .post(ApiConstants.ADMIN_LOGIN, {
+          email: data.email,
+          password: data.password,
+        })
+        .then((response) => {
+          console.log(response.data);
+          localStorage.setItem("ADMIN", JSON.stringify(response.data));
+          localStorage.setItem("login", true);
 
-          didOpen: () => {
-            Swal.showLoading();
-          },
-          icon: "success",
-        });
+          // Swal.fire({
+          //   title: response.data.message,
+          //   html: "Verifiying Detail", // add html attribute if you want or remove
+          //   allowOutsideClick: true,
+          //   allowEscapeKey: true,
+          //   allowEnterKey: true,
 
-        window.location.pathname = "/adminDashboard";
-      })
-      .catch((error) => {
-        if (error.message === "Network Error") {
-          let timerInterval;
-          Swal.fire({
-            title: "Please Wait",
-            timer: 2500,
-            timerProgressBar: true,
-            didOpen: () => {
-              Swal.showLoading();
-              timerInterval = setInterval(() => {
-                Swal.getTimerLeft();
-              }, 50);
-            },
-            willClose: () => {
-              clearInterval(timerInterval);
-            },
-          }).then((result) => {
+          //   didOpen: () => {
+          //     Swal.showLoading();
+          //   },
+          //   icon: "success",
+          // });
+
+          window.location.pathname = "/adminDashboard";
+        })
+        .catch((error) => {
+          if (error.message === "Network Error") {
+            let timerInterval;
             Swal.fire({
-              title: "Backend not connected",
-              icon: "info",
-              width: 400,
-              height: 100,
+              title: "Please Wait",
+              timer: 2500,
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading();
+                timerInterval = setInterval(() => {
+                  Swal.getTimerLeft();
+                }, 50);
+              },
+              willClose: () => {
+                clearInterval(timerInterval);
+              },
+            }).then((result) => {
+              Swal.fire({
+                title: "Backend not connected",
+                icon: "info",
+                width: 400,
+                height: 100,
+              });
             });
-          });
-        } else if (error.message === "Request failed with status code 400") {
-          let timerInterval;
-          Swal.fire({
-            title: "Please Wait",
-            timer: 2500,
-            timerProgressBar: true,
-            didOpen: () => {
-              Swal.showLoading();
-              timerInterval = setInterval(() => {
-                Swal.getTimerLeft();
-              }, 50);
-            },
-            willClose: () => {
-              clearInterval(timerInterval);
-            },
-          }).then((result) => {
+          } else if (error.message === "Request failed with status code 400") {
+            let timerInterval;
             Swal.fire({
-              title: error.response.data.error,
-              icon: "info",
-              width: 400,
-              height: 100,
+              title: "Please Wait",
+              timer: 2500,
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading();
+                timerInterval = setInterval(() => {
+                  Swal.getTimerLeft();
+                }, 50);
+              },
+              willClose: () => {
+                clearInterval(timerInterval);
+              },
+            }).then((result) => {
+              Swal.fire({
+                title: error.response.data.error,
+                icon: "info",
+                width: 400,
+                height: 100,
+              });
             });
-          });
-        }
-      });
+          }
+        })
+    );
   };
 
   function showHint() {
@@ -111,7 +118,19 @@ export default function Admin() {
   return (
     <>
       <Navbar />
-      <div className="main-box">
+
+      <div className="continer-fluid adminSignin border">
+        {promiseInProgress === true ? (
+          <div class="d-flex align-items-center">
+            <h3 className="mb-3">Loading...</h3>
+            <div
+              class="spinner-border ml-auto"
+              role="status"
+              aria-hidden="true"
+            ></div>
+          </div>
+        ) : null}
+        <h2 className="d-flex justify-content-center">Admin Sign-in</h2>
         <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
           <div className="mb-3">
             <label className="form-label">Email address</label>
@@ -157,16 +176,14 @@ export default function Admin() {
 
             {/* <p style={{ 'color': 'red' }}>  {errors.password?.type === 'required' && "Password is required" }  </p> */}
           </div>
-          <div className="row">
-            <div className="d-grid gap-2 col-6 mx-auto">
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onClick={handleClick}
-              >
-                Sign in
-              </button>
-            </div>
+          <div className="row ml-1 mr-1">
+            <button
+              type="submit"
+              className="btn btn-primary "
+              onClick={handleClick}
+            >
+              Sign in
+            </button>
           </div>
         </form>
       </div>
