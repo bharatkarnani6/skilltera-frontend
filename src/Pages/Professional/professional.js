@@ -5,8 +5,11 @@ import axios from "axios";
 import ApiConstants from "../../Services/apiconstants";
 import Swal from "sweetalert2";
 import "./professional.css";
+import { trackPromise, usePromiseTracker } from "react-promise-tracker";
 
 const Profile = () => {
+  const { promiseInProgress } = usePromiseTracker();
+
   const {
     register,
     handleSubmit,
@@ -26,49 +29,60 @@ const Profile = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    axios
-      .put(
-        ApiConstants.PROFILE,
-        {
-          experience: data.experience,
-          currentCompany: data.currentCompany,
-          interestedRole: data.interestedRole,
-          knownTechnologies: data.knownTechnologies,
-          experienceDescription: data.experienceDescription,
-          previousEmployers: data.previousEmployers,
-          interestedRole: data.interestedRole,
-        },
-        {
-          Accept: "application/json",
-          "Content-type": "application/json",
-          token: token,
-          _id: userId,
-          "Access-Control-Allow-Origin": true,
-          "Access-Control-Allow-Methods": "GET, POST, PATCH",
-        }
-      )
-      .then((response) => {
-        console.log(response.data);
-        Swal.fire({
-          title: "profile is done",
-          text: "Please verify your email address",
-          icon: "info",
-          width: 400,
-          height: 100,
-        });
+    trackPromise(
+      axios
+        .put(
+          ApiConstants.PROFILE,
+          {
+            experience: data.experience,
+            currentCompany: data.currentCompany,
+            interestedRole: data.interestedRole,
+            knownTechnologies: data.knownTechnologies,
+            experienceDescription: data.experienceDescription,
+            previousEmployers: data.previousEmployers,
+            interestedRole: data.interestedRole,
+          },
+          {
+            Accept: "application/json",
+            "Content-type": "application/json",
+            token: token,
+            _id: userId,
+            "Access-Control-Allow-Origin": true,
+            "Access-Control-Allow-Methods": "GET, POST, PATCH",
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
 
-        setTimeout(function () {
-          window.location.pathname = "/dashboard";
-        }, 2000);
-      })
-      .catch((error) => {
-        Swal.fire({
-          title: "Backend Not Connected",
-          icon: "info",
-          width: 400,
-          height: 100,
-        });
-      });
+          setTimeout(function () {
+            window.location.pathname = "/dashboard";
+          }, 2000);
+        })
+        .catch((error) => {
+          let timerInterval;
+          Swal.fire({
+            title: "Loading...",
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              timerInterval = setInterval(() => {
+                Swal.getTimerLeft();
+              }, 500);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((error) => {
+            Swal.fire({
+              title: "Backend not connected",
+              icon: "error",
+              width: 400,
+              height: 100,
+            });
+          });
+        })
+    );
   };
 
   // .............tooltips.........
@@ -81,8 +95,18 @@ const Profile = () => {
   return (
     <>
       <div class="border border-dark rounded professional">
-        <legend>Professional Info</legend>
+        {promiseInProgress === true ? (
+          <div class="d-flex align-items-center">
+            <h3 className="mb-3">Loading...</h3>
+            <div
+              class="spinner-border ml-auto"
+              role="status"
+              aria-hidden="true"
+            ></div>
+          </div>
+        ) : null}
 
+        <legend>Professional Info</legend>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div class="row">
             <div class="col-md-6 col-sm-6">
@@ -99,6 +123,7 @@ const Profile = () => {
                 defaultValue={user.experience}
                 {...register("experience")}
                 ref={inputRef}
+                disabled={check}
               />
             </div>
             <div class="col-md-6 col-sm-6">
@@ -110,6 +135,7 @@ const Profile = () => {
                 placeholder="Developer"
                 defaultValue={user.interestedRole}
                 {...register("interestedRole")}
+                disabled={check}
               />
             </div>
           </div>
@@ -126,6 +152,7 @@ const Profile = () => {
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.currentCompany}
                 {...register("currentCompany")}
+                disabled={check}
               />
             </div>
 
@@ -138,6 +165,7 @@ const Profile = () => {
                 class="form-control"
                 {...register("interestedRole")}
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
+                disabled={check}
               >
                 <option value="Data Engineer"> Data Engineer</option>
                 <option value="Full Stack Engineer">
@@ -160,6 +188,7 @@ const Profile = () => {
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.knownTechnologies}
                 {...register("knownTechnologies")}
+                disabled={check}
               />
             </div>
 
@@ -173,6 +202,7 @@ const Profile = () => {
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.previousEmployers}
                 {...register("previousEmployers")}
+                disabled={check}
               />
             </div>
           </div>
@@ -188,6 +218,7 @@ const Profile = () => {
               style={{ color: check === true ? "#7B7D7D" : "black" }}
               defaultValue={user.experienceDescription}
               {...register("experienceDescription")}
+              disabled={check}
             />
           </div>
 
@@ -195,16 +226,16 @@ const Profile = () => {
             {check ? (
               <button
                 type="submit"
-                className="btn btn-primary disabled"
-                aria-disabled="true"
+                className="btn btn-primary"
+                disabled={check}
               >
                 Save
               </button>
             ) : (
               <button
                 type="submit"
-                className="btn btn-primary active"
-                aria-disabled="true"
+                className="btn btn-primary "
+                disabled={check}
               >
                 Save
               </button>
@@ -213,7 +244,7 @@ const Profile = () => {
             {check ? (
               <button
                 type="button"
-                className="btn btn-secondary active"
+                className="btn btn-dark active"
                 onClick={(e) => setCheck(false)}
               >
                 Edit
@@ -221,7 +252,7 @@ const Profile = () => {
             ) : (
               <button
                 type="button"
-                className="btn btn-secondary disabled"
+                className="btn btn-dark disabled"
                 aria-disabled="true"
               >
                 Edit
