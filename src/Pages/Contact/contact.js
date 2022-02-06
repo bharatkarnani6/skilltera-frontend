@@ -29,13 +29,31 @@ const Contact = () => {
         })
         .then((response) => {
           console.log(response.data);
-          // Swal.fire({
-          //   title: response.data.message,
-          //   text: "We will contact you soon",
-          //   icon: "success",
-          //   width: 400,
-          //   height: 100,
-          // });
+
+          let timerInterval;
+          Swal.fire({
+            html: "<h1>Please Wait....</h1>",
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              timerInterval = setInterval(() => {
+                Swal.getTimerLeft();
+              }, 1);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((result) => {
+            Swal.fire({
+              title: "Email sent",
+              allowOutsideClick: true,
+              allowEscapeKey: true,
+              allowEnterKey: true,
+              icon: "success",
+              confirmButtonText: "Ok",
+            });
+          });
         })
         .catch((error) => {
           Swal.fire({
@@ -59,17 +77,8 @@ const Contact = () => {
   return (
     <div style={{ overflowX: "hidden" }}>
       <Navbar />
+
       <div className="row">
-        {promiseInProgress === true ? (
-          <div class="d-flex align-items-center">
-            <h3 className="mb-3">Loading...</h3>
-            <div
-              class="spinner-border ml-auto"
-              role="status"
-              aria-hidden="true"
-            ></div>
-          </div>
-        ) : null}
         <div className="col-12 col-md-6">
           <div className="contact-banner">
             <img src={ContactBanner} className="img-fluid" />
@@ -77,6 +86,16 @@ const Contact = () => {
         </div>
         <div className="col-12 col-md-6">
           <div className="contact-form">
+            {promiseInProgress === true ? (
+              <div class="d-flex align-items-center">
+                <h3 className="mb-3">Loading...</h3>
+                <div
+                  class="spinner-border ml-auto"
+                  role="status"
+                  aria-hidden="true"
+                ></div>
+              </div>
+            ) : null}
             <form
               class="row g-3"
               onSubmit={handleSubmit(onSubmit)}
