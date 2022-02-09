@@ -22,6 +22,7 @@ export default function ForgetPassword() {
     register: register2,
     formState: { errors: errors2 },
     handleSubmit: handleSubmit2,
+    reset,
   } = useForm({
     mode: "onBlur",
   });
@@ -30,6 +31,9 @@ export default function ForgetPassword() {
   const [getOtp, setgetOtp] = useState(false);
   const [newPasswordInput, setnewPasswordInput] = useState(false);
   const [otpButtonDisabled, setotpButtonDisabled] = useState(true);
+
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
 
   const onSubmitEmail = (data) => {
     setemail(data.email);
@@ -42,87 +46,19 @@ export default function ForgetPassword() {
         .then((response) => {
           setgetOtp(true);
           console.log(response);
-
-          let timerInterval;
-          Swal.fire({
-            html: "<h1>Please Wait....</h1>",
-            timer: 2500,
-            timerProgressBar: true,
-            didOpen: () => {
-              Swal.showLoading();
-              timerInterval = setInterval(() => {
-                Swal.getTimerLeft();
-              }, 50);
-            },
-            willClose: () => {
-              clearInterval(timerInterval);
-            },
-          }).then((result) => {
-            Swal.fire({
-              title: "Email sent",
-              allowOutsideClick: true,
-              allowEscapeKey: true,
-              allowEnterKey: true,
-              icon: "success",
-              confirmButtonText: "Ok",
-            });
-          });
         })
         .catch((error) => {
-          if (error.message === "Request failed with status code 501") {
-            let timerInterval;
-            Swal.fire({
-              title: "Please Wait....",
-              timer: 2500,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading();
-                timerInterval = setInterval(() => {
-                  Swal.getTimerLeft();
-                }, 50);
-              },
-              willClose: () => {
-                clearInterval(timerInterval);
-              },
-            }).then((result) => {
-              Swal.fire({
-                title: error.response.data.message,
-                icon: "info",
-                width: 400,
-                height: 100,
-              });
-            });
-          } else if (error.message === "Network Error") {
-            let timerInterval;
-            Swal.fire({
-              title: "Please Wait....",
-              timer: 2500,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading();
-                timerInterval = setInterval(() => {
-                  Swal.getTimerLeft();
-                }, 50);
-              },
-              willClose: () => {
-                clearInterval(timerInterval);
-              },
-            }).then((result) => {
-              Swal.fire({
-                title: "Backend not connected",
-                icon: "info",
-                width: 400,
-                height: 100,
-              });
-            });
-          }
+          // console.log("eroroM ", error.response.data.message);
+          setEmailErrorMessage(error.response.data.message);
         })
     );
     setotpButtonDisabled(false);
+    reset();
   };
 
   const onSubmitOtp = (data) => {
     if (data.newpassword === data.cnfnewpassword) {
+      trackPromise();
       axios
         .post(ApiConstants.RESET_PASSWORD, {
           otpCode: data.otp,
@@ -132,21 +68,12 @@ export default function ForgetPassword() {
           console.log(response);
         })
         .catch((error) => {
-          Swal.fire({
-            title: "Backend Not Connected",
-            icon: "info",
-            width: 400,
-            height: 100,
-          });
+          setPasswordErrorMessage("Password not matched");
         });
     } else {
-      Swal.fire({
-        title: "Password is not matching",
-        icon: "info",
-        width: 400,
-        height: 100,
-      });
+      setPasswordErrorMessage("Password not matched");
     }
+    reset();
   };
 
   // ............clearInputFiled after filldata.....
@@ -155,6 +82,15 @@ export default function ForgetPassword() {
 
   const handleClick = () => {
     formRef.current.reset();
+  };
+
+  //.......
+  const handleError = () => {
+    setEmailErrorMessage("");
+  };
+
+  const handleError2 = () => {
+    setPasswordErrorMessage("");
   };
 
   return (
@@ -179,33 +115,36 @@ export default function ForgetPassword() {
           <form
             key={1}
             onSubmit={handleSubmit(onSubmitEmail)}
-            ref={formRef}
             class="border"
+            ref={formRef}
           >
             <div className="modal-body">
               <div className="mb-3">
                 <label className="form-label">Email address</label>
                 <input
-                  type="email"
-                  disabled={getOtp}
+                  id="email"
                   className="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="name@example.com"
+                  disabled={getOtp}
                   {...register("email", {
-                    required: true,
+                    required: "Email is required",
                     pattern: {
                       value:
                         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                      message: <p>invalid email</p>,
+                      message: "Entered value does not match email format",
                     },
                   })}
+                  type="email"
+                  onClick={handleError}
                 />
-
                 {errors.email && (
-                  <p style={{ color: "red" }}>Enter the valid email</p>
+                  <span role="alert" style={{ color: "red" }}>
+                    {errors.email.message}
+                  </span>
                 )}
 
-                {/* <p style={{ 'color': 'red' }}>{errors.email?.type === 'required' && "Email is required"}</p> */}
+                <span role="alert" style={{ color: "red" }}>
+                  {emailErrorMessage}
+                </span>
               </div>
             </div>
             <div className="row mr-3 ml-3">
@@ -229,7 +168,12 @@ export default function ForgetPassword() {
         )}
 
         {getOtp && (
-          <form key={2} onSubmit={handleSubmit2(onSubmitOtp)} class="border">
+          <form
+            key={2}
+            onSubmit={handleSubmit2(onSubmitOtp)}
+            class="border"
+            ref={formRef}
+          >
             <div className="modal-body">
               <div className="">
                 <label className="form-label">Email</label>
@@ -249,6 +193,7 @@ export default function ForgetPassword() {
                   id="exampleFormControlInput1"
                   placeholder=""
                   {...register2("otp", { required: true })}
+                  onClick={handleError2}
                 />
                 <p style={{ color: "red" }}>
                   {errors2.otp?.type === "required" && "otp is required"}
@@ -257,33 +202,51 @@ export default function ForgetPassword() {
               <div className="">
                 <label className="form-label">New Password</label>
                 <input
-                  type="password"
+                  id="password"
                   className="form-control"
-                  id="inputPassword"
                   placeholder="New Password"
-                  {...register2("newpassword", { required: true })}
+                  {...register2("newpassword", {
+                    required: "Newpassword is required",
+                  })}
+                  type="password"
+                  onClick={handleError2}
                 />
-                <p style={{ color: "red" }}>
-                  {errors2.newpassword?.type === "required" &&
-                    "New Password is required"}
-                </p>
+                {errors.password && (
+                  <span role="alert" style={{ color: "red" }}>
+                    {errors.password.message}
+                  </span>
+                )}
+                <span role="alert" style={{ color: "red" }}>
+                  {passwordErrorMessage}
+                </span>
               </div>
               <div className="">
                 <label className="form-label">Confirm New Password</label>
                 <input
-                  type="password"
+                  id="password"
                   className="form-control"
-                  id="inputPassword"
-                  placeholder="Password"
-                  {...register2("cnfnewpassword", { required: true })}
+                  placeholder="conferm password"
+                  {...register2("cnfnewpassword", {
+                    required: "conferm password required",
+                  })}
+                  type="password"
                 />
-                <p style={{ color: "red" }}>
-                  {errors2.cnfnewpassword?.type === "required" &&
-                    "Confirm New Password is required"}
-                </p>
+                {errors.password && (
+                  <span role="alert" style={{ color: "red" }}>
+                    {errors.password.message}
+                  </span>
+                )}
+
+                <span role="alert" style={{ color: "red" }}>
+                  {passwordErrorMessage}
+                </span>
               </div>
               <div className="row mr-1 ml-1">
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  onClick={handleClick}
+                >
                   Change Password
                 </button>
               </div>
