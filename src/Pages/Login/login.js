@@ -17,6 +17,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const [isEmailVerified, setisEmailVerified] = useState(false);
@@ -59,6 +60,7 @@ const Login = () => {
           }
         })
     );
+    reset();
   };
 
   function showHint() {
@@ -66,14 +68,6 @@ const Login = () => {
       "1. At least 8 characters \n 2. At least one special char \n 3. At least one number \n 4. At least one upper and one lower case char. \n "
     );
   }
-
-  // ............clearInputFiled after filldata.....
-
-  const formRef = useRef();
-
-  const handleClick = () => {
-    formRef.current.reset();
-  };
 
   return (
     <>
@@ -91,58 +85,51 @@ const Login = () => {
           </div>
         ) : null}
         <h2 className="d-flex justify-content-center">Login</h2>
-        <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
             <label className="form-label">Email address</label>
             <input
-              type="text"
+              id="email"
               className="form-control"
-              placeholder="email"
               {...register("email", {
-                required: true,
+                required: "Email is required",
                 pattern: {
                   value:
                     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                  message: <p>invalid email</p>,
+                  message: "Entered value does not match email format",
                 },
               })}
+              type="email"
             />
             {errors.email && (
-              <p style={{ color: "red" }}>Enter the valid email </p>
+              <span role="alert" style={{ color: "red" }}>
+                {errors.email.message}
+              </span>
             )}
-
-            {/* <p style={{ 'color': 'red' }}>{errors.email?.type === 'required' && "Email is required"} </p> */}
           </div>
           <div className="mb-3">
             <label className="form-label">Password</label>
             <input
-              type="password"
+              id="password"
               className="form-control"
-              placeholder="Password"
               {...register("password", {
-                required: true,
-                // pattern: { value: /^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$/ },
+                required: "password is required",
+                minLength: {
+                  value: 5,
+                  message: "min length is 5",
+                },
               })}
+              type="password"
             />
             {errors.password && (
-              <p style={{ color: "red" }}>
-                Please enter password{" "}
-                <button onClick={showHint} className="showHint">
-                  {" "}
-                  <FcAbout />
-                </button>{" "}
-              </p>
+              <span role="alert" style={{ color: "red" }}>
+                {errors.password.message}
+              </span>
             )}
-
-            {/* <p style={{ 'color': 'red' }}>  {errors.password?.type === 'required' && "Password is required" }  </p> */}
           </div>
           <div className="row">
             <div className="d-grid col-12 mx-auto">
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onClick={handleClick}
-              >
+              <button type="submit" className="btn btn-primary">
                 Sign in
               </button>
             </div>
