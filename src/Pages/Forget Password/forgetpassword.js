@@ -130,7 +130,7 @@ export default function ForgetPassword() {
                     pattern: {
                       value:
                         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                      message: "Entered value does not match email format",
+                      message: "Invalid email format",
                     },
                   })}
                   type="email"
