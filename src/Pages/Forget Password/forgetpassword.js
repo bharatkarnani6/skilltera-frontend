@@ -108,8 +108,6 @@ export default function ForgetPassword() {
             ></div>
           </div>
         ) : null}
-        <h2>Forgot Password ?</h2>
-        <span>Reset password by email varification</span>
 
         {!getOtp && (
           <form
@@ -118,6 +116,8 @@ export default function ForgetPassword() {
             class="border"
             ref={formRef}
           >
+            <h2 class="d-flex justify-content-center">Forgot Password ?</h2>
+            <span>Reset password by email varification</span>
             <div className="modal-body">
               <div className="mb-3">
                 <label className="form-label">Email address</label>
@@ -174,6 +174,12 @@ export default function ForgetPassword() {
             class="border"
             ref={formRef}
           >
+            <h3 class="d-flex justify-content-center">Reset your Password</h3>
+            <span style={{ color: "#9b51e0" }}>
+              Use the OTP sent to your email to set our new password.Please
+              check your spam folder if you don't find email in your inbox
+            </span>
+
             <div className="modal-body">
               <div className="">
                 <label className="form-label">Email</label>
@@ -184,7 +190,7 @@ export default function ForgetPassword() {
                   placeholder={email}
                 />
               </div>
-              <div className="">
+              <div className="mt-1">
                 <label className="form-label">OTP</label>
                 <input
                   type="text"
@@ -199,7 +205,7 @@ export default function ForgetPassword() {
                   {errors2.otp?.type === "required" && "otp is required"}
                 </p>
               </div>
-              <div className="">
+              <div className="mb-2">
                 <label className="form-label">New Password</label>
                 <input
                   id="password"
@@ -220,7 +226,7 @@ export default function ForgetPassword() {
                   {passwordErrorMessage}
                 </span>
               </div>
-              <div className="">
+              <div className="mt-2 mb-2">
                 <label className="form-label">Confirm New Password</label>
                 <input
                   id="password"
@@ -241,7 +247,7 @@ export default function ForgetPassword() {
                   {passwordErrorMessage}
                 </span>
               </div>
-              <div className="row mr-1 ml-1">
+              <div className="row mr-1 ml-1 ">
                 <button
                   type="submit"
                   className="btn btn-primary"

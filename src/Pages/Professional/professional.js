@@ -31,7 +31,7 @@ const Profile = () => {
     console.log(data);
     trackPromise(
       axios
-        .put(
+        .patch(
           ApiConstants.PROFILE,
           {
             experience: data.experience,

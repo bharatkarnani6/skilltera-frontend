@@ -30,7 +30,7 @@ const Profile = () => {
   const onSubmit = (data) => {
     trackPromise(
       axios
-        .put(
+        .patch(
           ApiConstants.PROFILE,
           {
             phone: data.phone,
