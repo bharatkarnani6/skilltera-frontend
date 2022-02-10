@@ -19,10 +19,19 @@ export default function AllCandidates() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [candidateId, setCandidateId] = useState("");
   const [editClicked, setEditClicked] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("")
   const columnsList = [
     {
       name: "ID",
       cell: (row, index) => index + 1,
+    },
+    {
+      name: "Candidate Name",
+      selector: (row) => row.fullname,
+    },
+    {
+      name: "Candidate Email Id",
+      selector: (row) => row.email,
     },
     {
       name: "Overall Exprience (Years)",
@@ -32,18 +41,18 @@ export default function AllCandidates() {
       name: "Current Role",
       selector: (row) => row.currentRole,
     },
-    {
-      name: "Current Client/Company",
-      selector: (row) => row.currentCompany,
-    },
-    {
-      name: "Companies/Client worked with",
-      selector: (row) => row.previousEmployers,
-    },
-    {
-      name: "Available In (Weeks)",
-      selector: (row) => row.timeToJoin,
-    },
+    // {
+    //   name: "Current Client/Company",
+    //   selector: (row) => row.currentCompany,
+    // },
+    // {
+    //   name: "Companies/Client worked with",
+    //   selector: (row) => row.previousEmployers,
+    // },
+    // {
+    //   name: "Available In (Weeks)",
+    //   selector: (row) => row.timeToJoin,
+    // },
     {
       name: "Key Skill Areas",
       selector: (row) => row.knownTechnologies,
@@ -74,10 +83,10 @@ export default function AllCandidates() {
       name: "Expected Salary per year / Rate per hour (C2H/C2C)",
       selector: (row) => row.expectedRateC2CorC2H,
     },
-    {
-      name: "Open to relocation",
-      selector: (row) => (row.relocation ? "Yes" : "No"),
-    },
+    // {
+    //   name: "Open to relocation",
+    //   selector: (row) => (row.relocation ? "Yes" : "No"),
+    // },
     {
       name: "Selection",
       cell: (row) => (
@@ -130,6 +139,11 @@ export default function AllCandidates() {
   return (
     <>
       <div className="table">
+        <div className="search-box mt-3 mb-3 d-flex justify-content-end">
+          <div className="form-group mb-2">
+            <input type="search" className="form-control" size="24" placeholder="Search by Candidate Name" onChange={event => setSearchTerm(event.target.value)} />
+          </div>
+        </div>
         {Object.keys(values.candidateData).length && (
           <DataTable
             striped
@@ -139,7 +153,15 @@ export default function AllCandidates() {
             paginationPerPage={5}
             highlightOnHover
             columns={columnsList}
-            data={values.candidateData}
+            data={values.candidateData.filter((item) => {
+              if (searchTerm === "") {
+                return item;
+              } else if (
+                item.fullname.toLowerCase().includes(searchTerm.toLowerCase())
+              ) {
+                return item;
+              }
+            })}
           />
         )}
         <UpdateCandidateAdmin candidateId={candidateId} />
