@@ -117,7 +117,7 @@ export default function ForgetPassword() {
             ref={formRef}
           >
             <h2 class="d-flex justify-content-center">Forgot Password ?</h2>
-            <span>Reset password by email varification</span>
+            <span>Reset password by email verification</span>
             <div className="modal-body">
               <div className="mb-3">
                 <label className="form-label">Email address</label>
@@ -176,7 +176,7 @@ export default function ForgetPassword() {
           >
             <h3 class="d-flex justify-content-center">Reset your Password</h3>
             <span style={{ color: "#9b51e0" }}>
-              Use the OTP sent to your email to set our new password.Please
+              Use the OTP sent to your email to set your new password. Please
               check your spam folder if you don't find email in your inbox
             </span>
 
@@ -197,7 +197,7 @@ export default function ForgetPassword() {
                   disabled={otpButtonDisabled}
                   className="form-control"
                   id="exampleFormControlInput1"
-                  placeholder=""
+                  placeholder="Enter OTP"
                   {...register2("otp", { required: true })}
                   onClick={handleError2}
                 />
@@ -231,7 +231,7 @@ export default function ForgetPassword() {
                 <input
                   id="password"
                   className="form-control"
-                  placeholder="conferm password"
+                  placeholder="confirm password"
                   {...register2("cnfnewpassword", {
                     required: "conferm password required",
                   })}
