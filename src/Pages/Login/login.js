@@ -114,10 +114,6 @@ const Login = () => {
               className="form-control"
               {...register("password", {
                 required: "password is required",
-                minLength: {
-                  value: 5,
-                  message: "min length is 5",
-                },
               })}
               type="password"
             />

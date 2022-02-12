@@ -49,7 +49,7 @@ export default function ForgetPassword() {
         })
         .catch((error) => {
           // console.log("eroroM ", error.response.data.message);
-          setEmailErrorMessage(error.response.data.message);
+          setEmailErrorMessage(error.response.data.error);
         })
     );
     setotpButtonDisabled(false);
@@ -58,21 +58,24 @@ export default function ForgetPassword() {
 
   const onSubmitOtp = (data) => {
     if (data.newpassword === data.cnfnewpassword) {
-      trackPromise();
-      axios
-        .post(ApiConstants.RESET_PASSWORD, {
-          otpCode: data.otp,
-          password: data.newpassword,
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          setPasswordErrorMessage("Password not matched");
-        });
+      trackPromise(
+        axios
+          .post(ApiConstants.RESET_PASSWORD, {
+            otpCode: data.otp,
+            password: data.newpassword,
+          })
+          .then((response) => {
+            console.log(response);
+            window.location.pathname = "/login";
+          })
+          .catch((error) => {
+            setPasswordErrorMessage("Password not matched");
+          })
+      );
     } else {
       setPasswordErrorMessage("Password not matched");
     }
+
     reset();
   };
 
