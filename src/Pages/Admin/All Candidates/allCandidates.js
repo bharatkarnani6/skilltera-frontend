@@ -141,7 +141,7 @@ export default function AllCandidates() {
       <div className="table">
         <div className="search-box mt-3 mb-3 d-flex justify-content-end">
           <div className="form-group mb-2">
-            <input type="search" className="form-control" size="24" placeholder="Search by Candidate Name" onChange={event => setSearchTerm(event.target.value)} />
+            <input type="search" className="form-control" size="24" placeholder="Search by E-mail" onChange={event => setSearchTerm(event.target.value)} />
           </div>
         </div>
         {Object.keys(values.candidateData).length && (
@@ -157,7 +157,7 @@ export default function AllCandidates() {
               if (searchTerm === "") {
                 return item;
               } else if (
-                item.fullname.toLowerCase().includes(searchTerm.toLowerCase())
+                item.email.toLowerCase().includes(searchTerm.toLowerCase())
               ) {
                 return item;
               }
