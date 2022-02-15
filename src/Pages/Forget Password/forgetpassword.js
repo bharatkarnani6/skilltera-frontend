@@ -49,7 +49,7 @@ export default function ForgetPassword() {
         })
         .catch((error) => {
           // console.log("eroroM ", error.response.data.message);
-          setEmailErrorMessage(error.response.data.message);
+          setEmailErrorMessage(error.response.data.error);
         })
     );
     setotpButtonDisabled(false);
@@ -58,6 +58,22 @@ export default function ForgetPassword() {
 
   const onSubmitOtp = (data) => {
     if (data.newpassword === data.cnfnewpassword) {
+<<<<<<< HEAD
+      trackPromise(
+        axios
+          .post(ApiConstants.RESET_PASSWORD, {
+            otpCode: data.otp,
+            password: data.newpassword,
+          })
+          .then((response) => {
+            console.log(response);
+            window.location.pathname = "/login";
+          })
+          .catch((error) => {
+            setPasswordErrorMessage("Password not matched");
+          })
+      );
+=======
       trackPromise(axios
         .post(ApiConstants.RESET_PASSWORD, {
           otpCode: data.otp,
@@ -70,9 +86,11 @@ export default function ForgetPassword() {
           setPasswordErrorMessage("Password not matched");
         }));
 
+>>>>>>> fa8ef84ff2525722e9cc7a3ae0c229b767304a90
     } else {
       setPasswordErrorMessage("Password not matched");
     }
+
     reset();
   };
 
@@ -117,7 +135,7 @@ export default function ForgetPassword() {
             ref={formRef}
           >
             <h2 class="d-flex justify-content-center">Forgot Password ?</h2>
-            <span>Reset password by email varification</span>
+            <span>Reset password by email verification</span>
             <div className="modal-body">
               <div className="mb-3">
                 <label className="form-label">Email address</label>
@@ -176,7 +194,7 @@ export default function ForgetPassword() {
           >
             <h3 class="d-flex justify-content-center">Reset your Password</h3>
             <span style={{ color: "#9b51e0" }}>
-              Use the OTP sent to your email to set our new password.Please
+              Use the OTP sent to your email to set your new password. Please
               check your spam folder if you don't find email in your inbox
             </span>
 
@@ -197,7 +215,7 @@ export default function ForgetPassword() {
                   disabled={otpButtonDisabled}
                   className="form-control"
                   id="exampleFormControlInput1"
-                  placeholder=""
+                  placeholder="Enter OTP"
                   {...register2("otp", { required: true })}
                   onClick={handleError2}
                 />
@@ -231,7 +249,7 @@ export default function ForgetPassword() {
                 <input
                   id="password"
                   className="form-control"
-                  placeholder="conferm password"
+                  placeholder="confirm password"
                   {...register2("cnfnewpassword", {
                     required: "conferm password required",
                   })}

@@ -27,6 +27,20 @@ const Profile = () => {
 
   const user = candidateData.candidate;
 
+  useEffect(() => {
+    if (
+      user.experience === undefined &&
+      user.currentCompany === undefined &&
+      user.interestedRole === undefined &&
+      user.knownTechnologies === undefined &&
+      user.experienceDescription === undefined &&
+      user.previousEmployers === undefined &&
+      user.interestedRole === undefined
+    ) {
+      setCheck(false);
+    }
+  }, []);
+
   const onSubmit = (data) => {
     console.log(data);
     trackPromise(
@@ -118,7 +132,7 @@ const Profile = () => {
               <input
                 type="number"
                 className="form-control"
-                placeholder="1"
+                placeholder=""
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.experience}
                 {...register("experience")}
@@ -132,7 +146,7 @@ const Profile = () => {
                 type="text"
                 class="form-control"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
-                placeholder="Developer"
+                placeholder=""
                 defaultValue={user.interestedRole}
                 {...register("interestedRole")}
                 disabled={check}
@@ -148,7 +162,7 @@ const Profile = () => {
               <input
                 type="text"
                 class="form-control"
-                placeholder="Google"
+                placeholder=""
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.currentCompany}
                 {...register("currentCompany")}
@@ -167,6 +181,7 @@ const Profile = () => {
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 disabled={check}
               >
+                <option value=""> </option>
                 <option value="Data Engineer"> Data Engineer</option>
                 <option value="Full Stack Engineer">
                   Full Stack Engineer{" "}
@@ -184,7 +199,7 @@ const Profile = () => {
               <input
                 type="text"
                 className="form-control"
-                placeholder="c++,mern"
+                placeholder=""
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.knownTechnologies}
                 {...register("knownTechnologies")}
@@ -234,7 +249,7 @@ const Profile = () => {
             ) : (
               <button
                 type="submit"
-                className="btn btn-primary "
+                className="btn btn-primary"
                 disabled={check}
               >
                 Save

@@ -27,6 +27,22 @@ const Profile = () => {
 
   const user = candidateData.candidate;
 
+  useEffect(() => {
+    if (
+      user.phone === undefined &&
+      user.country === undefined &&
+      user.currentCity === undefined &&
+      user.relocation === undefined &&
+      user.typeOfJob === undefined &&
+      user.timeToJoin === undefined &&
+      user.needVisaEmployer === undefined &&
+      user.expectedRateC2CorC2H === undefined &&
+      user.linkedInUrl === undefined
+    ) {
+      setCheck(false);
+    }
+  }, []);
+
   const onSubmit = (data) => {
     trackPromise(
       axios
@@ -141,6 +157,7 @@ const Profile = () => {
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 disabled={check}
               >
+                <option value=""> </option>
                 <option value="1">1 </option>
                 <option value="2">2 </option>
                 <option value="1">3 </option>
@@ -156,7 +173,7 @@ const Profile = () => {
                 type="text"
                 class="form-control"
                 id="inputState"
-                placeholder="India"
+                placeholder=""
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.country}
                 {...register("country")}
@@ -170,7 +187,7 @@ const Profile = () => {
                 type="text"
                 class="form-control"
                 id="inputCity"
-                placeholder="Delhi"
+                placeholder=""
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.currentCity}
                 {...register("currentCity")}
@@ -191,10 +208,10 @@ const Profile = () => {
                 disabled={check}
               >
                 <option value={user.relocation === false ? false : true}>
-                  {user.relocation === true ? "No" : "Yes"}
+                  {user.relocation === true ? "No" : ""}
                 </option>
                 <option value={user.relocation === true ? true : false}>
-                  {user.relocation === true ? "Yes" : "No"}
+                  {user.relocation === true ? "Yes" : ""}
                 </option>
               </select>
             </div>
@@ -213,12 +230,12 @@ const Profile = () => {
                   value={user.typeOfJob == "Fulltime" ? "Fulltime" : "Parttime"}
                 >
                   {" "}
-                  {user.typeOfJob == "Fulltime" ? "Fulltime" : "Parttime"}{" "}
+                  {user.typeOfJob == "Fulltime" ? "Fulltime" : ""}{" "}
                 </option>
-                <option value={user.jobOfType == "C2C" ? "C2C" : "C2H"}>
+                <option value={user.jobOfType == "C2C" ? "C2C" : ""}>
                   {user.typeOfJob == "C2C" ? "C2C" : "C2H"}
                 </option>
-                <option value={user.jobOfType == "C2H" ? "C2H" : "C2C"}>
+                <option value={user.jobOfType == "C2H" ? "C2H" : ""}>
                   {user.typeOfJob == "C2H" ? "C2H" : "C2C"}
                 </option>
               </select>
@@ -240,10 +257,10 @@ const Profile = () => {
                 disabled={check}
               >
                 <option value={user.needVisaEmployer === false ? false : true}>
-                  {user.needVisaEmployer === false ? "No" : "Yes"}
+                  {user.needVisaEmployer === false ? "No" : ""}
                 </option>
                 <option value={user.needVisaEmployer === true ? true : false}>
-                  {user.needVisaEmployer === true ? "Yes" : "No"}
+                  {user.needVisaEmployer === true ? "Yes" : ""}
                 </option>
               </select>
             </div>
@@ -255,7 +272,7 @@ const Profile = () => {
                 type="number"
                 class="form-control"
                 id="inputCity"
-                placeholder="usd"
+                placeholder=""
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.expectedRateC2CorC2H}
                 {...register("expectedRateC2CorC2H")}
@@ -270,7 +287,7 @@ const Profile = () => {
               type="url"
               className="form-control"
               id="inputPhone"
-              placeholder="http://"
+              placeholder=""
               style={{ color: check === true ? "#7B7D7D" : "black" }}
               defaultValue={user.linkedInUrl}
               {...register("linkedInUrl")}
