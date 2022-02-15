@@ -58,7 +58,6 @@ export default function ForgetPassword() {
 
   const onSubmitOtp = (data) => {
     if (data.newpassword === data.cnfnewpassword) {
-<<<<<<< HEAD
       trackPromise(
         axios
           .post(ApiConstants.RESET_PASSWORD, {
@@ -73,20 +72,6 @@ export default function ForgetPassword() {
             setPasswordErrorMessage("Password not matched");
           })
       );
-=======
-      trackPromise(axios
-        .post(ApiConstants.RESET_PASSWORD, {
-          otpCode: data.otp,
-          password: data.newpassword,
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          setPasswordErrorMessage("Password not matched");
-        }));
-
->>>>>>> fa8ef84ff2525722e9cc7a3ae0c229b767304a90
     } else {
       setPasswordErrorMessage("Password not matched");
     }
