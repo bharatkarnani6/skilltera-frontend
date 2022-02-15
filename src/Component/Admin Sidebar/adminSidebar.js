@@ -85,7 +85,7 @@ export default function AdminSidebar() {
               >
                 <FiHome />
               </button>
-              <span> Candidate Admin Page</span>
+              <span> Company Admin Page</span>
             </li>
 
             <li class="list-group-item">
