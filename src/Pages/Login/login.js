@@ -37,6 +37,7 @@ const Login = () => {
           localStorage.setItem("candidate_data", JSON.stringify(response.data));
 
           localStorage.setItem("login", true);
+          localStorage.setItem("candidateDashboard", true);
 
           window.location.pathname = "/dashboard";
           // history.push('/dashboard')

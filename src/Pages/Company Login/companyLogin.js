@@ -34,6 +34,7 @@ export default function CompanyLogin() {
             JSON.stringify(response.data)
           );
           localStorage.setItem("login", true);
+          localStorage.setItem("companyDashboard", true);
 
           Swal.fire({
             title: "Please Wait !",
