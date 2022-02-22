@@ -19,30 +19,37 @@ export default function Jobs() {
     {
       name: "ID",
       cell: (row, index) => index + 1,
+      sortable: true,
     },
     {
       name: "Overall Exprience (Years)",
       selector: (row) => row.experience,
+      sortable: true,
     },
     {
       name: "Current Role",
       selector: (row) => row.currentRole,
+      sortable: true,
     },
     {
       name: "Current Client/Company",
       selector: (row) => row.currentCompany,
+      sortable: true,
     },
     {
       name: "Companies/Client worked with",
       selector: (row) => row.previousEmployers,
+      sortable: true,
     },
     {
       name: "Available In (Weeks)",
       selector: (row) => row.timeToJoin,
+      sortable: true,
     },
     {
       name: "Key Skill Areas",
       selector: (row) => row.knownTechnologies,
+      sortable: true,
     },
     {
       name: "Brief about experience/ skills / key aspects of projects",
@@ -61,18 +68,27 @@ export default function Jobs() {
           {row.experienceDescription}
         </ShowMoreText>
       ),
+      sortable: true,
     },
     {
       name: "Looking for",
       selector: (row) => row.typeOfJob,
+      sortable: true,
+    },
+    {
+      name: "Interested Role",
+      selector: (row) => row.interestedRole,
+      sortable: true,
     },
     {
       name: "Expected Salary per year / Rate per hour (C2H/C2C)",
       selector: (row) => row.expectedRateC2CorC2H,
+      sortable: true,
     },
     {
       name: "Open to relocation",
       selector: (row) => (row.relocation ? "Yes" : "No"),
+      sortable: true,
     },
     {
       name: "Selection",
@@ -83,6 +99,7 @@ export default function Jobs() {
           onClick={() => test(row)}
         />
       ),
+      sortable: true,
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
@@ -98,7 +115,7 @@ export default function Jobs() {
       .then((response) => {
         var dataTest = [];
         for (var i = 0; i < Object.keys(response.data.candidate).length; i++) {
-          if (Object.keys(response.data.candidate[i]).length > 8) {
+          if (Object.keys(response.data.candidate[i]).length > 10) {
             dataTest.push(response.data.candidate[i]);
           }
         }
@@ -106,6 +123,7 @@ export default function Jobs() {
           ...values,
           jobData: dataTest,
         });
+
       })
       .catch((err) => {
         console.log(err);
@@ -123,12 +141,11 @@ export default function Jobs() {
   const executeOnClick = () => {
     setIsExpanded(!isExpanded);
   };
-  const [selectedData, setSelectedData] = React.useState();
   const test = (data) => {
     console.log("clicked");
     console.log(data);
   };
-  //console.log(selectedData);
+
   return (
     <>
       <div className="table-responsive job-table">

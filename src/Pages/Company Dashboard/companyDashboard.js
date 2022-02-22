@@ -14,7 +14,7 @@ export default function CompanyDashboard() {
     (state) => state.sidebarMenuSelectionReducer
   );
   const data = JSON.parse(localStorage.getItem("company_loggedin_user_data"));
-  console.log(data);
+
 
   const logout = () => {
     localStorage.clear();
