@@ -59,7 +59,7 @@ const Home = () => {
             </div>
             <div className="col-lg-6 order-1 order-xl-2 ">
               <div className="for-developers-block fonts">
-                <h1 style={{ fontWeight: "900", fontSize: 'xx-large' }}>For Developers</h1>
+                <h1 style={{ fontWeight: "900", fontSize: 'xx-large' }}>For Job Seekers</h1>
                 <p>
                   Our highly experienced founders have felt that putting your
                   profile in known portals or applying for jobs does not really
