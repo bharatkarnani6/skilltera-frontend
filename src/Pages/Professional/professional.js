@@ -126,7 +126,7 @@ const Profile = () => {
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">
                 {" "}
-                Total Overall Experience
+                Overall experience(Years)
               </label>
 
               <input
@@ -157,7 +157,7 @@ const Profile = () => {
           <div class="row mt-1">
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">
-                Current Company/Client
+                Current Company / Client
               </label>
               <input
                 type="text"
@@ -173,7 +173,7 @@ const Profile = () => {
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">
                 {" "}
-                Enter Type of Role you are looking
+                Enter Type of Role you are looking for
               </label>
               <select
                 class="form-control"
@@ -194,7 +194,7 @@ const Profile = () => {
           <div class="row ">
             <div class="col-md-6 col-sm-6 ">
               <label for="exampleFormControlSelect1">
-                Technologies /Tools you are good
+                Technologies / Tools you are good at(comma seperated)
               </label>
               <input
                 type="text"
@@ -209,7 +209,7 @@ const Profile = () => {
 
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">
-                Enter Companies/Client you have worked for{" "}
+                Enter Companies / Client you have worked for{" "}
               </label>
               <input
                 type="text"
@@ -224,7 +224,7 @@ const Profile = () => {
 
           <div class="form-row ">
             <label for="exampleFormControlTextarea1">
-              Brief Description about your skill
+              Brief Description of experience / type of work done (in 300 words)
             </label>
             <textarea
               class="form-control"

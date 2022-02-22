@@ -141,6 +141,7 @@ const Profile = () => {
               <input
                 type="number"
                 className="form-control"
+                placeholder="xxx-xxx-xxxx"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.phone}
                 {...register("phone")}
@@ -149,19 +150,20 @@ const Profile = () => {
             </div>
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">
-                When can you join(week)
+                When can you join(weeks)
               </label>
               <select
                 class="form-control"
                 {...register("timeToJoin")}
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
+                style={{ color: check === true ? "#7B7D7D" : "gray" } }
                 disabled={check}
               >
-                <option value=""> </option>
+                <option value="" disabled selected hidden>Choose from 1,2,3,4 or 5</option>
                 <option value="1">1 </option>
                 <option value="2">2 </option>
-                <option value="1">3 </option>
-                <option value="2">4 </option>
+                <option value="3">3 </option>
+                <option value="4">4 </option>
+                <option value="5">5 </option>
               </select>
             </div>
           </div>
@@ -173,7 +175,7 @@ const Profile = () => {
                 type="text"
                 class="form-control"
                 id="inputState"
-                placeholder=""
+                placeholder="Enter your Country"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.country}
                 {...register("country")}
@@ -187,7 +189,7 @@ const Profile = () => {
                 type="text"
                 class="form-control"
                 id="inputCity"
-                placeholder=""
+                placeholder="Enter your current location or City"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.currentCity}
                 {...register("currentCity")}
@@ -198,7 +200,7 @@ const Profile = () => {
 
           <div class="row">
             <div class="col-md-6 col-sm-6">
-              <label for="exampleFormControlSelect1"> Open to relocate</label>
+              <label for="exampleFormControlSelect1"> Open to relocation</label>
 
               {/* /check */}
               <select
@@ -227,7 +229,7 @@ const Profile = () => {
                 disabled={check}
               >
                 <option
-                  value={user.typeOfJob == "Fulltime" ? "Fulltime" : "Parttime"}
+                  value={user.typeOfJob == "Fulltime" ? "Fulltime" : "C2C"}
                 >
                   {" "}
                   {user.typeOfJob == "Fulltime" ? "Fulltime" : ""}{" "}
@@ -247,7 +249,7 @@ const Profile = () => {
           <div class="row mt-3">
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">
-                Do you need visa Sponsorship ?
+                Do you need Visa Sponsorship?
               </label>
 
               <select
@@ -266,7 +268,7 @@ const Profile = () => {
             </div>
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">
-                Expected Rate for C2C/C2H
+                Expected Rate for C2C/C2H(USD)
               </label>
               <input
                 type="number"
@@ -282,7 +284,7 @@ const Profile = () => {
           </div>
 
           <div class="from-row mt-1">
-            <label for="exampleFormControlTextarea1">LinkedIn url</label>
+            <label for="exampleFormControlTextarea1">Your LinkedIn profile link</label>
             <input
               type="url"
               className="form-control"

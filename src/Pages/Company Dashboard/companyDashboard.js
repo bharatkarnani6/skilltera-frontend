@@ -39,7 +39,7 @@ export default function CompanyDashboard() {
               </div>
               <div className="col px-4 d-flex justify-content-end">
                 <h4 className="p-2" style={{ color: "white" }}>
-                  Hi Rakesh
+                  {data.company.companyName}
                 </h4>
               </div>
             </div>
