@@ -10,7 +10,7 @@ import Jobs from "../Jobs/jobs";
 
 //comment for presonal
 export default function Dashboard() {
-  const candidateData = JSON.parse(localStorage.getItem("candidate_data"));
+  const candidateData = JSON.parse(sessionStorage.getItem("candidate_data"));
 
   console.log(candidateData);
 
@@ -21,7 +21,7 @@ export default function Dashboard() {
   );
 
   const logout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.pathname = "/";
   };
 

@@ -41,8 +41,8 @@ export default function UpdateCandidateAdmin(props) {
 
     useEffect(() => {
         candidateData();
-        setAdminId(JSON.parse(localStorage.getItem('ADMIN')).admin._id);
-        setToken(JSON.parse(localStorage.getItem('ADMIN')).token)
+        setAdminId(JSON.parse(sessionStorage.getItem('ADMIN')).admin._id);
+        setToken(JSON.parse(sessionStorage.getItem('ADMIN')).token)
     }, [props.candidateId])
 
     const onSubmit = (data) => {

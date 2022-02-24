@@ -19,7 +19,7 @@ const Profile = () => {
 
   const [check, setCheck] = useState(true);
 
-  const candidateData = JSON.parse(localStorage.getItem("candidate_data"));
+  const candidateData = JSON.parse(sessionStorage.getItem("candidate_data"));
 
   const token = candidateData.token;
 

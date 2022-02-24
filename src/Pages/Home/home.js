@@ -10,14 +10,14 @@ const Home = () => {
   const [candidateDashboardActive, setcandidateDashboardActive] = useState(false);
   const [companyDashboardActive, setcompanyDashboardActive] = useState(false);
 
-  //const candidateData = JSON.parse(localStorage.getItem("candidate_data"));
+  //const candidateData = JSON.parse(sessionStorage.getItem("candidate_data"));
   // console.log(candidateData.message);
   useEffect(() => {
-    if (localStorage.getItem("candidateDashboard") == 'true') {
-      setcandidateDashboardActive(localStorage.getItem('candidateDashboard'));
+    if (sessionStorage.getItem("candidateDashboard") == 'true') {
+      setcandidateDashboardActive(sessionStorage.getItem('candidateDashboard'));
     }
-    if (localStorage.getItem("companyDashboard") == 'true') {
-      setcompanyDashboardActive(localStorage.getItem('companyDashboard'));
+    if (sessionStorage.getItem("companyDashboard") == 'true') {
+      setcompanyDashboardActive(sessionStorage.getItem('companyDashboard'));
     }
   }, [])
 

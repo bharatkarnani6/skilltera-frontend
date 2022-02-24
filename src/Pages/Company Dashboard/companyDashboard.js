@@ -13,11 +13,11 @@ export default function CompanyDashboard() {
   const titleSelection = useSelector(
     (state) => state.sidebarMenuSelectionReducer
   );
-  const data = JSON.parse(localStorage.getItem("company_loggedin_user_data"));
+  const data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data"));
 
 
   const logout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.pathname = "/";
   };
 

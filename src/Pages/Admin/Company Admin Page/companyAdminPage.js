@@ -19,8 +19,8 @@ export default function CompanyAdminPage() {
   const [id, setId] = useState("");
   const [token, setToken] = useState("");
   useEffect(() => {
-    setId(JSON.parse(localStorage.getItem("ADMIN")).admin._id);
-    setToken(JSON.parse(localStorage.getItem("ADMIN")).token);
+    setId(JSON.parse(sessionStorage.getItem("ADMIN")).admin._id);
+    setToken(JSON.parse(sessionStorage.getItem("ADMIN")).token);
   }, []);
   const onSubmit = (data) => {
     console.log("id", id);

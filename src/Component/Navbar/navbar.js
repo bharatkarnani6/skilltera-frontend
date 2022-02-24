@@ -4,22 +4,22 @@ import Logo from '../../Assets/skilltera_logo.png'
 import './navbar.css'
 const Navbar = () => {
 
-  // const candidateData = localStorage.getItem('candidate_data')
-  // const adminData = localStorage.getItem('ADMIN')
-  // const companyData = localStorage.getItem('company_loggedin_user_data')
+  // const candidateData = sessionStorage.getItem('candidate_data')
+  // const adminData = sessionStorage.getItem('ADMIN')
+  // const companyData = sessionStorage.getItem('company_loggedin_user_data')
 
   const [candidateData, setCandidateData] = useState(false);
   const [adminData, setAdminData] = useState(false);
   const [companyData, setCompanyData] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem('candidate_data') != null) {
+    if (sessionStorage.getItem('candidate_data') != null) {
       setCandidateData(true)
     }
-    if (localStorage.getItem('ADMIN') != null) {
+    if (sessionStorage.getItem('ADMIN') != null) {
       setAdminData(true)
     }
-    if (localStorage.getItem('company_loggedin_user_data') != null) {
+    if (sessionStorage.getItem('company_loggedin_user_data') != null) {
       setCompanyData(true)
     }
   }, [])

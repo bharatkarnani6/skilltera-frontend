@@ -38,7 +38,7 @@ export default function CompanySidebar() {
   };
 
   const logout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.pathname = "/";
   };
 

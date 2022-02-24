@@ -18,8 +18,8 @@ export default function CandidateAdminSignup() {
   const [id, setId] = useState("");
   const [token, setToken] = useState("");
   useEffect(() => {
-    setId(JSON.parse(localStorage.getItem("ADMIN")).admin._id);
-    setToken(JSON.parse(localStorage.getItem("ADMIN")).token);
+    setId(JSON.parse(sessionStorage.getItem("ADMIN")).admin._id);
+    setToken(JSON.parse(sessionStorage.getItem("ADMIN")).token);
   }, []);
   const onSubmit = (data) => {
     console.log("id", id);
@@ -117,7 +117,7 @@ export default function CandidateAdminSignup() {
                 pattern: {
                   value:
                     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                  message: <p>invalid email</p>,
+                  message: "Entered value does not match email format",
                 },
               })}
             />

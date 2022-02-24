@@ -34,10 +34,10 @@ const Login = () => {
         .then((response) => {
           console.log(response.data);
 
-          localStorage.setItem("candidate_data", JSON.stringify(response.data));
+          sessionStorage.setItem("candidate_data", JSON.stringify(response.data));
 
-          localStorage.setItem("login", true);
-          localStorage.setItem("candidateDashboard", true);
+          sessionStorage.setItem("login", true);
+          sessionStorage.setItem("candidateDashboard", true);
 
           window.location.pathname = "/dashboard";
           // history.push('/dashboard')

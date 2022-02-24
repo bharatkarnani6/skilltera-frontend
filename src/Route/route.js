@@ -1,4 +1,4 @@
-import react from "react";
+import react, { useEffect, useState } from "react";
 import { Switch, Route, Router } from "react-router-dom";
 import Home from "../Pages/Home/home";
 import Login from "../Pages/Login/login";
@@ -42,6 +42,7 @@ export default function Routes() {
         <Route exact path="/company_login">
           <CompanyLogin />
         </Route>
+
         <Route exact path="/admin">
           <Admin />
         </Route>
