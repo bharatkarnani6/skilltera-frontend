@@ -42,9 +42,9 @@ const Navbar = () => {
               <li class="nav-item">
                 <a class="nav-link px-4 fonts"><NavLink exact to='/about' class="navItem" >About Us </NavLink></a>
               </li>
-              <li class="nav-item">
+              {/* <li class="nav-item">
                 <a class="nav-link px-4 fonts"><NavLink exact to='/blog' class="navItem" >Blog</NavLink></a>
-              </li>
+              </li> */}
               <li class="nav-item">
                 <a class="nav-link px-4 fonts"><NavLink exact to='/contact' activeStyle={{ color: "red" }}>Contact Us</NavLink></a>
               </li>
