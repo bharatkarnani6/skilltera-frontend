@@ -1,4 +1,4 @@
-import react, { useEffect, useRef } from "react";
+import react, { useEffect, useRef, useState } from "react";
 import "./companyLogin.css";
 import Navbar from "../../Component/Navbar/navbar";
 import { useForm } from "react-hook-form";
@@ -10,8 +10,10 @@ import { trackPromise, usePromiseTracker } from "react-promise-tracker";
 
 export default function CompanyLogin() {
   const { promiseInProgress } = usePromiseTracker();
+  const [values, setValues] = useState({
+    companyList: {},
+  });
 
-  const companyList = ["Netflix", "Google", "Meta", "SkillTera"];
   const {
     register,
     handleSubmit,
@@ -19,6 +21,25 @@ export default function CompanyLogin() {
   } = useForm({
     mode: "onChange",
   });
+
+  const companyUserList = () => {
+    axios
+      .get(ApiConstants.COMPANY_DATA)
+      .then((response) => {
+        setValues({
+          ...values, companyList:
+            response.data.company.filter((v, i, a) => a.findIndex(t => ['companyName'].every(k => t[k] === v[k])) === i)
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    companyUserList();
+
+  }, [])
+
   const onSubmit = (data) => {
     console.log(data);
     trackPromise(
@@ -35,64 +56,22 @@ export default function CompanyLogin() {
           );
           localStorage.setItem("login", true);
           localStorage.setItem("companyDashboard", true);
-
-          Swal.fire({
-            title: "Please Wait !",
-            html: "data loading", // add html attribute if you want or remove
-            allowOutsideClick: true,
-            didOpen: () => {
-              Swal.showLoading();
-            },
-          });
-
           window.location.pathname = "/companyDashboard";
         })
         .catch((error) => {
-          if (error.message === "Network Error") {
-            let timerInterval;
+          if (error.message === "Request failed with status code 400") {
             Swal.fire({
-              title: "Please Wait",
-              timer: 2500,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading();
-                timerInterval = setInterval(() => {
-                  Swal.getTimerLeft();
-                }, 50);
-              },
-              willClose: () => {
-                clearInterval(timerInterval);
-              },
-            }).then((result) => {
-              Swal.fire({
-                title: "Backend not connected",
-                icon: "info",
-                width: 400,
-                height: 100,
-              });
+              title: error.response.data.error,
+              icon: "info",
+              width: 400,
+              height: 100,
             });
-          } else {
-            let timerInterval;
+          } else if (error.message === "Network Error") {
             Swal.fire({
-              title: "Please Wait",
-              timer: 2500,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading();
-                timerInterval = setInterval(() => {
-                  Swal.getTimerLeft();
-                }, 50);
-              },
-              willClose: () => {
-                clearInterval(timerInterval);
-              },
-            }).then((result) => {
-              Swal.fire({
-                title: error.response.data.error,
-                icon: "info",
-                width: 400,
-                height: 100,
-              });
+              title: "Backend not connected",
+              icon: "info",
+              width: 400,
+              height: 100,
             });
           }
         })
@@ -107,6 +86,7 @@ export default function CompanyLogin() {
   const handleClick = () => {
     formRef.current.reset();
   };
+
 
   return (
     <div>
@@ -143,13 +123,15 @@ export default function CompanyLogin() {
             <input
               className="form-control"
               list="datalistOptions"
-              id="exampleDataList"
+
               placeholder="Type to search..."
               {...register("company_name", { required: true })}
+
             />
-            <datalist id="datalistOptions">
-              {companyList.map((d, i) => {
-                return <option key={i} value={d} />;
+            <datalist id="datalistOptions" style={{ 'width': '300%' }}>
+              {Object.keys(values.companyList).map((d, i) => {
+                return <option key={i} value={values.companyList[d].companyName} />;
+                console.log(values.companyList[d].companyName);
               })}
             </datalist>
             <p style={{ color: "red" }}>
