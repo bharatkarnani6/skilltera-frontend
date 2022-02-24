@@ -50,12 +50,12 @@ export default function CompanyLogin() {
           password: data.password,
         })
         .then((response) => {
-          localStorage.setItem(
+          sessionStorage.setItem(
             "company_loggedin_user_data",
             JSON.stringify(response.data)
           );
-          localStorage.setItem("login", true);
-          localStorage.setItem("companyDashboard", true);
+          sessionStorage.setItem("login", true);
+          sessionStorage.setItem("companyDashboard", true);
           window.location.pathname = "/companyDashboard";
         })
         .catch((error) => {

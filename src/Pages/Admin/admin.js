@@ -31,70 +31,26 @@ export default function Admin() {
         })
         .then((response) => {
           console.log(response.data);
-          localStorage.setItem("ADMIN", JSON.stringify(response.data));
-          localStorage.setItem("login", true);
-
-          // Swal.fire({
-          //   title: response.data.message,
-          //   html: "Verifiying Detail", // add html attribute if you want or remove
-          //   allowOutsideClick: true,
-          //   allowEscapeKey: true,
-          //   allowEnterKey: true,
-
-          //   didOpen: () => {
-          //     Swal.showLoading();
-          //   },
-          //   icon: "success",
-          // });
+          sessionStorage.setItem("ADMIN", JSON.stringify(response.data));
+          sessionStorage.setItem("login", true);
+          sessionStorage.setItem("adminDashboard", true);
 
           window.location.pathname = "/adminDashboard";
         })
         .catch((error) => {
-          if (error.message === "Network Error") {
-            let timerInterval;
+          if (error.message === "Request failed with status code 400") {
             Swal.fire({
-              title: "Please Wait",
-              timer: 2500,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading();
-                timerInterval = setInterval(() => {
-                  Swal.getTimerLeft();
-                }, 50);
-              },
-              willClose: () => {
-                clearInterval(timerInterval);
-              },
-            }).then((result) => {
-              Swal.fire({
-                title: "Backend not connected",
-                icon: "info",
-                width: 400,
-                height: 100,
-              });
+              title: error.response.data.error,
+              icon: "info",
+              width: 400,
+              height: 100,
             });
-          } else if (error.message === "Request failed with status code 400") {
-            let timerInterval;
+          } else if (error.message === "Network Error") {
             Swal.fire({
-              title: "Please Wait",
-              timer: 2500,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading();
-                timerInterval = setInterval(() => {
-                  Swal.getTimerLeft();
-                }, 50);
-              },
-              willClose: () => {
-                clearInterval(timerInterval);
-              },
-            }).then((result) => {
-              Swal.fire({
-                title: error.response.data.error,
-                icon: "info",
-                width: 400,
-                height: 100,
-              });
+              title: "Backend not connected",
+              icon: "info",
+              width: 400,
+              height: 100,
             });
           }
         })

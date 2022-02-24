@@ -19,7 +19,7 @@ const Profile = () => {
 
   const [check, setCheck] = useState(true);
 
-  const candidateData = JSON.parse(localStorage.getItem("candidate_data"));
+  const candidateData = JSON.parse(sessionStorage.getItem("candidate_data"));
 
   const token = candidateData.token;
 
@@ -155,7 +155,7 @@ const Profile = () => {
               <select
                 class="form-control"
                 {...register("timeToJoin")}
-                style={{ color: check === true ? "#7B7D7D" : "gray" } }
+                style={{ color: check === true ? "#7B7D7D" : "gray" }}
                 disabled={check}
               >
                 <option value="" disabled selected hidden>Choose from 1,2,3,4 or 5</option>
@@ -304,7 +304,7 @@ const Profile = () => {
                 className="btn btn-primary active"
                 disabled={check}
 
-                // aria-disabled="true"
+              // aria-disabled="true"
               >
                 Save
               </button>
