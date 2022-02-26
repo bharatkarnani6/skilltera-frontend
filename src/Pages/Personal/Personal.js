@@ -207,11 +207,11 @@ const Profile = () => {
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 disabled={check}
               >
-                <option value={user.relocation === false ? false : true}>
-                  {user.relocation === true ? "No" : ""}
-                </option>
                 <option value={user.relocation === true ? true : false}>
-                  {user.relocation === true ? "Yes" : ""}
+                  {user.relocation === true ? "Yes" : "No"}
+                </option>
+                <option value={user.relocation === false ? false : true}>
+                  {user.relocation === true ? "No" : "Yes"}
                 </option>
               </select>
             </div>
