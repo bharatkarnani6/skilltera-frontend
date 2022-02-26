@@ -25,7 +25,27 @@ const Profile = () => {
 
   const userId = candidateData.candidate._id;
 
-  const user = candidateData.candidate;
+  //const user = candidateData.candidate;
+
+  const [user, setUser] = useState([]);
+
+  const getData = async () => {
+    await axios
+      .get(ApiConstants.CANDIDATE_DATA_BY_ID + "/" + `${userId}`)
+      .then((response) => {
+        console.log(response);
+        setUser(response);
+      })
+      .catch((err) => {
+        console.log("page not found");
+      });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  console.log("user : ", user);
 
   useEffect(() => {
     if (
@@ -57,12 +77,14 @@ const Profile = () => {
             interestedRole: data.interestedRole,
           },
           {
-            Accept: "application/json",
-            "Content-type": "application/json",
-            token: token,
-            _id: userId,
-            "Access-Control-Allow-Origin": true,
-            "Access-Control-Allow-Methods": "GET, POST, PATCH",
+            headers: {
+              Accept: "application/json",
+              "Content-type": "application/json",
+              token: token,
+              _id: userId,
+              "Access-Control-Allow-Origin": true,
+              "Access-Control-Allow-Methods": "GET, POST, PATCH",
+            },
           }
         )
         .then((response) => {

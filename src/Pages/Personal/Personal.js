@@ -20,12 +20,20 @@ const Profile = () => {
   const [check, setCheck] = useState(true);
 
   const candidateData = JSON.parse(localStorage.getItem("candidate_data"));
-
   const token = candidateData.token;
-
   const userId = candidateData.candidate._id;
 
-  const user = candidateData.candidate;
+  const [user, setUser] = useState([]);
+
+  useEffect(async () => {
+    const result = await axios
+      .get(ApiConstants.CANDIDATE_DATA_BY_ID + "/" + `${userId}`)
+      .then((response) => {
+        console.log("userdata : ", response);
+      });
+
+    setUser(result.candidate);
+  });
 
   useEffect(() => {
     if (
@@ -60,12 +68,14 @@ const Profile = () => {
             expectedRateC2CorC2H: data.expectedRateC2CorC2H,
           },
           {
-            Accept: "application/json",
-            "Content-type": "application/json",
-            token: token,
-            _id: userId,
-            "Access-Control-Allow-Origin": true,
-            "Access-Control-Allow-Methods": "GET, POST, PATCH",
+            headers: {
+              Accept: "application/json",
+              "Content-type": "application/json",
+              token: token,
+              _id: userId,
+              "Access-Control-Allow-Origin": true,
+              "Access-Control-Allow-Methods": "GET, POST, PATCH",
+            },
           }
         )
         .then((response) => {
@@ -227,16 +237,21 @@ const Profile = () => {
                 disabled={check}
               >
                 <option
-                  value={user.typeOfJob == "Fulltime" ? "Fulltime" : "Parttime"}
+                  value={user.jobOfType === "Fulltime" ? "Fulltime" : "Partime"}
                 >
-                  {" "}
-                  {user.typeOfJob == "Fulltime" ? "Fulltime" : ""}{" "}
+                  {user.typeOfJob === "Fulltme" ? "Fulltime" : "Partime"}
                 </option>
-                <option value={user.jobOfType == "C2C" ? "C2C" : ""}>
+                <option value={user.jobOfType === "C2C" ? "C2C" : ""}>
                   {user.typeOfJob == "C2C" ? "C2C" : "C2H"}
                 </option>
-                <option value={user.jobOfType == "C2H" ? "C2H" : ""}>
+
+                <option value={user.jobOfType === "C2H" ? "C2H" : ""}>
                   {user.typeOfJob == "C2H" ? "C2H" : "C2C"}
+                </option>
+                <option
+                  value={user.jobOfType === "Partime" ? "Partime" : "Fulltime"}
+                >
+                  {user.typeOfJob === "Partime" ? "Partime" : "Fulltime"}
                 </option>
               </select>
             </div>
@@ -257,10 +272,10 @@ const Profile = () => {
                 disabled={check}
               >
                 <option value={user.needVisaEmployer === false ? false : true}>
-                  {user.needVisaEmployer === false ? "No" : ""}
+                  {user.needVisaEmployer === false ? "No" : "Yes"}
                 </option>
                 <option value={user.needVisaEmployer === true ? true : false}>
-                  {user.needVisaEmployer === true ? "Yes" : ""}
+                  {user.needVisaEmployer === true ? "Yes" : "No"}
                 </option>
               </select>
             </div>

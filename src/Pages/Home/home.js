@@ -14,7 +14,9 @@ const Home = () => {
           <div className="row">
             <div className="col-lg-6">
               <div className="for-companies-block fonts">
-                <h1 style={{ fontWeight: "900", fontSize: 'xx-large' }}>For Companies</h1>
+                <h1 style={{ fontWeight: "900", fontSize: "xx-large" }}>
+                  For Companies
+                </h1>
                 <p>
                   There are many portals where you can get a list of candidates
                   and job portals to list your jobs with a hope that right
@@ -23,9 +25,12 @@ const Home = () => {
                   talent pipeline for in demand skills, then please try
                   Skilltera and let us know how we can help better?
                 </p>
-                <Link to="/company_login"><button className="btn btn-primary btn-lg">Sign Up</button></Link>
+                <Link to="/company_login">
+                  <button className="btn btn-primary btn-lg">
+                    Signup/Sign-in
+                  </button>
+                </Link>
               </div>
-
             </div>
             <div className="col-lg-6">
               <div className="banner-image">
@@ -43,7 +48,9 @@ const Home = () => {
             </div>
             <div className="col-lg-6 order-1 order-xl-2 ">
               <div className="for-developers-block fonts">
-                <h1 style={{ fontWeight: "900", fontSize: 'xx-large' }}>For Developers</h1>
+                <h1 style={{ fontWeight: "900", fontSize: "xx-large" }}>
+                  For Developers
+                </h1>
                 <p>
                   Our highly experienced founders have felt that putting your
                   profile in known portals or applying for jobs does not really
@@ -55,7 +62,11 @@ const Home = () => {
                   explore the upcoming features that will be shared first with
                   those who join us by March 2022
                 </p>
-                <Link to="/login"><button className="btn btn-primary btn-lg">Sign Up</button></Link>
+                <Link to="/login">
+                  <button className="btn btn-primary btn-lg">
+                    Signup/Sign-in
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -104,7 +115,7 @@ const Home = () => {
 
         </div> */}
       </div>
-    </div >
+    </div>
   );
 };
 
