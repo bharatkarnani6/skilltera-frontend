@@ -20,7 +20,7 @@ export default function AdminDashboard() {
   );
 
   const logout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.pathname = "/";
   };
 
