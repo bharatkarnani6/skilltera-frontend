@@ -237,13 +237,13 @@ const Profile = () => {
             />
           </div>
 
-          <div class="btn-group mt-3" role="group" aria-label="Basic example">
+          <div
+            class="btn-group mt-3 ml-3 w-50"
+            role="group"
+            aria-label="Basic example"
+          >
             {check ? (
-              <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={check}
-              >
+              <button type="submit" className="btn btn-light" disabled={check}>
                 Save
               </button>
             ) : (
