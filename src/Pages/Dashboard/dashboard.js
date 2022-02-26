@@ -47,9 +47,12 @@ export default function Dashboard() {
                 </h4>
               </div>
             </div>
+
+            {titleSelection.menuSelection === "Dashboard" ? <Personal /> : " "}
+
             {(() => {
               switch (titleSelection.menuSelection) {
-                case "Personal Info":
+                case "Personal Info" || "Dashboard":
                   return <Personal />;
                 case "Professional Info":
                   return <Professional />;
