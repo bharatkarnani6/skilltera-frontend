@@ -59,6 +59,7 @@ export default function CompanyLogin() {
           window.location.pathname = "/companyDashboard";
         })
         .catch((error) => {
+          console.log(error);
           if (error.message === "Request failed with status code 400") {
             Swal.fire({
               title: error.response.data.error,
@@ -87,6 +88,7 @@ export default function CompanyLogin() {
     formRef.current.reset();
   };
 
+  console.log(values.companyList);
 
   return (
     <div>
