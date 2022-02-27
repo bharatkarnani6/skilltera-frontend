@@ -164,7 +164,7 @@ export default function Signup(props) {
                 {...register("fullname", { required: true, minLength: 3 })}
               />
               {errors.fullname && (
-                <p style={{ color: "red" }}>Enter valide name min length 3</p>
+                <p style={{ color: "red" }}>Enter valid name minimum 3 letters</p>
               )}
               {/* <p style={{ 'color': 'red' }}>{errors.fullname?.type === 'required' && "Full Name is required"}</p> */}
             </div>
@@ -180,7 +180,7 @@ export default function Signup(props) {
                   pattern: {
                     value:
                       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: <p>invalid email</p>,
+                    message: <p>Invalid Email</p>,
                   },
                 })}
               />
@@ -204,7 +204,7 @@ export default function Signup(props) {
               />
               {errors.password && (
                 <p style={{ color: "red" }}>
-                  Enter the strong password{" "}
+                  Please enter the password{" "}
                   <button onClick={showHint} className="showHint">
                     {" "}
                     <FcAbout />
@@ -233,7 +233,7 @@ export default function Signup(props) {
 
             <div className="row ">
               <p className="pt-3 d-flex justify-content-center">
-                Already on LinkedIn?{" "}
+                Already on Skilltera?{" "}
                 <NavLink to="/login" style={{ color: "#9b51e0" }}>
                   Sign in{" "}
                 </NavLink>

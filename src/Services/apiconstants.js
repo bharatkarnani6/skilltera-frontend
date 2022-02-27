@@ -21,5 +21,6 @@ const ApiConstants = {
   CANDIDATE_DATA_BY_ID: `${baseUrl}/candidate/`,
   ADMIN_CANDIDATE_UPDATE: `${baseUrl}/admin/candidate/update`,
   PROFILE: `${baseUrl}/profile`,
+  ADMIN_COMPANY_PASSWORD_RESET: `${baseUrl}/admin/company/reset`,
 };
 export default ApiConstants;

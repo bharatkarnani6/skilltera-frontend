@@ -20,7 +20,7 @@ export default function AdminDashboard() {
   );
 
   const logout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.pathname = "/";
   };
 
@@ -42,7 +42,7 @@ export default function AdminDashboard() {
               </div>
               <div className="col px-4 d-flex justify-content-end">
                 <h4 className="p-2" style={{ color: "white" }}>
-                  Hi Rakesh
+                  Hi Admin
                 </h4>
               </div>
             </div>

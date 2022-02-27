@@ -13,11 +13,11 @@ export default function CompanyDashboard() {
   const titleSelection = useSelector(
     (state) => state.sidebarMenuSelectionReducer
   );
-  const data = JSON.parse(localStorage.getItem("company_loggedin_user_data"));
-  console.log(data);
+  const data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data"));
+
 
   const logout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.pathname = "/";
   };
 
@@ -39,7 +39,7 @@ export default function CompanyDashboard() {
               </div>
               <div className="col px-4 d-flex justify-content-end">
                 <h4 className="p-2" style={{ color: "white" }}>
-                  Hi Rakesh
+                  {data.company.companyName}
                 </h4>
               </div>
             </div>

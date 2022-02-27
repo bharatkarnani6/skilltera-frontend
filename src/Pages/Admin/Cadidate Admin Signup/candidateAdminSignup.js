@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import react, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import ApiConstants from "../../../Services/apiconstants";
@@ -10,6 +10,11 @@ import { trackPromise, usePromiseTracker } from "react-promise-tracker";
 
 export default function CandidateAdminSignup() {
   const { promiseInProgress } = usePromiseTracker();
+  const formRef = useRef();
+
+  const handleClick = () => {
+    formRef.current.reset();
+  };
   const {
     register,
     handleSubmit,
@@ -18,8 +23,8 @@ export default function CandidateAdminSignup() {
   const [id, setId] = useState("");
   const [token, setToken] = useState("");
   useEffect(() => {
-    setId(JSON.parse(localStorage.getItem("ADMIN")).admin._id);
-    setToken(JSON.parse(localStorage.getItem("ADMIN")).token);
+    setId(JSON.parse(sessionStorage.getItem("ADMIN")).admin._id);
+    setToken(JSON.parse(sessionStorage.getItem("ADMIN")).token);
   }, []);
   const onSubmit = (data) => {
     console.log("id", id);
@@ -55,17 +60,16 @@ export default function CandidateAdminSignup() {
           });
         })
         .catch((error) => {
-          if ("Backend Not Connected") {
+          if (error.message === "Request failed with status code 500") {
             Swal.fire({
-              title: "Backend Not Connected",
+              title: error.response.data.error,
               icon: "info",
               width: 400,
               height: 100,
             });
-          } else if (error.response.status == "500") {
-            console.log(error.response.status);
+          } else if (error.message === "Network Error") {
             Swal.fire({
-              title: error.response.data.message,
+              title: "Backend not connected",
               icon: "info",
               width: 400,
               height: 100,
@@ -90,7 +94,7 @@ export default function CandidateAdminSignup() {
         <h2 className="d-flex justify-content-center">
           Candidate Admin Signup
         </h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
           <div className="mb-3">
             <label className="form-label">Full Name</label>
             <input
@@ -117,7 +121,7 @@ export default function CandidateAdminSignup() {
                 pattern: {
                   value:
                     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                  message: <p>invalid email</p>,
+                  message: "Entered value does not match email format",
                 },
               })}
             />
@@ -143,7 +147,7 @@ export default function CandidateAdminSignup() {
             {/* <p style={{ 'color': 'red' }}>  {errors.password?.type === 'required' && "Password is required" }  </p> */}
           </div>
           <div className="row mt-2 ml-2">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" onClick={handleClick}>
               Create
             </button>
           </div>

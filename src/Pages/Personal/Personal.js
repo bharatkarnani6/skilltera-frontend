@@ -19,7 +19,12 @@ const Profile = () => {
 
   const [check, setCheck] = useState(false);
 
+<<<<<<< HEAD
   const candidateData = JSON.parse(localStorage.getItem("candidate_data"));
+=======
+  const candidateData = JSON.parse(sessionStorage.getItem("candidate_data"));
+
+>>>>>>> 28151f519b5e28a4a73bb89eafb71e93cffa810f
   const token = candidateData.token;
   const userId = candidateData.candidate._id;
 
@@ -129,6 +134,7 @@ const Profile = () => {
               <input
                 type="number"
                 className="form-control"
+                placeholder="xxx-xxx-xxxx"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.phone}
                 {...register("phone")}
@@ -137,19 +143,28 @@ const Profile = () => {
             </div>
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">
-                When can you join(week)
+                When can you join(weeks)
               </label>
               <select
                 class="form-control"
                 {...register("timeToJoin")}
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
+                style={{ color: check === true ? "#7B7D7D" : "gray" }}
                 disabled={check}
               >
+<<<<<<< HEAD
                 <option> {user.timeToJoin} </option>
                 <option value={1}>1 </option>
                 <option value={2}>2 </option>
                 <option value={3}>3 </option>
                 <option value={4}>4 </option>
+=======
+                <option value="" disabled selected hidden>Choose from 1,2,3,4 or 5</option>
+                <option value="1">1 </option>
+                <option value="2">2 </option>
+                <option value="3">3 </option>
+                <option value="4">4 </option>
+                <option value="5">5 </option>
+>>>>>>> 28151f519b5e28a4a73bb89eafb71e93cffa810f
               </select>
             </div>
           </div>
@@ -161,7 +176,7 @@ const Profile = () => {
                 type="text"
                 class="form-control"
                 id="inputState"
-                placeholder=""
+                placeholder="Enter your Country"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.country}
                 {...register("country")}
@@ -175,7 +190,7 @@ const Profile = () => {
                 type="text"
                 class="form-control"
                 id="inputCity"
-                placeholder=""
+                placeholder="Enter your current location or City"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.currentCity}
                 {...register("currentCity")}
@@ -186,7 +201,13 @@ const Profile = () => {
 
           <div class="row">
             <div class="col-md-6 col-sm-6">
+<<<<<<< HEAD
               <label for="exampleFormControlSelect1"> Open to relocate</label>
+=======
+              <label for="exampleFormControlSelect1"> Open to relocation</label>
+
+              {/* /check */}
+>>>>>>> 28151f519b5e28a4a73bb89eafb71e93cffa810f
               <select
                 class="form-control"
                 {...register("relocation")}
@@ -209,11 +230,26 @@ const Profile = () => {
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 disabled={check}
               >
+<<<<<<< HEAD
                 <option> {user.typeOfJob} </option>
                 <option value="Fulltime"> Fulltime</option>
                 <option value="C2C"> C2C </option>
                 <option value="C2H"> C2H </option>
                 <option value="Parttime"> Parttime </option>
+=======
+                <option
+                  value={user.typeOfJob == "Fulltime" ? "Fulltime" : "C2C"}
+                >
+                  {" "}
+                  {user.typeOfJob == "Fulltime" ? "Fulltime" : ""}{" "}
+                </option>
+                <option value={user.jobOfType == "C2C" ? "C2C" : ""}>
+                  {user.typeOfJob == "C2C" ? "C2C" : "C2H"}
+                </option>
+                <option value={user.jobOfType == "C2H" ? "C2H" : ""}>
+                  {user.typeOfJob == "C2H" ? "C2H" : "C2C"}
+                </option>
+>>>>>>> 28151f519b5e28a4a73bb89eafb71e93cffa810f
               </select>
             </div>
           </div>
@@ -223,7 +259,7 @@ const Profile = () => {
           <div class="row mt-3">
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">
-                Do you need visa Sponsorship ?
+                Do you need Visa Sponsorship?
               </label>
 
               <select
@@ -239,7 +275,7 @@ const Profile = () => {
             </div>
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">
-                Expected Rate for C2C/C2H
+                Expected Rate for C2C/C2H(USD)
               </label>
               <input
                 type="number"
@@ -255,7 +291,7 @@ const Profile = () => {
           </div>
 
           <div class="from-row mt-1">
-            <label for="exampleFormControlTextarea1">LinkedIn url</label>
+            <label for="exampleFormControlTextarea1">Your LinkedIn profile link</label>
             <input
               type="url"
               className="form-control"
@@ -273,7 +309,17 @@ const Profile = () => {
             aria-label="Basic example"
           >
             {check ? (
+<<<<<<< HEAD
               <button type="submit" className="btn btn-light" disabled={check}>
+=======
+              <button
+                type="submit"
+                className="btn btn-primary active"
+                disabled={check}
+
+              // aria-disabled="true"
+              >
+>>>>>>> 28151f519b5e28a4a73bb89eafb71e93cffa810f
                 Save
               </button>
             ) : (

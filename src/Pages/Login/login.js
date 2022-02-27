@@ -34,9 +34,10 @@ const Login = () => {
         .then((response) => {
           console.log(response.data);
 
-          localStorage.setItem("candidate_data", JSON.stringify(response.data));
+          sessionStorage.setItem("candidate_data", JSON.stringify(response.data));
 
-          localStorage.setItem("login", true);
+          sessionStorage.setItem("login", true);
+          sessionStorage.setItem("candidateDashboard", true);
 
           window.location.pathname = "/dashboard";
           // history.push('/dashboard')
@@ -113,7 +114,7 @@ const Login = () => {
               id="password"
               className="form-control"
               {...register("password", {
-                required: "password is required",
+                required: "Please Enter Password",
               })}
               type="password"
             />
@@ -135,7 +136,7 @@ const Login = () => {
         <div className="row">
           <div className="col-6">
             <p className="pt-3" style={{ color: "#9b51e0" }}>
-              <NavLink to="/forgotPassword"> Forgot Password </NavLink>
+              <NavLink to="/forgotPassword"> Forget Password </NavLink>
             </p>
           </div>
           <div className="col-6">
