@@ -17,15 +17,30 @@ const Profile = () => {
     setValue,
   } = useForm();
 
-  const [check, setCheck] = useState(true);
+  const [check, setCheck] = useState(false);
 
-  const candidateData = JSON.parse(sessionStorage.getItem("candidate_data"));
-
+  const candidateData = JSON.parse(localStorage.getItem("candidate_data"));
   const token = candidateData.token;
-
   const userId = candidateData.candidate._id;
 
-  const user = candidateData.candidate;
+  // const user = candidateData.candidate;
+
+  const [user, setUser] = useState([]);
+
+  const getData = async () => {
+    await axios
+      .get(ApiConstants.CANDIDATE_DATA_BY_ID + `${userId}`)
+      .then((response) => {
+        setUser(response.data.candidate);
+      })
+      .catch((error) => {
+        console.log("Data can not fetched");
+      });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   useEffect(() => {
     if (
@@ -35,11 +50,11 @@ const Profile = () => {
       user.relocation === undefined &&
       user.typeOfJob === undefined &&
       user.timeToJoin === undefined &&
-      user.needVisaEmployer === undefined &&
+      user.needVisaSponsorship === undefined &&
       user.expectedRateC2CorC2H === undefined &&
       user.linkedInUrl === undefined
     ) {
-      setCheck(false);
+      setCheck(true);
     }
   }, []);
 
@@ -54,65 +69,38 @@ const Profile = () => {
             currentCity: data.currentCity,
             linkedInUrl: data.linkedInUrl,
             relocation: data.relocation,
-            typeOfJob: data.jobOfType,
+            typeOfJob: data.typeOfJob,
             timeToJoin: data.timeToJoin,
-            needVisaEmployers: data.needVisaEmployers,
+            needVisaSponsorship: data.needVisaSponsorship,
             expectedRateC2CorC2H: data.expectedRateC2CorC2H,
           },
           {
-            Accept: "application/json",
-            "Content-type": "application/json",
-            token: token,
-            _id: userId,
-            "Access-Control-Allow-Origin": true,
-            "Access-Control-Allow-Methods": "GET, POST, PATCH",
+            headers: {
+              Accept: "application/json",
+              "Content-type": "application/json",
+              token: token,
+              _id: userId,
+              "Access-Control-Allow-Origin": true,
+              "Access-Control-Allow-Methods": "GET, POST, PATCH",
+            },
           }
         )
         .then((response) => {
-          let timerInterval;
-          // Swal.fire({
-          //   title: "Please Wait....",
-          //   timer: 2500,
-          //   timerProgressBar: true,
-          //   didOpen: () => {
-          //     Swal.showLoading();
-          //     timerInterval = setInterval(() => {
-          //       Swal.getTimerLeft();
-          //     }, 1000);
-          //   },
-          //   willClose: () => {
-          //     clearInterval(timerInterval);
-          //   },
-          // });
-          // setTimeout(function () {
-          //   window.location.pathname = "/dashboard";
-          // }, 2000);
-
-          window.location.pathname = "/dashboard";
+          console.log("response : ", response);
+          Swal.fire({
+            title: "Personal Profile Updated",
+            icon: "success",
+            width: 400,
+            height: 100,
+          });
+          // window.location.pathname = "/dashboard";
         })
         .catch((error) => {
-          console.log("ERROR : ", error);
-          let timerInterval;
           Swal.fire({
-            title: "Loading...",
-            timer: 2500,
-            timerProgressBar: true,
-            didOpen: () => {
-              Swal.showLoading();
-              timerInterval = setInterval(() => {
-                Swal.getTimerLeft();
-              }, 1000);
-            },
-            willClose: () => {
-              clearInterval(timerInterval);
-            },
-          }).then((error) => {
-            Swal.fire({
-              title: "backend not working",
-              icon: "error",
-              width: 400,
-              height: 100,
-            });
+            title: "backend not working",
+            icon: "error",
+            width: 400,
+            height: 100,
           });
         })
     );
@@ -158,12 +146,11 @@ const Profile = () => {
                 style={{ color: check === true ? "#7B7D7D" : "gray" }}
                 disabled={check}
               >
-                <option value="" disabled selected hidden>Choose from 1,2,3,4 or 5</option>
-                <option value="1">1 </option>
-                <option value="2">2 </option>
-                <option value="3">3 </option>
-                <option value="4">4 </option>
-                <option value="5">5 </option>
+                <option> {user.timeToJoin} </option>
+                <option value={1}>1 </option>
+                <option value={2}>2 </option>
+                <option value={3}>3 </option>
+                <option value={4}>4 </option>
               </select>
             </div>
           </div>
@@ -200,21 +187,16 @@ const Profile = () => {
 
           <div class="row">
             <div class="col-md-6 col-sm-6">
-              <label for="exampleFormControlSelect1"> Open to relocation</label>
-
-              {/* /check */}
+              <label for="exampleFormControlSelect1"> Open to relocate</label>
               <select
                 class="form-control"
                 {...register("relocation")}
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 disabled={check}
               >
-                <option value={user.relocation === false ? false : true}>
-                  {user.relocation === true ? "No" : ""}
-                </option>
-                <option value={user.relocation === true ? true : false}>
-                  {user.relocation === true ? "Yes" : ""}
-                </option>
+                <option> {user.relocation} </option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
               </select>
             </div>
 
@@ -228,18 +210,11 @@ const Profile = () => {
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 disabled={check}
               >
-                <option
-                  value={user.typeOfJob == "Fulltime" ? "Fulltime" : "C2C"}
-                >
-                  {" "}
-                  {user.typeOfJob == "Fulltime" ? "Fulltime" : ""}{" "}
-                </option>
-                <option value={user.jobOfType == "C2C" ? "C2C" : ""}>
-                  {user.typeOfJob == "C2C" ? "C2C" : "C2H"}
-                </option>
-                <option value={user.jobOfType == "C2H" ? "C2H" : ""}>
-                  {user.typeOfJob == "C2H" ? "C2H" : "C2C"}
-                </option>
+                <option> {user.typeOfJob} </option>
+                <option value="Fulltime"> Fulltime</option>
+                <option value="C2C"> C2C </option>
+                <option value="C2H"> C2H </option>
+                <option value="Parttime"> Parttime </option>
               </select>
             </div>
           </div>
@@ -254,16 +229,13 @@ const Profile = () => {
 
               <select
                 class="form-control"
-                {...register("needVisaEmployer")}
+                {...register("needVisaSponsorship")}
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 disabled={check}
               >
-                <option value={user.needVisaEmployer === false ? false : true}>
-                  {user.needVisaEmployer === false ? "No" : ""}
-                </option>
-                <option value={user.needVisaEmployer === true ? true : false}>
-                  {user.needVisaEmployer === true ? "Yes" : ""}
-                </option>
+                <option> {user.needVisaSponsorship} </option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
               </select>
             </div>
             <div class="col-md-6 col-sm-6">
@@ -284,7 +256,9 @@ const Profile = () => {
           </div>
 
           <div class="from-row mt-1">
-            <label for="exampleFormControlTextarea1">Your LinkedIn profile link</label>
+            <label for="exampleFormControlTextarea1">
+              Your LinkedIn profile link
+            </label>
             <input
               type="url"
               className="form-control"
@@ -296,23 +270,19 @@ const Profile = () => {
               disabled={check}
             />
           </div>
-
-          <div class="btn-group mt-4" role="group" aria-label="Basic example">
+          <div
+            class="btn-group mt-3 ml-3 w-50"
+            role="group"
+            aria-label="Basic example"
+          >
             {check ? (
-              <button
-                type="submit"
-                className="btn btn-primary active"
-                disabled={check}
-
-              // aria-disabled="true"
-              >
+              <button type="submit" className="btn btn-light" disabled={check}>
                 Save
               </button>
             ) : (
               <button
                 type="submit"
-                className="btn btn-primary active"
-                // aria-disabled="true"
+                className="btn btn-primary "
                 disabled={check}
               >
                 Save

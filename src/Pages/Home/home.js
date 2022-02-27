@@ -6,21 +6,20 @@ import Banner1 from "../../Assets/bannerimg.png";
 import "./home.css";
 import { Link } from "react-router-dom";
 const Home = () => {
-
-  const [candidateDashboardActive, setcandidateDashboardActive] = useState(false);
+  const [candidateDashboardActive, setcandidateDashboardActive] =
+    useState(false);
   const [companyDashboardActive, setcompanyDashboardActive] = useState(false);
 
   //const candidateData = JSON.parse(sessionStorage.getItem("candidate_data"));
   // console.log(candidateData.message);
   useEffect(() => {
-    if (sessionStorage.getItem("candidateDashboard") == 'true') {
-      setcandidateDashboardActive(sessionStorage.getItem('candidateDashboard'));
+    if (sessionStorage.getItem("candidateDashboard") == "true") {
+      setcandidateDashboardActive(sessionStorage.getItem("candidateDashboard"));
     }
-    if (sessionStorage.getItem("companyDashboard") == 'true') {
-      setcompanyDashboardActive(sessionStorage.getItem('companyDashboard'));
+    if (sessionStorage.getItem("companyDashboard") == "true") {
+      setcompanyDashboardActive(sessionStorage.getItem("companyDashboard"));
     }
-  }, [])
-
+  }, []);
 
   return (
     <div>
@@ -30,7 +29,9 @@ const Home = () => {
           <div className="row">
             <div className="col-lg-6">
               <div className="for-companies-block fonts">
-                <h1 style={{ fontWeight: "900", fontSize: 'xx-large' }}>For Companies</h1>
+                <h1 style={{ fontWeight: "900", fontSize: "xx-large" }}>
+                  For Companies
+                </h1>
                 <p>
                   There are many portals where you can get a list of candidates
                   and job portals to list your jobs with a hope that right
@@ -39,9 +40,18 @@ const Home = () => {
                   talent pipeline for in demand skills, then please try
                   Skilltera and let us know how we can help better?
                 </p>
-                <Link to={companyDashboardActive ? "/companyDashboard" : "/company_login"}><button className="btn btn-primary btn-lg">Sign-up / Sign-in</button></Link>
+                <Link
+                  to={
+                    companyDashboardActive
+                      ? "/companyDashboard"
+                      : "/company_login"
+                  }
+                >
+                  <button className="btn btn-primary btn-lg">
+                    Sign-up / Sign-in
+                  </button>
+                </Link>
               </div>
-
             </div>
             <div className="col-lg-6">
               <div className="banner-image">
@@ -59,7 +69,9 @@ const Home = () => {
             </div>
             <div className="col-lg-6 order-1 order-xl-2 ">
               <div className="for-developers-block fonts">
-                <h1 style={{ fontWeight: "900", fontSize: 'xx-large' }}>For Job Seekers</h1>
+                <h1 style={{ fontWeight: "900", fontSize: "xx-large" }}>
+                  For Developers
+                </h1>
                 <p>
                   Our highly experienced founders have felt that putting your
                   profile in known portals or applying for jobs does not really
@@ -71,13 +83,17 @@ const Home = () => {
                   explore the upcoming features that will be shared first with
                   those who join us by March 2022
                 </p>
-                <Link to={candidateDashboardActive ? "/dashboard" : "/login"}><button className="btn btn-primary btn-lg">Sign-up / Sign-in</button></Link>
+                <Link to={candidateDashboardActive ? "/dashboard" : "/login"}>
+                  <button className="btn btn-primary btn-lg">
+                    Sign-up / Sign-in
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
