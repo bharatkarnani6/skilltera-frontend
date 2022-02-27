@@ -48,7 +48,8 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {titleSelection.menuSelection === "Dashboard" ? <Personal /> : " "}
+            {/* for defaut dashboard show */}
+            {/* {titleSelection.menuSelection === "Dashboard" ? <Personal /> : " "} */}
 
             {(() => {
               switch (titleSelection.menuSelection) {

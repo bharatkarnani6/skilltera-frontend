@@ -31,21 +31,15 @@ const Profile = () => {
 
   const getData = async () => {
     await axios
-      .get(ApiConstants.CANDIDATE_DATA_BY_ID + "/" + `${userId}`)
+      .get(ApiConstants.CANDIDATE_DATA_BY_ID + `${userId}`)
       .then((response) => {
-        console.log(response);
-        setUser(response);
-      })
-      .catch((err) => {
-        console.log("page not found");
+        setUser(response.data.candidate);
       });
   };
 
   useEffect(() => {
     getData();
   }, []);
-
-  console.log("user : ", user);
 
   useEffect(() => {
     if (
@@ -55,9 +49,9 @@ const Profile = () => {
       user.knownTechnologies === undefined &&
       user.experienceDescription === undefined &&
       user.previousEmployers === undefined &&
-      user.interestedRole === undefined
+      user.currentRole === undefined
     ) {
-      setCheck(false);
+      setCheck(true);
     }
   }, []);
 
@@ -70,11 +64,11 @@ const Profile = () => {
           {
             experience: data.experience,
             currentCompany: data.currentCompany,
+            currentRole: data.currentRole,
             interestedRole: data.interestedRole,
             knownTechnologies: data.knownTechnologies,
             experienceDescription: data.experienceDescription,
             previousEmployers: data.previousEmployers,
-            interestedRole: data.interestedRole,
           },
           {
             headers: {
@@ -88,45 +82,26 @@ const Profile = () => {
           }
         )
         .then((response) => {
-          console.log(response.data);
-
-          setTimeout(function () {
-            window.location.pathname = "/dashboard";
-          }, 2000);
+          console.log("response : ", response);
+          Swal.fire({
+            title: "Personal Profile Updated",
+            icon: "success",
+            width: 400,
+            height: 100,
+          });
         })
         .catch((error) => {
-          let timerInterval;
           Swal.fire({
-            title: "Loading...",
-            timer: 2500,
-            timerProgressBar: true,
-            didOpen: () => {
-              Swal.showLoading();
-              timerInterval = setInterval(() => {
-                Swal.getTimerLeft();
-              }, 500);
-            },
-            willClose: () => {
-              clearInterval(timerInterval);
-            },
-          }).then((error) => {
-            Swal.fire({
-              title: "Backend not connected",
-              icon: "error",
-              width: 400,
-              height: 100,
-            });
+            title: "backend not working",
+            icon: "error",
+            width: 400,
+            height: 100,
           });
         })
     );
   };
 
   // .............tooltips.........
-  const inputRef = useRef();
-
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
 
   return (
     <>
@@ -154,14 +129,13 @@ const Profile = () => {
               <input
                 type="number"
                 className="form-control"
-                placeholder=""
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.experience}
                 {...register("experience")}
-                ref={inputRef}
                 disabled={check}
               />
             </div>
+
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">Current Role</label>
               <input
@@ -169,8 +143,8 @@ const Profile = () => {
                 class="form-control"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 placeholder=""
-                defaultValue={user.interestedRole}
-                {...register("interestedRole")}
+                defaultValue={user.currentRole}
+                {...register("currentRole")}
                 disabled={check}
               />
             </div>
@@ -203,7 +177,7 @@ const Profile = () => {
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 disabled={check}
               >
-                <option value=""> </option>
+                <option> {user.interestedRole} </option>
                 <option value="Data Engineer"> Data Engineer</option>
                 <option value="Full Stack Engineer">
                   Full Stack Engineer{" "}
@@ -221,7 +195,6 @@ const Profile = () => {
               <input
                 type="text"
                 className="form-control"
-                placeholder=""
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={user.knownTechnologies}
                 {...register("knownTechnologies")}
