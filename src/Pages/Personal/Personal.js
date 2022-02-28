@@ -25,54 +25,77 @@ const Profile = () => {
 
   // const user = candidateData.candidate;
 
-  const [user, setUser] = useState([]);
+  const [userData, setUserData] = useState({});
 
   const getData = async () => {
     await axios
       .get(ApiConstants.CANDIDATE_DATA_BY_ID + `${userId}`)
       .then((response) => {
-        setUser(response.data.candidate);
+        setUserData(response.data.candidate);
       })
       .catch((error) => {
         console.log("Data can not fetched");
       });
   };
-
   useEffect(() => {
     getData();
   }, []);
 
+  console.log("userData : ", userData.phone);
+
+  const [user, setUser] = useState({
+    phone: userData.phone,
+    country: userData.country,
+    currentCity: userData.currentCity,
+    linkedInUrl: userData.linkedInUrl,
+    relocation: userData.relocation,
+    typeOfJob: userData.typeOfJob,
+    timeToJoin: userData.timeToJoin,
+    needVisaSponsorship: userData.needVisaSponsorship,
+    expectedRateC2CorC2H: userData.expectedRateC2CorC2H,
+  });
+
+  const onChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    const newValues = {
+      ...user,
+      [name]: value,
+    };
+    setUser(newValues);
+  };
+
   useEffect(() => {
     if (
-      user.phone === undefined &&
-      user.country === undefined &&
-      user.currentCity === undefined &&
-      user.relocation === undefined &&
-      user.typeOfJob === undefined &&
-      user.timeToJoin === undefined &&
-      user.needVisaSponsorship === undefined &&
-      user.expectedRateC2CorC2H === undefined &&
-      user.linkedInUrl === undefined
+      userData.phone === undefined &&
+      userData.country === undefined &&
+      userData.currentCity === undefined &&
+      userData.relocation === undefined &&
+      userData.typeOfJob === undefined &&
+      userData.timeToJoin === undefined &&
+      userData.needVisaSponsorship === undefined &&
+      userData.expectedRateC2CorC2H === undefined &&
+      userData.linkedInUrl === undefined
     ) {
       setCheck(true);
     }
   }, []);
 
-  const onSubmit = (data) => {
+  const onSubmit = () => {
     trackPromise(
       axios
         .patch(
           ApiConstants.PROFILE,
           {
-            phone: data.phone,
-            country: data.country,
-            currentCity: data.currentCity,
-            linkedInUrl: data.linkedInUrl,
-            relocation: data.relocation,
-            typeOfJob: data.typeOfJob,
-            timeToJoin: data.timeToJoin,
-            needVisaSponsorship: data.needVisaSponsorship,
-            expectedRateC2CorC2H: data.expectedRateC2CorC2H,
+            phone: user.phone,
+            country: user.country,
+            currentCity: user.currentCity,
+            linkedInUrl: user.linkedInUrl,
+            relocation: user.relocation,
+            typeOfJob: user.typeOfJob,
+            timeToJoin: user.timeToJoin,
+            needVisaSponsorship: user.needVisaSponsorship,
+            expectedRateC2CorC2H: user.expectedRateC2CorC2H,
           },
           {
             headers: {
@@ -93,7 +116,6 @@ const Profile = () => {
             width: 400,
             height: 100,
           });
-          // window.location.pathname = "/dashboard";
         })
         .catch((error) => {
           Swal.fire({
@@ -129,10 +151,11 @@ const Profile = () => {
               <input
                 type="number"
                 className="form-control"
-                placeholder="xxx-xxx-xxxx"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
-                defaultValue={user.phone}
-                {...register("phone")}
+                defaultValue={userData.phone}
+                name="phone"
+                // {...register("phone")}
+                onChange={onChange}
                 disabled={check}
               />
             </div>
@@ -142,11 +165,13 @@ const Profile = () => {
               </label>
               <select
                 class="form-control"
-                {...register("timeToJoin")}
+                // {...register("timeToJoin")}
+                name="timeToJoin"
                 style={{ color: check === true ? "#7B7D7D" : "gray" }}
                 disabled={check}
+                onChange={onChange}
               >
-                <option> {user.timeToJoin} </option>
+                <option> {userData.timeToJoin} </option>
                 <option value={1}>1 </option>
                 <option value={2}>2 </option>
                 <option value={3}>3 </option>
@@ -162,11 +187,13 @@ const Profile = () => {
                 type="text"
                 class="form-control"
                 id="inputState"
-                placeholder="Enter your Country"
+                placeholder=""
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
-                defaultValue={user.country}
-                {...register("country")}
+                defaultValue={userData.country}
+                // {...register("country")}
+                name="country"
                 disabled={check}
+                onChange={onChange}
               />
             </div>
 
@@ -176,10 +203,11 @@ const Profile = () => {
                 type="text"
                 class="form-control"
                 id="inputCity"
-                placeholder="Enter your current location or City"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
-                defaultValue={user.currentCity}
-                {...register("currentCity")}
+                defaultValue={userData.currentCity}
+                // {...register("currentCity")}
+                name="currentCity"
+                onChange={onChange}
                 disabled={check}
               />
             </div>
@@ -190,11 +218,13 @@ const Profile = () => {
               <label for="exampleFormControlSelect1"> Open to relocate</label>
               <select
                 class="form-control"
-                {...register("relocation")}
+                // {...register("relocation")}
+                onChange={onChange}
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 disabled={check}
+                name="relocation"
               >
-                <option> {user.relocation} </option>
+                <option> {userData.relocation} </option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
@@ -206,11 +236,13 @@ const Profile = () => {
               </label>
               <select
                 class="form-control"
-                {...register("typeOfJob")}
+                // {...register("typeOfJob")}
+                name="typeOfJob"
+                onChange={onChange}
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 disabled={check}
               >
-                <option> {user.typeOfJob} </option>
+                <option> {userData.typeOfJob} </option>
                 <option value="Fulltime"> Fulltime</option>
                 <option value="C2C"> C2C </option>
                 <option value="C2H"> C2H </option>
@@ -229,11 +261,13 @@ const Profile = () => {
 
               <select
                 class="form-control"
-                {...register("needVisaSponsorship")}
+                // {...register("needVisaSponsorship")}
+                onChange={onChange}
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 disabled={check}
+                name="needVisaSponsorship"
               >
-                <option> {user.needVisaSponsorship} </option>
+                <option> {userData.needVisaSponsorship} </option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
@@ -248,8 +282,10 @@ const Profile = () => {
                 id="inputCity"
                 placeholder=""
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
-                defaultValue={user.expectedRateC2CorC2H}
-                {...register("expectedRateC2CorC2H")}
+                defaultValue={userData.expectedRateC2CorC2H}
+                // {...register("expectedRateC2CorC2H")}
+                name="expectedRateC2CorC2H"
+                onChange={onChange}
                 disabled={check}
               />
             </div>
@@ -265,8 +301,10 @@ const Profile = () => {
               id="inputPhone"
               placeholder=""
               style={{ color: check === true ? "#7B7D7D" : "black" }}
-              defaultValue={user.linkedInUrl}
-              {...register("linkedInUrl")}
+              defaultValue={userData.linkedInUrl}
+              // {...register("linkedInUrl")}
+              name="linkedInUrl"
+              onChange={onChange}
               disabled={check}
             />
           </div>
