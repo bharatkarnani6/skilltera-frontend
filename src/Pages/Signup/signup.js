@@ -32,80 +32,31 @@ export default function Signup(props) {
         })
         .then((response) => {
           console.log(response.data);
-          let timerInterval;
           Swal.fire({
-            title: "Please Wait....",
-            timer: 2500,
-            timerProgressBar: true,
-            didOpen: () => {
-              Swal.showLoading();
-              timerInterval = setInterval(() => {
-                Swal.getTimerLeft();
-              }, 50);
-            },
-            willClose: () => {
-              clearInterval(timerInterval);
-            },
-          }).then((result) => {
-            Swal.fire({
-              title: "Email Sent !",
-              html: "Please Verify your Email",
-              icon: "success",
-              allowOutsideClick: true,
-              allowEscapeKey: true,
-              allowEnterKey: true,
-              confirmButtonText: "Ok",
-            });
+            title: "Email Sent !",
+            html: "Please Verify your Email",
+            icon: "success",
+            allowOutsideClick: true,
+            allowEscapeKey: true,
+            allowEnterKey: true,
+            confirmButtonText: "Ok",
           });
+
         })
         .catch((error) => {
-          // console.log("error_massage :  ", error.response.status);
-          //console.log("error massage : ", error.response.message);
-          if (error.response.status === 500) {
-            let timerInterval;
+          if (error.message === "Request failed with status code 500") {
             Swal.fire({
-              title: "Please Wait.....",
-              timer: 2500,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading();
-                timerInterval = setInterval(() => {
-                  Swal.getTimerLeft();
-                }, 50);
-              },
-              willClose: () => {
-                clearInterval(timerInterval);
-              },
-            }).then((result) => {
-              Swal.fire({
-                title: error.response.data.message,
-                icon: "info",
-                width: 400,
-                height: 100,
-              });
+              title: error.response.data.error,
+              icon: "info",
+              width: 400,
+              height: 100,
             });
           } else if (error.message === "Network Error") {
-            let timerInterval;
             Swal.fire({
-              title: "Please Wait...",
-              timer: 2500,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading();
-                timerInterval = setInterval(() => {
-                  Swal.getTimerLeft();
-                }, 50);
-              },
-              willClose: () => {
-                clearInterval(timerInterval);
-              },
-            }).then((result) => {
-              Swal.fire({
-                title: "Backend Not Connected",
-                icon: "info",
-                width: 400,
-                height: 100,
-              });
+              title: "Backend not connected",
+              icon: "info",
+              width: 400,
+              height: 100,
             });
           }
         })
@@ -139,7 +90,7 @@ export default function Signup(props) {
 
       <div className="main-box signup ">
         {promiseInProgress === true ? (
-          <div class="d-flex align-items-center">
+          <div className="d-flex align-items-center">
             <h3 className="mb-1">Loading...</h3>
             <div
               class="spinner-border ml-auto"
@@ -160,7 +111,7 @@ export default function Signup(props) {
                 type="text"
                 className="form-control"
                 id="formGroupExampleInput"
-                placeholder="fullname"
+                placeholder="Full Name"
                 {...register("fullname", { required: true, minLength: 3 })}
               />
               {errors.fullname && (
@@ -174,7 +125,7 @@ export default function Signup(props) {
                 type="email"
                 className="form-control"
                 id="exampleFormControlInput1"
-                placeholder="email"
+                placeholder="E-mail"
                 {...register("email", {
                   required: true,
                   pattern: {
@@ -196,7 +147,7 @@ export default function Signup(props) {
                 type="password"
                 className="form-control"
                 id="inputPassword"
-                placeholder="password"
+                placeholder="Password"
                 {...register("password", {
                   required: true,
                   pattern: { value: /^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$/ },
