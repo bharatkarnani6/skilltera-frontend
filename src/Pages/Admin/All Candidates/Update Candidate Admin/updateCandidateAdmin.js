@@ -91,139 +91,139 @@ export default function UpdateCandidateAdmin(props) {
 
     return (
         <>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Update Candidate</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                <div className="modal-dialog" role="document" style={{ 'backgroundColor': 'white' }}>
+                    <div className="modal-content" >
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Update Candidate</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             <form onSubmit={handleSubmit(onSubmit)}>
-                                <div class="form-row">
+                                <div className="form-row">
                                     <label for="exampleFormControlTextarea1">Full Name</label>
-                                    <input type="text" class="form-control mb-2"
+                                    <input type="text" className="form-control mb-2"
                                         {...register("fullname")}
                                     />
                                 </div>
 
-                                <div class="form-row">
+                                <div className="form-row">
                                     <label for="exampleFormControlTextarea1">Phone Number</label>
-                                    <input type="tel" class="form-control mb-2"
+                                    <input type="tel" className="form-control mb-2"
                                         {...register("phone")}
                                     />
                                 </div>
-                                <div class="form-row">
+                                <div className="form-row">
                                     <label for="exampleFormControlTextarea1">Email</label>
-                                    <input type="email" class="form-control mb-2"
+                                    <input type="email" className="form-control mb-2"
                                         {...register("email")}
                                     />
                                 </div>
-                                <div class="form-row">
+                                <div className="form-row">
                                     <label for="exampleFormControlTextarea1">LinkedIn url</label>
-                                    <input type="url" class="form-control mb-2"
+                                    <input type="url" className="form-control mb-2"
                                         {...register("linkedInUrl")}
                                     />
                                 </div>
 
-                                <div class="form-row">
-                                    <div class="col">
+                                <div className="form-row">
+                                    <div className="col">
                                         <label for="exampleFormControlTextarea1">Country</label>
-                                        <input type="text" class="form-control"
+                                        <input type="text" className="form-control"
                                             {...register("country")}
                                         />
                                     </div>
-                                    <div class="col">
+                                    <div className="col">
                                         <label for="exampleFormControlTextarea1">Current City</label>
-                                        <input type="text" class="form-control"
+                                        <input type="text" className="form-control"
                                             {...register("currentCity")}
                                         />
                                     </div>
                                 </div>
 
-                                <div class="form-row mt-2">
-                                    <div class="col">
+                                <div className="form-row mt-2">
+                                    <div className="col">
                                         <label for="exampleFormControlSelect1">Relocate</label>
-                                        <select class="form-control"  {...register("relocation")}  >
+                                        <select className="form-control"  {...register("relocation")}  >
                                             <option value={false} >No</option>
                                             <option value={true} >Yes</option>
                                         </select>
                                     </div>
-                                    <div class="col">
+                                    <div className="col">
                                         <label for="exampleFormControlSelect1">Job Type</label>
-                                        <input type="text" class="form-control"
+                                        <input type="text" className="form-control"
                                             {...register("typeOfJob")}
                                         />
                                     </div>
                                 </div>
 
-                                <div class="form-row mt-4">
-                                    <div class="col">
+                                <div className="form-row mt-4">
+                                    <div className="col">
                                         <label for="exampleFormControlSelect1">When can you join(Week)</label>
-                                        <select class="form-control" {...register("timeToJoin")} >
+                                        <select className="form-control" {...register("timeToJoin")} >
                                             <option value="1" >1</option>
                                             <option value="2">2</option>
                                             <option value="1" >3</option>
                                             <option value="2">4</option>
                                         </select>
                                     </div>
-                                    <div class="col">
+                                    <div className="col">
                                         <label for="exampleFormControlSelect1"> Total Overall Experience</label>
-                                        <input type="number" class="form-control"
+                                        <input type="number" className="form-control"
                                             {...register("experience")}
                                         />
                                     </div>
                                 </div>
 
-                                <div class="form-row mt-2">
-                                    <div class="col">
+                                <div className="form-row mt-2">
+                                    <div className="col">
                                         <label for="exampleFormControlSelect1">visa status</label>
-                                        <select class="form-control" {...register("needVisaSponsorship")} >
+                                        <select className="form-control" {...register("needVisaSponsorship")} >
                                             <option value={false} >No</option>
                                             <option value={true}>Yes</option>
                                         </select>
                                     </div>
-                                    <div class="col">
+                                    <div className="col">
                                         <label for="exampleFormControlSelect1">Expected salery</label>
-                                        <input type="number" class="form-control"
+                                        <input type="number" className="form-control"
                                             {...register("expectedRateC2CorC2H")}
                                         />
                                     </div>
                                 </div>
 
 
-                                <div class="form-row mt-2">
+                                <div className="form-row mt-2">
                                     <label for="exampleFormControlSelect1">Current Company</label>
-                                    <input type="text" class="form-control mb-2"
+                                    <input type="text" className="form-control mb-2"
                                         {...register("currentCompany")}
                                     />
                                 </div>
 
-                                <div class="form-row mt-2">
+                                <div className="form-row mt-2">
                                     <label for="exampleFormControlSelect1">Current Role</label>
-                                    <input type="text" class="form-control mb-2"
+                                    <input type="text" className="form-control mb-2"
                                         {...register("interestedRole")}
                                     />
                                 </div>
 
-                                <div class="form-row mt-2">
+                                <div className="form-row mt-2">
                                     <label for="exampleFormControlSelect1">Technologies /Tools you are good</label>
-                                    <input type="text" class="form-control mb-2"
+                                    <input type="text" className="form-control mb-2"
                                         {...register("knownTechnologies")}
                                     />
                                 </div>
 
 
-                                <div class="form-row mt-2">
+                                <div className="form-row mt-2">
                                     <label for="exampleFormControlTextarea1">Brief Description about your skill</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"
                                         {...register("experienceDescription")}
                                     />
                                 </div>
 
-                                <div class="modal-footer" >
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                <div className="modal-footer" >
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" className="btn btn-primary">Update</button>
                                 </div>
                             </form>
                         </div>
