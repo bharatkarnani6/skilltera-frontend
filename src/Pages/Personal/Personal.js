@@ -80,6 +80,7 @@ const Profile = () => {
   }, []);
 
   const onSubmit = () => {
+    setCheck(true);
     trackPromise(
       axios
         .patch(
@@ -147,7 +148,7 @@ const Profile = () => {
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlTextarea1">Phone Number</label>
               <input
-                type="number"
+                type="tel"
                 className="form-control"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={userData.phone}
@@ -275,7 +276,7 @@ const Profile = () => {
                 Expected Rate for C2C/C2H(USD)
               </label>
               <input
-                type="number"
+                type="tel"
                 class="form-control"
                 id="inputCity"
                 placeholder=""

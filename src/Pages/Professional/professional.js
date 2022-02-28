@@ -5,6 +5,7 @@ import axios from "axios";
 import ApiConstants from "../../Services/apiconstants";
 import Swal from "sweetalert2";
 import "./professional.css";
+import { FcInfo } from "react-icons/fc";
 import { trackPromise, usePromiseTracker } from "react-promise-tracker";
 
 const Profile = () => {
@@ -80,6 +81,7 @@ const Profile = () => {
   }, []);
 
   const onSubmit = () => {
+    setCheck(true);
     trackPromise(
       axios
         .patch(
@@ -149,50 +151,90 @@ const Profile = () => {
                 Overall experience(Years)
               </label>
 
-              <input
-                type="number"
-                className="form-control"
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
-                defaultValue={userData.experience}
-                // {...register("experience")}
-                name="experience"
-                onChange={onChange}
-                disabled={check}
-              />
+              <div class="input-group ">
+                <input
+                  type="tel"
+                  className="form-control"
+                  style={{ color: check === true ? "#7B7D7D" : "black" }}
+                  defaultValue={userData.experience}
+                  // {...register("experience")}
+                  name="experience"
+                  onChange={onChange}
+                  disabled={check}
+                  title="tooltip"
+                />
+
+                <div class="input-group-append ml-1">
+                  <div class="dropdown">
+                    <div class="dropbtn">
+                      <FcInfo />
+                    </div>
+                    <div class="dropdown-content">
+                      <span>tooltip</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">Current Role</label>
-              <input
-                type="text"
-                class="form-control"
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
-                placeholder=""
-                defaultValue={userData.currentRole}
-                // {...register("currentRole")}
-                name="currentRole"
-                onChange={onChange}
-                disabled={check}
-              />
+
+              <div class="input-group ">
+                <input
+                  type="text"
+                  class="form-control"
+                  style={{ color: check === true ? "#7B7D7D" : "black" }}
+                  placeholder=""
+                  defaultValue={userData.currentRole}
+                  // {...register("currentRole")}
+                  name="currentRole"
+                  onChange={onChange}
+                  disabled={check}
+                />
+
+                <div class="input-group-append ml-1">
+                  <div class="dropdown">
+                    <div class="dropbtn">
+                      <FcInfo />
+                    </div>
+                    <div class="dropdown-content">
+                      <span>tooltip</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="row mt-1">
+          <div class="row mt-3">
             <div class="col-md-6 col-sm-6">
               <label for="exampleFormControlSelect1">
                 Current Company / Client
               </label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder=""
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
-                defaultValue={userData.currentCompany}
-                // {...register("currentCompany")}
-                name="currentCompany"
-                onChange={onChange}
-                disabled={check}
-              />
+              <div class="input-group ">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                  style={{ color: check === true ? "#7B7D7D" : "black" }}
+                  defaultValue={userData.currentCompany}
+                  // {...register("currentCompany")}
+                  name="currentCompany"
+                  onChange={onChange}
+                  disabled={check}
+                />
+                <div class="input-group-append ml-1">
+                  <div class="dropdown">
+                    <div class="dropbtn">
+                      <FcInfo />
+                    </div>
+                    <div class="dropdown-content">
+                      <span>tooltip</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="col-md-6 col-sm-6">
@@ -200,73 +242,131 @@ const Profile = () => {
                 {" "}
                 Enter Type of Role you are looking for
               </label>
-              <select
-                class="form-control"
-                // {...register("interestedRole")}
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
-                disabled={check}
-                name="interestedRole"
-                onChange={onChange}
-              >
-                <option> {userData.interestedRole} </option>
-                <option value="Data Engineer"> Data Engineer</option>
-                <option value="Full Stack Engineer">
-                  Full Stack Engineer{" "}
-                </option>
-                <option value="Cloud Engineer">Cloud Engineer</option>
-              </select>
+              <div class="input-group ">
+                <select
+                  class="form-control"
+                  // {...register("interestedRole")}
+                  style={{ color: check === true ? "#7B7D7D" : "black" }}
+                  disabled={check}
+                  name="interestedRole"
+                  onChange={onChange}
+                >
+                  <option> {userData.interestedRole} </option>
+                  <option value="Data Engineer"> Data Engineer</option>
+                  <option value="Full Stack Engineer">
+                    Full Stack Engineer{" "}
+                  </option>
+                  <option value="Cloud Engineer">Cloud Engineer</option>
+                </select>
+                <div class="input-group-append ml-1">
+                  <div class="dropdown">
+                    <div class="dropbtn">
+                      <FcInfo />
+                    </div>
+                    <div class="dropdown-content">
+                      <span>tooltip</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="row ">
+          <div class="row mt-4 ">
             <div class="col-md-6 col-sm-6 ">
               <label for="exampleFormControlSelect1">
                 Technologies / Tools you are good at(comma seperated)
               </label>
-              <input
-                type="text"
-                className="form-control"
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
-                defaultValue={userData.knownTechnologies}
-                //{...register("knownTechnologies")}
-                disabled={check}
-                onChange={onChange}
-                name="knownTechnologies"
-              />
+              <div class="input-group ">
+                <input
+                  type="text"
+                  className="form-control"
+                  style={{ color: check === true ? "#7B7D7D" : "black" }}
+                  defaultValue={userData.knownTechnologies}
+                  //{...register("knownTechnologies")}
+                  disabled={check}
+                  onChange={onChange}
+                  name="knownTechnologies"
+                />
+                <div class="input-group-append ml-1">
+                  <div class="dropdown">
+                    <div class="dropbtn">
+                      <FcInfo />
+                    </div>
+                    <div class="dropdown-content">
+                      <span>
+                        Example: Hadoop ecosystem tools like MapReduce, HDFS,
+                        Pig, Hive, Kafka, Yarn, Sqoop, Storm, Spark, Oozie, and
+                        Zookeeper. Cassandra, Snowflake, mongo DB, AWS
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6 col-sm-6 mt-4">
               <label for="exampleFormControlSelect1">
                 Enter Companies / Client you have worked for{" "}
               </label>
-              <input
-                type="text"
-                class="form-control mb-2"
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
-                defaultValue={userData.previousEmployers}
-                // {...register("previousEmployers")}
-                disabled={check}
-                name="previousEmployers"
-                onChange={onChange}
-              />
+              <div class="input-group ">
+                <input
+                  type="text"
+                  class="form-control mb-2"
+                  style={{ color: check === true ? "#7B7D7D" : "black" }}
+                  defaultValue={userData.previousEmployers}
+                  // {...register("previousEmployers")}
+                  disabled={check}
+                  name="previousEmployers"
+                  onChange={onChange}
+                />
+                <div class="input-group-append ml-1">
+                  <div class="dropdown">
+                    <div class="dropbtn">
+                      <FcInfo />
+                    </div>
+                    <div class="dropdown-content">
+                      <span>Example: Apple, Amazon, Bloomberg, UHG</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="form-row ">
+          <div class="form-row mt-3 ">
             <label for="exampleFormControlTextarea1">
               Brief Description of experience / type of work done (in 300 words)
             </label>
-            <textarea
-              class="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              style={{ color: check === true ? "#7B7D7D" : "black" }}
-              defaultValue={userData.experienceDescription}
-              // {...register("experienceDescription")}
-              name="experienceDescription"
-              onChange={onChange}
-              disabled={check}
-            />
+            <div class="input-group ">
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+                style={{ color: check === true ? "#7B7D7D" : "black" }}
+                defaultValue={userData.experienceDescription}
+                // {...register("experienceDescription")}
+                name="experienceDescription"
+                onChange={onChange}
+                disabled={check}
+              />
+              <div class="input-group-append ml-1">
+                <div class="dropdown">
+                  <div class="dropbtn">
+                    <FcInfo />
+                  </div>
+                  <div class="dropdown-content">
+                    <span>
+                      Example: A Python Developer, charged with intellectual
+                      curiosity and positive attitude; interested in applying
+                      newly acquired Data Science skills and solving challenging
+                      problems. I am looking for an exciting place to work where
+                      I can apply my skills to make a positive impact.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div

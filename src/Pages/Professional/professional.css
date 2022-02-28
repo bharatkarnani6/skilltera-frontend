@@ -13,3 +13,28 @@
     margin-left: -3.75rem;
   }
 }
+
+.dropbtn {
+  border: none;
+  background-color: transparent;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 10%;
+  height: 25vh;
+  width: 25vw;
+  background-color: #9b51e0;
+  color: white;
+
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
