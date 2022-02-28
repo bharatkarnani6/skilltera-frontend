@@ -17,7 +17,7 @@ const Profile = () => {
     setValue,
   } = useForm();
 
-  const [check, setCheck] = useState(true);
+  const [check, setCheck] = useState(false);
 
   const candidateData = JSON.parse(sessionStorage.getItem("candidate_data"));
 
@@ -27,48 +27,71 @@ const Profile = () => {
 
   //const user = candidateData.candidate;
 
-  const [user, setUser] = useState([]);
+  const [userData, setUserData] = useState({});
 
   const getData = async () => {
     await axios
       .get(ApiConstants.CANDIDATE_DATA_BY_ID + `${userId}`)
       .then((response) => {
-        setUser(response.data.candidate);
+        setUserData(response.data.candidate);
+      })
+      .catch((error) => {
+        console.log("Data can not fetched");
       });
   };
-
   useEffect(() => {
     getData();
   }, []);
 
+  const [user, setUser] = useState({
+    phone: userData.phone,
+    country: userData.country,
+    currentCity: userData.currentCity,
+    linkedInUrl: userData.linkedInUrl,
+    relocation: userData.relocation,
+    typeOfJob: userData.typeOfJob,
+    timeToJoin: userData.timeToJoin,
+    needVisaSponsorship: userData.needVisaSponsorship,
+    expectedRateC2CorC2H: userData.expectedRateC2CorC2H,
+  });
+
+  const onChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    const newValues = {
+      ...user,
+      [name]: value,
+    };
+    setUser(newValues);
+  };
+
   useEffect(() => {
     if (
-      user.experience === undefined &&
-      user.currentCompany === undefined &&
-      user.interestedRole === undefined &&
-      user.knownTechnologies === undefined &&
-      user.experienceDescription === undefined &&
-      user.previousEmployers === undefined &&
-      user.currentRole === undefined
+      userData.experience === undefined &&
+      userData.currentCompany === undefined &&
+      userData.interestedRole === undefined &&
+      userData.knownTechnologies === undefined &&
+      userData.experienceDescription === undefined &&
+      userData.previousEmployers === undefined &&
+      userData.currentRole === undefined
     ) {
       setCheck(true);
     }
   }, []);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = () => {
     trackPromise(
       axios
         .patch(
           ApiConstants.PROFILE,
           {
-            experience: data.experience,
-            currentCompany: data.currentCompany,
-            currentRole: data.currentRole,
-            interestedRole: data.interestedRole,
-            knownTechnologies: data.knownTechnologies,
-            experienceDescription: data.experienceDescription,
-            previousEmployers: data.previousEmployers,
+            experience: user.experience,
+            currentCompany: user.currentCompany,
+            currentRole: user.currentRole,
+            interestedRole: user.interestedRole,
+            knownTechnologies: user.knownTechnologies,
+            experienceDescription: user.experienceDescription,
+            previousEmployers: user.previousEmployers,
           },
           {
             headers: {
@@ -84,7 +107,7 @@ const Profile = () => {
         .then((response) => {
           console.log("response : ", response);
           Swal.fire({
-            title: "Personal Profile Updated",
+            title: "Professional Profile Updated",
             icon: "success",
             width: 400,
             height: 100,
@@ -130,8 +153,10 @@ const Profile = () => {
                 type="number"
                 className="form-control"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
-                defaultValue={user.experience}
-                {...register("experience")}
+                defaultValue={userData.experience}
+                // {...register("experience")}
+                name="experience"
+                onChange={onChange}
                 disabled={check}
               />
             </div>
@@ -143,8 +168,10 @@ const Profile = () => {
                 class="form-control"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 placeholder=""
-                defaultValue={user.currentRole}
-                {...register("currentRole")}
+                defaultValue={userData.currentRole}
+                // {...register("currentRole")}
+                name="currentRole"
+                onChange={onChange}
                 disabled={check}
               />
             </div>
@@ -160,8 +187,10 @@ const Profile = () => {
                 class="form-control"
                 placeholder=""
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
-                defaultValue={user.currentCompany}
-                {...register("currentCompany")}
+                defaultValue={userData.currentCompany}
+                // {...register("currentCompany")}
+                name="currentCompany"
+                onChange={onChange}
                 disabled={check}
               />
             </div>
@@ -173,11 +202,13 @@ const Profile = () => {
               </label>
               <select
                 class="form-control"
-                {...register("interestedRole")}
+                // {...register("interestedRole")}
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 disabled={check}
+                name="interestedRole"
+                onChange={onChange}
               >
-                <option> {user.interestedRole} </option>
+                <option> {userData.interestedRole} </option>
                 <option value="Data Engineer"> Data Engineer</option>
                 <option value="Full Stack Engineer">
                   Full Stack Engineer{" "}
@@ -196,9 +227,11 @@ const Profile = () => {
                 type="text"
                 className="form-control"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
-                defaultValue={user.knownTechnologies}
-                {...register("knownTechnologies")}
+                defaultValue={userData.knownTechnologies}
+                //{...register("knownTechnologies")}
                 disabled={check}
+                onChange={onChange}
+                name="knownTechnologies"
               />
             </div>
 
@@ -210,9 +243,11 @@ const Profile = () => {
                 type="text"
                 class="form-control mb-2"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
-                defaultValue={user.previousEmployers}
-                {...register("previousEmployers")}
+                defaultValue={userData.previousEmployers}
+                // {...register("previousEmployers")}
                 disabled={check}
+                name="previousEmployers"
+                onChange={onChange}
               />
             </div>
           </div>
@@ -226,8 +261,10 @@ const Profile = () => {
               id="exampleFormControlTextarea1"
               rows="3"
               style={{ color: check === true ? "#7B7D7D" : "black" }}
-              defaultValue={user.experienceDescription}
-              {...register("experienceDescription")}
+              defaultValue={userData.experienceDescription}
+              // {...register("experienceDescription")}
+              name="experienceDescription"
+              onChange={onChange}
               disabled={check}
             />
           </div>
