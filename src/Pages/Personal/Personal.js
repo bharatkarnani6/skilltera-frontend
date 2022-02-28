@@ -19,7 +19,7 @@ const Profile = () => {
 
   const [check, setCheck] = useState(false);
 
-  const candidateData = JSON.parse(localStorage.getItem("candidate_data"));
+  const candidateData = JSON.parse(sessionStorage.getItem("candidate_data"));
   const token = candidateData.token;
   const userId = candidateData.candidate._id;
 
@@ -40,8 +40,6 @@ const Profile = () => {
   useEffect(() => {
     getData();
   }, []);
-
-  console.log("userData : ", userData.phone);
 
   const [user, setUser] = useState({
     phone: userData.phone,
