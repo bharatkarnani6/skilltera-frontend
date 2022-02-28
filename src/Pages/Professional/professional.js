@@ -5,6 +5,7 @@ import axios from "axios";
 import ApiConstants from "../../Services/apiconstants";
 import Swal from "sweetalert2";
 import "./professional.css";
+import { FcInfo } from "react-icons/fc";
 import { trackPromise, usePromiseTracker } from "react-promise-tracker";
 
 const Profile = () => {
@@ -80,6 +81,7 @@ const Profile = () => {
   }, []);
 
   const onSubmit = () => {
+    setCheck(true);
     trackPromise(
       axios
         .patch(
@@ -150,7 +152,7 @@ const Profile = () => {
               </label>
 
               <input
-                type="number"
+                type="tel"
                 className="form-control"
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 defaultValue={userData.experience}
@@ -158,6 +160,7 @@ const Profile = () => {
                 name="experience"
                 onChange={onChange}
                 disabled={check}
+                title="tooltip"
               />
             </div>
 
