@@ -136,7 +136,7 @@ const Login = () => {
         <div className="row">
           <div className="col-6">
             <p className="pt-3" style={{ color: "#9b51e0" }}>
-              <NavLink to="/forgotPassword"> Forget Password </NavLink>
+              <NavLink to="/forgotPassword"> Forgot Password ? </NavLink>
             </p>
           </div>
           <div className="col-6">

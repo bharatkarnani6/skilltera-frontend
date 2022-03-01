@@ -51,7 +51,7 @@ export default function CompanyDashboard() {
                 case "Profile":
                   return <Profile />;
                   break;
-                case "Jobs":
+                case "Candidates":
                   return <Jobs />;
                   break;
                 case "logout":

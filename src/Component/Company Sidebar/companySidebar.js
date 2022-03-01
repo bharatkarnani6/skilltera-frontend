@@ -92,13 +92,13 @@ export default function CompanySidebar() {
                 active={true}
                 class="btn btn-primary mr-1"
                 data-bs-dismiss="offcanvas"
-                onClick={() => menuSelection("Jobs")}
+                onClick={() => menuSelection("Candidates")}
               >
                 <FaList />
               </button>
-              <span> Jobs</span>
+              <span> Candidates</span>
             </li>
-            <li class="list-group-item">
+            {/* <li class="list-group-item">
               <button
                 active={true}
                 class="btn btn-primary mr-1"
@@ -108,7 +108,7 @@ export default function CompanySidebar() {
                 <BiCog />
               </button>
               <span>Setting</span>
-            </li>
+            </li> */}
 
             <li class="list-group-item">
               <button
