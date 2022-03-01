@@ -163,17 +163,6 @@ const Profile = () => {
                   disabled={check}
                   title="tooltip"
                 />
-
-                <div class="input-group-append ml-1">
-                  <div class="dropdown">
-                    <div class="dropbtn">
-                      <FcInfo />
-                    </div>
-                    <div class="dropdown-content">
-                      <span>tooltip</span>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -192,17 +181,6 @@ const Profile = () => {
                   onChange={onChange}
                   disabled={check}
                 />
-
-                <div class="input-group-append ml-1">
-                  <div class="dropdown">
-                    <div class="dropbtn">
-                      <FcInfo />
-                    </div>
-                    <div class="dropdown-content">
-                      <span>tooltip</span>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -224,16 +202,6 @@ const Profile = () => {
                   onChange={onChange}
                   disabled={check}
                 />
-                <div class="input-group-append ml-1">
-                  <div class="dropdown">
-                    <div class="dropbtn">
-                      <FcInfo />
-                    </div>
-                    <div class="dropdown-content">
-                      <span>tooltip</span>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -258,16 +226,6 @@ const Profile = () => {
                   </option>
                   <option value="Cloud Engineer">Cloud Engineer</option>
                 </select>
-                <div class="input-group-append ml-1">
-                  <div class="dropdown">
-                    <div class="dropbtn">
-                      <FcInfo />
-                    </div>
-                    <div class="dropdown-content">
-                      <span>tooltip</span>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
