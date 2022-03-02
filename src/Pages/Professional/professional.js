@@ -219,7 +219,7 @@ const Profile = () => {
                   name="interestedRole"
                   onChange={onChange}
                 >
-                  <option> {userData.interestedRole} </option>
+                  <option hidden> {userData.interestedRole} </option>
                   <option value="Data Engineer"> Data Engineer</option>
                   <option value="Full Stack Engineer">
                     Full Stack Engineer{" "}

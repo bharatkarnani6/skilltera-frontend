@@ -127,7 +127,12 @@ const Profile = () => {
     );
   };
 
-  // .............tooltips.........
+  // .............tooltips........
+  const show = useRef();
+
+  const handleChange = () => {
+    show.current.color = "red";
+  };
 
   return (
     <>
@@ -168,9 +173,8 @@ const Profile = () => {
                 name="timeToJoin"
                 style={{ color: check === true ? "#7B7D7D" : "gray" }}
                 disabled={check}
-                onChange={onChange}
               >
-                <option> {userData.timeToJoin} </option>
+                <option hidden> {userData.timeToJoin} </option>
                 <option value={1}>1 </option>
                 <option value={2}>2 </option>
                 <option value={3}>3 </option>
@@ -223,7 +227,7 @@ const Profile = () => {
                 disabled={check}
                 name="relocation"
               >
-                <option> {userData.relocation} </option>
+                <option hidden> {userData.relocation} </option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
@@ -241,7 +245,7 @@ const Profile = () => {
                 style={{ color: check === true ? "#7B7D7D" : "black" }}
                 disabled={check}
               >
-                <option> {userData.typeOfJob} </option>
+                <option hidden> {userData.typeOfJob} </option>
                 <option value="Fulltime"> Fulltime</option>
                 <option value="C2C"> C2C </option>
                 <option value="C2H"> C2H </option>
@@ -266,7 +270,7 @@ const Profile = () => {
                 disabled={check}
                 name="needVisaSponsorship"
               >
-                <option> {userData.needVisaSponsorship} </option>
+                <option hidden> {userData.needVisaSponsorship} </option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
