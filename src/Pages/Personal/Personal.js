@@ -18,6 +18,9 @@ const Profile = () => {
   } = useForm();
 
   const [check, setCheck] = useState(false);
+  const [count, setCount] = useState(0);
+
+  const [liked, setLiked] = useState(false);
 
   const candidateData = JSON.parse(sessionStorage.getItem("candidate_data"));
   const token = candidateData.token;
@@ -32,11 +35,13 @@ const Profile = () => {
       .get(ApiConstants.CANDIDATE_DATA_BY_ID + `${userId}`)
       .then((response) => {
         setUserData(response.data.candidate);
+        setLiked(true);
       })
       .catch((error) => {
         console.log("Data can not fetched");
       });
   };
+
   useEffect(() => {
     getData();
   }, []);
@@ -53,6 +58,18 @@ const Profile = () => {
     expectedRateC2CorC2H: userData.expectedRateC2CorC2H,
   });
 
+  const emptyData = {
+    phone: userData.phone || {},
+    country: userData.country || {},
+    currentCity: userData.currentCity || {},
+    linkedInUrl: userData.linkedInUrl || {},
+    relocation: userData.relocation || {},
+    typeOfJob: userData.typeOfJob || {},
+    timeToJoin: userData.timeToJoin || {},
+    needVisaSponsorship: userData.needVisaSponsorship || {},
+    expectedRateC2CorC2H: userData.expectedRateC2CorC2H || {},
+  };
+
   const onChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -63,24 +80,27 @@ const Profile = () => {
     setUser(newValues);
   };
 
-  useEffect(() => {
-    if (
-      userData.phone === undefined &&
-      userData.country === undefined &&
-      userData.currentCity === undefined &&
-      userData.relocation === undefined &&
-      userData.typeOfJob === undefined &&
-      userData.timeToJoin === undefined &&
-      userData.needVisaSponsorship === undefined &&
-      userData.expectedRateC2CorC2H === undefined &&
-      userData.linkedInUrl === undefined
-    ) {
+  const checkEmpty = () => {
+    var k = 0;
+    for (var i in emptyData) {
+      if (Object.keys(emptyData[i]).length === 0) {
+        k++;
+      }
+    }
+
+    setCount(k);
+    if (k == 9) {
       setCheck(true);
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    if (liked) {
+      checkEmpty();
+    }
+  }, [liked]);
 
   const onSubmit = () => {
-    setCheck(true);
     trackPromise(
       axios
         .patch(
@@ -127,13 +147,6 @@ const Profile = () => {
     );
   };
 
-  // .............tooltips........
-  const show = useRef();
-
-  const handleChange = () => {
-    show.current.color = "red";
-  };
-
   return (
     <>
       <div class="border border-dark rounded personal">
@@ -155,12 +168,12 @@ const Profile = () => {
               <input
                 type="tel"
                 className="form-control"
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
+                style={{ color: check === true ? "black" : "#7B7D7D" }}
                 defaultValue={userData.phone}
                 name="phone"
                 // {...register("phone")}
                 onChange={onChange}
-                disabled={check}
+                disabled={!check}
               />
             </div>
             <div class="col-md-6 col-sm-6">
@@ -171,8 +184,9 @@ const Profile = () => {
                 class="form-control"
                 // {...register("timeToJoin")}
                 name="timeToJoin"
-                style={{ color: check === true ? "#7B7D7D" : "gray" }}
-                disabled={check}
+                style={{ color: check === true ? "black" : "#7B7D7D" }}
+                onChange={onChange}
+                disabled={!check}
               >
                 <option hidden> {userData.timeToJoin} </option>
                 <option value={1}>1 </option>
@@ -191,11 +205,11 @@ const Profile = () => {
                 class="form-control"
                 id="inputState"
                 placeholder=""
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
+                style={{ color: check === true ? "black" : "#7B7D7D" }}
                 defaultValue={userData.country}
                 // {...register("country")}
                 name="country"
-                disabled={check}
+                disabled={!check}
                 onChange={onChange}
               />
             </div>
@@ -206,12 +220,12 @@ const Profile = () => {
                 type="text"
                 class="form-control"
                 id="inputCity"
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
+                style={{ color: check === true ? "black" : "#7B7D7D" }}
                 defaultValue={userData.currentCity}
                 // {...register("currentCity")}
                 name="currentCity"
                 onChange={onChange}
-                disabled={check}
+                disabled={!check}
               />
             </div>
           </div>
@@ -223,8 +237,8 @@ const Profile = () => {
                 class="form-control"
                 // {...register("relocation")}
                 onChange={onChange}
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
-                disabled={check}
+                style={{ color: check === true ? "black" : "#7B7D7D" }}
+                disabled={!check}
                 name="relocation"
               >
                 <option hidden> {userData.relocation} </option>
@@ -242,8 +256,8 @@ const Profile = () => {
                 // {...register("typeOfJob")}
                 name="typeOfJob"
                 onChange={onChange}
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
-                disabled={check}
+                style={{ color: check === true ? "black" : "#7B7D7D" }}
+                disabled={!check}
               >
                 <option hidden> {userData.typeOfJob} </option>
                 <option value="Fulltime"> Fulltime</option>
@@ -266,8 +280,8 @@ const Profile = () => {
                 class="form-control"
                 // {...register("needVisaSponsorship")}
                 onChange={onChange}
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
-                disabled={check}
+                style={{ color: check === true ? "black" : "#7B7D7D" }}
+                disabled={!check}
                 name="needVisaSponsorship"
               >
                 <option hidden> {userData.needVisaSponsorship} </option>
@@ -284,12 +298,12 @@ const Profile = () => {
                 class="form-control"
                 id="inputCity"
                 placeholder=""
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
+                style={{ color: check === true ? "black" : "#7B7D7D" }}
                 defaultValue={userData.expectedRateC2CorC2H}
                 // {...register("expectedRateC2CorC2H")}
                 name="expectedRateC2CorC2H"
                 onChange={onChange}
-                disabled={check}
+                disabled={!check}
               />
             </div>
           </div>
@@ -303,20 +317,45 @@ const Profile = () => {
               className="form-control"
               id="inputPhone"
               placeholder=""
-              style={{ color: check === true ? "#7B7D7D" : "black" }}
+              style={{ color: check === true ? "black" : "#7B7D7D" }}
               defaultValue={userData.linkedInUrl}
               // {...register("linkedInUrl")}
               name="linkedInUrl"
               onChange={onChange}
-              disabled={check}
+              disabled={!check}
             />
           </div>
-          <div
-            class="btn-group mt-3 ml-3 w-50"
-            role="group"
-            aria-label="Basic example"
-          >
-            {check ? (
+
+          <div class="d-flex justify-content-center">
+            <div
+              class="btn-group mt-3 w-50 "
+              role="group"
+              aria-label="Basic example"
+            >
+              {check === true || count === 9 ? (
+                <button
+                  type="submit"
+                  class="btn btn-primary "
+                  onClick={(e) => {
+                    setCheck(false);
+                  }}
+                >
+                  Save
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="btn btn-dark"
+                  onClick={(e) => {
+                    setCheck(true);
+                    e.preventDefault();
+                  }}
+                >
+                  Edit
+                </button>
+              )}
+
+              {/* {check ? (
               <button type="submit" className="btn btn-light" disabled={check}>
                 Save
               </button>
@@ -328,9 +367,9 @@ const Profile = () => {
               >
                 Save
               </button>
-            )}
+            )} */}
 
-            {check ? (
+              {/* {check ? (
               <button
                 type="button"
                 className="btn btn-dark active"
@@ -346,7 +385,8 @@ const Profile = () => {
               >
                 Edit
               </button>
-            )}
+            )}  */}
+            </div>
           </div>
         </form>
       </div>

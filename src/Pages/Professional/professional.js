@@ -20,6 +20,10 @@ const Profile = () => {
 
   const [check, setCheck] = useState(false);
 
+  const [count, setCount] = useState(0);
+
+  const [liked, setLiked] = useState(false);
+
   const candidateData = JSON.parse(sessionStorage.getItem("candidate_data"));
 
   const token = candidateData.token;
@@ -35,26 +39,36 @@ const Profile = () => {
       .get(ApiConstants.CANDIDATE_DATA_BY_ID + `${userId}`)
       .then((response) => {
         setUserData(response.data.candidate);
+        setLiked(true);
       })
       .catch((error) => {
         console.log("Data can not fetched");
       });
   };
+
   useEffect(() => {
     getData();
   }, []);
 
   const [user, setUser] = useState({
-    phone: userData.phone,
-    country: userData.country,
-    currentCity: userData.currentCity,
-    linkedInUrl: userData.linkedInUrl,
-    relocation: userData.relocation,
-    typeOfJob: userData.typeOfJob,
-    timeToJoin: userData.timeToJoin,
-    needVisaSponsorship: userData.needVisaSponsorship,
-    expectedRateC2CorC2H: userData.expectedRateC2CorC2H,
+    experience: userData.experience,
+    currentCompany: userData.currentCompany,
+    currentRole: userData.currentRole,
+    interestedRole: userData.interestedRole,
+    knownTechnologies: userData.knownTechnologies,
+    experienceDescription: userData.experienceDescription,
+    previousEmployers: userData.previousEmployers,
   });
+
+  const emptyData = {
+    experience: userData.experience || {},
+    currentCompany: userData.currentCompany || {},
+    currentRole: userData.currentRole || {},
+    interestedRole: userData.interestedRole || {},
+    knownTechnologies: userData.knownTechnologies || {},
+    experienceDescription: userData.experienceDescription || {},
+    previousEmployers: userData.previousEmployers || {},
+  };
 
   const onChange = (e) => {
     let name = e.target.name;
@@ -66,22 +80,27 @@ const Profile = () => {
     setUser(newValues);
   };
 
-  useEffect(() => {
-    if (
-      userData.experience === undefined &&
-      userData.currentCompany === undefined &&
-      userData.interestedRole === undefined &&
-      userData.knownTechnologies === undefined &&
-      userData.experienceDescription === undefined &&
-      userData.previousEmployers === undefined &&
-      userData.currentRole === undefined
-    ) {
+  const checkEmpty = () => {
+    var k = 0;
+    for (var i in emptyData) {
+      if (Object.keys(emptyData[i]).length === 0) {
+        k++;
+      }
+    }
+
+    setCount(k);
+    if (k == 7) {
       setCheck(true);
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    if (liked) {
+      checkEmpty();
+    }
+  }, [liked]);
 
   const onSubmit = () => {
-    setCheck(true);
     trackPromise(
       axios
         .patch(
@@ -126,8 +145,6 @@ const Profile = () => {
     );
   };
 
-  // .............tooltips.........
-
   return (
     <>
       <div class="border border-dark rounded professional">
@@ -155,13 +172,12 @@ const Profile = () => {
                 <input
                   type="tel"
                   className="form-control"
-                  style={{ color: check === true ? "#7B7D7D" : "black" }}
+                  style={{ color: check === true ? "black" : "#7B7D7D" }}
+                  disabled={!check}
                   defaultValue={userData.experience}
                   // {...register("experience")}
                   name="experience"
                   onChange={onChange}
-                  disabled={check}
-                  title="tooltip"
                 />
               </div>
             </div>
@@ -173,13 +189,13 @@ const Profile = () => {
                 <input
                   type="text"
                   class="form-control"
-                  style={{ color: check === true ? "#7B7D7D" : "black" }}
+                  style={{ color: check === true ? "black" : "#7B7D7D" }}
+                  disabled={!check}
                   placeholder=""
                   defaultValue={userData.currentRole}
                   // {...register("currentRole")}
                   name="currentRole"
                   onChange={onChange}
-                  disabled={check}
                 />
               </div>
             </div>
@@ -195,12 +211,12 @@ const Profile = () => {
                   type="text"
                   class="form-control"
                   placeholder=""
-                  style={{ color: check === true ? "#7B7D7D" : "black" }}
+                  style={{ color: check === true ? "black" : "#7B7D7D" }}
+                  disabled={!check}
                   defaultValue={userData.currentCompany}
                   // {...register("currentCompany")}
                   name="currentCompany"
                   onChange={onChange}
-                  disabled={check}
                 />
               </div>
             </div>
@@ -214,8 +230,8 @@ const Profile = () => {
                 <select
                   class="form-control"
                   // {...register("interestedRole")}
-                  style={{ color: check === true ? "#7B7D7D" : "black" }}
-                  disabled={check}
+                  style={{ color: check === true ? "black" : "#7B7D7D" }}
+                  disabled={!check}
                   name="interestedRole"
                   onChange={onChange}
                 >
@@ -239,10 +255,11 @@ const Profile = () => {
                 <input
                   type="text"
                   className="form-control"
-                  style={{ color: check === true ? "#7B7D7D" : "black" }}
+                  style={{ color: check === true ? "black" : "#7B7D7D" }}
+                  disabled={!check}
                   defaultValue={userData.knownTechnologies}
                   //{...register("knownTechnologies")}
-                  disabled={check}
+
                   onChange={onChange}
                   name="knownTechnologies"
                 />
@@ -271,10 +288,10 @@ const Profile = () => {
                 <input
                   type="text"
                   class="form-control mb-2"
-                  style={{ color: check === true ? "#7B7D7D" : "black" }}
+                  style={{ color: check === true ? "black" : "#7B7D7D" }}
+                  disabled={!check}
                   defaultValue={userData.previousEmployers}
                   // {...register("previousEmployers")}
-                  disabled={check}
                   name="previousEmployers"
                   onChange={onChange}
                 />
@@ -301,12 +318,12 @@ const Profile = () => {
                 class="form-control"
                 id="exampleFormControlTextarea1"
                 rows="3"
-                style={{ color: check === true ? "#7B7D7D" : "black" }}
+                style={{ color: check === true ? "black" : "#7B7D7D" }}
+                disabled={!check}
                 defaultValue={userData.experienceDescription}
                 // {...register("experienceDescription")}
                 name="experienceDescription"
                 onChange={onChange}
-                disabled={check}
               />
               <div class="input-group-append ml-1">
                 <div class="dropdown">
@@ -327,11 +344,36 @@ const Profile = () => {
             </div>
           </div>
 
-          <div
-            class="btn-group mt-3 ml-3 w-50"
-            role="group"
-            aria-label="Basic example"
-          >
+          <div class="d-flex justify-content-center">
+            <div
+              class="btn-group mt-3 ml-3 w-50"
+              role="group"
+              aria-label="Basic example"
+            >
+              {check === true || count === 7 ? (
+                <button
+                  type="submit"
+                  class="btn btn-primary "
+                  onClick={(e) => {
+                    setCheck(false);
+                  }}
+                >
+                  Save
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="btn btn-dark"
+                  onClick={(e) => {
+                    setCheck(true);
+                    e.preventDefault();
+                  }}
+                >
+                  Edit
+                </button>
+              )}
+
+              {/*             
             {check ? (
               <button type="submit" className="btn btn-light" disabled={check}>
                 Save
@@ -362,7 +404,8 @@ const Profile = () => {
               >
                 Edit
               </button>
-            )}
+            )} */}
+            </div>
           </div>
         </form>
       </div>
