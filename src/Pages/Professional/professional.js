@@ -7,6 +7,10 @@ import Swal from "sweetalert2";
 import "./professional.css";
 import { FcInfo } from "react-icons/fc";
 import { trackPromise, usePromiseTracker } from "react-promise-tracker";
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw } from "draft-js";
+import draftToHtml from "draftjs-to-html";
+import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const Profile = () => {
   const { promiseInProgress } = usePromiseTracker();
@@ -18,7 +22,17 @@ const Profile = () => {
     setValue,
   } = useForm();
 
+  const getHtml = (editorState) =>
+    draftToHtml(convertToRaw(editorState.getCurrentContent()));
+
   const [check, setCheck] = useState(false);
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
+
+  const onEditorStateChange = (editorState) => {
+    setEditorState(editorState);
+  };
 
   const [count, setCount] = useState(0);
 
@@ -111,7 +125,7 @@ const Profile = () => {
             currentRole: user.currentRole,
             interestedRole: user.interestedRole,
             knownTechnologies: user.knownTechnologies,
-            experienceDescription: user.experienceDescription,
+            experienceDescription: getHtml(editorState),
             previousEmployers: user.previousEmployers,
           },
           {
@@ -314,7 +328,7 @@ const Profile = () => {
               Brief Description of experience / type of work done (in 300 words)
             </label>
             <div class="input-group ">
-              <textarea
+              {/* <div
                 class="form-control"
                 id="exampleFormControlTextarea1"
                 rows="3"
@@ -324,7 +338,35 @@ const Profile = () => {
                 // {...register("experienceDescription")}
                 name="experienceDescription"
                 onChange={onChange}
-              />
+                style={{
+                  border: "1px solid black",
+                  padding: "2px",
+                  minHeight: "200px",
+                }}
+              >
+                <Editor
+                  editorState={editorState}
+                  onEditorStateChange={setEditorState}
+                />
+              </div> */}
+
+              <div className="col-12">
+                <Editor
+                  // editorState={editorState}
+                  wrapperClassName="rich-editor demo-wrapper"
+                  editorClassName="demo-editor"
+                  onEditorStateChange={onEditorStateChange}
+                  placeholder="Blog content goes here..."
+                />
+
+                <div
+                  class="row border border-dark"
+                  dangerouslySetInnerHTML={{
+                    __html: userData.experienceDescription,
+                  }}
+                />
+              </div>
+
               <div class="input-group-append ml-1">
                 <div class="dropdown">
                   <div class="dropbtn">
@@ -372,39 +414,6 @@ const Profile = () => {
                   Edit
                 </button>
               )}
-
-              {/*             
-            {check ? (
-              <button type="submit" className="btn btn-light" disabled={check}>
-                Save
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={check}
-              >
-                Save
-              </button>
-            )}
-
-            {check ? (
-              <button
-                type="button"
-                className="btn btn-dark active"
-                onClick={(e) => setCheck(false)}
-              >
-                Edit
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="btn btn-dark disabled"
-                aria-disabled="true"
-              >
-                Edit
-              </button>
-            )} */}
             </div>
           </div>
         </form>
