@@ -21,6 +21,7 @@
     "cli-ux": "^6.0.6",
     "datatables.net": "^1.11.3",
     "datatables.net-dt": "^1.11.3",
+    "draft-convert": "^2.1.12",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
     "firebase-tools": "^9.23.3",

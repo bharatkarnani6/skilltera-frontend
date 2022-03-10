@@ -8,8 +8,14 @@ import "./professional.css";
 import { FcInfo } from "react-icons/fc";
 import { trackPromise, usePromiseTracker } from "react-promise-tracker";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw } from "draft-js";
+import {
+  EditorState,
+  convertToRaw,
+  ContentState,
+  convertFromHTML,
+} from "draft-js";
 import draftToHtml from "draftjs-to-html";
+//import { convertFromHTML } from "draft-convert";
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const Profile = () => {
@@ -22,17 +28,7 @@ const Profile = () => {
     setValue,
   } = useForm();
 
-  const getHtml = (editorState) =>
-    draftToHtml(convertToRaw(editorState.getCurrentContent()));
-
   const [check, setCheck] = useState(false);
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
-
-  const onEditorStateChange = (editorState) => {
-    setEditorState(editorState);
-  };
 
   const [count, setCount] = useState(0);
 
@@ -114,6 +110,20 @@ const Profile = () => {
     }
   }, [liked]);
 
+  //............... text reach editor .................
+
+  const getHtml = (editorState) =>
+    draftToHtml(convertToRaw(editorState.getCurrentContent("<h1>hello</h1>")));
+
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
+
+  const onEditorStateChange = (editorState) => {
+    setEditorState(editorState);
+  };
+
+  // .............................
   const onSubmit = () => {
     trackPromise(
       axios
@@ -147,6 +157,7 @@ const Profile = () => {
             width: 400,
             height: 100,
           });
+          window.location.reload(false);
         })
         .catch((error) => {
           Swal.fire({
@@ -158,6 +169,8 @@ const Profile = () => {
         })
     );
   };
+
+  //.....................
 
   return (
     <>
@@ -328,42 +341,19 @@ const Profile = () => {
               Brief Description of experience / type of work done (in 300 words)
             </label>
             <div class="input-group ">
-              {/* <div
-                class="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-                style={{ color: check === true ? "black" : "#7B7D7D" }}
-                disabled={!check}
-                defaultValue={userData.experienceDescription}
-                // {...register("experienceDescription")}
-                name="experienceDescription"
-                onChange={onChange}
-                style={{
-                  border: "1px solid black",
-                  padding: "2px",
-                  minHeight: "200px",
-                }}
-              >
-                <Editor
-                  editorState={editorState}
-                  onEditorStateChange={setEditorState}
-                />
-              </div> */}
-
               <div className="col-12">
                 <Editor
-                  // editorState={editorState}
+                  editorState={editorState}
                   wrapperClassName="rich-editor demo-wrapper"
-                  editorClassName="demo-editor"
                   onEditorStateChange={onEditorStateChange}
-                  placeholder="Blog content goes here..."
-                />
-
-                <div
-                  class="row border border-dark"
-                  dangerouslySetInnerHTML={{
-                    __html: userData.experienceDescription,
-                  }}
+                  editorClassName="editorClassName"
+                  placeholder={
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: userData.experienceDescription,
+                      }}
+                    />
+                  }
                 />
               </div>
 
