@@ -28,35 +28,36 @@ export default function UpdateCandidateAdmin(props) {
 
         setCandiData(response.data.candidate);
 
-        setValue("fullname", response.data.candidate.fullname);
-        setValue("country", response.data.candidate.country);
-        setValue("currentCity", response.data.candidate.currentCity);
-        setValue("currentCompany", response.data.candidate.currentCompany);
-        setValue("currentRole", response.data.candidate.currentRole);
-        setValue("email", response.data.candidate.email);
-        setValue(
-          "expectedRateC2CorC2H",
-          response.data.candidate.expectedRateC2CorC2H
-        );
-        setValue("experience", response.data.candidate.experience);
-        setValue(
-          "experienceDescription",
-          response.data.candidate.experienceDescription
-        );
-        setValue("interestedRole", response.data.candidate.interestedRole);
-        setValue(
-          "knownTechnologies",
-          response.data.candidate.knownTechnologies
-        );
-        setValue("linkedInUrl", response.data.candidate.linkedInUrl);
-        setValue(
-          "needVisaSponsorship",
-          response.data.candidate.needVisaSponsorship
-        );
-        setValue("phone", response.data.candidate.phone);
-        setValue("relocation", response.data.candidate.relocation);
-        setValue("timeToJoin", response.data.candidate.timeToJoin);
-        setValue("typeOfJob", response.data.candidate.typeOfJob);
+        // setValue("fullname", response.data.candidate.fullname);
+        // setValue("country", response.data.candidate.country);
+        // setValue("currentCity", response.data.candidate.currentCity);
+        // setValue("currentCompany", response.data.candidate.currentCompany);
+        // setValue("currentRole", response.data.candidate.currentRole);
+        // setValue("email", response.data.candidate.email);
+        // setValue(
+        //   "expectedRateC2CorC2H",
+        //   response.data.candidate.expectedRateC2CorC2H
+        // );
+        // setValue("experience", response.data.candidate.experience);
+        // setValue(
+        //   "experienceDescription",
+        //   response.data.candidate.experienceDescription
+        // );
+        // setValue("interestedRole", response.data.candidate.interestedRole);
+        // setValue(
+        //   "knownTechnologies",
+        //   response.data.candidate.knownTechnologies
+        // );
+        // setValue("linkedInUrl", response.data.candidate.linkedInUrl);
+        // setValue(
+        //   "needVisaSponsorship",
+        //   response.data.candidate.needVisaSponsorship
+        // );
+        // setValue("phone", response.data.candidate.phone);
+        // setValue("relocation", response.data.candidate.relocation);
+        // setValue("timeToJoin", response.data.candidate.timeToJoin);
+        // setValue("typeOfJob", response.data.candidate.typeOfJob);
+        //rak
       })
       .catch((err) => {
         console.log(err);
@@ -69,7 +70,7 @@ export default function UpdateCandidateAdmin(props) {
     setToken(JSON.parse(sessionStorage.getItem("ADMIN")).token);
   }, [props.candidateId]);
 
-  //.......................... edit...................................................................................
+  //.......................... edit...........................................................................
 
   const [user, setUser] = useState({
     fullname: candiData.fullname,
@@ -101,7 +102,7 @@ export default function UpdateCandidateAdmin(props) {
     setUser(newValues);
   };
 
-  //..................................................................................................................
+  //..........................................................................................................
   const onSubmit = () => {
     axios
       .patch(
@@ -208,7 +209,7 @@ export default function UpdateCandidateAdmin(props) {
                 <div className="form-row">
                   <label for="exampleFormControlTextarea1">Email</label>
                   <input
-                    type="email"
+                    type="text"
                     className="form-control mb-2"
                     // {...register("email")}
                     defaultValue={candiData.email}
@@ -220,7 +221,7 @@ export default function UpdateCandidateAdmin(props) {
                 <div className="form-row">
                   <label for="exampleFormControlTextarea1">LinkedIn url</label>
                   <input
-                    type="url"
+                    type="text"
                     className="form-control mb-2"
                     // {...register("linkedInUrl")}
                     defaultValue={candiData.linkedInUrl}
