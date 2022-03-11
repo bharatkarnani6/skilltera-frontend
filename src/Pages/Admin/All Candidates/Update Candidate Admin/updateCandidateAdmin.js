@@ -57,6 +57,7 @@ export default function UpdateCandidateAdmin(props) {
         // setValue("relocation", response.data.candidate.relocation);
         // setValue("timeToJoin", response.data.candidate.timeToJoin);
         // setValue("typeOfJob", response.data.candidate.typeOfJob);
+        //rak
       })
       .catch((err) => {
         console.log(err);
