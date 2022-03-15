@@ -32,7 +32,7 @@ const Profile = () => {
 
   const getData = async () => {
     await axios
-      .get(ApiConstants.CANDIDATE_DATA_BY_ID + `${userId}`)
+      .get(ApiConstants.CANDIDATE_DATA_BY_ID + `/${userId}`)
       .then((response) => {
         setUserData(response.data.candidate);
         setLiked(true);
