@@ -14,3 +14,11 @@ export const SidebarMenuSelectionAction = (value) => {
         })
     };
 }
+export const StateChangeForUpdate = (value) => {
+    return (dispatch) => {
+        dispatch({
+            type: "STATE_CHANGE_FOR_UPDATE",
+            data: value
+        })
+    };
+}

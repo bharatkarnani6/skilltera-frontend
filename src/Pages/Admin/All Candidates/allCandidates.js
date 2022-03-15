@@ -7,7 +7,7 @@ import ShowMoreText from "react-show-more-text";
 import $ from "jquery";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
-
+import { useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
 import UpdateCandidateAdmin from "./Update Candidate Admin/updateCandidateAdmin";
 import "./allCandidates.css";
@@ -16,9 +16,10 @@ export default function AllCandidates() {
   const [values, setValues] = useState({
     candidateData: {},
   });
+  const forUpdate = useSelector((state) => state.stateChangeForUpdate)
+
   const [isExpanded, setIsExpanded] = useState(false);
   const [candidateId, setCandidateId] = useState("");
-  const [editClicked, setEditClicked] = useState(false);
   const [searchTerm, setSearchTerm] = useState("")
   const columnsList = [
     {
@@ -126,7 +127,9 @@ export default function AllCandidates() {
   };
   useEffect(() => {
     userData();
-  }, []);
+    console.log("bharat");
+  }, [forUpdate.toogleUpdate]);
+
 
   const executeOnClick = () => {
     setIsExpanded(!isExpanded);
@@ -144,6 +147,7 @@ export default function AllCandidates() {
             <input type="search" className="form-control" size="24" placeholder="Search by E-mail" onChange={event => setSearchTerm(event.target.value)} />
           </div>
         </div>
+        {/* <button className="btn btn-primary" onClick={() => test(forTesting)} >Refresh Table</button> */}
         {Object.keys(values.candidateData).length && (
           <DataTable
             striped
@@ -164,7 +168,10 @@ export default function AllCandidates() {
             })}
           />
         )}
-        <UpdateCandidateAdmin candidateId={candidateId} />
+        {
+          candidateId.length != 0 && <UpdateCandidateAdmin candidateId={candidateId} />
+        }
+
       </div>
     </>
   );
