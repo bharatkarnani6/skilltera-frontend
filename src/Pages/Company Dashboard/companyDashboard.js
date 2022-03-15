@@ -7,6 +7,7 @@ import Aboutus from "../About/about";
 import Profile from "../Profile/profile";
 import Jobs from "../Jobs/jobs";
 import CompanySidebar from "../../Component/Company Sidebar/companySidebar";
+//import CompanyDashboardSceen from "../Company Dashboard Screen/companyDashboardScreen";
 
 export default function CompanyDashboard() {
   const menu = useSelector((state) => state.toggleMenu);
@@ -46,7 +47,7 @@ export default function CompanyDashboard() {
             {(() => {
               switch (titleSelection.menuSelection) {
                 case "Dashboard":
-                  return;
+                  return
                   break;
                 case "Profile":
                   return <Profile />;

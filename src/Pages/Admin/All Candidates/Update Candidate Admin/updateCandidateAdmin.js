@@ -1,8 +1,13 @@
 import react, { useEffect, useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import ApiConstants from "../../../../Services/apiconstants";
+import { StateChangeForUpdate } from '../../../../Redux/Action/toggleAction'
 // import '../Update Candidate Admin/updateCandidateAdmin.css'
+import {
+  useHistory
+} from "react-router-dom";
 
 export default function UpdateCandidateAdmin(props) {
   const [adminId, setAdminId] = useState("");
@@ -10,6 +15,8 @@ export default function UpdateCandidateAdmin(props) {
   const [candiData, setCandiData] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+
+
 
   const {
     register,
@@ -19,45 +26,19 @@ export default function UpdateCandidateAdmin(props) {
     getValues,
   } = useForm();
 
+  const dispatch = useDispatch();
+  const [forUpdating, setForUpdating] = useState(false);
+  const forReRender = (data) => {
+    setForUpdating(!data)
+    dispatch(StateChangeForUpdate(forUpdating))
+  }
+
+
   const candidateData = () => {
     axios
       .post(ApiConstants.CANDIDATE_DATA_BY_ID, { id: props.candidateId })
       .then((response) => {
-        // console.log(response);
-        // setCandidateDataById(response.data.candidate)
-
         setCandiData(response.data.candidate);
-
-        // setValue("fullname", response.data.candidate.fullname);
-        // setValue("country", response.data.candidate.country);
-        // setValue("currentCity", response.data.candidate.currentCity);
-        // setValue("currentCompany", response.data.candidate.currentCompany);
-        // setValue("currentRole", response.data.candidate.currentRole);
-        // setValue("email", response.data.candidate.email);
-        // setValue(
-        //   "expectedRateC2CorC2H",
-        //   response.data.candidate.expectedRateC2CorC2H
-        // );
-        // setValue("experience", response.data.candidate.experience);
-        // setValue(
-        //   "experienceDescription",
-        //   response.data.candidate.experienceDescription
-        // );
-        // setValue("interestedRole", response.data.candidate.interestedRole);
-        // setValue(
-        //   "knownTechnologies",
-        //   response.data.candidate.knownTechnologies
-        // );
-        // setValue("linkedInUrl", response.data.candidate.linkedInUrl);
-        // setValue(
-        //   "needVisaSponsorship",
-        //   response.data.candidate.needVisaSponsorship
-        // );
-        // setValue("phone", response.data.candidate.phone);
-        // setValue("relocation", response.data.candidate.relocation);
-        // setValue("timeToJoin", response.data.candidate.timeToJoin);
-        // setValue("typeOfJob", response.data.candidate.typeOfJob);
-        //rak
       })
       .catch((err) => {
         console.log(err);
@@ -420,6 +401,7 @@ export default function UpdateCandidateAdmin(props) {
                     type="button"
                     className="btn btn-secondary"
                     data-bs-dismiss="modal"
+                    onClick={() => forReRender(forUpdating)}
                   >
                     Close
                   </button>

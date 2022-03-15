@@ -15,6 +15,7 @@ import {
   convertFromHTML,
 } from "draft-js";
 import draftToHtml from "draftjs-to-html";
+import htmlToDraft from "html-to-draftjs";
 //import { convertFromHTML } from "draft-convert";
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
@@ -44,12 +45,32 @@ const Profile = () => {
 
   const [userData, setUserData] = useState({});
 
+  const [content, setContent] = useState("");
+
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
+
   const getData = async () => {
     await axios
-      .get(ApiConstants.CANDIDATE_DATA_BY_ID + `${userId}`)
+      .get(ApiConstants.CANDIDATE_DATA_BY_ID + `/${userId}`)
       .then((response) => {
         setUserData(response.data.candidate);
         setLiked(true);
+
+        const contentBlock = htmlToDraft(
+          response.data.candidate.experienceDescription
+        );
+
+        EditorState.createWithContent(
+          ContentState.createFromBlockArray(contentBlock.contentBlocks)
+        );
+
+        setEditorState(
+          EditorState.createWithContent(
+            ContentState.createFromBlockArray(contentBlock.contentBlocks)
+          )
+        );
       })
       .catch((error) => {
         console.log("Data can not fetched");
@@ -110,20 +131,6 @@ const Profile = () => {
     }
   }, [liked]);
 
-  //............... text reach editor .................
-
-  const getHtml = (editorState) =>
-    draftToHtml(convertToRaw(editorState.getCurrentContent("<h1>hello</h1>")));
-
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
-
-  const onEditorStateChange = (editorState) => {
-    setEditorState(editorState);
-  };
-
-  // .............................
   const onSubmit = () => {
     trackPromise(
       axios
@@ -135,7 +142,7 @@ const Profile = () => {
             currentRole: user.currentRole,
             interestedRole: user.interestedRole,
             knownTechnologies: user.knownTechnologies,
-            experienceDescription: getHtml(editorState),
+            experienceDescription: content,
             previousEmployers: user.previousEmployers,
           },
           {
@@ -157,7 +164,6 @@ const Profile = () => {
             width: 400,
             height: 100,
           });
-          window.location.reload(false);
         })
         .catch((error) => {
           Swal.fire({
@@ -340,38 +346,40 @@ const Profile = () => {
             <label for="exampleFormControlTextarea1">
               Brief Description of experience / type of work done (in 300 words)
             </label>
-            <div class="input-group ">
-              <div className="col-12">
-                <Editor
-                  editorState={editorState}
-                  wrapperClassName="rich-editor demo-wrapper"
-                  onEditorStateChange={onEditorStateChange}
-                  editorClassName="editorClassName"
-                  placeholder={
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: userData.experienceDescription,
-                      }}
-                    />
-                  }
-                />
-              </div>
 
-              <div class="input-group-append ml-1">
-                <div class="dropdown">
-                  <div class="dropbtn">
-                    <FcInfo />
-                  </div>
-                  <div class="dropdown-content">
-                    <span>
-                      Example: A Python Developer, charged with intellectual
-                      curiosity and positive attitude; interested in applying
-                      newly acquired Data Science skills and solving challenging
-                      problems. I am looking for an exciting place to work where
-                      I can apply my skills to make a positive impact.
-                    </span>
-                  </div>
-                </div>
+            <div
+              class="col-11 pl-0 pr-0"
+              style={{
+                backgroundColor: check === true ? "white" : " #e9ecef",
+                pointerEvents: check === true ? "visibleFill" : "none",
+              }}
+            >
+              <Editor
+                editorState={editorState}
+                wrapperClassName="rich-editor demo-wrapper"
+                editorClassName="editorClassName"
+                onEditorStateChange={(newState) => {
+                  setEditorState(newState);
+                  setContent(
+                    draftToHtml(convertToRaw(newState.getCurrentContent()))
+                  );
+                }}
+                placeholder={"Write your experience here ..."}
+              />
+            </div>
+
+            <div class="dropdown col-1">
+              <div class="dropbtn">
+                <FcInfo />
+              </div>
+              <div class="dropdown-content">
+                <span>
+                  Example: A Python Developer, charged with intellectual
+                  curiosity and positive attitude; interested in applying newly
+                  acquired Data Science skills and solving challenging problems.
+                  I am looking for an exciting place to work where I can apply
+                  my skills to make a positive impact.
+                </span>
               </div>
             </div>
           </div>
