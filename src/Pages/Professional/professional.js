@@ -365,24 +365,6 @@ const Profile = () => {
                   );
                 }}
                 placeholder={"Write your experience here ..."}
-                toolbar={{
-                  options: [
-                    "inline",
-                    "blockType",
-                    "fontSize",
-                    "list",
-                    "textAlign",
-                    "history",
-                    "embedded",
-                    "emoji",
-                    "image",
-                  ],
-                  inline: { inDropdown: true },
-                  list: { inDropdown: true },
-                  textAlign: { inDropdown: true },
-                  link: { inDropdown: true },
-                  history: { inDropdown: true },
-                }}
               />
             </div>
 
