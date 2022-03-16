@@ -356,8 +356,8 @@ const Profile = () => {
             >
               <Editor
                 editorState={editorState}
-                wrapperClassName="rich-editor demo-wrapper"
-                editorClassName="editorClassName"
+                wrapperClassName="card"
+                editorClassName="card-body"
                 onEditorStateChange={(newState) => {
                   setEditorState(newState);
                   setContent(
