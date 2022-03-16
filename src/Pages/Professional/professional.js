@@ -347,28 +347,28 @@ const Profile = () => {
               Brief Description of experience / type of work done (in 300 words)
             </label>
 
-            {/* <div
-              class="col-11 pl-0 pr-0"
+            <div
+              class="col-12 pl-0 pr-0"
               style={{
                 backgroundColor: check === true ? "white" : " #e9ecef",
                 pointerEvents: check === true ? "visibleFill" : "none",
               }}
-            > */}
-            <Editor
-              editorState={editorState}
-              wrapperClassName="rich-editor"
-              editorClassName="editorClassName"
-              onEditorStateChange={(newState) => {
-                setEditorState(newState);
-                setContent(
-                  draftToHtml(convertToRaw(newState.getCurrentContent()))
-                );
-              }}
-              placeholder={"Write your experience here ..."}
-            />
-            {/* </div> */}
-
-            {/* <div class="dropdown col-1">
+            >
+              <Editor
+                editorState={editorState}
+                wrapperClassName="rich-editor"
+                editorClassName="editorClassName"
+                onEditorStateChange={(newState) => {
+                  setEditorState(newState);
+                  setContent(
+                    draftToHtml(convertToRaw(newState.getCurrentContent()))
+                  );
+                }}
+                placeholder={"Write your experience here ..."}
+              />
+            </div>
+            {/* 
+            <div class="dropdown col-1">
               <div class="dropbtn">
                 <FcInfo />
               </div>
