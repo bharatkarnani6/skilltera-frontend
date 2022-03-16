@@ -365,6 +365,7 @@ const Profile = () => {
                   );
                 }}
                 placeholder={"Write your experience here ..."}
+                toolbarStyle={{ width: "100%" }}
               />
             </div>
             {/* 
