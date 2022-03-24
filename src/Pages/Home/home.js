@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../Component/Navbar/navbar";
 import Banner from "../../Assets/banner.png";
 import Banner1 from "../../Assets/bannerimg.png";
-
+import mixpanel from 'mixpanel-browser';
 import "./home.css";
 import { Link } from "react-router-dom";
+
+mixpanel.init('5510edbc11d8e6077735bbdb8cf9a9d6', { debug: true, ignore_dnt: true });
+
 const Home = () => {
+
+
+
   const [candidateDashboardActive, setcandidateDashboardActive] =
     useState(false);
   const [companyDashboardActive, setcompanyDashboardActive] = useState(false);
@@ -20,6 +26,12 @@ const Home = () => {
       setcompanyDashboardActive(sessionStorage.getItem("companyDashboard"));
     }
   }, []);
+
+  const testMixPanel = () => {
+    mixpanel.track('For Companies was clicked', {
+      'source': "For Companies",
+    });
+  }
 
   return (
     <div>
@@ -47,7 +59,7 @@ const Home = () => {
                       : "/company_login"
                   }
                 >
-                  <button className="btn btn-primary btn-lg">
+                  <button className="btn btn-primary btn-lg" onClick={testMixPanel}>
                     Sign-up / Sign-in
                   </button>
                 </Link>
