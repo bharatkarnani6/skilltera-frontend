@@ -10,10 +10,6 @@ import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import Card from "../../Component/Card/card";
 
-import DataTable from "react-data-table-component";
-import { isTemplateLiteral } from "@babel/types";
-import { set } from "harmony-reflect";
-
 export default function Jobs() {
   const [allData, setAllData] = useState([]);
   const [flag, setFlag] = useState(false);
@@ -66,8 +62,8 @@ export default function Jobs() {
   return (
     <>
       <div className="table-responsive job-table">
-        <div className="filter-menu">
-          <div className="btn-group" role="group" aria-label="Basic example">
+        <div className="filter-menu" style={{ overflowX: "auto" }}>
+          <div className="btn-group" role="group">
             {uniqueRole.map((data, i) => (
               <button
                 type="button"
@@ -79,23 +75,26 @@ export default function Jobs() {
             ))}
           </div>
         </div>
-        <div>
-          {clickRole.map((data, i) => {
-            console.log(data);
-            return (
-              <Card
-                interestedRole={data.interestedRole}
-                currentCompany={data.currentCompany}
-                currentRole={data.currentRole}
-                experience={data.experience}
-                timeToJoin={data.timeToJoin}
-                expectedRateC2CorC2H={data.expectedRateC2CorC2H}
-                experienceDescription={data.experienceDescription}
-                knownTechnologies={data.knownTechnologies}
-              />
-            );
-          })}
-        </div>
+      </div>
+
+      <div>
+        {clickRole.map((data, i) => {
+          console.log(data);
+          return (
+            <Card
+              interestedRole={data.interestedRole}
+              currentCompany={data.currentCompany}
+              currentRole={data.currentRole}
+              experience={data.experience}
+              timeToJoin={data.timeToJoin}
+              expectedRateC2CorC2H={data.expectedRateC2CorC2H}
+              experienceDescription={data.experienceDescription}
+              knownTechnologies={data.knownTechnologies}
+              previousEmployers={data.previousEmployers}
+              typeOfJob={data.typeOfJob}
+            />
+          );
+        })}
       </div>
     </>
   );
