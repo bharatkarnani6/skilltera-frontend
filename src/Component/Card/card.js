@@ -14,19 +14,22 @@ import {
 } from "react-icons/fc";
 import { BsQuestionLg } from "react-icons/bs";
 
+const selectedCandidate = (data) => {
+  console.log("selectedData : ", data);
+};
+const rejectedCandidate = (id) => {
+  console.log("RejectedDate : ", id);
+};
 
-const selected
-
-
-
-
-
+const futureCandidate = (data) => {
+  console.log("futureData", data);
+};
 
 const card = (props) => {
   return (
     <>
-      <div class="container-fluid myCard" id="accordionExample">
-        <div class="card  mt-3 mb-0 rounded-4">
+      <div class="container-fluid  " id="accordionExample">
+        <div class="card  mt-3 mb-0 rounded-4 myCard">
           <div class="card-body">
             <div class=" d-flex justify-content-end">
               <div
@@ -38,6 +41,7 @@ const card = (props) => {
                   type="button"
                   class="btn btn-outline-primary "
                   title="Shortlist"
+                  onClick={(e) => selectedCandidate(props.userData)}
                 >
                   <FcCheckmark />
                 </button>
@@ -45,6 +49,7 @@ const card = (props) => {
                   type="button"
                   class="btn btn-outline-primary"
                   title="Reject"
+                  onClick={(e) => rejectedCandidate(props.userData._id)}
                 >
                   <FcCancel />
                 </button>
@@ -52,6 +57,7 @@ const card = (props) => {
                   type="button"
                   class="btn btn-outline-primary"
                   title="Future View"
+                  onClick={(e) => futureCandidate(props.userData)}
                 >
                   <BsQuestionLg />
                 </button>

@@ -48,6 +48,8 @@ export default function Jobs() {
 
   const [clickRole, setClickRole] = useState([]);
 
+  let clickItem = uniqueRole[0];
+
   const filterByRole = (clickItem) => {
     if (Object.keys(allData).length > 0 && flag) {
       let arrByID = allData.filter((item) => {
@@ -59,9 +61,13 @@ export default function Jobs() {
     }
   };
 
+  useEffect(() => {
+    filterByRole(uniqueRole[0]);
+  }, [flag]);
+
   return (
     <>
-      <div className="table-responsive job-table">
+      <div className="table-responsive job-table mt-4">
         <div className="filter-menu" style={{ overflowX: "auto" }}>
           <div className="btn-group" role="group">
             {uniqueRole.map((data, i) => (
@@ -77,9 +83,8 @@ export default function Jobs() {
         </div>
       </div>
 
-      <div>
+      <div class="mr-4 ml-4">
         {clickRole.map((data, i) => {
-          console.log(data);
           return (
             <Card
               interestedRole={data.interestedRole}
@@ -92,6 +97,7 @@ export default function Jobs() {
               knownTechnologies={data.knownTechnologies}
               previousEmployers={data.previousEmployers}
               typeOfJob={data.typeOfJob}
+              userData={data}
             />
           );
         })}
