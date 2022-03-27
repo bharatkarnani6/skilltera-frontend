@@ -16,7 +16,6 @@ export default function CompanyDashboard() {
   );
   const data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data"));
 
-
   const logout = () => {
     sessionStorage.clear();
     window.location.pathname = "/";
@@ -47,12 +46,21 @@ export default function CompanyDashboard() {
             {(() => {
               switch (titleSelection.menuSelection) {
                 case "Dashboard":
-                  return
+                  return;
                   break;
                 case "Profile":
                   return <Profile />;
                   break;
                 case "Candidates":
+                  return <Jobs />;
+                  break;
+                case "SelectedCand":
+                  return <Jobs />;
+                  break;
+                case "RejectedCand":
+                  return <Jobs />;
+                  break;
+                case "FutureCand":
                   return <Jobs />;
                   break;
                 case "logout":
