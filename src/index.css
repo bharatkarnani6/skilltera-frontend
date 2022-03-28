@@ -24,3 +24,8 @@ code {
   background-color: #9b51e0;
   border: none;
 }
+.badge-primary {
+  color: black;
+  background-color: white;
+  border: 0.08px solid rgba(0, 0, 0, 0.295);
+}

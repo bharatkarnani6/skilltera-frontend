@@ -7,6 +7,9 @@ import Aboutus from "../About/about";
 import Profile from "../Profile/profile";
 import Jobs from "../Jobs/jobs";
 import CompanySidebar from "../../Component/Company Sidebar/companySidebar";
+import FutureCand from "../FutureCand/futureCand";
+import RejectedCand from "../RejectedCand/rejectedCand";
+import SelectedCand from "../SelectedCand/selectedCand";
 //import CompanyDashboardSceen from "../Company Dashboard Screen/companyDashboardScreen";
 
 export default function CompanyDashboard() {
@@ -15,7 +18,6 @@ export default function CompanyDashboard() {
     (state) => state.sidebarMenuSelectionReducer
   );
   const data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data"));
-
 
   const logout = () => {
     sessionStorage.clear();
@@ -47,13 +49,22 @@ export default function CompanyDashboard() {
             {(() => {
               switch (titleSelection.menuSelection) {
                 case "Dashboard":
-                  return
+                  return;
                   break;
                 case "Profile":
                   return <Profile />;
                   break;
                 case "Candidates":
                   return <Jobs />;
+                  break;
+                case "SelectedCand":
+                  return <SelectedCand />;
+                  break;
+                case "RejectedCand":
+                  return <RejectedCand />;
+                  break;
+                case "FutureCand":
+                  return <FutureCand />;
                   break;
                 case "logout":
                   return logout();

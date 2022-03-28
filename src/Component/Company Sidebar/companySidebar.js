@@ -20,6 +20,14 @@ import { RiPencilLine } from "react-icons/ri";
 import { BiCog } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useDispatch } from "react-redux";
+
+import {
+  BsCurrencyDollar,
+  BsQuestionLg,
+  BsCheckLg,
+  BsXCircle,
+} from "react-icons/bs";
+
 import {
   SidebarMenuSelectionAction,
   ToggleAction,
@@ -98,17 +106,39 @@ export default function CompanySidebar() {
               </button>
               <span> Candidates</span>
             </li>
-            {/* <li class="list-group-item">
+            <li class="list-group-item">
               <button
                 active={true}
                 class="btn btn-primary mr-1"
                 data-bs-dismiss="offcanvas"
-                onClick={() => menuSelection("Settings")}
+                onClick={() => menuSelection("SelectedCand")}
               >
-                <BiCog />
+                <BsCheckLg />
               </button>
-              <span>Setting</span>
-            </li> */}
+              <span>Selected Candidate</span>
+            </li>
+            <li class="list-group-item">
+              <button
+                active={true}
+                class="btn btn-primary mr-1"
+                data-bs-dismiss="offcanvas"
+                onClick={() => menuSelection("RejectedCand")}
+              >
+                <BsXCircle />
+              </button>
+              <span>Rejected Candidate</span>
+            </li>
+            <li class="list-group-item">
+              <button
+                active={true}
+                class="btn btn-primary mr-1"
+                data-bs-dismiss="offcanvas"
+                onClick={() => menuSelection("FutureCand")}
+              >
+                <BsQuestionLg />
+              </button>
+              <span>Future Candidate</span>
+            </li>
 
             <li class="list-group-item">
               <button

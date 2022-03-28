@@ -1,0 +1,8 @@
+.myCard {
+  transition: 1s;
+  margin-left: -20%;
+}
+
+.myCard:hover {
+  transform: scale(1.015);
+}
