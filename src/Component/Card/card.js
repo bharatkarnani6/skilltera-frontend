@@ -1,7 +1,7 @@
 import React from "react";
 import "./card.css";
 
-import { BsCurrencyDollar } from "react-icons/bs";
+import { BsCurrencyDollar, BsQuestionLg } from "react-icons/bs";
 import {
   FcCalendar,
   FcBusinessman,
@@ -12,7 +12,6 @@ import {
   FcCheckmark,
   FcCancel,
 } from "react-icons/fc";
-import { BsQuestionLg } from "react-icons/bs";
 
 const selectedCandidate = (data) => {
   console.log("selectedData : ", data);
