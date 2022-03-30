@@ -9,7 +9,7 @@ import Jobs from "../Jobs/jobs";
 import CompanySidebar from "../../Component/Company Sidebar/companySidebar";
 import FutureCand from "../FutureCand/futureCand";
 import RejectedCand from "../RejectedCand/rejectedCand";
-import SelectedCand from "../SelectedCand/selectedCand";
+import ShortlistedCand from "../../Pages/ShortlistedCand/shortlisted"
 import InterviewingCand from "../InterviewingCand/interviewingCand"
 //import CompanyDashboardSceen from "../Company Dashboard Screen/companyDashboardScreen";
 
@@ -59,7 +59,7 @@ export default function CompanyDashboard() {
                   return <Jobs />;
                   break;
                 case "Shortlisted Candidates":
-                  return <SelectedCand />;
+                  return <ShortlistedCand />;
                   break;
                 case "Rejected Candidates ":
                   return <RejectedCand />;
