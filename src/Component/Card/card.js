@@ -1,4 +1,8 @@
 import React from "react";
+import axios from 'axios'
+import ApiConstants from "../../Services/apiconstants";
+import Swal from "sweetalert2"
+
 import "./card.css";
 
 import { BsCurrencyDollar, BsQuestionLg } from "react-icons/bs";
@@ -13,8 +17,48 @@ import {
   FcCancel,
 } from "react-icons/fc";
 
-const selectedCandidate = (data) => {
+
+const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data")) 
+
+
+const token = company_loggedin_user_data.token
+const userId = company_loggedin_user_data.company._id
+
+const shortlistedCandidate = (data) => {
   console.log("selectedData : ", data);
+  axios.post(ApiConstants.SHORTLISTED_CANDIDATE ,{
+    _id:data
+  },{
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+      token: token,
+      _id: userId,
+      "Access-Control-Allow-Origin": true,
+      "Access-Control-Allow-Methods": "GET, POST, PATCH",
+    },
+  }).then((res) => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: 'Shortlisted successfully'
+    })
+
+  }).catch((error) => {
+
+  })
+
 };
 const rejectedCandidate = (id) => {
   console.log("RejectedDate : ", id);
@@ -24,6 +68,9 @@ const futureCandidate = (data) => {
   console.log("futureData", data);
 };
 
+const interviewingCandidate = (data) => {
+  console.log("interviewing", data);
+};
 const card = (props) => {
   return (
     <>
@@ -40,7 +87,7 @@ const card = (props) => {
                   type="button"
                   class="btn btn-outline-primary "
                   title="Shortlist"
-                  onClick={(e) => selectedCandidate(props.userData)}
+                  onClick={(e) => shortlistedCandidate(props.userData._id)}
                 >
                   <FcCheckmark />
                 </button>
@@ -56,7 +103,7 @@ const card = (props) => {
                   type="button"
                   class="btn btn-outline-primary"
                   title="Interview"
-                  onClick={(e) => futureCandidate(props.userData)}
+                  onClick={(e) => interviewingCandidate(props.userData._id)}
                 >
                   <FcBusinessman />
                 </button>
@@ -64,7 +111,7 @@ const card = (props) => {
                   type="button"
                   class="btn btn-outline-primary"
                   title="Future View"
-                  onClick={(e) => futureCandidate(props.userData)}
+                  onClick={(e) => futureCandidate(props.userData._id)}
                 >
                   <BsQuestionLg />
                 </button>
