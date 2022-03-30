@@ -26,6 +26,7 @@ import {
   BsQuestionLg,
   BsCheckLg,
   BsXCircle,
+  BsFillPersonCheckFill
 } from "react-icons/bs";
 
 import {
@@ -100,44 +101,55 @@ export default function CompanySidebar() {
                 active={true}
                 class="btn btn-primary mr-1"
                 data-bs-dismiss="offcanvas"
-                onClick={() => menuSelection("Candidates")}
+                onClick={() => menuSelection("All Candidates")}
               >
                 <FaList />
               </button>
-              <span> Candidates</span>
+              <span> All Candidates</span>
             </li>
             <li class="list-group-item">
               <button
                 active={true}
                 class="btn btn-primary mr-1"
                 data-bs-dismiss="offcanvas"
-                onClick={() => menuSelection("SelectedCand")}
+                onClick={() => menuSelection("Shortlisted Candidates")}
               >
                 <BsCheckLg />
               </button>
-              <span>Selected Candidate</span>
+              <span>Shortlisted Candidates</span>
             </li>
             <li class="list-group-item">
               <button
                 active={true}
                 class="btn btn-primary mr-1"
                 data-bs-dismiss="offcanvas"
-                onClick={() => menuSelection("RejectedCand")}
+                onClick={() => menuSelection("Rejected Candidates ")}
               >
                 <BsXCircle />
               </button>
-              <span>Rejected Candidate</span>
+              <span>Rejected Candidates</span>
             </li>
             <li class="list-group-item">
               <button
                 active={true}
                 class="btn btn-primary mr-1"
                 data-bs-dismiss="offcanvas"
-                onClick={() => menuSelection("FutureCand")}
+                onClick={() => menuSelection("Interviewing Candidates")}
+              >
+                <BsFillPersonCheckFill />
+              </button>
+              <span>Interviewing Candidates</span>
+            </li>
+            <li class="list-group-item">
+              <button
+                active={true}
+                class="btn btn-primary mr-1"
+                data-bs-dismiss="offcanvas"
+                onClick={() => menuSelection("Future Candidates")}
               >
                 <BsQuestionLg />
               </button>
-              <span>Future Candidate</span>
+              <span>Future Candidates</span>
             </li>
 
             <li class="list-group-item">
