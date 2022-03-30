@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { FcAbout } from "react-icons/fc";
 import { trackPromise, usePromiseTracker } from "react-promise-tracker";
 import { NavLink } from "react-router-dom";
+import Mixpanel from "../../Services/mixpanel";
 
 const Login = () => {
   const { promiseInProgress } = usePromiseTracker();
@@ -25,6 +26,7 @@ const Login = () => {
   let history = useHistory();
 
   const onSubmit = (data) => {
+    Mixpanel('For Login Candidate', 'Login Candidate Button')
     trackPromise(
       axios
         .post(ApiConstants.LOGIN, {
