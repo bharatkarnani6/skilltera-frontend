@@ -1,9 +1,10 @@
-var baseUrl = "https://skilltera-api.herokuapp.com"
-// if (process.env.NODE_ENV == "production") {
-//   baseUrl = "https://skilltera-api.herokuapp.com";
-// } else {
-//   baseUrl = "http://localhost:8080";
-// }
+//var baseUrl = "https://skilltera-api.herokuapp.com"
+var baseUrl
+if (process.env.NODE_ENV == "production") {
+  baseUrl = "https://skilltera-api.herokuapp.com";
+} else {
+  baseUrl = "http://localhost:8080";
+}
 console.log(baseUrl);
 const ApiConstants = {
   LOGIN: `${baseUrl}/login`,
@@ -22,5 +23,9 @@ const ApiConstants = {
   ADMIN_CANDIDATE_UPDATE: `${baseUrl}/admin/candidate/update`,
   PROFILE: `${baseUrl}/profile`,
   ADMIN_COMPANY_PASSWORD_RESET: `${baseUrl}/admin/company/reset`,
+  SHORTLISTED_CANDIDATE :`${baseUrl}/company/addShortlisted`,
+  REJECTED_CANDIDATE:`${baseUrl}/company/addRejected`,
+  INTERVIEWING_CANDIDATE:`${baseUrl}/company/addInterviewed`,
+  FUTURE_CANDIDATE:`${baseUrl}/company/addFuture`
 };
 export default ApiConstants;
