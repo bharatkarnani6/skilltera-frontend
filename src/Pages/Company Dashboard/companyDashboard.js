@@ -10,6 +10,7 @@ import CompanySidebar from "../../Component/Company Sidebar/companySidebar";
 import FutureCand from "../FutureCand/futureCand";
 import RejectedCand from "../RejectedCand/rejectedCand";
 import SelectedCand from "../SelectedCand/selectedCand";
+import InterviewingCand from "../InterviewingCand/interviewingCand"
 //import CompanyDashboardSceen from "../Company Dashboard Screen/companyDashboardScreen";
 
 export default function CompanyDashboard() {
@@ -54,19 +55,22 @@ export default function CompanyDashboard() {
                 case "Profile":
                   return <Profile />;
                   break;
-                case "Candidates":
+                case "All Candidates":
                   return <Jobs />;
                   break;
-                case "SelectedCand":
+                case "Shortlisted Candidates":
                   return <SelectedCand />;
                   break;
-                case "RejectedCand":
+                case "Rejected Candidates ":
                   return <RejectedCand />;
                   break;
-                case "FutureCand":
+                case "Interviewing Candidates":
+                  return <InterviewingCand />;
+                  break;
+                case "Future Candidates":
                   return <FutureCand />;
                   break;
-                case "logout":
+                 case "logout":
                   return logout();
                   break;
                 default:

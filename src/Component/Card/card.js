@@ -55,6 +55,14 @@ const card = (props) => {
                 <button
                   type="button"
                   class="btn btn-outline-primary"
+                  title="Interview"
+                  onClick={(e) => futureCandidate(props.userData)}
+                >
+                  <FcBusinessman />
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary"
                   title="Future View"
                   onClick={(e) => futureCandidate(props.userData)}
                 >
