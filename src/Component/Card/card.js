@@ -22,7 +22,8 @@ const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_lo
 
 
 const token = company_loggedin_user_data.token
-const userId = company_loggedin_user_data.company
+const userId = company_loggedin_user_data.company._id
+console.log( "token ,userId",token , userId)
 
 const shortlistedCandidate = (data) => {
   axios.post(ApiConstants.SHORTLISTED_CANDIDATE ,{
