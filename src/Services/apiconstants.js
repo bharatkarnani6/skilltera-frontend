@@ -26,6 +26,12 @@ const ApiConstants = {
   SHORTLISTED_CANDIDATE :`${baseUrl}/company/addShortlisted`,
   REJECTED_CANDIDATE:`${baseUrl}/company/addRejected`,
   INTERVIEWING_CANDIDATE:`${baseUrl}/company/addInterviewed`,
-  FUTURE_CANDIDATE:`${baseUrl}/company/addFuture`
+  FUTURE_CANDIDATE:`${baseUrl}/company/addSaved`,
+
+  GET_SHORTLISTED_CANDIDATE :`${baseUrl}/company/shortlisted`,
+  GET_REJECTED_CANDIDATE:`${baseUrl}/company/rejected`,
+  GET_INTERVIEWING_CANDIDATE:`${baseUrl}/company/interviewed`,
+  GET_FUTURE_CANDIDATE:`${baseUrl}/company/saved`,
+
 };
 export default ApiConstants;
