@@ -18,11 +18,11 @@ import {
 } from "react-icons/fc";
 
 
-const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data")) ||""
+const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data"))||""
 
 
 const token = company_loggedin_user_data.token
-const userId = company_loggedin_user_data.company._id 
+const userId = company_loggedin_user_data.company
 
 const shortlistedCandidate = (data) => {
   axios.post(ApiConstants.SHORTLISTED_CANDIDATE ,{
