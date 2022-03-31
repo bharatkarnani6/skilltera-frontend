@@ -7,6 +7,8 @@ if (process.env.NODE_ENV == "production") {
 }
 mixpanel.init(mixpanelToken, { debug: true, ignore_dnt: true });
 
+console.log(mixpanelToken);
+
 export default function Mixpanel(purpose, buttonName) {
     console.log(purpose, buttonName);
     mixpanel.track(purpose, {
