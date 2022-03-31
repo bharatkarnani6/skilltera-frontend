@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import ApiConstants from "../../Services/apiconstants";
 import Swal from "sweetalert2"
@@ -18,172 +18,180 @@ import {
 } from "react-icons/fc";
 
 
-const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data"))||""
 
-
-const token = company_loggedin_user_data.token
-const userId = company_loggedin_user_data.company._id
-console.log( "token ,userId",token , userId)
-
-const shortlistedCandidate = (data) => {
-  axios.post(ApiConstants.SHORTLISTED_CANDIDATE ,{
-    _id:data
-  },{
-    headers: {
-      Accept: "application/json",
-      "Content-type": "application/json",
-      token: token,
-      _id: userId,
-      "Access-Control-Allow-Origin": true,
-      "Access-Control-Allow-Methods": "GET, POST, PATCH",
-    },
-  }).then((res) => {
-    
-    console.log("res : ",res) 
-
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      }
-    })
-    
-    Toast.fire({
-      icon: 'success',
-      title: 'Shortlisted successfully'
-    })
-
-  }).catch((error) => {
-
-     console.log(error)
-
-  })
-};
-
-
-const rejectedCandidate = (data) => {
-
-  axios.post(ApiConstants.REJECTED_CANDIDATE ,{
-    _id:data
-  },{
-    headers: {
-      Accept: "application/json",
-      "Content-type": "application/json",
-      token: token,
-      _id: userId,
-      "Access-Control-Allow-Origin": true,
-      "Access-Control-Allow-Methods": "GET, POST, PATCH",
-    },
-  }).then((res) => {
-    
-    console.log("res : ",res) 
-
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      }
-    })
-    
-    Toast.fire({
-      icon: 'error',
-      title: 'Add to Rejectlist'
-    })
-
-  }).catch((error) => {
-
-     console.log(error)
-
-  })
-
-};
-
-const futureCandidate = (data) => {
-  
-  axios.post(ApiConstants.FUTURE_CANDIDATE ,{
-    _id:data
-  },{
-    headers: {
-      Accept: "application/json",
-      "Content-type": "application/json",
-      token: token,
-      _id: userId,
-      "Access-Control-Allow-Origin": true,
-      "Access-Control-Allow-Methods": "GET, POST, PATCH",
-    },
-  }).then((res) => {
-  
-     console.log("res : ",res) 
-     const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      }
-    })
-    Toast.fire({
-      icon: 'success',
-      title: 'Added to FutureList'
-    })
-  }).catch((error) => {
-     console.log(error)
-  })
-};
-
-const interviewingCandidate = (data) => {
-  axios.post(ApiConstants.INTERVIEWING_CANDIDATE ,{
-    _id:data
-  },{
-    headers: {
-      Accept: "application/json",
-      "Content-type": "application/json",
-      token: token,
-      _id: userId,
-      "Access-Control-Allow-Origin": true,
-      "Access-Control-Allow-Methods": "GET, POST, PATCH",
-    },
-  }).then((res) => {
-    
-    console.log("res : ",res) 
-
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      }
-    })
-    
-    Toast.fire({
-      icon: 'success',
-      title: 'Added To Interviewinglist'
-    })
-
-  }).catch((error) => {
-
-     console.log(error)
-
-  })
-};
 const card = (props) => {
+  const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data"))||""
+
+  const token = company_loggedin_user_data.token
+  const userId = company_loggedin_user_data.company._id
+  console.log( "token ,userId",token , userId)
+  
+  const shortlistedCandidate = (data) => {
+    axios.post(ApiConstants.SHORTLISTED_CANDIDATE ,{
+      _id:data
+    },{
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+        token: token,
+        _id: userId,
+        "Access-Control-Allow-Origin": true,
+        "Access-Control-Allow-Methods": "GET, POST, PATCH",
+      },
+    }).then((res) => {
+      
+      console.log("res : ",res) 
+  
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Shortlisted successfully'
+      })
+  
+    }).catch((error) => {
+  
+       console.log(error)
+  
+    })
+  };
+  
+  
+  
+  
+  
+  const rejectedCandidate = (data) => {
+  
+     
+    axios.post(ApiConstants.REJECTED_CANDIDATE ,{
+      _id:data
+    },{
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+        token: token,
+        _id: userId,
+        "Access-Control-Allow-Origin": true,
+        "Access-Control-Allow-Methods": "GET, POST, PATCH",
+      },
+    }).then((res) => {
+      
+      console.log("res : ",res) 
+  
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'error',
+        title: 'Add to Rejectlist'
+      })
+  
+    }).catch((error) => {
+  
+       console.log(error)
+  
+    })
+  
+  };
+  
+  const futureCandidate = (data) => {
+    
+    axios.post(ApiConstants.FUTURE_CANDIDATE ,{
+      _id:data
+    },{
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+        token: token,
+        _id: userId,
+        "Access-Control-Allow-Origin": true,
+        "Access-Control-Allow-Methods": "GET, POST, PATCH",
+      },
+    }).then((res) => {
+    
+       console.log("res : ",res) 
+       const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'success',
+        title: 'Added to FutureList'
+      })
+    }).catch((error) => {
+       console.log(error)
+    })
+  };
+  
+  const interviewingCandidate = (data) => {
+    axios.post(ApiConstants.INTERVIEWING_CANDIDATE ,{
+      _id:data
+    },{
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+        token: token,
+        _id: userId,
+        "Access-Control-Allow-Origin": true,
+        "Access-Control-Allow-Methods": "GET, POST, PATCH",
+      },
+    }).then((res) => {
+      
+      console.log("res : ",res) 
+  
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Added To Interviewinglist'
+      })
+  
+    }).catch((error) => {
+  
+       console.log(error)
+  
+    })
+  };
+
+  
+
+
   return (
     <>
       <div class="container-fluid  " id="accordionExample">
