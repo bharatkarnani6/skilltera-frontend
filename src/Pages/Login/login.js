@@ -26,7 +26,7 @@ const Login = () => {
   let history = useHistory();
 
   const onSubmit = (data) => {
-    Mixpanel('For Login Candidate', 'Login Candidate Button')
+    Mixpanel("For Login Candidate", "Login Candidate Button")
     trackPromise(
       axios
         .post(ApiConstants.LOGIN, {
