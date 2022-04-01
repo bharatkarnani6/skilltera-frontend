@@ -35,7 +35,7 @@ const userData = () => {
 
     }).catch((err) => {
 
-     console.log(err);
+     console.log(err); 
 
     })
 };
@@ -47,6 +47,7 @@ const filterRoles = () => {
     });
   }
 }
+
 useEffect(() => {
 
   userData()
@@ -55,10 +56,6 @@ useEffect(() => {
  }
  
  }, [flag])
-
-
-
-
 
 
 

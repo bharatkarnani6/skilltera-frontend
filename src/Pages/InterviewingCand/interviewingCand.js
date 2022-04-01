@@ -5,14 +5,15 @@ import Card from "../../Component/Card/card"
 import ApiConstants from "../../Services/apiconstants";
 
 const InterviewingCand = () => {
+  const [interviewedCand ,setInterviewedCand] = useState([])
+  const [flag, setFlag] = useState(false);
+  const [role, setRole] = useState([]);
 
   const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data")) 
 
   const token = company_loggedin_user_data.token
   const userId = company_loggedin_user_data.company._id
 
-  const [interviewedCand ,setInterviewedCand] = useState([])
-    
   const userData = () => {
     axios
       .get(ApiConstants.GET_INTERVIEWING_CANDIDATE ,{
@@ -28,21 +29,79 @@ const InterviewingCand = () => {
       .then((response) => {
         console.log(response)
         setInterviewedCand(response.data.interviewed);
+        setFlag(true)
       }).catch((err) => {
        console.log(err);
       })
   }
   
+  const filterRoles = () => {
+    if (Object.keys(interviewedCand).length > 0 && flag) {
+      let arrByID = interviewedCand.filter((item) => {
+         role.push(item.candidateId.currentRole);
+      });
+    }
+  }
   useEffect(() => {
-   userData()
-  }, [])
+
+    userData()
+    if (flag) {
+     filterRoles();
+   }
+   
+   }, [flag])
+
+   
+let uniqueRole = [...new Set(role)]
+
+console.log("uniqueRole : " ,uniqueRole)   
+
+
+const [clickRole, setClickRole] = useState([]);
+
+const filterByRole = (clickItem ) => {
+  if (Object.keys(interviewedCand).length > 0 && flag) {
+    let arrByID = interviewedCand.filter((item) => {
+      if (clickItem === item.candidateId.currentRole ) {
+        return item;
+      }
+    });
+    setClickRole(arrByID);
+  }
+}
+
+useEffect(() => {
+  
+    
+  filterByRole("Full Stack Engineer")
+
+
+}, [flag]);
 
 
     return (
         <>
+
+        
+<div className="table-responsive job-table mt-4">
+        <div className="filter-menu" style={{ overflowX: "auto" }}>
+          <div className="btn-group" role="group">
+            {uniqueRole.map((data, i) => (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => filterByRole(data)}
+                
+              >
+                {data}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
         
          <div class="mr-4 ml-4">
-        {interviewedCand.map((data, i) => {
+        {clickRole.map((data, i) => {
           return (
             <Card
             interestedRole={data.candidateId.interestedRole}
