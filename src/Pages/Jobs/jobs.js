@@ -2,10 +2,6 @@ import axios, { useMemo } from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import ApiConstants from "../../Services/apiconstants";
 import "./jobs.css";
-import Swal from "sweetalert2";
-import { useTable } from "react-table";
-import ShowMoreText from "react-show-more-text";
-import $ from "jquery";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import Card from "../../Component/Card/card";
@@ -34,35 +30,38 @@ export default function Jobs() {
         role.push(item.currentRole);
       });
     }
-  };
+  }
+
+  let uniqueRole
   useEffect(() => {
     userData();
     if (flag) {
       filterRoles();
     }
+
   }, [flag]);
 
-  // console.log("allUserData : ", allData);
-
-  let uniqueRole = [...new Set(role)];
+  uniqueRole = [...new Set(role)]
 
   const [clickRole, setClickRole] = useState([]);
 
-  let clickItem = uniqueRole[0];
-
-  const filterByRole = (clickItem) => {
+  const filterByRole = (clickItem ) => {
     if (Object.keys(allData).length > 0 && flag) {
       let arrByID = allData.filter((item) => {
-        if (clickItem === item.currentRole) {
+        if (clickItem === item.currentRole  ) {
           return item;
         }
       });
       setClickRole(arrByID);
     }
-  };
+  }
 
-  useEffect(() => {
-    filterByRole(uniqueRole[0]);
+ useEffect(() => {
+  
+    
+    filterByRole("Full Stack Engineer")
+
+
   }, [flag]);
 
   return (
@@ -75,6 +74,7 @@ export default function Jobs() {
                 type="button"
                 className="btn btn-primary"
                 onClick={() => filterByRole(data)}
+                
               >
                 {data}
               </button>
@@ -86,7 +86,7 @@ export default function Jobs() {
       <div class="mr-4 ml-4">
         {clickRole.map((data, i) => {
           return (
-            <Card
+           <Card
               interestedRole={data.interestedRole}
               currentCompany={data.currentCompany}
               currentRole={data.currentRole}
