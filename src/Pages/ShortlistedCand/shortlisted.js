@@ -8,6 +8,9 @@ import ApiConstants from "../../Services/apiconstants";
 const ShortlistedCand = () => {
 
 const [shortlistedCand ,setShortlistedCand] = useState([])
+const [flag, setFlag] = useState(false);
+const [role, setRole] = useState([]);
+
 const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data")) 
 
 const token = company_loggedin_user_data.token
@@ -28,6 +31,7 @@ const userData = () => {
     .then((response) => {
       console.log(response)
        setShortlistedCand(response.data.shortlisted);
+       setFlag(true)
 
     }).catch((err) => {
 
@@ -36,19 +40,79 @@ const userData = () => {
     })
 };
 
-
+const filterRoles = () => {
+  if (Object.keys(shortlistedCand).length > 0 && flag) {
+    let arrByID = shortlistedCand.filter((item) => {
+       role.push(item.candidateId.currentRole);
+    });
+  }
+}
 useEffect(() => {
 
- userData()
+  userData()
+  if (flag) {
+   filterRoles();
+ }
+ 
+ }, [flag])
 
-}, [])
+
+
+
+
+
+
+let uniqueRole = [...new Set(role)]
+
+console.log("uniqueRole : " ,uniqueRole)   
+
+
+
+
+  const [clickRole, setClickRole] = useState([]);
+
+  const filterByRole = (clickItem ) => {
+    if (Object.keys(shortlistedCand).length > 0 && flag) {
+      let arrByID = shortlistedCand.filter((item) => {
+        if (clickItem === item.candidateId.currentRole ) {
+          return item;
+        }
+      });
+      setClickRole(arrByID);
+    }
+  }
+
+
+  useEffect(() => {
+  
+    
+    filterByRole("Full Stack Engineer")
+
+
+  }, [flag]);
 
   return (
     <>
 
+<div className="table-responsive job-table mt-4">
+        <div className="filter-menu" style={{ overflowX: "auto" }}>
+          <div className="btn-group" role="group">
+            {uniqueRole.map((data, i) => (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => filterByRole(data)}
+                
+              >
+                {data}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
   
   <div class="mr-4 ml-4">
-        {shortlistedCand.map((data, i) => {
+        {clickRole.map((data, i) => {
       
       return (
             <Card
@@ -65,7 +129,7 @@ useEffect(() => {
               typeOfJob={data.candidateId.typeOfJob}
               userData={data.candidateId}
             />
-          );
+          )
         })}
       </div>
     </>
