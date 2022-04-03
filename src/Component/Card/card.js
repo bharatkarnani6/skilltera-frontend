@@ -5,9 +5,11 @@ import Swal from "sweetalert2"
 
 import "./card.css";
 
-import { BsCurrencyDollar, BsQuestionLg, BsCheckLg,
+import {
+  BsCurrencyDollar, BsQuestionLg, BsCheckLg,
   BsXCircle,
-  BsFillPersonCheckFill } from "react-icons/bs";
+  BsFillPersonCheckFill
+} from "react-icons/bs";
 import {
   FcCalendar,
   FcBusinessman,
@@ -24,20 +26,26 @@ import {
 
 const Card = (props) => {
 
-   const [clickDisable ,setclickDisable] = useState(false);
+  const [clickDisable, setclickDisable] = useState(false);
 
-  const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data"))||""
+  const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data")) || ""
 
   const token = company_loggedin_user_data.token
   const userId = company_loggedin_user_data.company._id
-  
-   
 
-  
+  const [uniquekeyforAccoridian, setUniquekeyforAccoridian] = useState('');
+  const [uniqueidforAccoridian, setUniqueidforAccoridian] = useState('');
+
+
+  useEffect(() => {
+    setUniqueidforAccoridian('collapse' + props.uniquekey)
+    setUniquekeyforAccoridian('#collapse' + props.uniquekey);
+  }, [])
+
   const shortlistedCandidate = (data) => {
-    axios.post(ApiConstants.SHORTLISTED_CANDIDATE ,{
-      _id:data
-    },{
+    axios.post(ApiConstants.SHORTLISTED_CANDIDATE, {
+      _id: data
+    }, {
       headers: {
         Accept: "application/json",
         "Content-type": "application/json",
@@ -47,10 +55,10 @@ const Card = (props) => {
         "Access-Control-Allow-Methods": "GET, POST, PATCH",
       },
     }).then((res) => {
-      
+
       setclickDisable(true)
-      console.log("res : ",res) 
-  
+      console.log("res : ", res)
+
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -62,29 +70,29 @@ const Card = (props) => {
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
       })
-      
+
       Toast.fire({
         icon: 'success',
         title: 'Shortlisted successfully'
       })
-  
+
     }).catch((error) => {
-  
-       console.log(error)
-  
+
+      console.log(error)
+
     })
   };
-  
 
-  
-  
-  
+
+
+
+
   const rejectedCandidate = (data) => {
-  
-     
-    axios.post(ApiConstants.REJECTED_CANDIDATE ,{
-      _id:data
-    },{
+
+
+    axios.post(ApiConstants.REJECTED_CANDIDATE, {
+      _id: data
+    }, {
       headers: {
         Accept: "application/json",
         "Content-type": "application/json",
@@ -94,9 +102,9 @@ const Card = (props) => {
         "Access-Control-Allow-Methods": "GET, POST, PATCH",
       },
     }).then((res) => {
-       setclickDisable(true)
-      console.log("res : ",res) 
-  
+      setclickDisable(true)
+      console.log("res : ", res)
+
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -108,25 +116,25 @@ const Card = (props) => {
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
       })
-      
+
       Toast.fire({
         icon: 'error',
         title: 'Add to Rejectlist'
       })
-  
+
     }).catch((error) => {
-  
-       console.log(error)
-  
+
+      console.log(error)
+
     })
-  
+
   };
-  
+
   const futureCandidate = (data) => {
-    
-    axios.post(ApiConstants.FUTURE_CANDIDATE ,{
-      _id:data
-    },{
+
+    axios.post(ApiConstants.FUTURE_CANDIDATE, {
+      _id: data
+    }, {
       headers: {
         Accept: "application/json",
         "Content-type": "application/json",
@@ -136,9 +144,9 @@ const Card = (props) => {
         "Access-Control-Allow-Methods": "GET, POST, PATCH",
       },
     }).then((res) => {
-          setclickDisable(true)
-       console.log("res : ",res) 
-       const Toast = Swal.mixin({
+      setclickDisable(true)
+      console.log("res : ", res)
+      const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
@@ -154,14 +162,14 @@ const Card = (props) => {
         title: 'Added to FutureList'
       })
     }).catch((error) => {
-       console.log(error)
+      console.log(error)
     })
   };
-  
+
   const interviewingCandidate = (data) => {
-    axios.post(ApiConstants.INTERVIEWING_CANDIDATE ,{
-      _id:data
-    },{
+    axios.post(ApiConstants.INTERVIEWING_CANDIDATE, {
+      _id: data
+    }, {
       headers: {
         Accept: "application/json",
         "Content-type": "application/json",
@@ -171,9 +179,9 @@ const Card = (props) => {
         "Access-Control-Allow-Methods": "GET, POST, PATCH",
       },
     }).then((res) => {
-      
-      console.log("res : ",res) 
-         setclickDisable(true)
+
+      console.log("res : ", res)
+      setclickDisable(true)
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -185,20 +193,20 @@ const Card = (props) => {
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
       })
-      
+
       Toast.fire({
         icon: 'success',
         title: 'Added To Interviewinglist'
       })
-  
+
     }).catch((error) => {
-  
-       console.log(error)
-  
+
+      console.log(error)
+
     })
   };
 
-  
+
 
 
   return (
@@ -214,42 +222,42 @@ const Card = (props) => {
               >
                 <button
                   type="button"
-                  class={clickDisable===false?"btn btn-primary":"btn btn-secondary"}
+                  class={clickDisable === false ? "btn btn-primary" : "btn btn-secondary"}
                   title="Shortlist"
                   onClick={(e) => shortlistedCandidate(props.userData._id)}
-                    disabled = {clickDisable}
-                     aria-pressed={clickDisable}
+                  disabled={clickDisable}
+                  aria-pressed={clickDisable}
                 >
                   <BsCheckLg />
                 </button>
                 <button
                   type="button"
-                  class={clickDisable===false?"btn btn-primary":"btn btn-secondary"}
+                  class={clickDisable === false ? "btn btn-primary" : "btn btn-secondary"}
                   title="Reject"
                   onClick={(e) => rejectedCandidate(props.userData._id)}
-                    disabled = {clickDisable}
-                     aria-pressed={clickDisable}
+                  disabled={clickDisable}
+                  aria-pressed={clickDisable}
                 >
                   <BsXCircle />
                 </button>
                 <button
                   type="button"
-                  class={clickDisable===false?"btn btn-primary":"btn btn-secondary"}
+                  class={clickDisable === false ? "btn btn-primary" : "btn btn-secondary"}
                   title="Interview"
                   onClick={(e) => interviewingCandidate(props.userData._id)}
-                     disabled = {clickDisable}
-               
+                  disabled={clickDisable}
+
                 >
-                  <BsFillPersonCheckFill/>
+                  <BsFillPersonCheckFill />
                 </button>
                 <button
                   type="button"
-                  class= {clickDisable===false?"btn btn-primary":"btn btn-secondary"}
+                  class={clickDisable === false ? "btn btn-primary" : "btn btn-secondary"}
                   title="Future View"
                   onClick={(e) => futureCandidate(props.userData._id)}
-                  disabled = {clickDisable}
-                   aria-pressed={clickDisable}
-                  
+                  disabled={clickDisable}
+                  aria-pressed={clickDisable}
+
                 >
                   <BsQuestionLg />
                 </button>
@@ -326,8 +334,8 @@ const Card = (props) => {
             </div>
           </div>
           <div
-            id="collapseOne"
-            class="accordion-collapse collapse "
+            id={uniqueidforAccoridian}
+            class="accordion-collapse collapse"
             aria-labelledby="heading"
             data-bs-parent="#accordionExample"
           >
@@ -356,9 +364,8 @@ const Card = (props) => {
             class="accordion-button mb-0"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseOne"
-            aria-expanded="true"
-            aria-controls="collapseOne"
+            data-bs-target={uniquekeyforAccoridian}
+            aria-expanded='true'
           >
             Show Details
           </button>
