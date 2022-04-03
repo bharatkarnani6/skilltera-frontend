@@ -115,6 +115,7 @@ const FutureCand = () => {
               previousEmployers={data.candidateId.previousEmployers}
               typeOfJob={data.candidateId.typeOfJob}
               userData={data.candidateId}
+              futureTabs = {true}
             />
           )
         })}

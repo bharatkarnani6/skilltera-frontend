@@ -212,47 +212,53 @@ const Card = (props) => {
                 role="group"
                 aria-label="Basic outlined example"
               >
-                <button
+             {!props.shortlistedTabs &&  <button
                   type="button"
-                  class={clickDisable===false?"btn btn-primary":"btn btn-secondary"}
+                  class={clickDisable===false  ?"btn btn-primary":"btn btn-secondary"}
                   title="Shortlist"
                   onClick={(e) => shortlistedCandidate(props.userData._id)}
-                    disabled = {clickDisable}
-                     aria-pressed={clickDisable}
+                    disabled = {clickDisable   }
+                     aria-pressed={clickDisable }
                 >
                   <BsCheckLg />
                 </button>
-                <button
+
+             }
+               {!props.rejectedTabs && < button
                   type="button"
-                  class={clickDisable===false?"btn btn-primary":"btn btn-secondary"}
+                  class={clickDisable===false ?"btn btn-primary":"btn btn-secondary"}
                   title="Reject"
                   onClick={(e) => rejectedCandidate(props.userData._id)}
-                    disabled = {clickDisable}
-                     aria-pressed={clickDisable}
+                    disabled = {clickDisable }
+                     aria-pressed={clickDisable }
                 >
                   <BsXCircle />
                 </button>
-                <button
+               }
+              {!props.interviewTabs &&  <button
                   type="button"
-                  class={clickDisable===false?"btn btn-primary":"btn btn-secondary"}
+                  class={clickDisable===false  ?"btn btn-primary":"btn btn-secondary"}
                   title="Interview"
                   onClick={(e) => interviewingCandidate(props.userData._id)}
-                     disabled = {clickDisable}
-               
+                     disabled = {clickDisable }
+                     aria-pressed={clickDisable }
                 >
                   <BsFillPersonCheckFill/>
                 </button>
-                <button
+               }
+
+              {!props.futureTabs &&  <button
                   type="button"
-                  class= {clickDisable===false?"btn btn-primary":"btn btn-secondary"}
+                  class= {clickDisable===false ?"btn btn-primary":"btn btn-secondary"}
                   title="Future View"
                   onClick={(e) => futureCandidate(props.userData._id)}
-                  disabled = {clickDisable}
-                   aria-pressed={clickDisable}
+                  disabled = {clickDisable  }
+                   aria-pressed={clickDisable }
                   
                 >
                   <BsQuestionLg />
                 </button>
+             }
               </div>
             </div>
             <div class="row mt-1">

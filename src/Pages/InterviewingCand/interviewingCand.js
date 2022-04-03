@@ -115,6 +115,7 @@ useEffect(() => {
             previousEmployers={data.candidateId.previousEmployers}
             typeOfJob={data.candidateId.typeOfJob}
             userData={data.candidateId}
+            interviewTabs = {true}
             />
           );
         })}

@@ -125,6 +125,7 @@ console.log("uniqueRole : " ,uniqueRole)
               previousEmployers={data.candidateId.previousEmployers}
               typeOfJob={data.candidateId.typeOfJob}
               userData={data.candidateId}
+              shortlistedTabs = {true}
             />
           )
         })}
