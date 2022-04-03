@@ -220,47 +220,86 @@ const Card = (props) => {
                 role="group"
                 aria-label="Basic outlined example"
               >
-                <button
+             {!props.shortlistedTabs &&  <button
                   type="button"
+<<<<<<< HEAD
+                  class={clickDisable===false  ?"btn btn-primary":"btn btn-secondary"}
+                  title="Shortlist"
+                  onClick={(e) => shortlistedCandidate(props.userData._id)}
+                    disabled = {clickDisable   }
+                     aria-pressed={clickDisable }
+=======
                   class={clickDisable === false ? "btn btn-primary" : "btn btn-secondary"}
                   title="Shortlist"
                   onClick={(e) => shortlistedCandidate(props.userData._id)}
                   disabled={clickDisable}
                   aria-pressed={clickDisable}
+>>>>>>> 6f51634d68420b8f13a0b056ca57cfe0580b5692
                 >
                   <BsCheckLg />
                 </button>
-                <button
+
+             }
+               {!props.rejectedTabs && < button
                   type="button"
+<<<<<<< HEAD
+                  class={clickDisable===false ?"btn btn-primary":"btn btn-secondary"}
+                  title="Reject"
+                  onClick={(e) => rejectedCandidate(props.userData._id)}
+                    disabled = {clickDisable }
+                     aria-pressed={clickDisable }
+=======
                   class={clickDisable === false ? "btn btn-primary" : "btn btn-secondary"}
                   title="Reject"
                   onClick={(e) => rejectedCandidate(props.userData._id)}
                   disabled={clickDisable}
                   aria-pressed={clickDisable}
+>>>>>>> 6f51634d68420b8f13a0b056ca57cfe0580b5692
                 >
                   <BsXCircle />
                 </button>
-                <button
+               }
+              {!props.interviewTabs &&  <button
                   type="button"
+<<<<<<< HEAD
+                  class={clickDisable===false  ?"btn btn-primary":"btn btn-secondary"}
+                  title="Interview"
+                  onClick={(e) => interviewingCandidate(props.userData._id)}
+                     disabled = {clickDisable }
+                     aria-pressed={clickDisable }
+=======
                   class={clickDisable === false ? "btn btn-primary" : "btn btn-secondary"}
                   title="Interview"
                   onClick={(e) => interviewingCandidate(props.userData._id)}
                   disabled={clickDisable}
 
+>>>>>>> 6f51634d68420b8f13a0b056ca57cfe0580b5692
                 >
                   <BsFillPersonCheckFill />
                 </button>
-                <button
+               }
+
+              {!props.futureTabs &&  <button
                   type="button"
+<<<<<<< HEAD
+                  class= {clickDisable===false ?"btn btn-primary":"btn btn-secondary"}
+                  title="Future View"
+                  onClick={(e) => futureCandidate(props.userData._id)}
+                  disabled = {clickDisable  }
+                   aria-pressed={clickDisable }
+                  
+=======
                   class={clickDisable === false ? "btn btn-primary" : "btn btn-secondary"}
                   title="Future View"
                   onClick={(e) => futureCandidate(props.userData._id)}
                   disabled={clickDisable}
                   aria-pressed={clickDisable}
 
+>>>>>>> 6f51634d68420b8f13a0b056ca57cfe0580b5692
                 >
                   <BsQuestionLg />
                 </button>
+             }
               </div>
             </div>
             <div class="row mt-1">

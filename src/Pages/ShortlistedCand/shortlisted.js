@@ -124,6 +124,7 @@ const ShortlistedCand = () => {
               previousEmployers={data.candidateId.previousEmployers}
               typeOfJob={data.candidateId.typeOfJob}
               userData={data.candidateId}
+              shortlistedTabs = {true}
             />
           )
         })}
