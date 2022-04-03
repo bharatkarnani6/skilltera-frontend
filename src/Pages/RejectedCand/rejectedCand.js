@@ -6,18 +6,21 @@ import ApiConstants from "../../Services/apiconstants";
 
 const RejectedCand = () => {
 
+  const [rejectedCand ,setRejectedCand] = useState([])
+  const [flag, setFlag] = useState(false);
+  const [role, setRole] = useState([]);
+  
   const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data")) 
 
   const token = company_loggedin_user_data.token
   const userId = company_loggedin_user_data.company._id
 
-  const [rejectedCand ,setRejectedCand] = useState([])
     
   const userData = () => {
     axios
       .get(ApiConstants.GET_REJECTED_CANDIDATE ,{
         headers: {
-          Accept: "application/json",
+          Accept: "application/json", 
           "Content-type": "application/json",
           token: token,
           _id: userId,
@@ -28,19 +31,75 @@ const RejectedCand = () => {
       .then((response) => {
         console.log(response)
          setRejectedCand(response.data.rejected);
+         setFlag(true);
       }).catch((err) => {
        console.log(err);
       })
   }
   
+  const filterRoles = () => {
+    if (Object.keys(rejectedCand).length > 0 && flag) {
+      let arrByID = rejectedCand.filter((item) => {
+         role.push(item.candidateId.currentRole);
+      });
+    }
+  }
+
   useEffect(() => {
-   userData()
-  }, [])
+  
+    userData()
+    if (flag) {
+     filterRoles();
+   }
+   
+   }, [flag])
+   
+let uniqueRole = [...new Set(role)]
+  
+console.log("uniqueRole : " ,uniqueRole)  
+
+
+
+const [clickRole, setClickRole] = useState([]);
+
+const filterByRole = (clickItem ) => {
+  if (Object.keys(rejectedCand).length > 0 && flag) {
+    let arrByID = rejectedCand.filter((item) => {
+      if (clickItem === item.candidateId.currentRole ) {
+        return item;
+      }
+    });
+    setClickRole(arrByID);
+  }
+}
+
+useEffect(() => {    
+  filterByRole("Full Stack Engineer")
+}, [flag]);
 
   return (
     <>
+    <div className="table-responsive job-table mt-4">
+        <div className="filter-menu" style={{ overflowX: "auto" }}>
+          <div className="btn-group" role="group">
+            {uniqueRole.map((data, i) => (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => filterByRole(data)}
+                
+              >
+                {data}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+
+
      <div class="mr-4 ml-4">
-         {rejectedCand.map((data, i) => {
+         {clickRole.map((data, i) => {
           return (
             <Card
 

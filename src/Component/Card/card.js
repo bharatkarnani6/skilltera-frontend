@@ -5,7 +5,9 @@ import Swal from "sweetalert2"
 
 import "./card.css";
 
-import { BsCurrencyDollar, BsQuestionLg } from "react-icons/bs";
+import { BsCurrencyDollar, BsQuestionLg, BsCheckLg,
+  BsXCircle,
+  BsFillPersonCheckFill } from "react-icons/bs";
 import {
   FcCalendar,
   FcBusinessman,
@@ -19,12 +21,18 @@ import {
 
 
 
-const card = (props) => {
+
+const Card = (props) => {
+
+   const [clickDisable ,setclickDisable] = useState(false);
+
   const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data"))||""
 
   const token = company_loggedin_user_data.token
   const userId = company_loggedin_user_data.company._id
-  console.log( "token ,userId",token , userId)
+  
+   
+
   
   const shortlistedCandidate = (data) => {
     axios.post(ApiConstants.SHORTLISTED_CANDIDATE ,{
@@ -40,6 +48,7 @@ const card = (props) => {
       },
     }).then((res) => {
       
+      setclickDisable(true)
       console.log("res : ",res) 
   
       const Toast = Swal.mixin({
@@ -66,7 +75,7 @@ const card = (props) => {
     })
   };
   
-  
+
   
   
   
@@ -85,7 +94,7 @@ const card = (props) => {
         "Access-Control-Allow-Methods": "GET, POST, PATCH",
       },
     }).then((res) => {
-      
+       setclickDisable(true)
       console.log("res : ",res) 
   
       const Toast = Swal.mixin({
@@ -127,7 +136,7 @@ const card = (props) => {
         "Access-Control-Allow-Methods": "GET, POST, PATCH",
       },
     }).then((res) => {
-    
+          setclickDisable(true)
        console.log("res : ",res) 
        const Toast = Swal.mixin({
         toast: true,
@@ -164,7 +173,7 @@ const card = (props) => {
     }).then((res) => {
       
       console.log("res : ",res) 
-  
+         setclickDisable(true)
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -194,7 +203,7 @@ const card = (props) => {
 
   return (
     <>
-      <div class="container-fluid  " id="accordionExample">
+      <div class="container-fluid d-flex flex-column-reverse " id="accordionExample">
         <div class="card  mt-3 mb-0 rounded-4 myCard">
           <div class="card-body">
             <div class=" d-flex justify-content-end">
@@ -205,33 +214,42 @@ const card = (props) => {
               >
                 <button
                   type="button"
-                  class="btn btn-outline-primary "
+                  class={clickDisable===false?"btn btn-primary":"btn btn-secondary"}
                   title="Shortlist"
                   onClick={(e) => shortlistedCandidate(props.userData._id)}
+                    disabled = {clickDisable}
+                     aria-pressed={clickDisable}
                 >
-                  <FcCheckmark />
+                  <BsCheckLg />
                 </button>
                 <button
                   type="button"
-                  class="btn btn-outline-primary"
+                  class={clickDisable===false?"btn btn-primary":"btn btn-secondary"}
                   title="Reject"
                   onClick={(e) => rejectedCandidate(props.userData._id)}
+                    disabled = {clickDisable}
+                     aria-pressed={clickDisable}
                 >
-                  <FcCancel />
+                  <BsXCircle />
                 </button>
                 <button
                   type="button"
-                  class="btn btn-outline-primary"
+                  class={clickDisable===false?"btn btn-primary":"btn btn-secondary"}
                   title="Interview"
                   onClick={(e) => interviewingCandidate(props.userData._id)}
+                     disabled = {clickDisable}
+               
                 >
-                  <FcBusinessman />
+                  <BsFillPersonCheckFill/>
                 </button>
                 <button
                   type="button"
-                  class="btn btn-outline-primary"
+                  class= {clickDisable===false?"btn btn-primary":"btn btn-secondary"}
                   title="Future View"
                   onClick={(e) => futureCandidate(props.userData._id)}
+                  disabled = {clickDisable}
+                   aria-pressed={clickDisable}
+                  
                 >
                   <BsQuestionLg />
                 </button>
@@ -350,4 +368,4 @@ const card = (props) => {
   );
 };
 
-export default card;
+export default Card;
