@@ -29,3 +29,11 @@ code {
   background-color: white;
   border: 0.08px solid rgba(0, 0, 0, 0.295);
 }
+
+
+
+.btn-primary:hover {
+  color: black;
+  background-color: white;
+
+}

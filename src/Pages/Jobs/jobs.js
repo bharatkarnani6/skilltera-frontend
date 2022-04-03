@@ -62,7 +62,14 @@ export default function Jobs() {
     filterByRole("Full Stack Engineer")
 
 
-  }, [flag]);
+  }, [flag])
+
+
+
+
+
+
+
 
   return (
     <>
@@ -85,6 +92,10 @@ export default function Jobs() {
 
       <div class="mr-4 ml-4">
         {clickRole.map((data, i) => {
+
+     console.log( "length : " ,data.companiesInterviewed.length , data.companiesRejected.length ,data.companiesShortlisted.length)
+       
+          if(data.companiesInterviewed.length === 0 && data.companiesRejected.length === 0 && data.companiesShortlisted.length === 0){
           return (
            <Card
               interestedRole={data.interestedRole}
@@ -99,7 +110,9 @@ export default function Jobs() {
               typeOfJob={data.typeOfJob}
               userData={data}
             />
-          );
+            
+          )
+            }
         })}
       </div>
     </>
