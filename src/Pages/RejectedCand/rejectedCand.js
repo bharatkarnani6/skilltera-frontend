@@ -29,7 +29,7 @@ const RejectedCand = () => {
         },
       })
       .then((response) => {
-        console.log(response)
+        console.log("rejecctedData : " ,response)
          setRejectedCand(response.data.rejected);
          setFlag(true);
       }).catch((err) => {
@@ -55,10 +55,7 @@ const RejectedCand = () => {
    }, [flag])
    
 let uniqueRole = [...new Set(role)]
-  
-console.log("uniqueRole : " ,uniqueRole)  
-
-
+const defaultRole = uniqueRole[0]  
 
 const [clickRole, setClickRole] = useState([]);
 
@@ -74,7 +71,7 @@ const filterByRole = (clickItem ) => {
 }
 
 useEffect(() => {    
-  filterByRole("Full Stack Engineer")
+  filterByRole(defaultRole)
 }, [flag]);
 
   return (
@@ -96,13 +93,10 @@ useEffect(() => {
         </div>
       </div>
 
-
-
      <div class="mr-4 ml-4">
          {clickRole.map((data, i) => {
           return (
             <Card
-
             interestedRole={data.candidateId.interestedRole}
             currentCompany={data.candidateId.currentCompany}
             currentRole={data.candidateId.currentRole}

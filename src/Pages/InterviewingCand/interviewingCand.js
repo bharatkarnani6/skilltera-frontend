@@ -27,7 +27,7 @@ const InterviewingCand = () => {
         },
       })
       .then((response) => {
-        console.log(response)
+        console.log("intervied : ", response)
         setInterviewedCand(response.data.interviewed);
         setFlag(true)
       }).catch((err) => {
@@ -54,7 +54,7 @@ const InterviewingCand = () => {
    
 let uniqueRole = [...new Set(role)]
 
-console.log("uniqueRole : " ,uniqueRole)   
+const defaultRole = uniqueRole[0]   
 
 
 const [clickRole, setClickRole] = useState([]);
@@ -73,7 +73,7 @@ const filterByRole = (clickItem ) => {
 useEffect(() => {
   
     
-  filterByRole("Full Stack Engineer")
+  filterByRole( defaultRole)
 
 
 }, [flag]);

@@ -25,28 +25,32 @@ const ShortlistedCand = () => {
           token: token,
           _id: userId,
           "Access-Control-Allow-Origin": true,
-          "Access-Control-Allow-Methods": "GET, POST, PATCH",
+          "Access-Control-Allow-Methods":"GET, POST, PATCH",
         },
       })
       .then((response) => {
-        console.log(response)
+        console.log("shortlistedData : " ,response )
         setShortlistedCand(response.data.shortlisted);
         setFlag(true)
-
+        
       }).catch((err) => {
-
+        
         console.log(err);
-
+        
       })
-  };
-
+    };
+    
+    
   const filterRoles = () => {
     if (Object.keys(shortlistedCand).length > 0 && flag) {
       let arrByID = shortlistedCand.filter((item) => {
-        role.push(item.candidateId.currentRole);
+         role.push(item.candidateId.currentRole);
       });
     }
   }
+
+
+
 
   useEffect(() => {
 
@@ -61,9 +65,7 @@ const ShortlistedCand = () => {
 
   let uniqueRole = [...new Set(role)]
 
-  console.log("uniqueRole : ", uniqueRole)
-
-
+  const defaultRole = uniqueRole[0]  
 
 
   const [clickRole, setClickRole] = useState([]);
@@ -74,7 +76,7 @@ const ShortlistedCand = () => {
         if (clickItem === item.candidateId.currentRole) {
           return item;
         }
-      });
+       });
       setClickRole(arrByID);
     }
   }
@@ -82,9 +84,7 @@ const ShortlistedCand = () => {
 
   useEffect(() => {
 
-
-    filterByRole("Full Stack Engineer")
-
+    filterByRole(defaultRole)
 
   }, [flag]);
 

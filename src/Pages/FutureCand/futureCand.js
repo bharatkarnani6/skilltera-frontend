@@ -28,7 +28,7 @@ const FutureCand = () => {
         },
       })
       .then((response) => {
-        console.log(response)
+        console.log( "futureCand : " ,response)
          setFutureCand(response.data.saved);
          setFlag(true)
 
@@ -40,6 +40,7 @@ const FutureCand = () => {
   const filterRoles = () => {
     if (Object.keys(futureCand).length > 0 && flag) {
       let arrByID = futureCand.filter((item) => {
+
          role.push(item.candidateId.currentRole);
       });
     }
@@ -57,8 +58,8 @@ const FutureCand = () => {
   
   
   let uniqueRole = [...new Set(role)]
-  
-  console.log("uniqueRole : " ,uniqueRole)   
+
+  const defaultRole = uniqueRole[0] 
   
 
     const [clickRole, setClickRole] = useState([]);
@@ -75,7 +76,7 @@ const FutureCand = () => {
     }
   
     useEffect(() => {
-      filterByRole("Full Stack Engineer")
+      filterByRole(defaultRole)
     }, [flag]);
   
   return (

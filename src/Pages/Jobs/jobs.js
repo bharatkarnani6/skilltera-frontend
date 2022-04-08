@@ -14,7 +14,8 @@ export default function Jobs() {
     axios
       .get(ApiConstants.CANDIDATE_DATA)
       .then((response) => {
-        setAllData(response.data.candidate);
+        // console.log( "res : " ,response)
+        setAllData(response.data.candidate)
         setFlag(true);
       })
       .catch((err) => {
@@ -22,9 +23,9 @@ export default function Jobs() {
       });
   };
 
-  const [role, setRole] = useState([]);
+ const [role, setRole] = useState([]);
 
-  const filterRoles = () => {
+ const filterRoles = () => {
     if (Object.keys(allData).length > 0 && flag) {
       let arrByID = allData.filter((item) => {
         role.push(item.currentRole);
@@ -32,44 +33,36 @@ export default function Jobs() {
     }
   }
 
-  let uniqueRole
+
+  
+  
+  
   useEffect(() => {
     userData();
     if (flag) {
       filterRoles();
     }
+  }, [flag])
+  
+  
+let uniqueRole = [...new Set(role)]
 
-  }, [flag]);
 
-  uniqueRole = [...new Set(role)]
-
-  const [clickRole, setClickRole] = useState([]);
+const [clickRole, setClickRole] = useState([]);
 
   const filterByRole = (clickItem ) => {
     if (Object.keys(allData).length > 0 && flag) {
       let arrByID = allData.filter((item) => {
         if (clickItem === item.currentRole  ) {
           return item;
-        }
-      });
+           }
+      })
+      
       setClickRole(arrByID);
     }
   }
 
- useEffect(() => {
   
-    
-    filterByRole("Full Stack Engineer")
-
-
-  }, [flag])
-
-
-
-
-
-
-
 
   return (
     <>
@@ -81,9 +74,8 @@ export default function Jobs() {
                 type="button"
                 className="btn btn-primary"
                 onClick={() => filterByRole(data)}
-                
               >
-                {data}
+             {data}
               </button>
             ))}
           </div>
@@ -91,11 +83,7 @@ export default function Jobs() {
       </div>
 
       <div class="mr-4 ml-4">
-        {clickRole.map((data, i) => {
-
-     console.log( "length : " ,data.companiesInterviewed.length , data.companiesRejected.length ,data.companiesShortlisted.length)
-       
-          if(data.companiesInterviewed.length === 0 && data.companiesRejected.length === 0 && data.companiesShortlisted.length === 0){
+        {clickRole.map((data, i) => {      
           return (
            <Card
               interestedRole={data.interestedRole}
@@ -109,10 +97,8 @@ export default function Jobs() {
               previousEmployers={data.previousEmployers}
               typeOfJob={data.typeOfJob}
               userData={data}
-            />
-            
-          )
-            }
+            /> 
+          )       
         })}
       </div>
     </>
