@@ -1,10 +1,10 @@
-var baseUrl = "https://skilltera-api.herokuapp.com"
-// var baseUrl
-// if (process.env.NODE_ENV == "production") {
-//   baseUrl = "https://skilltera-api.herokuapp.com";
-// } else {
-//   baseUrl = "http://localhost:8080";
-// }
+//var baseUrl = "https://skilltera-api.herokuapp.com"
+var baseUrl
+if (process.env.NODE_ENV == "production") {
+  baseUrl = "https://skilltera-api.herokuapp.com";
+} else {
+  baseUrl = "http://localhost:8080";
+}
 console.log(baseUrl);
 const ApiConstants = {
   LOGIN: `${baseUrl}/login`,
