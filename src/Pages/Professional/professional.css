@@ -19,8 +19,8 @@
   background-color: transparent;
 }
 .dropdown {
-  position: relative;
-  display: inline-block;
+  position: absolute;
+  right: 0;
 }
 
 .dropdown-content {
