@@ -11,6 +11,9 @@ const ShortlistedCand = () => {
   const [flag, setFlag] = useState(false);
   const [role, setRole] = useState([]);
 
+  const [clickRole, setClickRole] = useState([]);
+  const [uniqueRole ,setUniqueRole] =useState([])
+
   const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data"))
 
   const token = company_loggedin_user_data.token
@@ -29,7 +32,7 @@ const ShortlistedCand = () => {
         },
       })
       .then((response) => {
-        console.log("shortlistedData : " ,response )
+        //console.log("shortlistedData : " ,response )
         setShortlistedCand(response.data.shortlisted);
         setFlag(true)
         
@@ -47,28 +50,10 @@ const ShortlistedCand = () => {
          role.push(item.candidateId.currentRole);
       });
     }
+     setUniqueRole([...[...new Set(role)]])
   }
 
 
-
-
-  useEffect(() => {
-
-    userData()
-    if (flag) {
-      filterRoles();
-    }
-
-  }, [flag])
-
-
-
-  let uniqueRole = [...new Set(role)]
-
-  const defaultRole = uniqueRole[0]  
-
-
-  const [clickRole, setClickRole] = useState([]);
 
   const filterByRole = (clickItem) => {
     if (Object.keys(shortlistedCand).length > 0 && flag) {
@@ -81,12 +66,26 @@ const ShortlistedCand = () => {
     }
   }
 
+useEffect(() => {
+    userData()   
+    filterRoles()
+ }, [flag])
 
-  useEffect(() => {
+ const defaultFilterByRole =  () => {
+    if (Object.keys(shortlistedCand).length > 0 && flag){
+      const fr = uniqueRole[0]
+      let arrByID = shortlistedCand.filter((item) => {
+        if (fr ===  item.candidateId.currentRole ) {
+          return item;
+          }
+      })
+     setClickRole(arrByID)
+    }
+}
 
-    filterByRole(defaultRole)
-
-  }, [flag]);
+useEffect(() => {
+defaultFilterByRole()
+},[uniqueRole[0]])
 
   return (
     <>

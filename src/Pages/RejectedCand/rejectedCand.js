@@ -1,7 +1,7 @@
 import React ,{useState,useEffect} from "react";
 import "./rejectedCand.css";
 import axios from "axios";
-import Card from "../../Component/Card/card"
+import Card from "../../Component/Card/card" 
 import ApiConstants from "../../Services/apiconstants";
 
 const RejectedCand = () => {
@@ -9,6 +9,9 @@ const RejectedCand = () => {
   const [rejectedCand ,setRejectedCand] = useState([])
   const [flag, setFlag] = useState(false);
   const [role, setRole] = useState([]);
+
+  const [clickRole, setClickRole] = useState([]);
+  const [uniqueRole ,setUniqueRole] =useState([])
   
   const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data")) 
 
@@ -29,7 +32,7 @@ const RejectedCand = () => {
         },
       })
       .then((response) => {
-        console.log("rejecctedData : " ,response)
+       // console.log("rejecctedData : " ,response)
          setRejectedCand(response.data.rejected);
          setFlag(true);
       }).catch((err) => {
@@ -43,21 +46,10 @@ const RejectedCand = () => {
          role.push(item.candidateId.currentRole);
       });
     }
+    setUniqueRole([...[...new Set(role)]])
   }
 
-  useEffect(() => {
-  
-    userData()
-    if (flag) {
-     filterRoles();
-   }
-   
-   }, [flag])
-   
-let uniqueRole = [...new Set(role)]
-const defaultRole = uniqueRole[0]  
-
-const [clickRole, setClickRole] = useState([]);
+ 
 
 const filterByRole = (clickItem ) => {
   if (Object.keys(rejectedCand).length > 0 && flag) {
@@ -70,9 +62,28 @@ const filterByRole = (clickItem ) => {
   }
 }
 
-useEffect(() => {    
-  filterByRole(defaultRole)
-}, [flag]);
+useEffect(() => {
+    userData()   
+    filterRoles()
+ }, [flag])
+
+ const defaultFilterByRole =  () => {
+    if (Object.keys(rejectedCand).length > 0 && flag){
+      const fr = uniqueRole[0]
+      let arrByID = rejectedCand.filter((item) => {
+        if (fr ===  item.candidateId.currentRole ) {
+          return item;
+          }
+      })
+     setClickRole(arrByID)
+    }
+}
+
+useEffect(() => {
+defaultFilterByRole()
+},[uniqueRole[0]])
+
+
 
   return (
     <>

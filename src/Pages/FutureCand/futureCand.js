@@ -2,13 +2,16 @@ import React ,{useState,useEffect} from "react";
 import "./futureCand.css";
 import axios from "axios";
 import Card from "../../Component/Card/card"
-import ApiConstants from "../../Services/apiconstants";
+import ApiConstants from "../../Services/apiconstants"; 
 
 const FutureCand = () => {
 
   const [futureCand ,setFutureCand] = useState([])
   const [flag, setFlag] = useState(false);
   const [role, setRole] = useState([]);
+
+  const [clickRole, setClickRole] = useState([]);
+  const [uniqueRole ,setUniqueRole] =useState([])
 
   const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data")) 
 
@@ -28,7 +31,7 @@ const FutureCand = () => {
         },
       })
       .then((response) => {
-        console.log( "futureCand : " ,response)
+       // console.log( "futureCand : " ,response)
          setFutureCand(response.data.saved);
          setFlag(true)
 
@@ -44,25 +47,8 @@ const FutureCand = () => {
          role.push(item.candidateId.currentRole);
       });
     }
+       setUniqueRole([...[...new Set(role)]])
   }
-  
-  useEffect(() => {
-  
-    userData()
-    if (flag) {
-     filterRoles();
-   }
-   
-   }, [flag])
-  
-  
-  
-  let uniqueRole = [...new Set(role)]
-
-  const defaultRole = uniqueRole[0] 
-  
-
-    const [clickRole, setClickRole] = useState([]);
   
     const filterByRole = (clickItem ) => {
       if (Object.keys(futureCand).length > 0 && flag) {
@@ -74,10 +60,29 @@ const FutureCand = () => {
         setClickRole(arrByID);
       }
     }
+
+useEffect(() => {
+    userData()   
+    filterRoles()
+ }, [flag])
+
+ const defaultFilterByRole =  () => {
+    if (Object.keys(futureCand).length > 0 && flag){
+      const fr = uniqueRole[0]
+      let arrByID = futureCand.filter((item) => {
+        if (fr ===  item.candidateId.currentRole ) {
+          return item;
+          }
+      })
+     setClickRole(arrByID)
+    }
+}
+
+useEffect(() => {
+defaultFilterByRole()
+},[uniqueRole[0]])
   
-    useEffect(() => {
-      filterByRole(defaultRole)
-    }, [flag]);
+
   
   return (
     <>
