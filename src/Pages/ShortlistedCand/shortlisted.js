@@ -11,6 +11,9 @@ const ShortlistedCand = () => {
   const [flag, setFlag] = useState(false);
   const [role, setRole] = useState([]);
 
+  const [clickRole, setClickRole] = useState([]);
+  const [uniqueRole ,setUniqueRole] =useState([])
+
   const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data"))
 
   const token = company_loggedin_user_data.token
@@ -25,48 +28,32 @@ const ShortlistedCand = () => {
           token: token,
           _id: userId,
           "Access-Control-Allow-Origin": true,
-          "Access-Control-Allow-Methods": "GET, POST, PATCH",
+          "Access-Control-Allow-Methods":"GET, POST, PATCH",
         },
       })
       .then((response) => {
-        console.log(response)
+        //console.log("shortlistedData : " ,response )
         setShortlistedCand(response.data.shortlisted);
         setFlag(true)
-
+        
       }).catch((err) => {
-
+        
         console.log(err);
-
+        
       })
-  };
-
+    };
+    
+    
   const filterRoles = () => {
     if (Object.keys(shortlistedCand).length > 0 && flag) {
       let arrByID = shortlistedCand.filter((item) => {
-        role.push(item.candidateId.currentRole);
+         role.push(item.candidateId.currentRole);
       });
     }
+     setUniqueRole([...[...new Set(role)]])
   }
 
-  useEffect(() => {
 
-    userData()
-    if (flag) {
-      filterRoles();
-    }
-
-  }, [flag])
-
-
-
-  let uniqueRole = [...new Set(role)]
-
-  console.log("uniqueRole : ", uniqueRole)
-
-
-
-
-  const [clickRole, setClickRole] = useState([]);
 
   const filterByRole = (clickItem) => {
     if (Object.keys(shortlistedCand).length > 0 && flag) {
@@ -74,19 +61,31 @@ const ShortlistedCand = () => {
         if (clickItem === item.candidateId.currentRole) {
           return item;
         }
-      });
+       });
       setClickRole(arrByID);
     }
   }
 
+useEffect(() => {
+    userData()   
+    filterRoles()
+ }, [flag])
 
-  useEffect(() => {
+ const defaultFilterByRole =  () => {
+    if (Object.keys(shortlistedCand).length > 0 && flag){
+      const fr = uniqueRole[0]
+      let arrByID = shortlistedCand.filter((item) => {
+        if (fr ===  item.candidateId.currentRole ) {
+          return item;
+          }
+      })
+     setClickRole(arrByID)
+    }
+}
 
-
-    filterByRole("Full Stack Engineer")
-
-
-  }, [flag]);
+useEffect(() => {
+defaultFilterByRole()
+},[uniqueRole[0]])
 
   return (
     <>

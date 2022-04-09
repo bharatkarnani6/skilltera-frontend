@@ -44,7 +44,7 @@ const Card = (props) => {
 
   const shortlistedCandidate = (data) => {
     axios.post(ApiConstants.SHORTLISTED_CANDIDATE, {
-      _id: data
+            candidateId: data
     }, {
       headers: {
         Accept: "application/json",
@@ -84,14 +84,11 @@ const Card = (props) => {
   };
 
 
-
-
-
   const rejectedCandidate = (data) => {
-
-
     axios.post(ApiConstants.REJECTED_CANDIDATE, {
-      _id: data
+
+      candidateId: data
+      
     }, {
       headers: {
         Accept: "application/json",
@@ -133,7 +130,7 @@ const Card = (props) => {
   const futureCandidate = (data) => {
 
     axios.post(ApiConstants.FUTURE_CANDIDATE, {
-      _id: data
+      candidateId: data
     }, {
       headers: {
         Accept: "application/json",
@@ -168,7 +165,7 @@ const Card = (props) => {
 
   const interviewingCandidate = (data) => {
     axios.post(ApiConstants.INTERVIEWING_CANDIDATE, {
-      _id: data
+      candidateId: data
     }, {
       headers: {
         Accept: "application/json",

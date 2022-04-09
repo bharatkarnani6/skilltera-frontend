@@ -296,7 +296,7 @@ const Profile = () => {
                   onChange={onChange}
                   name="knownTechnologies"
                 />
-                <div class="input-group-append ml-1">
+                <div class="input-group-append ml-4">
                   <div class="dropdown">
                     <div class="dropbtn">
                       <FcInfo />
@@ -328,7 +328,7 @@ const Profile = () => {
                   name="previousEmployers"
                   onChange={onChange}
                 />
-                <div class="input-group-append ml-1">
+                <div class="input-group-append ml-4">
                   <div class="dropdown">
                     <div class="dropbtn">
                       <FcInfo />
@@ -346,7 +346,22 @@ const Profile = () => {
             <label for="exampleFormControlTextarea1">
               Brief Description of experience / type of work done (in 300 words)
             </label>
-
+      
+             <div class="dropdown mr-3 m-1">
+              <div class="dropbtn">
+                <FcInfo />
+              </div>
+              <div class="dropdown-content">
+                <span>
+                  Example: A Python Developer, charged with intellectual
+                  curiosity and positive attitude; interested in applying newly
+                  acquired Data Science skills and solving challenging problems.
+                  I am looking for an exciting place to work where I can apply
+                  my skills to make a positive impact.
+                </span>
+              </div>
+            </div>
+         
             <div
               class="col-12 pl-0 pr-0"
               style={{
@@ -368,21 +383,6 @@ const Profile = () => {
                 toolbarStyle={{ width: "100%" }}
               />
             </div>
-            {/* 
-            <div class="dropdown col-1">
-              <div class="dropbtn">
-                <FcInfo />
-              </div>
-              <div class="dropdown-content">
-                <span>
-                  Example: A Python Developer, charged with intellectual
-                  curiosity and positive attitude; interested in applying newly
-                  acquired Data Science skills and solving challenging problems.
-                  I am looking for an exciting place to work where I can apply
-                  my skills to make a positive impact.
-                </span>
-              </div>
-            </div> */}
           </div>
 
           <div class="d-flex justify-content-center">

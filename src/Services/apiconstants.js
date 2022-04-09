@@ -15,14 +15,17 @@ const ApiConstants = {
   CONTACT_MAIL: `${baseUrl}/contact`,
   COMPANY_LOGIN: `${baseUrl}/company/login`,
   CANDIDATE_DATA: `${baseUrl}/candidates/viewAll`,
+  
   COMPANY_DATA: `${baseUrl}/company/viewAll`,
+
   ADMIN_LOGIN: `${baseUrl}/admin/login`,
   ADMIN_COMPANY_SIGNUP: `${baseUrl}/admin/company/signup`,
   ADMIN_CANDIDATE_SIGNUP: `${baseUrl}/admin/candidate/signup`,
   CANDIDATE_DATA_BY_ID: `${baseUrl}/candidate`,
   ADMIN_CANDIDATE_UPDATE: `${baseUrl}/admin/candidate/update`,
-  PROFILE: `${baseUrl}/profile`,
+  PROFILE: `${baseUrl}/profile`, 
   ADMIN_COMPANY_PASSWORD_RESET: `${baseUrl}/admin/company/reset`,
+
   SHORTLISTED_CANDIDATE :`${baseUrl}/company/addShortlisted`,
   REJECTED_CANDIDATE:`${baseUrl}/company/addRejected`,
   INTERVIEWING_CANDIDATE:`${baseUrl}/company/addInterviewed`,

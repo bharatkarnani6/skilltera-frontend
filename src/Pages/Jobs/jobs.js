@@ -7,83 +7,84 @@ import "datatables.net-dt/css/jquery.dataTables.min.css";
 import Card from "../../Component/Card/card";
 
 export default function Jobs() {
+
   const [allData, setAllData] = useState([]);
   const [flag, setFlag] = useState(false);
+  const [role, setRole] = useState([]);
+
+  const [clickRole, setClickRole] = useState([]);
+  const [uniqueRole ,setUniqueRole] =useState([])
 
   const userData = () => {
     axios
       .get(ApiConstants.CANDIDATE_DATA)
       .then((response) => {
-        setAllData(response.data.candidate);
-        setFlag(true);
+       // console.log( "res : " ,response)
+        setAllData(response.data.candidate)
+        setFlag(true)
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   };
 
-  const [role, setRole] = useState([]);
-
-  const filterRoles = () => {
+ const filterRoles = () => {
     if (Object.keys(allData).length > 0 && flag) {
       let arrByID = allData.filter((item) => {
         role.push(item.currentRole);
       });
     }
+   setUniqueRole([...[...new Set(role)]])
   }
 
-  let uniqueRole
-  useEffect(() => {
-    userData();
-    if (flag) {
-      filterRoles();
-    }
 
-  }, [flag]);
-
-  uniqueRole = [...new Set(role)]
-
-  const [clickRole, setClickRole] = useState([]);
-
-  const filterByRole = (clickItem ) => {
-    if (Object.keys(allData).length > 0 && flag) {
+const filterByRole = (clickItem) => {
+    if (Object.keys(allData).length > 0 && flag){
       let arrByID = allData.filter((item) => {
-        if (clickItem === item.currentRole  ) {
+        if (clickItem === item.currentRole ) {
           return item;
-        }
-      });
+           }
+      })
       setClickRole(arrByID);
     }
-  }
+}
 
- useEffect(() => {
-  
-    
-    filterByRole("Full Stack Engineer")
+useEffect(() => {
+    userData()   
+    filterRoles()
+ }, [flag])
+
+const defaultFilterByRole = () => {
+    if (Object.keys(allData).length > 0 && flag){
+          const fr = uniqueRole[0]
+      let arrByID = allData.filter((item) => {
+        if (fr === item.currentRole ) {
+          return item;
+          }
+      })
+     setClickRole(arrByID)
+    }
+}
+
+useEffect(() => {
+
+  defaultFilterByRole()
+
+},[uniqueRole[0]])
 
 
-  }, [flag])
-
-
-
-
-
-
-
-
-  return (
+return (
     <>
       <div className="table-responsive job-table mt-4">
-        <div className="filter-menu" style={{ overflowX: "auto" }}>
+        <div className="filter-menu" style={{ overflowX:"auto"}}>
           <div className="btn-group" role="group">
             {uniqueRole.map((data, i) => (
               <button
                 type="button"
                 className="btn btn-primary"
                 onClick={() => filterByRole(data)}
-                
               >
-                {data}
+                 {data}
               </button>
             ))}
           </div>
@@ -91,11 +92,7 @@ export default function Jobs() {
       </div>
 
       <div class="mr-4 ml-4">
-        {clickRole.map((data, i) => {
-
-     console.log( "length : " ,data.companiesInterviewed.length , data.companiesRejected.length ,data.companiesShortlisted.length)
-       
-          if(data.companiesInterviewed.length === 0 && data.companiesRejected.length === 0 && data.companiesShortlisted.length === 0){
+        {clickRole.map((data, i) => {      
           return (
            <Card
               interestedRole={data.interestedRole}
@@ -109,10 +106,8 @@ export default function Jobs() {
               previousEmployers={data.previousEmployers}
               typeOfJob={data.typeOfJob}
               userData={data}
-            />
-            
-          )
-            }
+            /> 
+          )       
         })}
       </div>
     </>
