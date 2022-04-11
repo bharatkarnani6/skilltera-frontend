@@ -117,7 +117,7 @@ export default function CandidateDashboardScreen() {
                     console.log(err);
                 })
         }
-        if (data == "On Hold For Future") {
+        if (data == "Saved") {
             axios
                 .get(ApiConstants.CANDIDATE_SAVED_DATA_BY_COMPANY, {
                     headers: {
@@ -157,19 +157,22 @@ export default function CandidateDashboardScreen() {
 
     return (
         <>
-            <div className="table-responsive job-table mt-4">
-                <div className="filter-menu" style={{ overflowX: "auto" }}>
-                    <div className="btn-group" role="group">
-                        <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("Shortlisted")}>Shortlisted</button>
-                        <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("Interviewed")}>Interviewed</button>
-                        <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("Rejected")}>Rejected</button>
-                        <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("Selected")}>Selected</button>
-                        <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("On Hold For Future")}>On Hold For Future</button>
-                    </div>
-                </div>
+            <div className="btn-group flex-wrap mt-4" role="group">
+                <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("Shortlisted")}>Shortlisted</button>
+                <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("Interviewed")}>Interviewed</button>
+                <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("Rejected")}>Rejected</button>
+                <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("Selected")}>Selected</button>
+                <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("Saved")}>Saved</button>
             </div>
+
+
             <div className="data-table">
-                {Object.keys(values.candidateSelectionData).length && (
+                {Object.keys(values.candidateSelectionData).length == 0 &&
+                    <><h5>As of today, there are no companies to display in this page. Please
+                        check back later.</h5><h6>Please do check Skilltera website for additional features that we are about
+                            to add to help your profile stand out.</h6></>
+                }
+                {Object.keys(values.candidateSelectionData).length != 0 && (
                     <DataTable
                         striped
                         responsive
@@ -180,9 +183,11 @@ export default function CandidateDashboardScreen() {
                         dense
                         columns={columnsList}
                         data={values.candidateSelectionData}
+
                     />
                 )}
             </div>
+
 
         </>
     )

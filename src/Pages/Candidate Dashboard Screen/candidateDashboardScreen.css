@@ -1,13 +1,18 @@
 /* .rdt_Table {
   width: 50%;
 } */
-
+.btn-group {
+  margin-left: 20%;
+}
 .data-table {
   width: 50%;
-  margin-left: 14.5%;
+  margin-left: 16%;
   margin-top: 5%;
 }
 @media (max-width: 480px) {
+  .btn-group {
+    margin-left: -16%;
+  }
   .data-table {
     width: 100%;
     margin-left: -14%;
