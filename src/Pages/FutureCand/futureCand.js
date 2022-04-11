@@ -1,26 +1,26 @@
-import React ,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./futureCand.css";
 import axios from "axios";
 import Card from "../../Component/Card/card"
-import ApiConstants from "../../Services/apiconstants"; 
+import ApiConstants from "../../Services/apiconstants";
 
 const FutureCand = () => {
 
-  const [futureCand ,setFutureCand] = useState([])
+  const [futureCand, setFutureCand] = useState([])
   const [flag, setFlag] = useState(false);
   const [role, setRole] = useState([]);
 
   const [clickRole, setClickRole] = useState([]);
-  const [uniqueRole ,setUniqueRole] =useState([])
+  const [uniqueRole, setUniqueRole] = useState([])
 
-  const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data")) 
+  const company_loggedin_user_data = JSON.parse(sessionStorage.getItem("company_loggedin_user_data"))
 
   const token = company_loggedin_user_data.token
   const userId = company_loggedin_user_data.company._id
 
   const userData = () => {
     axios
-      .get(ApiConstants.GET_FUTURE_CANDIDATE ,{
+      .get(ApiConstants.GET_FUTURE_CANDIDATE, {
         headers: {
           Accept: "application/json",
           "Content-type": "application/json",
@@ -31,63 +31,63 @@ const FutureCand = () => {
         },
       })
       .then((response) => {
-       // console.log( "futureCand : " ,response)
-         setFutureCand(response.data.saved);
-         setFlag(true)
+        // console.log( "futureCand : " ,response)
+        setFutureCand(response.data.saved);
+        setFlag(true)
 
       }).catch((err) => {
-       console.log(err);
+        console.log(err);
       })
   }
-  
+
   const filterRoles = () => {
     if (Object.keys(futureCand).length > 0 && flag) {
       let arrByID = futureCand.filter((item) => {
 
-         role.push(item.candidateId.currentRole);
+        role.push(item.candidateId.currentRole);
       });
     }
-       setUniqueRole([...[...new Set(role)]])
+    setUniqueRole([...[...new Set(role)]])
   }
-  
-    const filterByRole = (clickItem ) => {
-      if (Object.keys(futureCand).length > 0 && flag) {
-        let arrByID = futureCand.filter((item) => {
-          if (clickItem === item.candidateId.currentRole ) {
-            return item;
-          }
-        });
-        setClickRole(arrByID);
-      }
+
+  const filterByRole = (clickItem) => {
+    if (Object.keys(futureCand).length > 0 && flag) {
+      let arrByID = futureCand.filter((item) => {
+        if (clickItem === item.candidateId.currentRole) {
+          return item;
+        }
+      });
+      setClickRole(arrByID);
     }
+  }
 
-useEffect(() => {
-    userData()   
+  useEffect(() => {
+    userData()
     filterRoles()
- }, [flag])
+  }, [flag])
 
- const defaultFilterByRole =  () => {
-    if (Object.keys(futureCand).length > 0 && flag){
+  const defaultFilterByRole = () => {
+    if (Object.keys(futureCand).length > 0 && flag) {
       const fr = uniqueRole[0]
       let arrByID = futureCand.filter((item) => {
-        if (fr ===  item.candidateId.currentRole ) {
+        if (fr === item.candidateId.currentRole) {
           return item;
-          }
+        }
       })
-     setClickRole(arrByID)
+      setClickRole(arrByID)
     }
-}
+  }
 
-useEffect(() => {
-defaultFilterByRole()
-},[uniqueRole[0]])
-  
+  useEffect(() => {
+    defaultFilterByRole()
+  }, [uniqueRole[0]])
 
-  
+
+
   return (
     <>
-   
-<div className="table-responsive job-table mt-4">
+
+      <div className="table-responsive job-table mt-4">
         <div className="filter-menu" style={{ overflowX: "auto" }}>
           <div className="btn-group" role="group">
             {uniqueRole.map((data, i) => (
@@ -95,7 +95,7 @@ defaultFilterByRole()
                 type="button"
                 className="btn btn-primary"
                 onClick={() => filterByRole(data)}
-                
+
               >
                 {data}
               </button>
@@ -103,13 +103,13 @@ defaultFilterByRole()
           </div>
         </div>
       </div>
-  
-  <div class="mr-4 ml-4">
-        {clickRole.map((data, i) => {
-      
-      return (
-            <Card
 
+      <div class="mr-4 ml-4">
+        {clickRole.map((data, i) => {
+
+          return (
+            <Card
+              uniquekey={i}
               interestedRole={data.candidateId.interestedRole}
               currentCompany={data.candidateId.currentCompany}
               currentRole={data.candidateId.currentRole}
@@ -121,7 +121,7 @@ defaultFilterByRole()
               previousEmployers={data.candidateId.previousEmployers}
               typeOfJob={data.candidateId.typeOfJob}
               userData={data.candidateId}
-              futureTabs = {true}
+              futureTabs={true}
             />
           )
         })}
