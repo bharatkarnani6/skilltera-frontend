@@ -50,6 +50,7 @@ export default function CompanyLogin() {
           password: data.password,
         })
         .then((response) => {
+          //console.log("loginStatus :  " ,response)
           sessionStorage.setItem(
             "company_loggedin_user_data",
             JSON.stringify(response.data)
@@ -88,7 +89,7 @@ export default function CompanyLogin() {
     formRef.current.reset();
   };
 
-  console.log(values.companyList);
+  //console.log(values.companyList);
 
   return (
     <div>

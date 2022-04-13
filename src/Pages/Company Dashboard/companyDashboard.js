@@ -11,6 +11,7 @@ import FutureCand from "../FutureCand/futureCand";
 import RejectedCand from "../RejectedCand/rejectedCand";
 import ShortlistedCand from "../../Pages/ShortlistedCand/shortlisted"
 import InterviewingCand from "../InterviewingCand/interviewingCand"
+import DefaultCompanyDashboard from "../DefaultCompany Dashboard/defaultCompanyDashboard";
 //import CompanyDashboardSceen from "../Company Dashboard Screen/companyDashboardScreen";
 
 export default function CompanyDashboard() {
@@ -50,7 +51,7 @@ export default function CompanyDashboard() {
             {(() => {
               switch (titleSelection.menuSelection) {
                 case "Dashboard":
-                  return;
+                  return <DefaultCompanyDashboard/>;
                   break;
                 case "Profile":
                   return <Profile />;
@@ -77,9 +78,13 @@ export default function CompanyDashboard() {
                   <h1>Error</h1>;
               }
             })()}
+
           </div>
         </div>
       </div>
+
+
+
     </div>
   );
 }
