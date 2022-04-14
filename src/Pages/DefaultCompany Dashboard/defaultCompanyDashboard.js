@@ -108,6 +108,7 @@ const [currentStatus , setCurrentStatus] = useState([])
 
 
 const [requireDate , setRequireDate] = useState('shortlistingDate')
+const [label ,setLabel] = useState(["Role shortlisted for" ,"Shortlisted date","Days since shortlisted"])
 
 
 const requireStatus = (enterStatus) => {
@@ -115,18 +116,23 @@ const requireStatus = (enterStatus) => {
      if(enterStatus === "Shortlisted"){
        setCurrentStatus( allData[0])
        setRequireDate("shortlistingDate")
+       setLabel(["Role shortlisted for" ,"Shortlisted date","Days since shortlisted"])
      }
      else if(enterStatus === "Rejected"){
       setCurrentStatus( allData[2] )
       setRequireDate("rejectionDate")
+      setLabel(["Role for Rejected " ,"Rejected date","Days since Rejected"])
      }
      else if(enterStatus === "Interviewing"){
       setCurrentStatus( allData[1] )
       setRequireDate("interviewingDate")
+      setLabel(["Role for interview " ," Interviewing date","Days since interview"])
 
     }else if(enterStatus === "Saved"){
       setCurrentStatus( allData[3] )
       setRequireDate("savedDate")
+      setLabel(["Role saved for " ," Saved date","Days since saved"])
+
 
     }
   }
@@ -160,6 +166,23 @@ function dateConverter(str) {
   return `${day}`
 }
 
+
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
+
+function dateConverterTypeSec(str) {
+  var date = new Date(str)
+  var mnth = ("0" + (date.getMonth() + 1)).slice(-2)
+  var day = ("0" + date.getDate()).slice(-2);
+  var hours = ("0" + date.getHours()).slice(-2);
+  var minutes = ("0" + date.getMinutes()).slice(-2);
+  var seconds = ("0" + date.getSeconds()).slice(-2);
+  var year = date.getFullYear();
+  return `${day + " " + monthNames[mnth-1] + " " +year}`
+  
+}
 const d = new Date()
 
 
@@ -169,10 +192,12 @@ console.log(currentStatus)
 return (
         <>
 
-       <div className="table-responsive job-table mt-4">
-        <div className="filter-menu" style={{ overflowX:"auto"}}>
-          <h3> Total Candidate  - {countData[4]}</h3>
-          <div className="btn-group" role="group">           
+   <h3 class="totalCand mt-5">Total Candidate  - {countData[4]}</h3>
+     
+       <div>
+
+
+          <div className="btn-group " role="group">           
           <button
            type="button"
           className="btn btn-primary"
@@ -203,17 +228,17 @@ onClick = {() => requireStatus("Saved") }
  Saved {countData[3]}
 </button>    
           </div>
-        </div>
+      
       </div>
 
-      <div class="table-responsive">
+      <div class="table-responsive ">
   <table class="table">
   <thead  style={{backgroundColor:"#9b51e0"}}>
     <tr>
     <th scope="col"> Candidate Name</th>
-<th scope="col">Role shortlisted for</th>
-<th scope="col">Shortlisted date</th>
-<th scope="col">Days since shortlisted</th>
+<th scope="col"> {label[0]}</th>
+<th scope="col">{label[1]} </th>
+<th scope="col">{label[2]}</th>
     </tr>
   </thead>
   <tbody>
@@ -225,9 +250,10 @@ onClick = {() => requireStatus("Saved") }
       <td> {data.candidateId.fullname} </td>
       <td>{data.candidateId.currentRole}</td>        
 
-      <td >{data.selectionTimeline[requireDate] }</td>
+      
+      <td >{ dateConverterTypeSec(data.selectionTimeline[requireDate])}</td>
 
-      <td>{-(dateConverter( data.selectionTimeline[requireDate]) - d.getDate()) } day ago</td>
+      <td>{-(dateConverter( data.selectionTimeline[requireDate]) - d.getDate()) } days ago</td>
 
 
     </tr>
