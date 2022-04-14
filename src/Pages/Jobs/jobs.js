@@ -19,7 +19,7 @@ export default function Jobs() {
     axios
       .get(ApiConstants.CANDIDATE_DATA)
       .then((response) => {
-        // console.log( "res : " ,response)
+        //console.log( "res : " ,response)
         setAllData(response.data.candidate)
         setFlag(true)
       })
