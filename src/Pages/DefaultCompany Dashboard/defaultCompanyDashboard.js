@@ -2,6 +2,7 @@ import React ,{useState,useEffect} from 'react'
 import "./defaultCompanyDashboard.css"
 import ApiConstants from '../../Services/apiconstants';
 import axios from 'axios'
+import { setAutoFreeze } from 'immer';
 
 
 
@@ -9,6 +10,8 @@ import axios from 'axios'
 const DefaultCompanyDashboard = () => {
 
 const [flag, setFlag] = useState(false);
+const [flag2 ,setFlag2] = useState(false);
+
 const [allData ,setAllData] = useState([])
 const [countData ,setCountData] = useState([])
 
@@ -72,7 +75,7 @@ axios.all([requestOne,requestTwo,requestThree,requestFour ,requestFive] ).then(a
   const responseFour = responses[3].data.saved
   const responseFive = responses[4].data.candidate
 
-  console.log("multipleRes : " ,responseOne ,responseTwo,responesThree,responseFour, responseFive)
+ // console.log("multipleRes : " ,responseOne ,responseTwo,responesThree,responseFour, responseFive)
 
   setFlag(true)
 
@@ -94,31 +97,74 @@ useEffect(() => {
 
   multipleAxiosCall()
 
+  setFlag2(true);
+
 },[flag])
 
 
 
 
-const [currentSatus , setCurrentStatus] = useState([])
+const [currentStatus , setCurrentStatus] = useState([])
+
+
+const [requireDate , setRequireDate] = useState('shortlistingDate')
+
 
 const requireStatus = (enterStatus) => {
  if(flag === true){
      if(enterStatus === "Shortlisted"){
        setCurrentStatus( allData[0])
+       setRequireDate("shortlistingDate")
      }
      else if(enterStatus === "Rejected"){
       setCurrentStatus( allData[2] )
+      setRequireDate("rejectionDate")
      }
      else if(enterStatus === "Interviewing"){
       setCurrentStatus( allData[1] )
+      setRequireDate("interviewingDate")
+
     }else if(enterStatus === "Saved"){
       setCurrentStatus( allData[3] )
+      setRequireDate("savedDate")
+
     }
   }
 
 }
 
-console.log("currentStatus : " ,currentSatus)
+const defaultShown = () => {
+
+   if(flag2===true){
+
+    setCurrentStatus( allData[0])
+
+   }
+}
+
+useEffect(() => {
+
+  defaultShown();
+  
+},[allData[0]])
+
+
+function dateConverter(str) {
+  var date = new Date(str)
+  var mnth = ("0" + (date.getMonth() + 1)).slice(-2)
+  var day = ("0" + date.getDate()).slice(-2);
+  var hours = ("0" + date.getHours()).slice(-2);
+  var minutes = ("0" + date.getMinutes()).slice(-2);
+  var seconds = ("0" + date.getSeconds()).slice(-2);
+  var year = date.getFullYear();
+  return `${day}`
+}
+
+const d = new Date()
+
+
+
+console.log(currentStatus)
 
 return (
         <>
@@ -172,14 +218,18 @@ onClick = {() => requireStatus("Saved") }
   </thead>
   <tbody>
 
-  {currentSatus.map((data, i) => {      
+  {currentStatus.map((data, i) => {      
           return (
-     
-    <tr> 
+            
+      <tr> 
       <td> {data.candidateId.fullname} </td>
-      <td>{data.candidateId.currentRole}</td>
-      <td>{data.selectionTimeline.shortlistingDate}</td>
-      <td>(today() – shortlisted date)</td>
+      <td>{data.candidateId.currentRole}</td>        
+
+      <td >{data.selectionTimeline[requireDate] }</td>
+
+      <td>{-(dateConverter( data.selectionTimeline[requireDate]) - d.getDate()) } day ago</td>
+
+
     </tr>
 
           )})

@@ -14,6 +14,7 @@ const ApiConstants = {
   VERIFY_OTP: `${baseUrl}/verifyOtp`,
   CONTACT_MAIL: `${baseUrl}/contact`,
   COMPANY_LOGIN: `${baseUrl}/company/login`,
+  
   CANDIDATE_DATA: `${baseUrl}/candidates/viewAll`,
   
   COMPANY_DATA: `${baseUrl}/company/viewAll`,
@@ -35,6 +36,7 @@ const ApiConstants = {
   GET_REJECTED_CANDIDATE:`${baseUrl}/company/rejected`,
   GET_INTERVIEWING_CANDIDATE:`${baseUrl}/company/interviewed`,
   GET_FUTURE_CANDIDATE:`${baseUrl}/company/saved`,
+  GET_ALL_COMPANY_CANDIDATE:`${baseUrl}/company/candidates`
 
 };
 export default ApiConstants;
