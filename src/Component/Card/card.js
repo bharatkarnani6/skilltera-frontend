@@ -42,7 +42,7 @@ const Card = (props) => {
     setUniquekeyforAccoridian('#collapse' + props.uniquekey);
   }, [])
 
-  console.log(uniquekeyforAccoridian, uniqueidforAccoridian);
+  // console.log(uniquekeyforAccoridian, uniqueidforAccoridian);
   const shortlistedCandidate = (data) => {
     axios.post(ApiConstants.SHORTLISTED_CANDIDATE, {
       candidateId: data
