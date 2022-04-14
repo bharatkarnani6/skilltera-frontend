@@ -13,7 +13,7 @@ export default function Jobs() {
   const [role, setRole] = useState([]);
 
   const [clickRole, setClickRole] = useState([]);
-  const [uniqueRole ,setUniqueRole] =useState([])
+  const [uniqueRole, setUniqueRole] = useState([])
 
   const userData = () => {
     axios
@@ -28,55 +28,55 @@ export default function Jobs() {
       })
   };
 
- const filterRoles = () => {
+  const filterRoles = () => {
     if (Object.keys(allData).length > 0 && flag) {
       let arrByID = allData.filter((item) => {
         role.push(item.currentRole);
       });
     }
-   setUniqueRole([...[...new Set(role)]])
+    setUniqueRole([...[...new Set(role)]])
   }
 
 
-const filterByRole = (clickItem) => {
-    if (Object.keys(allData).length > 0 && flag){
+  const filterByRole = (clickItem) => {
+    if (Object.keys(allData).length > 0 && flag) {
       let arrByID = allData.filter((item) => {
-        if (clickItem === item.currentRole ) {
+        if (clickItem === item.currentRole) {
           return item;
-           }
+        }
       })
       setClickRole(arrByID);
     }
-}
+  }
 
-useEffect(() => {
-    userData()   
+  useEffect(() => {
+    userData()
     filterRoles()
- }, [flag])
+  }, [flag])
 
-const defaultFilterByRole = () => {
-    if (Object.keys(allData).length > 0 && flag){
-          const fr = uniqueRole[0]
+  const defaultFilterByRole = () => {
+    if (Object.keys(allData).length > 0 && flag) {
+      const fr = uniqueRole[0]
       let arrByID = allData.filter((item) => {
-        if (fr === item.currentRole ) {
+        if (fr === item.currentRole) {
           return item;
-          }
+        }
       })
-     setClickRole(arrByID)
+      setClickRole(arrByID)
     }
-}
+  }
 
-useEffect(() => {
+  useEffect(() => {
 
-  defaultFilterByRole()
+    defaultFilterByRole()
 
-},[uniqueRole[0]])
+  }, [uniqueRole[0]])
 
 
-return (
+  return (
     <>
       <div className="table-responsive job-table mt-4">
-        <div className="filter-menu" style={{ overflowX:"auto"}}>
+        <div className="filter-menu" style={{ overflowX: "auto" }}>
           <div className="btn-group" role="group">
             {uniqueRole.map((data, i) => (
               <button
@@ -84,7 +84,7 @@ return (
                 className="btn btn-primary"
                 onClick={() => filterByRole(data)}
               >
-                 {data}
+                {data}
               </button>
             ))}
           </div>
@@ -92,9 +92,10 @@ return (
       </div>
 
       <div class="mr-4 ml-4">
-        {clickRole.map((data, i) => {      
+        {clickRole.map((data, i) => {
           return (
-           <Card
+            <Card
+              uniquekey={i}
               interestedRole={data.interestedRole}
               currentCompany={data.currentCompany}
               currentRole={data.currentRole}
@@ -106,8 +107,8 @@ return (
               previousEmployers={data.previousEmployers}
               typeOfJob={data.typeOfJob}
               userData={data}
-            /> 
-          )       
+            />
+          )
         })}
       </div>
     </>

@@ -42,9 +42,10 @@ const Card = (props) => {
     setUniquekeyforAccoridian('#collapse' + props.uniquekey);
   }, [])
 
+  console.log(uniquekeyforAccoridian, uniqueidforAccoridian);
   const shortlistedCandidate = (data) => {
     axios.post(ApiConstants.SHORTLISTED_CANDIDATE, {
-            candidateId: data
+      candidateId: data
     }, {
       headers: {
         Accept: "application/json",
@@ -88,7 +89,7 @@ const Card = (props) => {
     axios.post(ApiConstants.REJECTED_CANDIDATE, {
 
       candidateId: data
-      
+
     }, {
       headers: {
         Accept: "application/json",
@@ -217,53 +218,53 @@ const Card = (props) => {
                 role="group"
                 aria-label="Basic outlined example"
               >
-             {!props.shortlistedTabs &&  <button
+                {!props.shortlistedTabs && <button
                   type="button"
-                  class={clickDisable===false  ?"btn btn-primary":"btn btn-secondary"}
+                  class={clickDisable === false ? "btn btn-primary" : "btn btn-secondary"}
                   title="Shortlist"
                   onClick={(e) => shortlistedCandidate(props.userData._id)}
-                    disabled = {clickDisable   }
-                     aria-pressed={clickDisable }
+                  disabled={clickDisable}
+                  aria-pressed={clickDisable}
                 >
                   <BsCheckLg />
                 </button>
 
-             }
-               {!props.rejectedTabs && < button
+                }
+                {!props.rejectedTabs && < button
                   type="button"
-                  class={clickDisable===false ?"btn btn-primary":"btn btn-secondary"}
+                  class={clickDisable === false ? "btn btn-primary" : "btn btn-secondary"}
                   title="Reject"
                   onClick={(e) => rejectedCandidate(props.userData._id)}
-                    disabled = {clickDisable }
-                     aria-pressed={clickDisable }
+                  disabled={clickDisable}
+                  aria-pressed={clickDisable}
                 >
                   <BsXCircle />
                 </button>
-               }
-              {!props.interviewTabs &&  <button
+                }
+                {!props.interviewTabs && <button
                   type="button"
-                  class={clickDisable===false  ?"btn btn-primary":"btn btn-secondary"}
+                  class={clickDisable === false ? "btn btn-primary" : "btn btn-secondary"}
                   title="Interview"
                   onClick={(e) => interviewingCandidate(props.userData._id)}
-                     disabled = {clickDisable }
-                     aria-pressed={clickDisable }
+                  disabled={clickDisable}
+                  aria-pressed={clickDisable}
                 >
                   <BsFillPersonCheckFill />
                 </button>
-               }
+                }
 
-              {!props.futureTabs &&  <button
+                {!props.futureTabs && <button
                   type="button"
-                  class= {clickDisable===false ?"btn btn-primary":"btn btn-secondary"}
+                  class={clickDisable === false ? "btn btn-primary" : "btn btn-secondary"}
                   title="Future View"
                   onClick={(e) => futureCandidate(props.userData._id)}
-                  disabled = {clickDisable  }
-                   aria-pressed={clickDisable }
-                  
+                  disabled={clickDisable}
+                  aria-pressed={clickDisable}
+
                 >
                   <BsQuestionLg />
                 </button>
-             }
+                }
               </div>
             </div>
             <div class="row mt-1">

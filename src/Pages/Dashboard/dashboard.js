@@ -7,13 +7,11 @@ import Aboutus from "../About/about";
 import Personal from "../Personal/Personal";
 import Professional from "../Professional/professional";
 import Jobs from "../Jobs/jobs";
+import CandidateDashboardScreen from "../Candidate Dashboard Screen/candidateDashboardScreen";
 
 //comment for presonal
 export default function Dashboard() {
   const candidateData = JSON.parse(sessionStorage.getItem("candidate_data"));
-
-  console.log(candidateData);
-
   const userName = candidateData.candidate.fullname;
   const menu = useSelector((state) => state.toggleMenu);
   const titleSelection = useSelector(
@@ -53,6 +51,8 @@ export default function Dashboard() {
 
             {(() => {
               switch (titleSelection.menuSelection) {
+                case "Dashboard":
+                  return <CandidateDashboardScreen />;
                 case "Personal Info" || "Dashboard":
                   return <Personal />;
                 case "Professional Info":
