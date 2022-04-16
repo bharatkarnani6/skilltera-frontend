@@ -185,89 +185,80 @@ function dateConverterTypeSec(str) {
 }
 const d = new Date()
 
-
-
 console.log(currentStatus)
 
 return (
         <>
 
-   <h3 class="totalCand mt-5">Total Candidate  - {countData[4]}</h3>
-     
-       <div>
 
-
-          <div className="btn-group " role="group">           
+ <h3 class="text-center mt-5">Total Candidate  - {countData[4]}</h3>
+       <div className="d-flex justify-content-center" >  
           <button
            type="button"
-          className="btn btn-primary"
+          className="btn btn-outline-primary btn-sm m-1"
 
     onClick = {() => requireStatus("Shortlisted") } 
 >
-  Shortlisted {countData[0]}
+  Shortlisted (#{countData[0]})
 </button>
 <button
 type="button"
-className="btn btn-primary"
+className="btn btn-outline-primary btn-sm m-1"
 onClick = {() => requireStatus("Rejected") } 
 >
-Rejected {countData[2]}
+Rejected  (#{countData[2]})
 </button>
 <button
 type="button"
-className="btn btn-primary"
+className="btn btn-outline-primary btn-sm m-1"
 onClick = {() => requireStatus("Interviewing") } 
 >
- Interviewing {countData[1]}
+ Interviewing (#{countData[1]})
 </button>
 <button
 type="button"
-className="btn btn-primary"
+className="btn btn-outline-primary btn-sm m-1 " 
 onClick = {() => requireStatus("Saved") } 
 >
- Saved {countData[3]}
+ Saved (#{countData[3]})
 </button>    
-          </div>
-      
-      </div>
+    </div> 
+         
 
-      <div class="table-responsive ">
-  <table class="table">
-  <thead  style={{backgroundColor:"#9b51e0"}}>
-    <tr>
-    <th scope="col"> Candidate Name</th>
+<table class="table table-sm w-75 myTable">
+
+<thead className="thead-dark">
+<tr>
+<th scope="col"> Candidate Name</th>
 <th scope="col"> {label[0]}</th>
 <th scope="col">{label[1]} </th>
 <th scope="col">{label[2]}</th>
+</tr>
+</thead>
+
+<tbody >
+{currentStatus.map((data, i) => {      
+        return (
+    <tr> 
+    <td > {data.candidateId.fullname} </td>
+    <td>{data.candidateId.currentRole}</td>        
+    <td >{ dateConverterTypeSec(data.selectionTimeline[requireDate])}</td>
+    <td>{-(dateConverter( data.selectionTimeline[requireDate]) - d.getDate()) } </td>
     </tr>
-  </thead>
-  <tbody>
+        )})}
+</tbody>
 
-  {currentStatus.map((data, i) => {      
-          return (
-            
-      <tr> 
-      <td> {data.candidateId.fullname} </td>
-      <td>{data.candidateId.currentRole}</td>        
-
-      
-      <td >{ dateConverterTypeSec(data.selectionTimeline[requireDate])}</td>
-
-      <td>{-(dateConverter( data.selectionTimeline[requireDate]) - d.getDate()) } days ago</td>
+</table>
 
 
-    </tr>
 
-          )})
-        }
-    
-  </tbody>
-  </table>
-</div>
-            
         </>
     )
 }
 
 export default DefaultCompanyDashboard
+
+
+
+
 

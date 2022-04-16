@@ -1,4 +1,10 @@
-.totalCand{
+@media (max-width: 480px) {
+    
+.myTable{
+
     position: relative;
-    left:25%;
+    left: 10%;
+ 
+}
+
 }
