@@ -27,7 +27,7 @@ export default function CompanyDashboard() {
   };
 
   return (
-    <div>
+    <>
       <Navbar />
       <div class="row patchBar" style={{ backgroundColor: "#9b51e0" }}>
         <div class="col-2">
@@ -48,6 +48,11 @@ export default function CompanyDashboard() {
                 </h4>
               </div>
             </div>
+
+            </div>
+            </div>
+            </div>
+
             {(() => {
               switch (titleSelection.menuSelection) {
                 case "Dashboard":
@@ -79,12 +84,9 @@ export default function CompanyDashboard() {
               }
             })()}
 
-          </div>
-        </div>
-      </div>
 
 
 
-    </div>
+    </>
   );
 }

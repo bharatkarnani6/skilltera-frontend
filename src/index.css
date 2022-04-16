@@ -30,6 +30,20 @@ code {
   border: 0.08px solid rgba(0, 0, 0, 0.295);
 }
 
+.btn-outline-primary{
+
+ border-color: #9b51e0;
+ color:#9b51e0;
+
+
+}
+.btn-outline-primary:hover{
+
+  background-color: #9b51e0;
+  border-color:#9b51e0;
+  color:white;
+ 
+ }
 
 
 .btn-primary:hover {

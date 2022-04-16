@@ -87,22 +87,19 @@ const RejectedCand = () => {
 
   return (
     <>
-      <div className="table-responsive job-table mt-4">
-        <div className="filter-menu" style={{ overflowX: "auto" }}>
-          <div className="btn-group" role="group">
+     <div className="mt-5" style={{ overflowX: "auto" }}>
+          <div className="d-flex justify-content-center" >
             {uniqueRole.map((data, i) => (
               <button
-                type="button"
-                className="btn btn-primary"
+              type="button"
+          className="btn btn-outline-primary m-1"
                 onClick={() => filterByRole(data)}
-
               >
                 {data}
               </button>
             ))}
           </div>
         </div>
-      </div>
 
       <div class="mr-4 ml-4">
         {clickRole.map((data, i) => {
