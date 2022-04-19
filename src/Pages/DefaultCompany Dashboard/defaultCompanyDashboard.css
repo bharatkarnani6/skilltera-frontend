@@ -1,11 +1,20 @@
-@media (max-width: 480px) {
-    
+
 .myTable{
 
     position: relative;
     /* right: ; */
-    left: 10%
+    left: 10%;
  
 }
+
+@media (max-width: 480px) {
+    
+    .myTable{
+    
+        position: relative;
+        /* right: ; */
+        left: 10%;
+     
+    }
 
 }

@@ -141,7 +141,7 @@ export default function AllCandidates() {
   };
   return (
     <>
-      <div className="table">
+      <div className="table myTables1">
         <div className="search-box mt-3 mb-3 d-flex justify-content-end">
           <div className="form-group mb-2">
             <input type="search" className="form-control" size="24" placeholder="Search by E-mail" onChange={event => setSearchTerm(event.target.value)} />

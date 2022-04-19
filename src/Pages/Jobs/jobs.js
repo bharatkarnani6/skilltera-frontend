@@ -79,6 +79,7 @@ export default function Jobs() {
         <div className="mt-5" style={{ overflowX: "auto" }}>
           <div className="d-flex justify-content-center" >
             {uniqueRole.map((data, i) => (
+
               <button
               type="button"
           className="btn btn-outline-primary m-1"
@@ -86,7 +87,8 @@ export default function Jobs() {
               >
                 {data}
               </button>
-            ))}
+          
+            ) )}
           </div>
         </div>
     
