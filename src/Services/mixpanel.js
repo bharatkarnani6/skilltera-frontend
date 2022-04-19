@@ -13,5 +13,6 @@ export default function Mixpanel(purpose, buttonName) {
     console.log(purpose, buttonName);
     mixpanel.track(purpose, {
         'source': buttonName,
+        'dummyData': "My name is BHarat"
     });
 }

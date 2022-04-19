@@ -158,11 +158,11 @@ export default function CandidateDashboardScreen() {
     return (
         <>
             <div className="btn-group flex-wrap mt-4" role="group">
-                <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("Shortlisted")}>Shortlisted</button>
-                <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("Interviewed")}>Interviewed</button>
-                <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("Rejected")}>Rejected</button>
-                <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("Selected")}>Selected</button>
-                <button type="button" class="btn btn btn-primary" onClick={() => filterForCandidate("Saved")}>Saved</button>
+                <button type="button" class="btn btn btn-primary me-1" onClick={() => filterForCandidate("Shortlisted")}>Shortlisted</button>
+                <button type="button" class="btn btn btn-primary me-1" onClick={() => filterForCandidate("Interviewed")}>Interviewed</button>
+                <button type="button" class="btn btn btn-primary me-1" onClick={() => filterForCandidate("Rejected")}>Rejected</button>
+                <button type="button" class="btn btn btn-primary me-1" onClick={() => filterForCandidate("Selected")}>Selected</button>
+                <button type="button" class="btn btn btn-primary me-1" onClick={() => filterForCandidate("Saved")}>Saved</button>
             </div>
 
 
