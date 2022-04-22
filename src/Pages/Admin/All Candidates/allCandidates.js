@@ -89,6 +89,11 @@ export default function AllCandidates() {
     //   selector: (row) => (row.relocation ? "Yes" : "No"),
     // },
     {
+      name: "Resume",
+      cell: row => (row.resumeLink ? <a href={row.resumeLink} target="_blank">Download</a> : ""),
+      button: true,
+    },
+    {
       name: "Selection",
       cell: (row) => (
         <button
@@ -127,7 +132,6 @@ export default function AllCandidates() {
   };
   useEffect(() => {
     userData();
-    console.log("bharat");
   }, [forUpdate.toogleUpdate]);
 
 
