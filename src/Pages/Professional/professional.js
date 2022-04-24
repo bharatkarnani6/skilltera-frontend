@@ -89,6 +89,7 @@ const Profile = () => {
     knownTechnologies: userData.knownTechnologies,
     experienceDescription: userData.experienceDescription,
     previousEmployers: userData.previousEmployers,
+    resumeName: userData.resumeName
   });
 
   const emptyData = {
@@ -99,6 +100,7 @@ const Profile = () => {
     knownTechnologies: userData.knownTechnologies || {},
     experienceDescription: userData.experienceDescription || {},
     previousEmployers: userData.previousEmployers || {},
+    resumeName: userData.resumeName || {},
   };
 
   const onChange = (e) => {
@@ -180,7 +182,6 @@ const Profile = () => {
 
 
   const resumeUpload = (e) => {
-    console.log(e.target.files);
     const formData = new FormData();
     formData.append('file', e.target.files[0]);
     formData.append('filename', e.target.files[0].name)
@@ -390,6 +391,9 @@ const Profile = () => {
               disabled={!check}
               accept="application/pdf, .doc, .docx"
               onChange={resumeUpload} />
+            <span id='val' style={{ color: check === true ? "black" : "#7B7D7D" }}
+              disabled={!check}>Last Updated Resume: {userData.resumeName ? userData.resumeName : "No file"}</span>
+
           </div>
 
 
