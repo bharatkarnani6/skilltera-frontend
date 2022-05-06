@@ -7,6 +7,7 @@ import ApiConstants from "../../Services/apiconstants";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { trackPromise, usePromiseTracker } from "react-promise-tracker";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function CompanyLogin() {
   const { promiseInProgress } = usePromiseTracker();
@@ -14,10 +15,12 @@ export default function CompanyLogin() {
     companyList: {},
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(true);
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isDirty, isValid },
+    formState: { errors,  isDirty, isValid },
   } = useForm({
     mode: "onChange",
   });
@@ -79,6 +82,13 @@ export default function CompanyLogin() {
         })
     );
   };
+
+
+  const reCaptchaSubmit = (value) => {
+    setIsSubmitting(false);
+    // console.log(value);
+  };
+
   //e.target.reset();
 
   // ............clearInputFiled after filldata.....
@@ -154,6 +164,13 @@ export default function CompanyLogin() {
               {errors.password?.type === "required" && "Password is required"}
             </p>
           </div>
+
+          <div className="mt-2 mb-1 d-flex justify-content-center">
+              <ReCAPTCHA
+                sitekey="6Lc1UbwfAAAAAFN7tTEMmUWZEQJ0Sxbr0HQ1SGiM"
+                onChange={reCaptchaSubmit}
+              />
+            </div>
 
           <div className="row mr-2 ml-2">
             <button

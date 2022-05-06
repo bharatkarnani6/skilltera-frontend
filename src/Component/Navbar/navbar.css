@@ -24,3 +24,9 @@ a {
      position: absolute;
   }
 }
+
+
+
+.logo:hover{
+  transform: scale(1.02);
+}

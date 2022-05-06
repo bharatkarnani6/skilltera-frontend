@@ -10,9 +10,11 @@ import { FcAbout } from "react-icons/fc";
 import { trackPromise, usePromiseTracker } from "react-promise-tracker";
 import { NavLink } from "react-router-dom";
 import Mixpanel from "../../Services/mixpanel";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Login = () => {
   const { promiseInProgress } = usePromiseTracker();
+
 
   const {
     register,
@@ -21,6 +23,7 @@ const Login = () => {
     reset,
   } = useForm();
 
+  const [isSubmitting, setIsSubmitting] = useState(true);
   const [isEmailVerified, setisEmailVerified] = useState(false);
 
   let history = useHistory();
@@ -66,6 +69,13 @@ const Login = () => {
     reset();
   };
 
+  const reCaptchaSubmit = (value) => {
+    setIsSubmitting(false);
+    // console.log(value);
+  };
+
+
+
   function showHint() {
     alert(
       "1. At least 8 characters \n 2. At least one special char \n 3. At least one number \n 4. At least one upper and one lower case char. \n "
@@ -73,7 +83,7 @@ const Login = () => {
   }
 
   return (
-    <>
+    <> 
       <Navbar />
 
       <div className="main-box login  border">
@@ -126,6 +136,15 @@ const Login = () => {
               </span>
             )}
           </div>
+
+          <div className="mt-2 mb-1 d-flex justify-content-center">
+              <ReCAPTCHA
+                sitekey="6Lc1UbwfAAAAAFN7tTEMmUWZEQJ0Sxbr0HQ1SGiM"
+                onChange={reCaptchaSubmit}
+              />
+            </div>
+
+
           <div className="row">
             <div className="d-grid col-12 mx-auto">
               <button type="submit" className="btn btn-primary">

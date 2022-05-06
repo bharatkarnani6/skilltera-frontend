@@ -240,10 +240,10 @@ onClick = {() => requireStatus("Saved") }
 {currentStatus.map((data, i) => {      
         return (
     <tr> 
-    <td > {data.candidateId.fullname} </td>
-    <td>{data.candidateId.currentRole}</td>        
-    <td >{ dateConverterTypeSec(data.selectionTimeline[requireDate])}</td>
-    <td>{-(dateConverter( data.selectionTimeline[requireDate]) - d.getDate()) } </td>
+    <td class="text-center" > {data.candidateId.fullname} </td>
+    <td class="text-center">{data.candidateId.currentRole}</td>        
+    <td class="text-center" >{ dateConverterTypeSec(data.selectionTimeline[requireDate])}</td>
+    <td class="text-center">{-(dateConverter( data.selectionTimeline[requireDate]) - d.getDate()) } </td>
     </tr>
         )})}
 </tbody>

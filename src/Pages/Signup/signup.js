@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { FcAbout } from "react-icons/fc";
 import { trackPromise, usePromiseTracker } from "react-promise-tracker";
 import Navbar from "../../Component/Navbar/navbar";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"; 
 import "./signup.css";
 export default function Signup(props) {
   const { promiseInProgress } = usePromiseTracker();
@@ -167,7 +167,7 @@ export default function Signup(props) {
             </div>
             <div className="mt-2 mb-1 d-flex justify-content-center">
               <ReCAPTCHA
-                sitekey="6LeV1SgdAAAAACOIFJkXmryFhyxHnK9jH4oYGkVN"
+                sitekey="6Lc1UbwfAAAAAFN7tTEMmUWZEQJ0Sxbr0HQ1SGiM"
                 onChange={reCaptchaSubmit}
               />
             </div>
