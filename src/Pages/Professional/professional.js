@@ -89,6 +89,7 @@ const Profile = () => {
     knownTechnologies: userData.knownTechnologies,
     experienceDescription: userData.experienceDescription,
     previousEmployers: userData.previousEmployers,
+    resumeName: userData.resumeName
   });
 
   const emptyData = {
@@ -99,6 +100,7 @@ const Profile = () => {
     knownTechnologies: userData.knownTechnologies || {},
     experienceDescription: userData.experienceDescription || {},
     previousEmployers: userData.previousEmployers || {},
+    resumeName: userData.resumeName || {},
   };
 
   const onChange = (e) => {
@@ -176,6 +178,43 @@ const Profile = () => {
     );
   };
 
+
+
+
+  const resumeUpload = (e) => {
+    const formData = new FormData();
+    formData.append('file', e.target.files[0]);
+    formData.append('filename', e.target.files[0].name)
+    axios
+      .post(
+        ApiConstants.RESUME_UPLOAD,
+        formData,
+        {
+          headers: {
+            token: token,
+            _id: userId,
+            "Access-Control-Allow-Origin": true,
+            "Access-Control-Allow-Methods": "GET, POST, PATCH",
+          },
+        }
+      )
+      .then((response) => {
+        Swal.fire({
+          title: "Resume Uploaded",
+          icon: "success",
+          width: 400,
+          height: 100,
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: error.response.data.error,
+          icon: "error",
+          width: 400,
+          height: 100,
+        });
+      })
+  }
   //.....................
 
   return (
@@ -342,12 +381,29 @@ const Profile = () => {
             </div>
           </div>
 
+          <div className="mb-3">
+            <label class="form-label">Resume Upload</label>
+            <input
+              className="form-control"
+              type="file"
+              name="file_upload"
+              style={{ color: check === true ? "black" : "#7B7D7D" }}
+              disabled={!check}
+              accept="application/pdf, .doc, .docx"
+              onChange={resumeUpload} />
+            <span id='val' style={{ color: check === true ? "black" : "#7B7D7D" }}
+              disabled={!check}>Last Updated Resume: {userData.resumeName ? userData.resumeName : "No file"}</span>
+
+          </div>
+
+
+
           <div class="form-row mt-3 ">
             <label for="exampleFormControlTextarea1">
               Brief Description of experience / type of work done (in 300 words)
             </label>
-      
-             <div class="dropdown mr-3 m-1">
+
+            <div class="dropdown mr-3 m-1">
               <div class="dropbtn">
                 <FcInfo />
               </div>
@@ -361,7 +417,7 @@ const Profile = () => {
                 </span>
               </div>
             </div>
-         
+
             <div
               class="col-12 pl-0 pr-0"
               style={{
