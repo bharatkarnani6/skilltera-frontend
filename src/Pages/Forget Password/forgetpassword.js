@@ -1,5 +1,6 @@
 import react, { useState, useRef } from "react";
 import "./forgetpassword.css";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -9,6 +10,9 @@ import { NavLink } from "react-router-dom";
 import { trackPromise, usePromiseTracker } from "react-promise-tracker";
 
 export default function ForgetPassword() {
+
+  const [isSubmitting, setIsSubmitting] = useState(true);
+
   const { promiseInProgress } = usePromiseTracker();
   const {
     register,
@@ -96,6 +100,12 @@ export default function ForgetPassword() {
     setPasswordErrorMessage("");
   };
 
+
+  const reCaptchaSubmit = (value) => {
+    setIsSubmitting(false);
+    // console.log(value);
+  };
+
   return (
     <>
       <Navbar />
@@ -149,6 +159,12 @@ export default function ForgetPassword() {
                   {emailErrorMessage}
                 </span>
               </div>
+            </div>
+            <div className="mt-2 mb-1 d-flex justify-content-center">
+              <ReCAPTCHA
+                sitekey="6Lc1UbwfAAAAAFN7tTEMmUWZEQJ0Sxbr0HQ1SGiM"
+                onChange={reCaptchaSubmit}
+              />
             </div>
             <div className="row mr-3 ml-3">
               <button

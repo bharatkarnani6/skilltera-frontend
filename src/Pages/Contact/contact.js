@@ -1,5 +1,6 @@
-import React from "react";
+import React ,{useState} from "react";
 import "./contact.css";
+import ReCAPTCHA from "react-google-recaptcha";
 import Navbar from "../../Component/Navbar/navbar";
 import ContactBanner from "../../Assets/contact.jpg";
 import { useRef } from "react";
@@ -11,11 +12,12 @@ import { trackPromise, usePromiseTracker } from "react-promise-tracker";
 
 const Contact = () => {
   const { promiseInProgress } = usePromiseTracker();
-
+  const [isSubmitting, setIsSubmitting] = useState(true);
+ 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isDirty, isValid },
+    formState: { errors, isDirty, isValid },
   } = useForm({
     mode: "onChange",
   });
@@ -67,6 +69,12 @@ const Contact = () => {
   };
 
   // ............clearInputFiled after filldata.....
+
+  const reCaptchaSubmit = (value) => {
+    setIsSubmitting(false);
+    // console.log(value);
+  };
+
 
   const formRef = useRef();
 
@@ -138,6 +146,12 @@ const Contact = () => {
                   {errors.message?.type === "required" && "Message is required"}
                 </p>
               </div>
+              <div className="mt-2 mb-1 d-flex justify-content-center">
+              <ReCAPTCHA
+                sitekey="6Lc1UbwfAAAAAFN7tTEMmUWZEQJ0Sxbr0HQ1SGiM"
+                onChange={reCaptchaSubmit}
+              />
+            </div>
               <div class="d-grid gap-2 col-6 mx-auto">
                 <button
                   type="submit"
